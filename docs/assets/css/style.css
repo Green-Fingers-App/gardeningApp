@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Protest+Guerrilla&display=swap');
+
 :root {
   --primary: rgb(63, 155, 63);
   --secondary: rgb(157, 238, 157);
@@ -7,24 +9,29 @@
 * {
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   margin: 0px;
+  padding: 0;
 }
 
 h1 {
   height: 4rem;
   padding-left: 1rem;
   line-height: 4rem;
+  font-family: 'Protest Guerrilla';
 }
 
 h3 {
   padding-top: 0.75rem;
   padding-bottom: 0.75rem;
+  font-family: 'Protest Guerrilla';
 }
 
 body {
-  display: grid;
-  background-color: var(--background);
-  grid-template-columns: 1fr;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
   gap: 1rem;
+  align-items: center;
+  background-color: var(--background);
 }
 
 ul {
@@ -41,6 +48,7 @@ li {
   box-shadow: 0 2px 4px 0 black;
   transition: all 200ms;
   animation: slideInFromBottom 0.5s ease-out forwards;
+  width: 100%;
 }
 
 li:hover {
@@ -78,4 +86,28 @@ footer {
     transform: translateY(0);
     opacity: 1;
   }
+}
+
+.grass-container {
+  position: relative;
+  padding: 2em 2em;
+  background-color: rgb(200, 252, 200);
+  border: solid 1px;
+  border-color: var(--primary);
+  border-radius: 8px;
+  width: 80%;
+  overflow: hidden;
+  padding-top: 4rem;
+  box-shadow: 2px 2px 4px 0 black;
+}
+
+.grass-container h3 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: var(--primary);
+  height: 1.5rem;
+  width: 100%;
+  padding-left: 2rem;
+  color: white;
 }
