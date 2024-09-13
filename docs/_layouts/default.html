@@ -28,22 +28,6 @@
     <p>© {{ site.time | date: '%Y' }} {{ site.title }}</p>
   </footer>
 
-  <!-- Gitalk Script -->
-  <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
-  <script>
-    var gitalk = new Gitalk({
-      clientID: 'Ov23liKn5Qb59ESrd1Q0',  // Replace with your GitHub OAuth Application Client ID
-      clientSecret: '7714fb86539325f1c77298fdf2d83a09e45cfeb0',  // Replace with your GitHub OAuth Application Client Secret
-      repo: 'gardeningApp',  // Replace with your repository name where comments will be stored
-      owner: 'dhbw-malte',  // Replace with your GitHub username
-      admin: ['DHBW-Malte', 'simagolrokh', 'CasimirG12', 'rmoolmandreyer'],  // GitHub usernames of admins who can moderate comments
-      id: '{{ page.url | slugify }}',  // Use the page URL or another unique value for each post
-      distractionFreeMode: false  // Set to true for a cleaner comment interface
-    });
-
-    gitalk.render('gitalk-container');
-  </script>
-
 </body>
 
 </html>
