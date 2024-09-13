@@ -1,3 +1,7 @@
+* {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  margin: 0px;
+}
 body {
   background-color: rgb(220, 255, 220);
 }
@@ -7,4 +11,5 @@ body {
   top: 0;
   background-color: green;
   color: white;
+  width: 1vw;
 }
