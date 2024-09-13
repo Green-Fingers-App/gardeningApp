@@ -1,5 +1,5 @@
 title: Green Fingers
-description: A simple blog using Jekyll and GitHub Pages
+description: Welcome to our blog about our garden app. We're glad you're here and would love to hear your feedback on our recent project changes. You can find them in the “Recent Posts” section.
 baseurl: "" # Leave blank unless you have a custom domain
 baseurl: "/gardeningApp"  # This is important for correct URLs on GitHub Pages
 url: "https://dhbw-malte.github.io"  # Your main domain without the subdirectory
