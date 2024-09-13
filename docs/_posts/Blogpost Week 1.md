@@ -1,2 +1,4 @@
 # Week 1
-## Introduction 
+## Our vision
+
+## Our first choices for the techstack
