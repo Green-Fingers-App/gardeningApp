@@ -20,12 +20,11 @@
     <article class="grass-container">
       <h3>{{ page.title }}</h1>
       <p><small>Published on {{ page.date | date: "%B %d, %Y" }}</small></p>
+      <P>Authors: {{ page.author }}</P>
       {{ content }}
     </article>
-
-    <!-- Gitalk Container for Comments -->
-    <div id="gitalk-container" class="grass-container"></div>
   </main>
+  <div id="gitalk-container" class="grass-container"></div>
   <footer>
     <p>© {{ site.time | date: '%Y' }} {{ site.title }}</p>
   </footer>
