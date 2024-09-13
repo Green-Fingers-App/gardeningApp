@@ -8,8 +8,11 @@
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   margin: 0px;
 }
+
 body {
+  display: grid;
   background-color: var(--background);
+  grid-template-columns: 1fr;
 }
 
 .page-title {
