@@ -3,9 +3,6 @@ layout: default
 title: Home
 ---
 
-## Welcome to the Gardening App Blog
-This is a simple Jekyll blog hosted on GitHub Pages.
-
 ### Recent Posts
 
 <ul>
