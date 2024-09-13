@@ -1,6 +1,6 @@
 :root {
   --primary: rgb(63, 155, 63);
-  --secondary: rgb(120, 155, 120);
+  --secondary: rgb(157, 238, 157);
   --background: rgb(220, 255, 220);
 }
 
@@ -9,16 +9,69 @@
   margin: 0px;
 }
 
+h1 {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
+h3 {
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+}
+
 body {
   display: grid;
   background-color: var(--background);
   grid-template-columns: 1fr;
+  gap: 1rem;
+}
+
+ul {
+  display: flex;
+  gap: 1rem;
+  list-style-type: none;
+}
+
+li {
+  position: relative;
+  background-color: var(--secondary);
+  padding: 1rem;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px 0 black;
+  transition: all 200ms;
+  animation: slideInFromBottom 0.5s ease-out forwards;
+}
+
+li:hover {
+ opacity: 0.8;
+ cursor: pointer;
+}
+
+li:active {
+  scale: 0.95;
 }
 
 .page-title {
   background-color: var(--primary);
   color: white;
   width: 100vw;
-  border-radius: 8px;
-  box-shadow: 0 0 2px 0 black;
+  border-bottom-right-radius: 8px;
+  box-shadow: 0 0 4px 0 black;
+}
+
+footer {
+  position: absolute;
+  bottom: 0;
+  height: 30px;
+}
+
+@keyframes slideInFromBottom {
+  from {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
 }
