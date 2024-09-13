@@ -7,9 +7,10 @@ body {
 }
 
 .page-title {
-  position: fixed;
   top: 0;
-  background-color: green;
+  background-color: rgb(63, 155, 63);
   color: white;
   width: 1vw;
+  border-radius: 8px;
+  box-shadow: 0 0 2px 0 black;
 }
