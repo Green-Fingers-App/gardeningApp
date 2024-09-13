@@ -41,7 +41,8 @@
       owner: 'dhbw-malte',  // Replace with your GitHub username
       admin: ['DHBW-Malte', 'simagolrokh', 'CasimirG12', 'rmoolmandreyer'],  // GitHub usernames of admins who can moderate comments
       id: '{{ page.url | slugify }}',  // Use the page URL or another unique value for each post
-      distractionFreeMode: false  // Set to true for a cleaner comment interface
+      distractionFreeMode: false,  // Set to true for a cleaner comment interface
+      labels: ['blogComment']
     });
 
     gitalk.render('gitalk-container');
