@@ -1,16 +1,21 @@
+:root {
+  --primary: rgb(63, 155, 63);
+  --secondary: rgb(120, 155, 120);
+  --background: rgb(220, 255, 220);
+}
+
 * {
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   margin: 0px;
 }
 body {
-  background-color: rgb(220, 255, 220);
+  background-color: var(--background);
 }
 
 .page-title {
-  top: 0;
-  background-color: rgb(63, 155, 63);
+  background-color: var(--primary);
   color: white;
-  width: 1vw;
+  width: 100vw;
   border-radius: 8px;
   box-shadow: 0 0 2px 0 black;
 }
