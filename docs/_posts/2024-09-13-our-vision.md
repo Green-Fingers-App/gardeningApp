@@ -3,6 +3,7 @@ layout: post
 title: "Our Vision"
 date: 2024-09-13
 author: "Casimir"
+labels: ["blogComment"]
 ---
 # Week 1
 ## Our vision
