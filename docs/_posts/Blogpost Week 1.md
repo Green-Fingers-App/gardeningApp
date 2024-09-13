@@ -1,3 +1,8 @@
+---
+layout: post
+title: "Test Post"
+date: 2024-09-13
+---
 # Week 1
 ## Our vision
 The goal is to provide a comprehensive gardening solution that integrates software and hardware tools to manage multiple gardens (both indoors and outdoors).
