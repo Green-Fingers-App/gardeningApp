@@ -1,7 +1,8 @@
 title: Green Fingers
 description: A simple blog using Jekyll and GitHub Pages
 baseurl: "" # Leave blank unless you have a custom domain
-url: "https://dhbw-malte.github.io/gardeningApp/"
+baseurl: "/gardeningApp"  # This is important for correct URLs on GitHub Pages
+url: "https://dhbw-malte.github.io"  # Your main domain without the subdirectory
 theme: minima # Default GitHub Pages theme
 plugins:
   - jekyll-feed
