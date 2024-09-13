@@ -1,7 +1,9 @@
 ---
 layout: post
-title: "Test Post"
+title: "Our Vision"
 date: 2024-09-13
+author: "Casimir"
+tags: [gardening, project update]
 ---
 # Week 1
 ## Our vision
