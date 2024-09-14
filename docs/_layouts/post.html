@@ -46,6 +46,16 @@
     gitalk.render('gitalk-container');
   </script>
 
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const containers = document.querySelectorAll('.grass-container');
+    
+    containers.forEach((container, index) => {
+      container.style.animationDelay = `${index * 0.5}s`;
+    });
+  });
+</script>
+
 </body>
 
 </html>
