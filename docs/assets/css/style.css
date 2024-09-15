@@ -113,3 +113,12 @@ footer {
   padding-left: 2rem;
   color: white;
 }
+
+.go-back-button {
+  position: fixed;
+  top: 3rem;
+  right: 1rem;
+  background-color: var(--secondary);
+  padding: 0.5rem;
+  border-radius: 1000px;
+}
