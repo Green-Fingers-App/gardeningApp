@@ -73,7 +73,7 @@ export interface Pest {
   controlMethods: string[];
 }
 
-// Name interface
+// Plant name interface
 export interface PlantName {
   commonName: string;
   scientificName: string;
@@ -140,12 +140,14 @@ export interface Plant {
   companion: Plant[];
 }
 
+//Garden interface
 export interface Garden {
   id: number;
   location: string;
   plantIds: number[];  
 }
 
+//User interface
 export interface User {
   id: number;
   username: string;
@@ -155,12 +157,14 @@ export interface User {
   plantIds: number[];
 }
 
+//expected Level interface
 export enum Level {
   TOO_LOW = "Too Low",
   OPTIMAL = "Optimal",
   TOO_HIGH = "Too High"
 }
 
+//User's own plant interface
 export interface UserPlant {
   id: number;
   plant: Plant;
