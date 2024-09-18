@@ -34,13 +34,13 @@ body {
   background-color: var(--background);
 }
 
-ul {
+.grass-container ul {
   display: flex;
   gap: 1rem;
   list-style-type: none;
 }
 
-li {
+.grass-container ul li {
   position: relative;
   background-color: var(--secondary);
   padding: 1rem;
@@ -51,12 +51,12 @@ li {
   width: 100%;
 }
 
-li:hover {
+.grass-container ul li:hover {
  opacity: 0.8;
  cursor: pointer;
 }
 
-li:active {
+.grass-container ul li:active {
   scale: 0.95;
 }
 
