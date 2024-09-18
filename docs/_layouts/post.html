@@ -16,7 +16,9 @@
   <header>
     <h1 class="page-title">{{ site.title }}</h1>
   </header>
-  <button class="go-back-button" onclick="goBack()" aria-label="go back">&lt;</button>
+  <a href="https://dhbw-malte.github.io/gardeningApp/" target="_self">
+    <button class="go-back-button" aria-label="go back">&lt;</button>
+  </a>
   <main class="grass-container">
     <article>
       <h3>{{ page.title }}</h1>
@@ -55,10 +57,6 @@
       container.style.animationDelay = `${index * 0.5}s`;
     });
   });
-
-  function goBack() {
-    window.history.back();
-  }
 </script>
 
 </body>
