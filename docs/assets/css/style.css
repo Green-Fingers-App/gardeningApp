@@ -103,6 +103,32 @@ footer {
   opacity: 0;
 }
 
+.grass-post-container {
+  position: relative;
+  padding: 2em 2em;
+  background-color: rgb(200, 252, 200);
+  border: solid 1px;
+  border-color: var(--primary);
+  border-radius: 8px;
+  width: 80%;
+  overflow: hidden;
+  padding-top: 4rem;
+  box-shadow: 2px 2px 4px 0 black;
+  animation: slideInFromBottom 0.5s ease-out forwards;
+  opacity: 0;
+}
+
+.grass-post-container h3 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: var(--primary);
+  height: 1.5rem;
+  width: 100%;
+  padding-left: 2rem;
+  color: white;
+}
+
 .grass-container h3 {
   position: absolute;
   top: 0;
