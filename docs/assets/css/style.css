@@ -1,9 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Protest+Guerrilla&display=swap');
 
 :root {
-  --primary: rgb(63, 155, 63);
-  --secondary: rgb(157, 238, 157);
-  --background: rgb(220, 255, 220);
+  --primary: rgb(0, 103, 105);
+  --secondary: rgb(64, 165, 120);
+  --detail: rgb(157, 222, 139);
+  --background: rgb(230, 255, 148);
 }
 
 * {
@@ -17,12 +18,14 @@ h1 {
   padding-left: 1rem;
   line-height: 4rem;
   font-family: 'Protest Guerrilla';
+  color: var(--detail);
 }
 
 h3 {
   padding-top: 0.75rem;
   padding-bottom: 0.75rem;
   font-family: 'Protest Guerrilla';
+  color: var(--detail);
 }
 
 body {
