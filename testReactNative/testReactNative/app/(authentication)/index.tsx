@@ -5,48 +5,93 @@ import {
   ImageBackground,
   StyleSheet,
   Text,
-  TextInput,
   TouchableOpacity,
   View,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
-export default function App() {
-  const [count, setCount] = useState<number>(0);
+import Input from "../components/Input";
 
-  const incrementCount = (): void => {
-    setCount(count + 1);
+export default function App() {
+  const [inputValues, setInputvalues] = useState<{
+    username: string;
+    password: string;
+  }>({
+    username: "",
+    password: "",
+  });
+
+  type InputFieldName = keyof typeof inputValues;
+
+  const [inputErrors, setInputErrors] = useState<{
+    [key in InputFieldName]?: string;
+  }>({});
+
+  const handleChange = (name: InputFieldName, value: string): void => {
+    setInputvalues((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }));
+  };
+
+  const handleErrorMessage = (name: InputFieldName, text?: string): void => {
+    setInputErrors((prevState) => ({
+      ...prevState,
+      [name]: text,
+    }));
+  };
+
+  const validate = (): void => {
+    if (!inputValues.username) {
+      handleErrorMessage("username", "Please enter your username");
+    }
+
+    if (!inputValues.password) {
+      handleErrorMessage("password", "Please enter your password");
+    }
   };
 
   return (
     <SafeAreaView style={styles.container}>
       <ImageBackground
-        source={require("../../assets/login-background.jpg")} // Make sure this path is correct
-        style={[styles.background, { width: "100%", height: "100%" }]} // Add width and height
-        resizeMode="cover" // Optional: Ensures the image covers the whole background
+        source={require("../../assets/login-background.jpg")}
+        style={[styles.background, { width: "100%", height: "100%" }]}
+        resizeMode="cover"
       >
         <Text style={styles.title}>Green Fingers</Text>
         <View style={styles.content}>
           <Text style={styles.contentTitle}>Login</Text>
-          <TextInput
-            placeholder="Username"
+          <Input
+            label="Username"
+            placeholder="Enter your username"
             autoFocus={true}
-            style={styles.inputField}
+            onChangeText={(text) => handleChange("username", text)}
+            error={inputErrors.username}
+            onFocus={() => {
+              handleErrorMessage("username", undefined);
+            }}
           />
-          <TextInput
-            placeholder="Password"
+          <Input
+            label="Password"
+            placeholder="Enter your password"
             secureTextEntry={true}
-            style={styles.inputField}
+            onChangeText={(text) => handleChange("password", text)}
+            password
+            error={inputErrors.password}
+            onFocus={() => handleErrorMessage("password", undefined)}
           />
           <View style={styles.buttonContainer}>
-            <TouchableOpacity style={styles.loginButton}>
-              <Text>Login</Text>
+            <TouchableOpacity
+              style={styles.loginButton}
+              onPress={() => validate()}
+            >
+              <Text style={{ fontWeight: "bold" }}>Login</Text>
             </TouchableOpacity>
             <TouchableOpacity
               style={styles.signUpButton}
               onPress={() => router.push("/signup")}
             >
-              <Text>Sign Up</Text>
+              <Text style={{ fontWeight: "bold" }}>Sign Up</Text>
             </TouchableOpacity>
           </View>
           <Text>Forgot Password?</Text>
@@ -67,7 +112,7 @@ const styles = StyleSheet.create({
     width: "100%",
   },
   container: {
-    flex: 1, // Ensure full screen
+    flex: 1,
   },
   background: {
     flex: 1,
@@ -76,8 +121,8 @@ const styles = StyleSheet.create({
     gap: 20,
   },
   content: {
-    alignItems: "center", // Centers content horizontally
-    justifyContent: "center", // Centers content vertically
+    alignItems: "center",
+    justifyContent: "center",
     backgroundColor: "#fff",
     padding: 10,
     width: "100%",
@@ -97,13 +142,6 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     borderRadius: 8,
     opacity: 1,
-  },
-  inputField: {
-    borderColor: "#fec7b4",
-    borderWidth: 2,
-    borderRadius: 4,
-    width: "90%",
-    paddingLeft: 5,
   },
   contentTitle: {
     color: "#FA7070",
