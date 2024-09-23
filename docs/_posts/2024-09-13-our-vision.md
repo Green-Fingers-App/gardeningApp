@@ -9,6 +9,12 @@ author: "Sima, Casimir, Ruan & Malte"
 
 We are Sima, Casimir, Ruan & Malte, we love our plants and want to keep them healthy and happy 🍀. That's why we decided to develop an app that supports users in caring for their green friends.
 
+Our roles (TBD):
+- **Sima**: …
+- **Casimir**: …
+- **Ruan**: …
+- **Malte**: …
+
 ## Our vision
 
 - **Comprehensive Gardening Solution**: Integrating software and hardware tools to manage both indoor and outdoor gardens.
