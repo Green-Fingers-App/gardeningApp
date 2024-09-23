@@ -6,9 +6,7 @@ author: "Sima, Casimir, Ruan & Malte"
 ---
 <br/>
 
-## Tech Stack
-
-### Overview of the Core Features:
+## Overview of the Core Features:
 
 Plant database with information on different species.<br/><br/>
 Sunlight tracking and analysis based on user input.<br/><br/>
@@ -16,7 +14,7 @@ Recommendations for plant placement.<br/><br/>
 Alerts and care schedules based on plant needs.<br/><br/>
 
 
-### Tech Stack Breakdown:
+## Tech Stack Breakdown:
 
 #### Frontend (Client):
 
