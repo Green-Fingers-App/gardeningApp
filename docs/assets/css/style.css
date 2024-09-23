@@ -55,8 +55,8 @@ body {
 }
 
 .grass-container li:hover {
- opacity: 0.8;
- cursor: pointer;
+  opacity: 0.8;
+  cursor: pointer;
 }
 
 .grass-container li:active {
@@ -85,6 +85,7 @@ footer {
     transform: translateY(100%);
     opacity: 0;
   }
+
   to {
     transform: translateY(0);
     opacity: 1;

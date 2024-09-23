@@ -14,18 +14,15 @@
 
 <body>
   <header>
-    <h1 class="page-title">{{ site.title }}</h1>
+    <h1 class="page-title">{{ page.title }}</h1>
   </header>
   <a href="https://dhbw-malte.github.io/gardeningApp/" target="_self">
     <button class="go-back-button" aria-label="go back">&lt;</button>
   </a>
   <main class="grass-post-container">
-    <article>
-      <h3>{{ page.title }}</h1>
-      <p><small>Published on {{ page.date | date: "%B %d, %Y" }}</small></p>
-      <P>Authors: {{ page.author }}</P>
-      {{ content }}
-    </article>
+    <p><small>Published on {{ page.date | date: "%B %d, %Y" }}</small></p>
+    <p>Authors: {{ page.author }}</p>
+    {{ content }}
   </main>
   <div id="gitalk-container" class="grass-post-container"></div>
   <footer>
@@ -49,16 +46,14 @@
     gitalk.render('gitalk-container');
   </script>
 
-<script>
-  document.addEventListener("DOMContentLoaded", () => {
-    const containers = document.querySelectorAll('.grass-container');
-    
-    containers.forEach((container, index) => {
-      container.style.animationDelay = `${index * 0.5}s`;
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const containers = document.querySelectorAll('.grass-container');
+
+      containers.forEach((container, index) => {
+        container.style.animationDelay = `${index * 0.5}s`;
+      });
     });
-  });
-</script>
+  </script>
 
 </body>
-
-</html>
