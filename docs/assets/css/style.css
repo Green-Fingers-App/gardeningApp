@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Protest+Guerrilla&display=swap');
 
+/* Color variables for easier theme management */
 :root {
   --primary: rgb(0, 103, 105);
   --secondary: rgb(64, 165, 120);
@@ -7,62 +8,66 @@
   --background: rgb(230, 255, 148);
 }
 
+/* General reset */
 * {
   font-family: Verdana, Geneva, Tahoma, sans-serif;
-  margin: 0px;
+  margin: 0;
   padding: 0;
+}
+
+/* Heading styles */
+h1,
+h3 {
+  font-family: 'Protest Guerrilla', sans-serif;
+  color: var(--detail);
 }
 
 h1 {
   height: 4rem;
   padding-left: 1rem;
   line-height: 4rem;
-  font-family: 'Protest Guerrilla';
-  color: var(--detail);
 }
 
 h3 {
-  padding-top: 0.75rem;
-  padding-bottom: 0.75rem;
-  font-family: 'Protest Guerrilla';
-  color: var(--detail);
+  padding: 0.75rem 0;
 }
 
+/* Body layout */
 body {
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
-  gap: 1rem;
   align-items: center;
   background-color: var(--background);
+  gap: 1rem;
 }
 
+/* List styles inside grass container */
 .grass-container ul {
   display: flex;
   gap: 1rem;
-  list-style-type: none;
+  list-style: none;
 }
 
 .grass-container li {
-  position: relative;
   background-color: var(--secondary);
   padding: 1rem;
   border-radius: 10px;
   box-shadow: 0 2px 4px 0 black;
   transition: all 200ms;
-  animation: slideInFromBottom 0.5s ease-out forwards;
   width: 100%;
+  animation: slideInFromBottom 0.5s ease-out forwards;
 }
 
 .grass-container li:hover {
- opacity: 0.8;
- cursor: pointer;
+  opacity: 0.8;
+  cursor: pointer;
 }
 
 .grass-container li:active {
-  scale: 0.95;
+  transform: scale(0.95);
 }
 
+/* Page title styling */
 .page-title {
   background-color: var(--primary);
   color: white;
@@ -71,6 +76,7 @@ body {
   box-shadow: 0 0 4px 0 black;
 }
 
+/* Footer styling */
 footer {
   background-color: var(--primary);
   position: fixed;
@@ -80,47 +86,56 @@ footer {
   width: 100vw;
 }
 
+/* Go back button */
+.go-back-button {
+  position: fixed;
+  top: 4rem;
+  right: 1rem;
+  width: 2rem;
+  height: 2rem;
+  background-color: var(--secondary);
+  padding: 0.5rem;
+  border-radius: 50%;
+  border: none;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: all 200ms;
+  z-index: 10;
+}
+
+.go-back-button:hover {
+  background-color: var(--detail);
+  cursor: pointer;
+}
+
+/* Animations */
 @keyframes slideInFromBottom {
   from {
     transform: translateY(100%);
     opacity: 0;
   }
+
   to {
     transform: translateY(0);
     opacity: 1;
   }
 }
 
-.grass-container {
-  position: relative;
-  padding: 2em 2em;
-  background-color: rgb(200, 252, 200);
-  border: solid 1px;
-  border-color: var(--primary);
-  border-radius: 8px;
-  width: 80%;
-  overflow: hidden;
-  padding-top: 4rem;
-  box-shadow: 2px 2px 4px 0 black;
-  animation: slideInFromBottom 0.5s ease-out forwards;
-  opacity: 0;
-}
-
+/* Shared container styles */
+.grass-container,
 .grass-post-container {
   position: relative;
-  padding: 2em 2em;
+  padding: 2em;
   background-color: rgb(200, 252, 200);
-  border: solid 1px;
-  border-color: var(--primary);
+  border: 1px solid var(--primary);
   border-radius: 8px;
   width: 80%;
-  overflow: hidden;
-  padding-top: 4rem;
   box-shadow: 2px 2px 4px 0 black;
   animation: slideInFromBottom 0.5s ease-out forwards;
   opacity: 0;
 }
 
+/* Title styles inside containers */
+.grass-container h3,
 .grass-post-container h3 {
   position: absolute;
   top: 0;
@@ -130,28 +145,4 @@ footer {
   width: 100%;
   padding-left: 2rem;
   color: white;
-}
-
-.grass-container h3 {
-  position: absolute;
-  top: 0;
-  left: 0;
-  background-color: var(--primary);
-  height: 1.5rem;
-  width: 100%;
-  padding-left: 2rem;
-  color: white;
-}
-
-.go-back-button {
-  position: fixed;
-  width: 2rem;
-  height: 2rem;
-  top: 4rem;
-  right: 1rem;
-  background-color: var(--secondary);
-  padding: 0.5rem;
-  border-radius: 1000px;
-  border: none;
-  z-index: 10;
 }

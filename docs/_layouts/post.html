@@ -13,18 +13,27 @@
 </head>
 
 <body>
+  <!-- Header -->
   <header>
     <h1 class="page-title">{{ page.title }}</h1>
   </header>
-  <a href="https://dhbw-malte.github.io/gardeningApp/" target="_self">
+
+  <!-- Go Back Button -->
+  <a href="{{ site.url }}" target="_self">
     <button class="go-back-button" aria-label="go back">&lt;</button>
   </a>
+
+  <!-- Main Content -->
   <main class="grass-post-container">
     <p><small>Published on {{ page.date | date: "%B %d, %Y" }}</small></p>
     <p>Authors: {{ page.author }}</p>
     {{ content }}
   </main>
+
+  <!-- Gitalk Comments -->
   <div id="gitalk-container" class="grass-post-container"></div>
+
+  <!-- Footer -->
   <footer>
     <p>© {{ site.time | date: '%Y' }} {{ site.title }}</p>
   </footer>
