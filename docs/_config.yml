@@ -14,29 +14,3 @@ plugins:
 livereload:
   enable: true
   port: 35730
-
-# Exclude from build
-exclude:
-  - .expo
-  - databaseStructure
-  - GreenFingers
-  - testReactNative
-  - Gemfile
-  - Gemfile.lock
-  - node_modules
-  - .git
-
-# Include specific files
-include:
-  - README.md
-
-# Default Metadata
-defaults:
-  -
-    scope:
-      path: ""
-      type: "posts"
-    values:
-      layout: "post"
-      author: "Sima, Casimir, Ruan & Malte"
-      comments: true
