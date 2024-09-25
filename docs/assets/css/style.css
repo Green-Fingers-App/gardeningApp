@@ -202,3 +202,46 @@ footer {
   font-weight: 400;
   line-height: 16px;
 }
+
+/* Responsive Media Queries for Mobile */
+@media screen and (max-width: 768px) {
+  h1 {
+    font-size: 36px;
+    line-height: 44px;
+  }
+
+  h2 {
+    font-size: 28px;
+    line-height: 36px;
+  }
+
+  h3 {
+    font-size: 24px;
+    line-height: 32px;
+  }
+
+  body {
+    gap: 24px;
+    margin-bottom: 72px;
+  }
+
+  header {
+    padding: 16px 24px;
+    justify-content: space-between;
+  }
+
+  main {
+    margin: 0 24px;
+    padding: 24px;
+  }
+
+  .postButton {
+    flex: 1 1 100%;
+    max-width: 100%;
+    padding: 12px;
+  }
+
+  footer {
+    padding: 12px 24px;
+  }
+}
