@@ -80,6 +80,7 @@ header {
   gap: 0;
   box-sizing: border-box;
   background: var(--Primary-Green-Light, #4F6F52);
+  index: 999;
 }
 
 .pageTitle {
@@ -183,6 +184,7 @@ footer {
   bottom: 0px;
   background: var(--Primary-Green-Light, #4F6F52);
   box-sizing: border-box;
+  index: 999;
 }
 
 .impText {
