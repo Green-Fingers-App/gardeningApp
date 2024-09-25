@@ -15,6 +15,8 @@ Our roles (TBD):
 - **Ruan**: …
 - **Malte**: …
 
+---
+
 ## Our vision
 
 - **Comprehensive Gardening Solution**: Integrating software and hardware tools to manage both indoor and outdoor gardens.
