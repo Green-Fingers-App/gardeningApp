@@ -234,6 +234,11 @@ footer {
     justify-content: space-between;
   }
 
+  .backBtn svg {
+    width: auto;
+    height: 32px;
+  }
+
   main {
     margin-top: 112px;
     margin-bottom: 24px;
