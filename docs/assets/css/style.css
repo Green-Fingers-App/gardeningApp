@@ -206,8 +206,8 @@ footer {
 /* Responsive Media Queries for Mobile */
 @media screen and (max-width: 768px) {
   h1 {
-    font-size: 36px;
-    line-height: 44px;
+    font-size: 32px;
+    line-height: 40px;
   }
 
   h2 {
@@ -221,6 +221,8 @@ footer {
   }
 
   body {
+    font-size: 16px;
+    line-height: 20px;
     gap: 24px;
     margin-bottom: 72px;
   }
@@ -231,7 +233,7 @@ footer {
   }
 
   main {
-    margin: 0 24px;
+    margin: 0 96px;
     padding: 24px;
   }
 
