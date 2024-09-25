@@ -30,9 +30,6 @@ exclude:
 include:
   - README.md
 
-# Permalink structure
-permalink: /blog/:title/
-
 # Default Metadata
 defaults:
   -
