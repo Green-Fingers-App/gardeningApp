@@ -38,3 +38,6 @@ $RECYCLE.BIN/
 *.msm
 *.msp
 *.lnk
+
+testReactNative/testReactNative/.env
+testReactNative/testReactNative/app/google-services.json
