@@ -148,7 +148,7 @@ hr {
   align-items: flex-start;
   gap: 8px;
   flex: 1 1 240px;
-  max-width: 320px;
+  max-width: 332px;
   border-radius: 16px;
   background: var(--Primary-Green-Light, #4F6F52);
   border: none;
