@@ -226,7 +226,7 @@ footer {
     gap: 24px;
     padding-left: 16px;
     padding-right: 16px;
-    margin-bottom: 72px;
+    margin-bottom: 88px;
   }
 
   header {
@@ -235,7 +235,7 @@ footer {
   }
 
   main {
-    margin-top: 96px;
+    margin-top: 112px;
     margin-bottom: 24px;
     padding: 24px;
   }
