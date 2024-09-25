@@ -80,7 +80,7 @@ header {
   gap: 0;
   box-sizing: border-box;
   background: var(--Primary-Green-Light, #4F6F52);
-  index: 999;
+  z-index: 999;
 }
 
 .pageTitle {
@@ -173,6 +173,13 @@ hr {
   line-height: 16px;
 }
 
+#gitalk-container {
+  margin-left: auto !important;
+  margin-right: auto !important;
+  max-width: 1440px !important;
+  z-index: 1 !important;
+}
+
 footer {
   display: flex;
   width: 100%;
@@ -184,7 +191,7 @@ footer {
   bottom: 0px;
   background: var(--Primary-Green-Light, #4F6F52);
   box-sizing: border-box;
-  index: 999;
+  z-index: 999;
 }
 
 .impText {
