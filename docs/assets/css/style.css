@@ -135,11 +135,10 @@ hr {
 
 .postList {
   display: flex;
-  align-items: flex-start;
-  align-content: flex-start;
-  gap: 16px;
-  align-self: stretch;
   flex-wrap: wrap;
+  gap: 16px;
+  align-items: flex-start;
+  justify-content: flex-start;
 }
 
 .postButton {
@@ -148,12 +147,13 @@ hr {
   flex-direction: column;
   align-items: flex-start;
   gap: 8px;
-  flex: 1 0 0;
-  flex-basis: calc(100% /4);
+  flex: 1 1 240px;
+  max-width: 320px;
   border-radius: 16px;
   background: var(--Primary-Green-Light, #4F6F52);
   border: none;
   cursor: pointer;
+  box-sizing: border-box;
 }
 
 .postButton h3,
