@@ -3,27 +3,25 @@ import {
   Text,
   ImageBackground,
   SafeAreaView,
-  StatusBar,
   StyleSheet,
   TextInput,
   TouchableOpacity,
-  Switch,
   Pressable,
 } from "react-native";
 import React, { useState } from "react";
 import { router, Link } from "expo-router";
 import Icon from "react-native-vector-icons/FontAwesome";
+import { auth } from "../../firebase";
+import { createUserWithEmailAndPassword, sendEmailVerification } from "firebase/auth";
 
-const signup = () => {
+const Signup = () => {
   const [show, setShow] = useState<boolean>(false);
   const [inputValues, setInputValues] = useState<{
-    username: string;
     email: string;
     confirmEmail: string;
     password: string;
     confirmPassword: string;
   }>({
-    username: "",
     email: "",
     confirmEmail: "",
     password: "",
@@ -39,6 +37,47 @@ const signup = () => {
   const toggleShow = () => {
     setShow(!show);
   };
+
+  // Firebase signup function with email verification, email verify before login not implemented
+
+  const handleSignup = async () => {
+    const { email, confirmEmail, password, confirmPassword } = inputValues;
+
+    // Check if emails match
+    if (email !== confirmEmail) {
+      alert("Emails do not match!");
+      return;
+    }
+
+    // Check if passwords match
+    if (password !== confirmPassword) {
+      alert("Passwords do not match!");
+      return;
+    }
+
+    try {
+      // Create user with email and password
+      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+      console.log("User account created:", userCredential.user);
+
+      // Send email verification
+      await sendEmailVerification(userCredential.user);
+      alert("A verification email has been sent. Please check your inbox.");
+
+      // Where do we send em?
+      router.push("/home");
+
+    } catch (error) {
+      if (error instanceof Error) {
+        console.error("Error signing up:", error.message);
+        alert(error.message);
+      } else {
+        console.error("Error signing up:", error);
+        alert("An error occurred while signing up. Please try again.");
+      }
+    }
+  };
+
   return (
     <SafeAreaView style={styles.container}>
       <ImageBackground
@@ -49,12 +88,6 @@ const signup = () => {
         <Text style={styles.title}>Green Fingers</Text>
         <View style={styles.content}>
           <Text style={styles.contentTitle}>Sign Up</Text>
-          <TextInput
-            placeholder="Username"
-            autoFocus={true}
-            style={styles.inputField}
-            onChangeText={(text) => handleChange("username", text)}
-          />
           <TextInput
             placeholder="Email"
             style={styles.inputField}
@@ -90,16 +123,17 @@ const signup = () => {
             onChangeText={(text) => handleChange("confirmPassword", text)}
           />
           <View style={styles.buttonContainer}>
-            <TouchableOpacity style={styles.loginButton}>
-              <Text>Login</Text>
-            </TouchableOpacity>
             <TouchableOpacity
               style={styles.signUpButton}
-              onPress={() => router.push("/signup")}
+              onPress={handleSignup}
             >
               <Text>Sign Up</Text>
             </TouchableOpacity>
           </View>
+          <Text>Already have an account?</Text>
+          <TouchableOpacity onPress={() => router.push("/login")}>
+            <Text>Login</Text>
+          </TouchableOpacity>
           <Text>Forgot Password?</Text>
           <Link href={"/forgotpassword"}>
             <Text>Click Here</Text>
@@ -117,7 +151,7 @@ const styles = StyleSheet.create({
     width: "100%",
   },
   container: {
-    flex: 1, // Ensure full screen
+    flex: 1,
   },
   background: {
     flex: 1,
@@ -126,8 +160,8 @@ const styles = StyleSheet.create({
     gap: 20,
   },
   content: {
-    alignItems: "center", // Centers content horizontally
-    justifyContent: "center", // Centers content vertically
+    alignItems: "center",
+    justifyContent: "center",
     backgroundColor: "#fff",
     padding: 10,
     width: "100%",
@@ -169,4 +203,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default signup;
+export default Signup;

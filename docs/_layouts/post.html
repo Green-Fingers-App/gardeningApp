@@ -5,60 +5,59 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>{{ page.title }}</title>
+  <title>Green Fingers – {{ page.title }}</title>
   <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
 
-  <!-- Gitalk Stylesheet -->
   <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
 </head>
 
 <body>
   <header>
-    <h1 class="page-title">{{ site.title }}</h1>
+    <div class="pageTitle">
+      <a class="backBtn" href="javascript:history.back()" target="_self">
+        <svg xmlns="http://www.w3.org/2000/svg" width="56" height="56" viewBox="0 0 56 56" fill="#F5EFE6">
+          <g clip-path="url(#clip0_17_33)">
+            <path d="M27.23 9.02999L23.1 4.89999L0 28L23.1 51.1L27.23 46.97L8.26 28L27.23 9.02999Z" />
+          </g>
+          <defs>
+            <clipPath id="clip0_17_33">
+              <rect width="56" height="56" fill="white" />
+            </clipPath>
+          </defs>
+        </svg>
+      </a>
+      <h1>{{ page.title }}</h1>
+    </div>
   </header>
-  <a href="https://dhbw-malte.github.io/gardeningApp/" target="_self">
-    <button class="go-back-button" aria-label="go back">&lt;</button>
-  </a>
-  <main class="grass-post-container">
-    <article>
-      <h3>{{ page.title }}</h1>
-      <p><small>Published on {{ page.date | date: "%B %d, %Y" }}</small></p>
-      <P>Authors: {{ page.author }}</P>
-      {{ content }}
-    </article>
+
+  <main class="postContentContainer">
+    <p class="postMetaData">Published on {{ page.date | date: "%B %d, %Y" }} | Authors: {{ page.author }}</p>
+    <hr>
+    {{ content }}
   </main>
+
   <div id="gitalk-container" class="grass-post-container"></div>
+
   <footer>
-    <p>© {{ site.time | date: '%Y' }} {{ site.title }}</p>
+    <p class="impText">© {{ site.time | date: '%Y' }} {{ site.title }}</p>
   </footer>
 
   <!-- Gitalk Script -->
   <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
   <script>
     var gitalk = new Gitalk({
-      clientID: 'Ov23liKn5Qb59ESrd1Q0',  // Replace with your GitHub OAuth Application Client ID
-      clientSecret: '57c426e16ecb53eeee0e3b4c9456fc7639890a35',  // Replace with your GitHub OAuth Application Client Secret
-      repo: 'gardeningApp',  // Replace with your repository name where comments will be stored
-      owner: 'dhbw-malte',  // Replace with your GitHub username
-      admin: ['DHBW-Malte', 'simagolrokh', 'CasimirG12', 'rmoolmandreyer'],  // GitHub usernames of admins who can moderate comments
-      id: '{{ page.url | slugify }}',  // Use the page URL or another unique value for each post
-      distractionFreeMode: false,  // Set to true for a cleaner comment interface
+      clientID: 'Ov23liKn5Qb59ESrd1Q0',
+      clientSecret: '57c426e16ecb53eeee0e3b4c9456fc7639890a35',
+      repo: 'gardeningApp',
+      owner: 'dhbw-malte',
+      admin: ['DHBW-Malte', 'simagolrokh', 'CasimirG12', 'rmoolmandreyer'],
+      id: '{{ page.url | slugify }}',
+      distractionFreeMode: false,
       labels: ['blog']
     });
 
     gitalk.render('gitalk-container');
   </script>
-
-<script>
-  document.addEventListener("DOMContentLoaded", () => {
-    const containers = document.querySelectorAll('.grass-container');
-    
-    containers.forEach((container, index) => {
-      container.style.animationDelay = `${index * 0.5}s`;
-    });
-  });
-</script>
-
 </body>
 
 </html>

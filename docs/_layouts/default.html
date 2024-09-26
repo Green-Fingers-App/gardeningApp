@@ -5,40 +5,26 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>{{ page.title }}</title>
+  <title>Green Fingers – {{ page.title }}</title>
   <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
-
-  <!-- Gitalk Stylesheet -->
-  <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
 </head>
 
 <body>
   <header>
-    <h1 class="page-title">{{ site.title }}</h1>
+    <h1 class="pageTitle">{{ site.title }}</h1>
   </header>
-    <div class="grass-container">
-      <h3>Welcome to our blog</h3>
-      <p>{{ site.description }}</p>
-    </div>
-  <main class="grass-container">
+  <main>
+    <h2>Welcome to our blog</h2>
+    <p>{{ site.description }}</p>
+    <hr>
+    <h2>Our Posts</h2>
     {{ content }}
   </main>
 
 
   <footer>
-    <p>© {{ site.time | date: '%Y' }} {{ site.title }}</p>
+    <p class="impText">© {{ site.time | date: '%Y' }} {{ site.title }}</p>
   </footer>
-
-  <script>
-    document.addEventListener("DOMContentLoaded", () => {
-      const containers = document.querySelectorAll('.grass-container');
-      
-      containers.forEach((container, index) => {
-        container.style.animationDelay = `${index * 0.5}s`;
-      });
-    });
-  </script>
-
 </body>
 
 </html>

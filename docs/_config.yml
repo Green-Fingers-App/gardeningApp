@@ -1,8 +1,16 @@
+# Basic Settings
 title: Green Fingers
-description: Welcome to our blog about our garden app. We're glad you're here and would love to hear your feedback on our recent project changes. You can find them in the “Recent Posts” section.
-baseurl: "" # Leave blank unless you have a custom domain
-baseurl: "/gardeningApp"  # This is important for correct URLs on GitHub Pages
-url: "https://dhbw-malte.github.io"  # Your main domain without the subdirectory
-theme: minima # Default GitHub Pages theme
+description: "Thank you for being here, and thank you for visiting our blog. We regularly publish updates on the development of our GreenFingers app. This app will help all plant lovers and those who want to become plant lovers to take care of their plants and enjoy their plants for a long time. <br/><br/>Below you will find our blog posts, just choose one and start reading. We also appreciate your feedback and thoughts. You can use our comments section at the end of each post. To leave a comment, simply sign in with your Github account and let us know your thoughts. We look forward to hearing from you."
+baseurl: "/gardeningApp"
+url: "https://dhbw-malte.github.io"
+
+# Plugins
 plugins:
   - jekyll-feed
+  - jekyll-livereload
+  - jekyll-seo-tag
+
+# Livereload
+livereload:
+  enable: true
+  port: 35730

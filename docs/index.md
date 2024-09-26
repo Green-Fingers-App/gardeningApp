@@ -3,13 +3,11 @@ layout: default
 title: Home
 ---
 
-### Recent Posts
-
-<ul>
+<div class="postList">
   {% for post in site.posts %}
-    <li>
-      <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
-      <small> - {{ post.date | date: "%B %d, %Y" }}</small>
-    </li>
+  <button class="postButton" onclick="window.location.href='{{ post.url | relative_url }}'">
+    <h3>{{ post.title }}</h3>
+    <p class="postDate"> {{ post.date | date: "%B %d, %Y" }}</p>
+  </button>
   {% endfor %}
-</ul>
+</div>

@@ -9,15 +9,17 @@ import {
   View,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { auth } from "../../firebase";
+import { signInWithEmailAndPassword } from "firebase/auth";
 
 import Input from "../components/Input";
 
 export default function App() {
   const [inputValues, setInputvalues] = useState<{
-    username: string;
+    email: string;
     password: string;
   }>({
-    username: "",
+    email: "",
     password: "",
   });
 
@@ -41,13 +43,31 @@ export default function App() {
     }));
   };
 
-  const validate = (): void => {
-    if (!inputValues.username) {
-      handleErrorMessage("username", "Please enter your username");
+  const validate = async (): Promise<void> => {
+    if (!inputValues.email) {
+      handleErrorMessage("email", "Please enter your email");
+      return;
     }
 
     if (!inputValues.password) {
       handleErrorMessage("password", "Please enter your password");
+      return;
+    }
+
+    try {
+      const userCredential = await signInWithEmailAndPassword(
+        auth,
+        inputValues.email,
+        inputValues.password
+      );
+      console.log("User logged in:", userCredential.user);
+      router.push("/home");
+    } catch (error) {
+      if (error instanceof Error) {
+        alert(error.message);
+      } else {
+        alert("An unknown error occurred");
+      }
     }
   };
 
@@ -66,10 +86,10 @@ export default function App() {
             label="Username"
             placeholder="Enter your username"
             autoFocus={true}
-            onChangeText={(text) => handleChange("username", text)}
-            error={inputErrors.username}
+            onChangeText={(text) => handleChange("email", text)}
+            error={inputErrors.email}
             onFocus={() => {
-              handleErrorMessage("username", undefined);
+              handleErrorMessage("email", undefined);
             }}
           />
           <Input
