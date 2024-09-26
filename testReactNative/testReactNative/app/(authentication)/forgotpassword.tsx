@@ -14,12 +14,6 @@ const forgotpasswordPage = () => {
         iconName="email-outline"
         placeholder="Enter your email"
       />
-      <Input
-        label="Password"
-        placeholder="Enter your password"
-        iconName="lock-outline"
-        password
-      />
     </View>
   );
 };

@@ -62,6 +62,7 @@ export default function App() {
         <View style={styles.content}>
           <Text style={styles.contentTitle}>Login</Text>
           <Input
+            iconName="account"
             label="Username"
             placeholder="Enter your username"
             autoFocus={true}
@@ -72,6 +73,7 @@ export default function App() {
             }}
           />
           <Input
+            iconName="lock-outline"
             label="Password"
             placeholder="Enter your password"
             secureTextEntry={true}

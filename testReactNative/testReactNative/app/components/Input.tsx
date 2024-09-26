@@ -4,8 +4,6 @@ import {
   TextInput,
   StyleSheet,
   TextInputProps,
-  NativeSyntheticEvent,
-  TextInputFocusEventData,
 } from "react-native";
 import React, { useState } from "react";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
