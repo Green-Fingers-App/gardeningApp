@@ -16,7 +16,7 @@ Hello everyone! We are excited to share our Software Requirements Specification 
 ## Use-Case Diagram (UCD)
 
 Here is our first draft of the User-Case Diagram for "Green Fingers":
-![Use-Case Diagram](../assets/svg/GreenFingersUsecases.drawio.svg)
+![Use-Case Diagram](/assets/svg/GreenFingersUsecases.drawio.svg)
 
 
 ### User Roles
