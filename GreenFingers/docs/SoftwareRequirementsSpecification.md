@@ -32,27 +32,24 @@ THIS IS ONLY THE COPY PASTE VERSION OF THE SRS TEMPLATE
 ## 1. Introduction
 
 ### 1.1 Purpose
-This Software Requirements Specification (SRS) describes all specifications for the application "Green Fingers". It includes an overview about this project and its vision, detailed information about the planned features and boundary conditions of the development process.
-
+This Software Requirements Specification (SRS) describes all specifications for the "Green Fingers" application. The app helps users manage their gardens by providing plant data such as watering schedules, temperature ranges, sunlight exposure, and other details. It outlines the features and boundary conditions for the development process.
 
 ### 1.2 Scope
-The project is going to be realized as an Android App.  
+The app will be developed for both Android and iOS (via Flutter).
   
-Actors of this App can be users or moderators.  
+Actors of this app include:
+- Users: Gardeners who will use the app to track their plants and care schedules.
+- Admins: Admins responsible for maintaining plant databases and overseeing app content.
   
-Planned Subsystems are: 
-* Notice Board:  
-The notice board is the essential part of the user interface. Game sessions should be visualized as postings including relevant information about the session. Those should be partly standardized by a form with a free text option for specifics. The data must be stored accordingly.
-* Account System:  
-Users can create accounts so sessions can be connected to a person as well as to join requests. User data must be stored alongside the posting data.
-* Friend List and User Rating:  
-Once the account system is created there will be the option to mark users as favorites. Also users or game sessions should get a rating to counter abuse.
-* Connecting People:  
-The host of a game session has to be notified when someone wants to join their game. Both must then be able to get in touch to organize the details, so messages between the host and the guest have to be enabled. This could be done via automated emails or a custom in-app system. For this an account system is needed.
-* Storing Data:  
-User data for accounts and possibly profiles has to be stored. Also the game sessions have to be stored as datasets containing the form contents and possibly contact data. The data storage will form the foundation for the visualization, account system and the search feature.
-* Finding your Game:  
-We need a tag system so everyone looking to join a game can search for the kind of games they are interested in. Possibly other aspects can be searchable, such as place or date. Tags must be stored and a search function developed. 
+The main subsystems include:
+* Plant Database:  
+Store and manage detailed information about plants (e.g., watering frequency, temperature, sunlight requirements).
+* User Account System: 
+Users will create accounts to store gardens and plant data.
+* Notifications System:  
+Notify users when they need to water or take care of their plants.
+* Search System:
+Allow users to search for plants based on various parameters like water needs, sunlight, or season.
 
 ### 1.3 Definitions, Acronyms and Abbreviations
 | Abbrevation | Explanation                            |
