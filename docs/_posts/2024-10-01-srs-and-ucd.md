@@ -11,7 +11,7 @@ Hello everyone! We are excited to share our Software Requirements Specification 
 
 This Software Requirements Specification (SRS) provides a comprehensive description of the specifications for the "Green Fingers" application. It aims to assist gardeners in tracking plant care through features like adding plants, managing watering schedules, receiving notifications, and integrating sensor data. This document details the planned features, functionality, and boundary conditions for the development of the app.
 
-[Our SRS Markdown](/GreenFingers/docs/SoftwareRequirementsSpecification.md)
+[Our SRS Markdown](https://github.com/DHBW-Malte/gardeningApp/blob/update-week4-post/GreenFingers/docs/SoftwareRequirementsSpecification.md)
 
 ---
 
