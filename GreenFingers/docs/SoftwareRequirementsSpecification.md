@@ -44,7 +44,7 @@ Actors of this app include:
 The main subsystems include:
 * Plant Database:  
 Store and manage detailed information about plants (e.g., watering frequency, temperature, sunlight requirements).
-* User Account System: 
+* User Account System:
 Users will create accounts to store gardens and plant data.
 * Notifications System:  
 Notify users when they need to water or take care of their plants.
@@ -65,8 +65,8 @@ Allow users to search for plants based on various parameters like water needs, s
 
 | Title                                                              | Date       | Publishing organization   |
 | -------------------------------------------------------------------|:----------:| ------------------------- |
-| [Common Playground Blog](http://commonplayground.wordpress.com)    | 18.10.2018 | Common Playground Team    |
-| [GitHub](https://github.com/nilskre/CommonPlayground)              | 18.10.2018 | Common Playground Team    |
+| [Green Fingers Blog](https://dhbw-malte.github.io/gardeningApp/)   | 01.10.2024 | Green Fingers Team        |
+| [GitHub](https://github.com/DHBW-Malte/gardeningApp/)              | 01.10.2024 | Green Fingers Team        |
 
 
 ### 1.5 Overview
