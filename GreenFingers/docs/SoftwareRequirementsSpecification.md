@@ -82,7 +82,6 @@ By offering efficient garden management tools—including pumps, tubing, and noz
 ### 2.2 Use Case Diagram
 
 ![OUCD](../../docs/assets/svg/GreenFingersUsecases.drawio.svg)
-- Green: Planned till end of december
 
 ### 2.3 Technology Stack
 The technology we use is:
