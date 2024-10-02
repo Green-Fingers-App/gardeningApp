@@ -32,7 +32,7 @@ THIS IS ONLY THE COPY PASTE VERSION OF THE SRS TEMPLATE
 ## 1. Introduction
 
 ### 1.1 Purpose
-This Software Requirements Specification (SRS) describes all specifications for the application "Common Playground". It includes an overview about this project and its vision, detailed information about the planned features and boundary conditions of the development process.
+This Software Requirements Specification (SRS) describes all specifications for the application "Green Fingers". It includes an overview about this project and its vision, detailed information about the planned features and boundary conditions of the development process.
 
 
 ### 1.2 Scope
