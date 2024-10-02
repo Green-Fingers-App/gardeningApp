@@ -32,7 +32,7 @@ THIS IS ONLY THE COPY PASTE VERSION OF THE SRS TEMPLATE
 ## 1. Introduction
 
 ### 1.1 Purpose
-This Software Requirements Specification (SRS) describes all specifications for the "Green Fingers" application. The app helps users manage their gardens by providing plant data such as watering schedules, temperature ranges, sunlight exposure, and other details. It outlines the features and boundary conditions for the development process.
+This Software Requirements Specification (SRS) provides a comprehensive description of the specifications for the "Green Fingers" application. It aims to assist gardeners in tracking plant care through features like adding plants, managing watering schedules, receiving notifications, and integrating sensor data. This document details the planned features, functionality, and boundary conditions for the development of the app.
 
 ### 1.2 Scope
 The app will be developed for both Android and iOS (via Flutter).
@@ -75,7 +75,7 @@ The following chapter provides an overview of this project with vision and Overa
 ## 2. Overall Description
 
 ### 2.1 Vision
-Inspired by carpool coordination services like ‘BlaBlaCar’ or ‘Mitfahrzentrale’ we want to build an application to coordinate game sessions. We plan to create a platform for people who are looking for other people to play games with. Covering online multiplayer games, tabletop, pen and paper or regular board games we want to provide a kind of bulletin board where people can state what they want to play, when and where they want to do it and how many people they are looking for. Others can then react to the postings and virtually join the play session to be connected by us so everyone can coordinate the actual play session together on a Common Playground.
+"Green Fingers" is envisioned as an intelligent gardening assistant for both casual and experienced gardeners. It will provide users with personalised reminders and plant care guidance based on sensor data and best practices for plant maintenance. Users will be able to track individual plants, integrate smart sensors, and maintain a healthy garden.
 
 ### 2.2 Use Case Diagram
 
