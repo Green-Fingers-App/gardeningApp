@@ -53,8 +53,8 @@ Flask-Login will manage user authentication and session handling, ensuring secur
 
 ### Database
 
-#### MongoDB (NoSQL)
-We are using MongoDB, a NoSQL database that offers flexibility in handling unstructured data like plant species information, user preferences, and sunlight conditions. The schema-less nature of MongoDB will allow us to easily scale the plant database by adding new entries as needed.
+#### Firebase (NoSQL)
+We are using Firebase, a NoSQL database that offers flexibility in handling unstructured data like plant species information, user preferences, and sunlight conditions. The schema-less nature of Firebase will allow us to easily scale the plant database by adding new entries as needed.
 
 ---
 
