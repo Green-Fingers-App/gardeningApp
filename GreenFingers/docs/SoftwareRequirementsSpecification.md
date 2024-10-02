@@ -82,7 +82,7 @@ Inspired by carpool coordination services like ‘BlaBlaCar’ or ‘Mitfahrzent
 
 ### 2.2 Use Case Diagram
 
-![OUCD](./docs/assets/svg/GreenFingersUsecases.drawio.svg)
+![OUCD](../docs/assets/svg/GreenFingersUsecases.drawio.svg)
 
 - Green: Planned till end of december
 
