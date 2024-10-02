@@ -130,12 +130,15 @@ Until December we plan to implement:
 
 #### 3.1.1 Sign Up
 
+Users will be able to create a new account using an email address and password, or by signing up through third-party authentication providers (e.g., Google, Facebook).
 
 #### 3.1.2 Login / Logout
 
+Users will log into their accounts using an email and password or third-party credentials. They can also log out when needed.
 
 #### 3.1.3 Add plant
 
+Users can add new plants to their personal garden by entering plant details such as name, watering frequency, sunlight requirements, and more.
 
 #### 3.1.4 Delete plant
 The user can delete a plant from their app. This will remove the plant from the user's garden and all associated data in the database.
