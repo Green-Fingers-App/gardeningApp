@@ -82,10 +82,9 @@ Inspired by carpool coordination services like ‘BlaBlaCar’ or ‘Mitfahrzent
 
 ### 2.2 Use Case Diagram
 
-![OUCD](./UseCaseDiagramCP.png)
+![OUCD](./docs/assets/svg/GreenFingersUsecases.drawio.svg)
 
 - Green: Planned till end of december
-- Yellow: Planned till end of june
 
 ### 2.3 Technology Stack
 The technology we use is:
