@@ -88,34 +88,34 @@ By offering efficient garden management tools—including pumps, tubing, and noz
 The technology we use is:
 
 Backend:
--Flask
--Flask-CORS
--Flask-RESTful
--Flask-PyMongo
--Flask-Login
--Python
+- Flask
+- Flask-CORS
+- Flask-RESTful
+- Flask-PyMongo
+- Flask-Login
+- Python
 
 Frontend:
--React Native
--Expo
--TypeScript
+- React Native
+- Expo
+- TypeScript
 
 Database:
--Firebase (NoSQL)
+- Firebase (NoSQL)
 
 IDE:
--TBD
+- TBD
 
 Project Management:
--Clockify
--GitHub
--Discord
+- Clockify
+- GitHub
+- Discord
 
 Deployment:
--TBD
+- TBD
 
 Testing:
--TBD
+- TBD
 
 ## 3. Specific Requirements
 
