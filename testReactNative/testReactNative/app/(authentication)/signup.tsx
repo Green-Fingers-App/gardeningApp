@@ -12,7 +12,10 @@ import React, { useState } from "react";
 import { router, Link } from "expo-router";
 import Icon from "react-native-vector-icons/FontAwesome";
 import { auth } from "../../firebase";
-import { createUserWithEmailAndPassword, sendEmailVerification } from "firebase/auth";
+import {
+  createUserWithEmailAndPassword,
+  sendEmailVerification,
+} from "firebase/auth";
 
 const Signup = () => {
   const [show, setShow] = useState<boolean>(false);
@@ -57,7 +60,11 @@ const Signup = () => {
 
     try {
       // Create user with email and password
-      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+      const userCredential = await createUserWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
       console.log("User account created:", userCredential.user);
 
       // Send email verification
@@ -66,7 +73,6 @@ const Signup = () => {
 
       // Where do we send em?
       router.push("/home");
-
     } catch (error) {
       if (error instanceof Error) {
         console.error("Error signing up:", error.message);
@@ -131,7 +137,7 @@ const Signup = () => {
             </TouchableOpacity>
           </View>
           <Text>Already have an account?</Text>
-          <TouchableOpacity onPress={() => router.push("/login")}>
+          <TouchableOpacity onPress={() => router.push("/")}>
             <Text>Login</Text>
           </TouchableOpacity>
           <Text>Forgot Password?</Text>
