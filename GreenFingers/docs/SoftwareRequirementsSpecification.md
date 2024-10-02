@@ -30,10 +30,24 @@
 ## 1. Introduction
 
 ### 1.1 Purpose
-This Software Requirements Specification (SRS) describes all specifications for the application "Green Fingers". It includes an overview about this project and its vision, detailed information about the planned features and boundary conditions of the development process.
-
+This Software Requirements Specification (SRS) provides a comprehensive description of the specifications for the "Green Fingers" application. It aims to assist gardeners in tracking plant care through features like adding plants, managing watering schedules, receiving notifications, and integrating sensor data. This document details the planned features, functionality, and boundary conditions for the development of the app.
 
 ### 1.2 Scope
+The app will be developed for both Android and iOS (via Flutter).
+  
+Actors of this app include:
+- Users: Gardeners who will use the app to track their plants and care schedules.
+- Admins: Admins responsible for maintaining plant databases and overseeing app content.
+  
+The main subsystems include:
+* Plant Database:  
+Store and manage detailed information about plants (e.g., watering frequency, temperature, sunlight requirements).
+* User Account System:
+Users will create accounts to store gardens and plant data.
+* Notifications System:  
+Notify users when they need to water or take care of their plants.
+* Search System:
+Allow users to search for plants based on various parameters like water needs, sunlight, or season.
 
 ### 1.3 Definitions, Acronyms and Abbreviations
 | Abbrevation | Explanation                            |
@@ -49,9 +63,8 @@ This Software Requirements Specification (SRS) describes all specifications for 
 
 | Title                                                              | Date       | Publishing organization   |
 | -------------------------------------------------------------------|:----------:| ------------------------- |
-| [Green Fingers Blog](https://dhbw-malte.github.io/gardeningApp/)    | 18.10.2018 | Green Fingers Team    |
-| [GitHub](https://github.com/DHBW-Malte/gardeningApp)              | 18.10.2018 | Green Fingers Team    |
-
+| [Green Fingers Blog](https://dhbw-malte.github.io/gardeningApp/)   | 01.10.2024 | Green Fingers Team        |
+| [GitHub](https://github.com/DHBW-Malte/gardeningApp/)              | 01.10.2024 | Green Fingers Team        |
 
 ### 1.5 Overview
 The following chapter provides an overview of this project with vision and Overall Use Case Diagram. The third chapter (Requirements Specification) delivers more details about the specific requirements in terms of functionality, usability and design parameters. Finally there is a chapter with supporting information. 
@@ -59,6 +72,7 @@ The following chapter provides an overview of this project with vision and Overa
 ## 2. Overall Description
 
 ### 2.1 Vision
+
 Our vision is to provide a comprehensive gardening solution that seamlessly integrates software and hardware tools to empower users in managing both indoor and outdoor gardens. With a focus on automation and smart features, we offer real-time weather updates, UV lighting sensors, moisture tracking, and a solar-powered watering system, ensuring optimal plant care.
 
 We aim to guide users with tailored advice on watering, nutrition, sunlight, and harvest timing, along with insights into edible plant parts. Personalized notifications keep users informed of their plants’ needs, enhancing their gardening experience.
