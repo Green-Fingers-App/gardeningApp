@@ -138,13 +138,13 @@ Until December we plan to implement:
 
 
 #### 3.1.4 Delete plant
-
+The user can delete a plant from their app. This will remove the plant from the user's garden and all associated data in the database.
 
 #### 3.1.5 Recieve Notification
-
+The user can receive notifications about their plants' health status or needs. These notifications will be sent based on the plant's requirements and the user's settings.
 
 #### 3.1.6 Send notification about plant needs
-
+Each plant can send notifications to the user about its needs and health status. These notifications will be triggered based on the plant's data and the user's preferences.
 
 ### 3.2 Usability
 TBD
