@@ -19,7 +19,7 @@ This Software Requirements Specification (SRS) provides a comprehensive descript
 
 Here is our first draft of the User-Case Diagram for "Green Fingers":
 
-![Use-Case Diagram](/gardeningApp/docs/assets/svg/GreenFingersUsecases.drawio.svg)
+![Use-Case Diagram](/gardeningApp/assets/svg/GreenFingersUsecases.drawio.svg)
 
 ### User Roles
 
