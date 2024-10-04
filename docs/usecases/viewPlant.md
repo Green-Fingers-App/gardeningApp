@@ -15,16 +15,16 @@ These sections contain all information about a plant. The user can switch betwee
 
 # 2 Flow of Events
 
+## 2.1 Basic Flow
+
 - User clicks on plant card
 - User reads information
 - User interacts with harmonica
 - User finds information they wanted
 
-## 2.1 Basic Flow
-
 ### 2.1.1 Activity Diagram
 
-![UML flowchart](/)
+![UML flowchart](/gardeningApp/assets/svg/Use%20Case%20Diagrams/viewPlant.drawio.svg)
 
 ### 2.1.2 Mock-Up
 
