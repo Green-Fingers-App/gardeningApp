@@ -24,7 +24,7 @@ These sections contain all information about a plant. The user can switch betwee
 
 ### 2.1.1 Activity Diagram
 
-![UML flowchart](/gardeningApp/assets/svg/Use%20Case%20Diagrams/viewPlant.drawio.svg)
+![UML flowchart](/gardeningApp/docs/assets/svg/Use%20Case%20Diagrams/viewPlant.drawio.svg)
 
 ### 2.1.2 Mock-Up
 
