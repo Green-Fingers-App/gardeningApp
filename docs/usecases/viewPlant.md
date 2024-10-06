@@ -32,8 +32,17 @@ These sections contain all information about a plant. The user can switch betwee
 
 # 3 Special Requirements
 
+(n/a)
+
 # 4 Preconditions
+
+- user must be logged in
+- user must be on the page of a garden
 
 # 5 Postconditions
 
+(n/a)
+
 # 6 Extension Points
+
+(n/a)
