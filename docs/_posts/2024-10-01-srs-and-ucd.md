@@ -21,8 +21,8 @@ Here is our first draft of the User-Case Diagram for "Green Fingers":
 
 ![Use-Case Diagram](/gardeningApp/assets/svg/GreenFingersUsecases.drawio.svg)
 
-
 ### User Roles
+
 We have identified the following user roles and their interactions with the system:
 
 1. **User**: The primary user of the app who will use it to manage their garden, plants, and tasks about their plants. The user can also receive notifications about their plants' health and needs and adapt their profile settings.
@@ -31,6 +31,7 @@ We have identified the following user roles and their interactions with the syst
 4. **Garden**: The garden that provides an overview of all plants and tasks in the user's garden.
 
 ### Our Scope for the use cases
+
 In accordance with our MVP (Minimum Viable Product), we have identified the following five use cases, which we plan to deliver in December 2024
 
 1. **Sign Up**: The user can create an account and log in to the app.
