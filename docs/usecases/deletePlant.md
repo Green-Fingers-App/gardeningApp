@@ -41,10 +41,3 @@ To **delete a plant** from a garden, the user navigates to the garden overview b
 
 ### 2.1.3 Narrative
 
-# 3 Special Requirements
-
-# 4 Preconditions
-
-# 5 Postconditions
-
-# 6 Extension Points
