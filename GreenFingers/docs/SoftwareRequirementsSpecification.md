@@ -83,6 +83,18 @@ By offering efficient garden management tools—including pumps, tubing, and noz
 
 ![OUCD](../../docs/assets/svg/GreenFingersUsecases.drawio.svg)
 
+### [Usecase: Show Gardens](../../docs/usecases/showGardens.md)
+
+This usecase is part of the **CURD-usecases** of the graden objects.
+
+Our first activity diagram showcases the flow of events for the “Show Gardens” use case. This use case allows users to view an overview of all gardens they have created. By navigating to the garden overview, users can see a list of all their gardens, each with essential information such as the garden name, image, and status.
+
+### [Usecase: Delete plant](../../docs/usecases/deletePlant.md)
+
+This usecase is part of the **CURD-usecases** of the plant objects.
+
+Our second activity diagram outlines the flow of events for the “Delete Plant” use case. This use case enables users to remove a plant from their gardens. After selecting the garden of the plant they wish to delete, the use can select via the UI the option to delete the plant. The system will then prompt the user for confirmation before permanently removing the plant and its associated data.
+
 ### 2.3 Technology Stack
 The technology we use is:
 
