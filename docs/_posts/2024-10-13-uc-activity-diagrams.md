@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Our first two UC activity diagrams"
+title: "UC activity diagrams"
 date: 2024-10-13
 author: "Sima, Casimir, Ruan & Malte"
 ---
