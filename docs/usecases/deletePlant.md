@@ -1,32 +1,43 @@
-# 1 Use-Case Name
+# 1 Delete Plant from Garden
 
-Delete Plant from Garden
 
-## 1.1 Brief Description
+## 1.1 Actors
 
-The user wants to see information about a plant they have in their garden. They open up the plant list and select the plant they want to view.
-Once the user has selected the plant, they will get an overview that is divided in three sections:
+This use case can be performed by a **User**.
 
-- Status
-- Description
-- Sensor
+## 1.2 Goal
 
-These sections contain all information about a plant. The user can switch between these section by clicking on the harmonica item they want to be shown.
+The user wants to **delete a plant** from a specific garden.
+
+## 1.3 Preconditions
+
+The user is **logged in** and has at least **one garden in their account** and at least **one plant in the garden**.
+
+## 1.4 Summary
+
+To **delete a plant** from a garden, the user navigates to the garden overview by clicking in the navigation bar on the **garden icon**. The user selects the garden they want to delete the plant from. The user click on the **more options** icon of the plant they want to delete and selects **delete plant**. The use has to **confirm the deletion**. The plant will be removed from the garden and deleted from the database with all its data.
 
 # 2 Flow of Events
 
-- User clicks on plant card
-- User reads information
-- User interacts with harmonica
-- User finds information they wanted
-
 ## 2.1 Basic Flow
+
+1. The user clicks on **garden icon** in the navigation bar.
+2. The user is presented with a **List of Gardens**.
+3. The user selects the garden they want to delete the plant from.
+4. The user is presented with a **List of Plants**.
+5. The user clicks on the **more options** icon of the plant they want to delete.
+6. The user selects **delete plant**.
+7. The user is presented with a **confirmation dialog**.
+8. The user confirms the deletion.
+9. The plant is removed from the garden and deleted from the database.
 
 ### 2.1.1 Activity Diagram
 
-![UML flowchart]()
+![Activity diagram](/docs/assets/svg/useCaseDiagrams/deletePlant.drawio.svg)
 
 ### 2.1.2 Mock-Up
+
+![Delte plant wireframes](/docs/assets/svg/useCaseWireframes/deletePlant.png)
 
 ### 2.1.3 Narrative
 

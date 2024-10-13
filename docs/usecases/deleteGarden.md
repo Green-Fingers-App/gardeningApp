@@ -24,7 +24,7 @@ The basic flow for deleting a garden follows these steps:
 
 ### 2.1.1 Activity Diagram
 
-![UML flowchart](https://github.com/DHBW-Malte/gardeningApp/blob/main/docs/assets/svg/Use%20Case%20Diagrams/deleteGarden.drawio.svg)
+![UML flowchart](https://github.com/DHBW-Malte/gardeningApp/blob/main/docs/assets/svg/useCaseDiagrams/deleteGarden.drawio.svg)
 
 ### 2.1.2 Mock-Up
 
