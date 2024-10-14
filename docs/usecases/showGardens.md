@@ -36,9 +36,9 @@ To see an **overview of all gardens**, the user navigate to the garden overview 
 
 ### 2.2 Alternative Flows
 
-### 2.3 Exception Flow
+### 2.3 Exception Flows
 
-## 2.3.1 Error Handling - Loading the gardens
+#### 2.3.1 Error Handling - Loading the gardens
 The system displays an error message if the function fails to load the garden overview.
 
 # 3 Special Requirements
