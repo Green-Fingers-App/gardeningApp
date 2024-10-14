@@ -41,3 +41,28 @@ To **delete a plant** from a garden, the user navigates to the garden overview b
 
 ### 2.1.3 Narrative
 
+### 2.2 Alternative Flows
+
+#### 2.2.1 Error Handling - Loading the plants
+The system displays an error message if the function fails to load the plants.
+User can retry the loading.
+
+#### 2.2.2 Error Handling - Deletion
+The system displays an error message if the function fails to delete the plant.
+User can retry the deletion.
+
+# 3 Special Requirements
+
+# 4 Preconditions
+
+The user is **logged in** and has at least **one garden in their account** and the garden has **one plant in the garden**.
+
+# 5 Postconditions
+
+The user has deleted a plant from the garden.
+
+# 6 Extension Points
+
+# 7 CRUD Classifiction
+
+The **Delete Plant** use case is a **Delete** operation. The user deletes a plant from the garden.

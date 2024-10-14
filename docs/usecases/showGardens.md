@@ -9,10 +9,6 @@ This use case can be performed by a **User**.
 
 The user wants to see an **overview of all gardens** they have.
 
-## 1.3 Preconditions
-
-The user is **logged in** and has at least **one garden in their account**.
-
 ## 1.4 Summary
 
 To see an **overview of all gardens**, the user navigate to the garden overview by clicking in the navigation bar on the **garden icon**. The user will see a list of all gardens they have. Each garden card contains the following information:
@@ -37,3 +33,24 @@ To see an **overview of all gardens**, the user navigate to the garden overview 
 ![Show gardens wireframes](/docs/assets/svg/useCaseWireframes/showGardens.png)
 
 ### 2.1.3 Narrative
+
+### 2.2 Alternative Flows
+
+#### 2.2.1 Error Handling
+The system displays an error message if the function fails to load the garden overview.
+
+# 3 Special Requirements
+
+# 4 Preconditions
+
+The user is **logged in** and has at least **one garden in their account**.
+
+# 5 Postconditions
+
+The user has seen an **overview of all gardens** they have.
+
+# 6 Extension Points
+
+# 7 CRUD Classifiction
+
+The **Show Gardens** use case is a **Read** operation. The user reads information about their gardens.
