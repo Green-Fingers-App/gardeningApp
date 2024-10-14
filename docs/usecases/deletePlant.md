@@ -45,11 +45,11 @@ To **delete a plant** from a garden, the user navigates to the garden overview b
 
 ### 2.3 Exception Flows
 
-## 2.3.1 Error Handling - Loading the plants
+#### 2.3.1 Error Handling - Loading the plants
 The system displays an error message if the function fails to load the plants.
 User can retry the loading.
 
-## 2.3.2 Error Handling - Deletion
+#### 2.3.2 Error Handling - Deletion
 The system displays an error message if the function fails to delete the plant.
 User can retry the deletion.
 
