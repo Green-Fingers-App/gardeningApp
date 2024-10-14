@@ -48,7 +48,7 @@ The user has seen an **overview of all gardens** they have.
 
 # 6 Extension Points
 
-#### 6.1 Error Handling - Loading the gardens
+## 6.1 Error Handling - Loading the gardens
 The system displays an error message if the function fails to load the garden overview.
 
 # 7 CRUD Classifiction
