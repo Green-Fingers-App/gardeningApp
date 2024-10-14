@@ -36,9 +36,6 @@ To see an **overview of all gardens**, the user navigate to the garden overview 
 
 ### 2.2 Alternative Flows
 
-#### 2.2.1 Error Handling
-The system displays an error message if the function fails to load the garden overview.
-
 # 3 Special Requirements
 
 # 4 Preconditions
@@ -50,6 +47,9 @@ The user is **logged in** and has at least **one garden in their account**.
 The user has seen an **overview of all gardens** they have.
 
 # 6 Extension Points
+
+#### 6.1 Error Handling - Loading the gardens
+The system displays an error message if the function fails to load the garden overview.
 
 # 7 CRUD Classifiction
 
