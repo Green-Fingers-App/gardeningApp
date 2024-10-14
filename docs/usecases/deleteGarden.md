@@ -1,3 +1,4 @@
+
 # 1 Use Case Name
 
 **Delete Garden**
@@ -22,6 +23,23 @@ The basic flow for deleting a garden follows these steps:
 6. The system deletes the garden and its associated data.
 7. The user is returned to the **List of Gardens** view.
 
+## 2.2 Alternative Flow
+- If the user long-presses the garden name, the system presents a confirmation dialog. The user confirms, and the garden is deleted. The user is returned to the **List of Gardens** view.
+
+## 2.3 Exception Flows
+
+### 2.3.1 Database Error during Deletion
+1. The user confirms the deletion of the garden.
+2. The system attempts to delete the garden but encounters a database connection error.
+3. The system logs the error and displays an error message: "Unable to delete garden due to a system error. Please try again later."
+4. The user is returned to the **Manage Gardens** section, and the garden remains unchanged.
+
+### 2.3.2 No Internet Connection
+1. The user confirms the deletion of the garden.
+2. The system detects that there is no internet connection.
+3. The system displays an error message: "No internet connection. Please try again when connected."
+4. The user is returned to the **Manage Gardens** section, and the garden remains unchanged.
+
 ### 2.1.1 Activity Diagram
 
 ![UML flowchart](https://github.com/DHBW-Malte/gardeningApp/blob/main/docs/assets/svg/useCaseDiagrams/deleteGarden.drawio.svg)
@@ -32,13 +50,19 @@ Mock-up pending, awaiting access to the Figma file.
 
 ### 2.1.3 Narrative
 
-- **Step 1**: The user navigates to the **Manage Gardens** section from the main app interface.
-- **Step 2**: The user views the list of gardens they have created.
-- **Step 3**: The user clicks the **Delete Garden** button next to the garden they want to remove.
-- **Step 4**: A confirmation dialog appears, asking: "Are you sure you want to delete this garden?"
-- **Step 5**: The user clicks **Confirm** to proceed.
-- **Step 6**: The system permanently deletes the garden and its related data. A success message is shown to the user.
-- **Step 7**: The user is returned to the **Manage Gardens** section.
+**Feature:** Delete Garden
+
+```gherkin
+  Scenario: User deletes a garden from their list
+    Given the user is on the "Manage Gardens" section
+    And the user views the list of gardens they have created
+    When the user clicks the "Delete Garden" button next to the garden they want to remove
+    Then a confirmation dialog appears asking "Are you sure you want to delete this garden?"
+    When the user clicks "Confirm" to proceed
+    Then the system permanently deletes the garden and its related data
+    And a success message is shown to the user
+    And the user is returned to the "Manage Gardens" section
+```
 
 ---
 
