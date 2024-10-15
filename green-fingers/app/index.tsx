@@ -1,23 +1,23 @@
 import { View, ActivityIndicator } from "react-native";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useRouter } from "expo-router";
+import { useAuth } from "@/context/AuthContext";
 
 const index = () => {
   const [loading, setLoading] = useState(true);
   const router = useRouter();
-  const isAuthenticated = false;
+  const { user } = useAuth();
 
   useEffect(() => {
-    // Simulate checking the authentication status
     setTimeout(() => {
       setLoading(false);
-      if (!isAuthenticated) {
+      if (user) {
         router.replace("/(auth)/login");
       } else {
         router.replace("/profile");
       }
-    }, 1000); // Simulate a loading delay
-  }, [isAuthenticated]);
+    }, 1000);
+  }, [user]);
 
   if (loading) {
     return (
