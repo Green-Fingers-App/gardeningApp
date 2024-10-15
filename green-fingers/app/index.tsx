@@ -1,23 +1,34 @@
-import { View, ActivityIndicator } from "react-native";
 import React, { useEffect, useState } from "react";
+import { View, ActivityIndicator } from "react-native";
 import { useRouter } from "expo-router";
 import { useAuth } from "@/context/AuthContext";
 
-const index = () => {
+const Index = () => {
   const [loading, setLoading] = useState(true);
   const router = useRouter();
   const { user } = useAuth();
 
   useEffect(() => {
-    setTimeout(() => {
-      setLoading(false);
+    // This effect will fire every time 'user' changes
+    console.log("User in useEffect:", user); // Log the user state
+
+    if (!loading) {
       if (!user) {
         router.replace("/(auth)/login");
       } else {
         router.replace("/profile");
       }
+    }
+  }, [loading, user]); // Added loading to dependencies
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setLoading(false);
     }, 1000);
-  }, [user]);
+
+    // Cleanup the timer on unmount
+    return () => clearTimeout(timer);
+  }, []);
 
   if (loading) {
     return (
@@ -26,6 +37,8 @@ const index = () => {
       </View>
     );
   }
+
+  return null;
 };
 
-export default index;
+export default Index;
