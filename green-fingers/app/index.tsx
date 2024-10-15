@@ -1,5 +1,5 @@
 import { View, ActivityIndicator } from "react-native";
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useRouter } from "expo-router";
 import { useAuth } from "@/context/AuthContext";
 
@@ -11,7 +11,7 @@ const index = () => {
   useEffect(() => {
     setTimeout(() => {
       setLoading(false);
-      if (user) {
+      if (!user) {
         router.replace("/(auth)/login");
       } else {
         router.replace("/profile");
