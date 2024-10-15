@@ -1,10 +1,11 @@
 import { Link, router } from "expo-router";
 import { StatusBar } from "expo-status-bar";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 import Input from "../../components/Input";
+import { useAuth } from "@/context/AuthContext";
 
 export default function App() {
   const [inputValues, setInputvalues] = useState<{
@@ -20,6 +21,8 @@ export default function App() {
   const [inputErrors, setInputErrors] = useState<{
     [key in InputFieldName]?: string;
   }>({});
+
+  const { login, user } = useAuth();
 
   const handleChange = (name: InputFieldName, value: string): void => {
     setInputvalues((prevState) => ({
@@ -46,10 +49,17 @@ export default function App() {
       return;
     }
 
-    if (inputValues.password === "hallo" && inputValues.email === "hallo") {
-      router.push("/profile/home");
+    try {
+      const response = await login(inputValues.email, inputValues.password);
+      router.replace("/profile/home");
+    } catch (error) {
+      handleErrorMessage("email", "Invalid email or password");
+      handleErrorMessage("password", "Invalid email or password");
+      console.error("Login error:", error);
     }
   };
+
+  useEffect(() => console.log("this is a use effect" + user), [user]);
 
   return (
     <SafeAreaView style={styles.container}>
@@ -81,7 +91,9 @@ export default function App() {
           <View style={styles.buttonContainer}>
             <TouchableOpacity
               style={styles.loginButton}
-              onPress={() => validate()}
+              onPress={() => {
+                validate();
+              }}
             >
               <Text style={{ fontWeight: "bold" }}>Login</Text>
             </TouchableOpacity>
@@ -131,14 +143,12 @@ const styles = StyleSheet.create({
     backgroundColor: "#A9A9A9",
     paddingVertical: 10,
     paddingHorizontal: 40,
-    borderRadius: 8,
     opacity: 1,
   },
   signUpButton: {
     backgroundColor: "#DEDEDE",
     paddingHorizontal: 40,
     paddingVertical: 10,
-    borderRadius: 8,
     opacity: 1,
   },
   contentTitle: {
