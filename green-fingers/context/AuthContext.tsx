@@ -1,5 +1,6 @@
 import React, { createContext, useState, ReactNode, useContext } from "react";
 import { User, AuthContextProps } from "@/types/authtypes";
+import { router } from "expo-router";
 
 const AuthContext = createContext<AuthContextProps | undefined>(undefined);
 
@@ -23,6 +24,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
 
   const logout = () => {
     setUser(null);
+    router.replace("/login");
   };
 
   return (
