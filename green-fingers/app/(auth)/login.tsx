@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
-import Input from "../../components/Input";
+import Input from "@/components/Input";
 import { useAuth } from "@/context/AuthContext";
 
 export default function App() {
