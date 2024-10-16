@@ -1,6 +1,5 @@
 # 1 Show Gardens
 
-
 ## 1.1 Actors
 
 This use case can be performed by a **User**.
@@ -34,6 +33,17 @@ To see an **overview of all gardens**, the user navigate to the garden overview 
 
 ### 2.1.3 Narrative
 
+**Feature:** Show Gardens
+
+```gherkin
+  Scenario: User views an overview of all gardens
+    Given the user is on the "Home" page
+    When the user clicks on the "Garden" icon in the navigation bar
+    Then the system loads the garden overview
+    And the user is presented with a list of all gardens
+    And each garden card contains the garden name, an image of the garden, and the status of the garden
+```
+
 ### 2.2 Alternative Flows
 
 ### 2.3 Exception Flows
@@ -45,7 +55,7 @@ The system displays an error message if the function fails to load the garden ov
 
 # 4 Preconditions
 
-The user is **logged in** and has at least **one garden in their account**.
+The user is **logged in** and has at least **one garden in their account**, also the user is at the **Home** page.
 
 # 5 Postconditions
 
@@ -53,6 +63,6 @@ The user has seen an **overview of all gardens** they have.
 
 # 6 Extension Points
 
-# 7 CRUD Classifiction
+# 7 CRUD Classification
 
 The **Show Gardens** use case is a **Read** operation. The user reads information about their gardens.
