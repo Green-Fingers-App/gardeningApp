@@ -30,6 +30,8 @@ These sections contain all information about a plant. The user can switch betwee
 
 ### 2.1.3 Narrative
 
+https://github.com/DHBW-Malte/gardeningApp/blob/main/green-fingers/features/viewPlant.feature
+
 # 3 Special Requirements
 
 # 4 Preconditions
