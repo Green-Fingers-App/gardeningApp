@@ -1,0 +1,1177 @@
+<svg host="65bd71144e" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="1322px" height="1262px" viewBox="-0.5 -0.5 1322 1262" content="&lt;mxfile&gt;&lt;diagram id=&quot;TJ9GMwate5G4AQncNu8M&quot; name=&quot;Page-1&quot;&gt;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&lt;/diagram&gt;&lt;/mxfile&gt;">
+    <defs/>
+    <g>
+        <rect x="1" y="1" width="1320" height="1260" fill="#ffffff" stroke="#000000" stroke-width="2" pointer-events="all"/>
+        <rect x="151" y="141" width="120" height="40" rx="16" ry="16" fill="#ffffc0" stroke="#ff0000" pointer-events="all"/>
+        <g transform="translate(-0.5 -0.5)">
+            <switch>
+                <foreignObject pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow: visible; text-align: left;">
+                    <div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 118px; height: 1px; padding-top: 161px; margin-left: 152px;">
+                        <div data-drawio-colors="color: #000000; " style="box-sizing: border-box; font-size: 0px; text-align: center;">
+                            <div style="display: inline-block; font-size: 12px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; pointer-events: all; white-space: normal; overflow-wrap: normal;">
+                                Click on Manage Gardens
+                            </div>
+                        </div>
+                    </div>
+                </foreignObject>
+                <text x="211" y="165" fill="#000000" font-family="Helvetica" font-size="12px" text-anchor="middle">
+                    Click on Manage Gard...
+                </text>
+            </switch>
+        </g>
+        <rect x="431" y="141" width="120" height="40" rx="16" ry="16" fill="#ffffc0" stroke="#ff0000" pointer-events="all"/>
+        <g transform="translate(-0.5 -0.5)">
+            <switch>
+                <foreignObject pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow: visible; text-align: left;">
+                    <div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 118px; height: 1px; padding-top: 161px; margin-left: 432px;">
+                        <div data-drawio-colors="color: #000000; " style="box-sizing: border-box; font-size: 0px; text-align: center;">
+                            <div style="display: inline-block; font-size: 12px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; pointer-events: all; white-space: normal; overflow-wrap: normal;">
+                                Sends API request
+                                <span class="hljs-keyword">
+                                    to
+                                </span>
+                                fetch the list
+                                <span class="hljs-keyword">
+                                    of
+                                </span>
+                                user’s gardens
+                            </div>
+                        </div>
+                    </div>
+                </foreignObject>
+                <text x="491" y="165" fill="#000000" font-family="Helvetica" font-size="12px" text-anchor="middle">
+                    Sends API request to...
+                </text>
+            </switch>
+        </g>
+        <path d="M 271 161 L 424.63 161" fill="none" stroke="#ff0000" stroke-miterlimit="10" pointer-events="stroke"/>
+        <path d="M 429.88 161 L 422.88 164.5 L 424.63 161 L 422.88 157.5 Z" fill="#ff0000" stroke="#ff0000" stroke-miterlimit="10" pointer-events="all"/>
+        <path d="M 551 161 L 654.63 161" fill="none" stroke="#ff0000" stroke-miterlimit="10" pointer-events="stroke"/>
+        <path d="M 659.88 161 L 652.88 164.5 L 654.63 161 L 652.88 157.5 Z" fill="#ff0000" stroke="#ff0000" stroke-miterlimit="10" pointer-events="all"/>
+        <path d="M 1101 336 L 927.37 336" fill="none" stroke="#ff0000" stroke-miterlimit="10" pointer-events="stroke"/>
+        <path d="M 922.12 336 L 929.12 332.5 L 927.37 336 L 929.12 339.5 Z" fill="#ff0000" stroke="#ff0000" stroke-miterlimit="10" pointer-events="all"/>
+        <rect x="1101" y="311" width="140" height="50" rx="20" ry="20" fill="#ffffc0" stroke="#ff0000" pointer-events="all"/>
+        <g transform="translate(-0.5 -0.5)">
+            <switch>
+                <foreignObject pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow: visible; text-align: left;">
+                    <div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 138px; height: 1px; padding-top: 336px; margin-left: 1102px;">
+                        <div data-drawio-colors="color: #000000; " style="box-sizing: border-box; font-size: 0px; text-align: center;">
+                            <div style="display: inline-block; font-size: 12px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; pointer-events: all; white-space: normal; overflow-wrap: normal;">
+                                <span class="hljs-keyword">
+                                    If
+                                </span>
+                                an
+                                <span class="hljs-keyword">
+                                    error
+                                </span>
+                                occurs, it sends an
+                                <span class="hljs-keyword">
+                                    error
+                                </span>
+                                response
+                                <span class="hljs-keyword">
+                                    to
+                                </span>
+                                the backend
+                            </div>
+                        </div>
+                    </div>
+                </foreignObject>
+                <text x="1171" y="340" fill="#000000" font-family="Helvetica" font-size="12px" text-anchor="middle">
+                    If an error occurs, it...
+                </text>
+            </switch>
+        </g>
+        <rect x="671" y="371" width="120" height="40" rx="16" ry="16" fill="#ffffc0" stroke="#ff0000" pointer-events="all"/>
+        <g transform="translate(-0.5 -0.5)">
+            <switch>
+                <foreignObject pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow: visible; text-align: left;">
+                    <div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 118px; height: 1px; padding-top: 391px; margin-left: 672px;">
+                        <div data-drawio-colors="color: #000000; " style="box-sizing: border-box; font-size: 0px; text-align: center;">
+                            <div style="display: inline-block; font-size: 12px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; pointer-events: all; white-space: normal; overflow-wrap: normal;">
+                                Sends the
+                                <span class="hljs-keyword">
+                                    error
+                                </span>
+                                <span class="hljs-keyword">
+                                    to
+                                </span>
+                                the frontend
+                            </div>
+                        </div>
+                    </div>
+                </foreignObject>
+                <text x="731" y="395" fill="#000000" font-family="Helvetica" font-size="12px" text-anchor="middle">
+                    Sends the error to t...
+                </text>
+            </switch>
+        </g>
+        <rect x="491" y="371" width="120" height="40" rx="16" ry="16" fill="#ffffc0" stroke="#ff0000" pointer-events="all"/>
+        <g transform="translate(-0.5 -0.5)">
+            <switch>
+                <foreignObject pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow: visible; text-align: left;">
+                    <div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 118px; height: 1px; padding-top: 391px; margin-left: 492px;">
+                        <div data-drawio-colors="color: #000000; " style="box-sizing: border-box; font-size: 0px; text-align: center;">
+                            <div style="display: inline-block; font-size: 12px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; pointer-events: all; white-space: normal; overflow-wrap: normal;">
+                                Displays an error message to the user
+                            </div>
+                        </div>
+                    </div>
+                </foreignObject>
+                <text x="551" y="395" fill="#000000" font-family="Helvetica" font-size="12px" text-anchor="middle">
+                    Displays an error me...
+                </text>
+            </switch>
+        </g>
+        <path d="M 1181 271 L 1180.14 301.48" fill="none" stroke="#ff0000" stroke-miterlimit="10" pointer-events="stroke"/>
+        <path d="M 1179.99 306.73 L 1176.69 299.64 L 1180.14 301.48 L 1183.69 299.83 Z" fill="#ff0000" stroke="#ff0000" stroke-miterlimit="10" pointer-events="all"/>
+        <path d="M 671 391 L 617.37 391" fill="none" stroke="#ff0000" stroke-miterlimit="10" pointer-events="stroke"/>
+        <path d="M 612.12 391 L 619.12 387.5 L 617.37 391 L 619.12 394.5 Z" fill="#ff0000" stroke="#ff0000" stroke-miterlimit="10" pointer-events="all"/>
+        <path d="M 801 336 L 741 336 Q 731 336 731 346 L 731 364.63" fill="none" stroke="#ff0000" stroke-miterlimit="10" pointer-events="stroke"/>
+        <path d="M 731 369.88 L 727.5 362.88 L 731 364.63 L 734.5 362.88 Z" fill="#ff0000" stroke="#ff0000" stroke-miterlimit="10" pointer-events="all"/>
+        <g transform="translate(-0.5 -0.5)">
+            <switch>
+                <foreignObject pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow: visible; text-align: left;">
+                    <div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 1px; height: 1px; padding-top: 282px; margin-left: 1182px;">
+                        <div data-drawio-colors="color: #000000; background-color: #ffffc0; " style="box-sizing: border-box; font-size: 0px; text-align: center;">
+                            <div style="display: inline-block; font-size: 11px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; pointer-events: all; background-color: rgb(255, 255, 192); white-space: nowrap;">
+                                Yes
+                            </div>
+                        </div>
+                    </div>
+                </foreignObject>
+                <text x="1182" y="285" fill="#000000" font-family="Helvetica" font-size="11px" text-anchor="middle">
+                    Yes
+                </text>
+            </switch>
+        </g>
+        <path d="M 741 251 L 627.37 251" fill="none" stroke="#ff0000" stroke-miterlimit="10" pointer-events="stroke"/>
+        <path d="M 622.12 251 L 629.12 247.5 L 627.37 251 L 629.12 254.5 Z" fill="#ff0000" stroke="#ff0000" stroke-miterlimit="10" pointer-events="all"/>
+        <path d="M 941 161 L 1114.63 161" fill="none" stroke="#ff0000" stroke-miterlimit="10" pointer-events="stroke"/>
+        <path d="M 1119.88 161 L 1112.88 164.5 L 1114.63 161 L 1112.88 157.5 Z" fill="#ff0000" stroke="#ff0000" stroke-miterlimit="10" pointer-events="all"/>
+        <path d="M 971 251 L 867.37 251" fill="none" stroke="#ff0000" stroke-miterlimit="10" pointer-events="stroke"/>
+        <path d="M 862.12 251 L 869.12 247.5 L 867.37 251 L 869.12 254.5 Z" fill="#ff0000" stroke="#ff0000" stroke-miterlimit="10" pointer-events="all"/>
+        <path d="M 1141 251 L 1097.37 251" fill="none" stroke="#ff0000" stroke-miterlimit="10" pointer-events="stroke"/>
+        <path d="M 1092.12 251 L 1099.12 247.5 L 1097.37 251 L 1099.12 254.5 Z" fill="#ff0000" stroke="#ff0000" stroke-miterlimit="10" pointer-events="all"/>
+        <g transform="translate(-0.5 -0.5)">
+            <switch>
+                <foreignObject pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow: visible; text-align: left;">
+                    <div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 1px; height: 1px; padding-top: 251px; margin-left: 1122px;">
+                        <div data-drawio-colors="color: #000000; background-color: #ffffc0; " style="box-sizing: border-box; font-size: 0px; text-align: center;">
+                            <div style="display: inline-block; font-size: 11px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; pointer-events: all; background-color: rgb(255, 255, 192); white-space: nowrap;">
+                                No
+                            </div>
+                        </div>
+                    </div>
+                </foreignObject>
+                <text x="1122" y="254" fill="#000000" font-family="Helvetica" font-size="11px" text-anchor="middle">
+                    No
+                </text>
+            </switch>
+        </g>
+        <path d="M 1181 231 L 1221 251 L 1181 271 L 1141 251 Z" fill="#ffffc0" stroke="#ff0000" stroke-miterlimit="10" pointer-events="all"/>
+        <g transform="translate(-0.5 -0.5)">
+            <switch>
+                <foreignObject pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow: visible; text-align: left;">
+                    <div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 78px; height: 1px; padding-top: 251px; margin-left: 1142px;">
+                        <div data-drawio-colors="color: #000000; " style="box-sizing: border-box; font-size: 0px; text-align: center;">
+                            <div style="display: inline-block; font-size: 12px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; pointer-events: all; white-space: normal; overflow-wrap: normal;">
+                                Error
+                            </div>
+                        </div>
+                    </div>
+                </foreignObject>
+                <text x="1181" y="255" fill="#000000" font-family="Helvetica" font-size="12px" text-anchor="middle">
+                    Error
+                </text>
+            </switch>
+        </g>
+        <rect x="971" y="231" width="120" height="40" rx="16" ry="16" fill="#ffffc0" stroke="#ff0000" pointer-events="all"/>
+        <g transform="translate(-0.5 -0.5)">
+            <switch>
+                <foreignObject pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow: visible; text-align: left;">
+                    <div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 118px; height: 1px; padding-top: 251px; margin-left: 972px;">
+                        <div data-drawio-colors="color: #000000; " style="box-sizing: border-box; font-size: 0px; text-align: center;">
+                            <div style="display: inline-block; font-size: 12px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; pointer-events: all; white-space: normal; overflow-wrap: normal;">
+                                Sends the list
+                                <span class="hljs-keyword">
+                                    of
+                                </span>
+                                gardens back
+                                <span class="hljs-keyword">
+                                    to
+                                </span>
+                                the backend
+                            </div>
+                        </div>
+                    </div>
+                </foreignObject>
+                <text x="1031" y="255" fill="#000000" font-family="Helvetica" font-size="12px" text-anchor="middle">
+                    Sends the list of ga...
+                </text>
+            </switch>
+        </g>
+        <rect x="1121" y="141" width="120" height="40" rx="16" ry="16" fill="#ffffc0" stroke="#ff0000" pointer-events="all"/>
+        <g transform="translate(-0.5 -0.5)">
+            <switch>
+                <foreignObject pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow: visible; text-align: left;">
+                    <div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 118px; height: 1px; padding-top: 161px; margin-left: 1122px;">
+                        <div data-drawio-colors="color: #000000; " style="box-sizing: border-box; font-size: 0px; text-align: center;">
+                            <div style="display: inline-block; font-size: 12px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; pointer-events: all; white-space: normal; overflow-wrap: normal;">
+                                Retrieves the list
+                                <span class="hljs-keyword">
+                                    of
+                                </span>
+                                gardens
+                            </div>
+                        </div>
+                    </div>
+                </foreignObject>
+                <text x="1181" y="165" fill="#000000" font-family="Helvetica" font-size="12px" text-anchor="middle">
+                    Retrieves the list o...
+                </text>
+            </switch>
+        </g>
+        <path d="M 1181 181 L 1181 224.63" fill="none" stroke="#ff0000" stroke-miterlimit="10" pointer-events="stroke"/>
+        <path d="M 1181 229.88 L 1177.5 222.88 L 1181 224.63 L 1184.5 222.88 Z" fill="#ff0000" stroke="#ff0000" stroke-miterlimit="10" pointer-events="all"/>
+        <path d="M 501 251 L 451 251 Q 441 251 441 261 L 441 284.63" fill="none" stroke="#ff0000" stroke-miterlimit="10" pointer-events="stroke"/>
+        <path d="M 441 289.88 L 437.5 282.88 L 441 284.63 L 444.5 282.88 Z" fill="#ff0000" stroke="#ff0000" stroke-miterlimit="10" pointer-events="all"/>
+        <rect x="501" y="231" width="120" height="40" rx="16" ry="16" fill="#ffffc0" stroke="#ff0000" pointer-events="all"/>
+        <g transform="translate(-0.5 -0.5)">
+            <switch>
+                <foreignObject pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow: visible; text-align: left;">
+                    <div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 118px; height: 1px; padding-top: 251px; margin-left: 502px;">
+                        <div data-drawio-colors="color: #000000; " style="box-sizing: border-box; font-size: 0px; text-align: center;">
+                            <div style="display: inline-block; font-size: 12px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; pointer-events: all; white-space: normal; overflow-wrap: normal;">
+                                Receives the list
+                                <span class="hljs-keyword">
+                                    of
+                                </span>
+                                gardens
+                            </div>
+                        </div>
+                    </div>
+                </foreignObject>
+                <text x="561" y="255" fill="#000000" font-family="Helvetica" font-size="12px" text-anchor="middle">
+                    Receives the list of...
+                </text>
+            </switch>
+        </g>
+        <rect x="381" y="291" width="120" height="40" rx="16" ry="16" fill="#ffffc0" stroke="#ff0000" pointer-events="all"/>
+        <g transform="translate(-0.5 -0.5)">
+            <switch>
+                <foreignObject pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow: visible; text-align: left;">
+                    <div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 118px; height: 1px; padding-top: 311px; margin-left: 382px;">
+                        <div data-drawio-colors="color: #000000; " style="box-sizing: border-box; font-size: 0px; text-align: center;">
+                            <div style="display: inline-block; font-size: 12px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; pointer-events: all; white-space: normal; overflow-wrap: normal;">
+                                Displays the list of gardens in the user interface
+                            </div>
+                        </div>
+                    </div>
+                </foreignObject>
+                <text x="441" y="315" fill="#000000" font-family="Helvetica" font-size="12px" text-anchor="middle">
+                    Displays the list of...
+                </text>
+            </switch>
+        </g>
+        <rect x="821" y="141" width="120" height="40" rx="16" ry="16" fill="#ffffc0" stroke="#ff0000" pointer-events="all"/>
+        <g transform="translate(-0.5 -0.5)">
+            <switch>
+                <foreignObject pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow: visible; text-align: left;">
+                    <div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 118px; height: 1px; padding-top: 161px; margin-left: 822px;">
+                        <div data-drawio-colors="color: #000000; " style="box-sizing: border-box; font-size: 0px; text-align: center;">
+                            <div style="display: inline-block; font-size: 12px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; pointer-events: all; white-space: normal; overflow-wrap: normal;">
+                                Sends request
+                                <span class="hljs-keyword">
+                                    to
+                                </span>
+                                the database
+                                <span class="hljs-keyword">
+                                    to
+                                </span>
+                                <span class="hljs-keyword">
+                                    get
+                                </span>
+                                the list
+                                <span class="hljs-keyword">
+                                    of
+                                </span>
+                                gardens
+                            </div>
+                        </div>
+                    </div>
+                </foreignObject>
+                <text x="881" y="165" fill="#000000" font-family="Helvetica" font-size="12px" text-anchor="middle">
+                    Sends request to the...
+                </text>
+            </switch>
+        </g>
+        <rect x="741" y="231" width="120" height="40" rx="16" ry="16" fill="#ffffc0" stroke="#ff0000" pointer-events="all"/>
+        <g transform="translate(-0.5 -0.5)">
+            <switch>
+                <foreignObject pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow: visible; text-align: left;">
+                    <div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 118px; height: 1px; padding-top: 251px; margin-left: 742px;">
+                        <div data-drawio-colors="color: #000000; " style="box-sizing: border-box; font-size: 0px; text-align: center;">
+                            <div style="display: inline-block; font-size: 12px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; pointer-events: all; white-space: normal; overflow-wrap: normal;">
+                                Receives the list
+                                <span class="hljs-keyword">
+                                    of
+                                </span>
+                                gardens
+                                <span class="hljs-keyword">
+                                    from
+                                </span>
+                                the database
+                            </div>
+                        </div>
+                    </div>
+                </foreignObject>
+                <text x="801" y="255" fill="#000000" font-family="Helvetica" font-size="12px" text-anchor="middle">
+                    Receives the list of...
+                </text>
+            </switch>
+        </g>
+        <path d="M 781 161 L 814.63 161" fill="none" stroke="#ff0000" stroke-miterlimit="10" pointer-events="stroke"/>
+        <path d="M 819.88 161 L 812.88 164.5 L 814.63 161 L 812.88 157.5 Z" fill="#ff0000" stroke="#ff0000" stroke-miterlimit="10" pointer-events="all"/>
+        <rect x="661" y="141" width="120" height="40" rx="16" ry="16" fill="#ffffc0" stroke="#ff0000" pointer-events="all"/>
+        <g transform="translate(-0.5 -0.5)">
+            <switch>
+                <foreignObject pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow: visible; text-align: left;">
+                    <div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 118px; height: 1px; padding-top: 161px; margin-left: 662px;">
+                        <div data-drawio-colors="color: #000000; " style="box-sizing: border-box; font-size: 0px; text-align: center;">
+                            <div style="display: inline-block; font-size: 12px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; pointer-events: all; white-space: normal; overflow-wrap: normal;">
+                                Receives request
+                                <span class="hljs-keyword">
+                                    from
+                                </span>
+                                frontend
+                            </div>
+                        </div>
+                    </div>
+                </foreignObject>
+                <text x="721" y="165" fill="#000000" font-family="Helvetica" font-size="12px" text-anchor="middle">
+                    Receives request fro...
+                </text>
+            </switch>
+        </g>
+        <rect x="801" y="316" width="120" height="40" rx="16" ry="16" fill="#ffffc0" stroke="#ff0000" pointer-events="all"/>
+        <g transform="translate(-0.5 -0.5)">
+            <switch>
+                <foreignObject pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow: visible; text-align: left;">
+                    <div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 118px; height: 1px; padding-top: 336px; margin-left: 802px;">
+                        <div data-drawio-colors="color: #000000; " style="box-sizing: border-box; font-size: 0px; text-align: center;">
+                            <div style="display: inline-block; font-size: 12px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; pointer-events: all; white-space: normal; overflow-wrap: normal;">
+                                Receives the
+                                <span class="hljs-keyword">
+                                    error
+                                </span>
+                                <span class="hljs-keyword">
+                                    from
+                                </span>
+                                the database
+                            </div>
+                        </div>
+                    </div>
+                </foreignObject>
+                <text x="861" y="340" fill="#000000" font-family="Helvetica" font-size="12px" text-anchor="middle">
+                    Receives the error f...
+                </text>
+            </switch>
+        </g>
+        <rect x="151" y="141" width="120" height="40" rx="16" ry="16" fill="#ffffc0" stroke="#ff0000" pointer-events="all"/>
+        <g transform="translate(-0.5 -0.5)">
+            <switch>
+                <foreignObject pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow: visible; text-align: left;">
+                    <div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 118px; height: 1px; padding-top: 161px; margin-left: 152px;">
+                        <div data-drawio-colors="color: #000000; " style="box-sizing: border-box; font-size: 0px; text-align: center;">
+                            <div style="display: inline-block; font-size: 12px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; pointer-events: all; white-space: normal; overflow-wrap: normal;">
+                                Click on Manage Gardens
+                            </div>
+                        </div>
+                    </div>
+                </foreignObject>
+                <text x="211" y="165" fill="#000000" font-family="Helvetica" font-size="12px" text-anchor="middle">
+                    Click on Manage Gard...
+                </text>
+            </switch>
+        </g>
+        <path d="M 271 161 L 424.63 161" fill="none" stroke="#ff0000" stroke-miterlimit="10" pointer-events="stroke"/>
+        <path d="M 429.88 161 L 422.88 164.5 L 424.63 161 L 422.88 157.5 Z" fill="#ff0000" stroke="#ff0000" stroke-miterlimit="10" pointer-events="all"/>
+        <rect x="431" y="141" width="120" height="40" rx="16" ry="16" fill="#ffffc0" stroke="#ff0000" pointer-events="all"/>
+        <g transform="translate(-0.5 -0.5)">
+            <switch>
+                <foreignObject pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow: visible; text-align: left;">
+                    <div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 118px; height: 1px; padding-top: 161px; margin-left: 432px;">
+                        <div data-drawio-colors="color: #000000; " style="box-sizing: border-box; font-size: 0px; text-align: center;">
+                            <div style="display: inline-block; font-size: 12px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; pointer-events: all; white-space: normal; overflow-wrap: normal;">
+                                Sends API request
+                                <span class="hljs-keyword">
+                                    to
+                                </span>
+                                fetch the list
+                                <span class="hljs-keyword">
+                                    of
+                                </span>
+                                user’s gardens
+                            </div>
+                        </div>
+                    </div>
+                </foreignObject>
+                <text x="491" y="165" fill="#000000" font-family="Helvetica" font-size="12px" text-anchor="middle">
+                    Sends API request to...
+                </text>
+            </switch>
+        </g>
+        <path d="M 551 161 L 654.63 161" fill="none" stroke="#ff0000" stroke-miterlimit="10" pointer-events="stroke"/>
+        <path d="M 659.88 161 L 652.88 164.5 L 654.63 161 L 652.88 157.5 Z" fill="#ff0000" stroke="#ff0000" stroke-miterlimit="10" pointer-events="all"/>
+        <rect x="661" y="141" width="120" height="40" rx="16" ry="16" fill="#ffffc0" stroke="#ff0000" pointer-events="all"/>
+        <g transform="translate(-0.5 -0.5)">
+            <switch>
+                <foreignObject pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow: visible; text-align: left;">
+                    <div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 118px; height: 1px; padding-top: 161px; margin-left: 662px;">
+                        <div data-drawio-colors="color: #000000; " style="box-sizing: border-box; font-size: 0px; text-align: center;">
+                            <div style="display: inline-block; font-size: 12px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; pointer-events: all; white-space: normal; overflow-wrap: normal;">
+                                Receives request
+                                <span class="hljs-keyword">
+                                    from
+                                </span>
+                                frontend
+                            </div>
+                        </div>
+                    </div>
+                </foreignObject>
+                <text x="721" y="165" fill="#000000" font-family="Helvetica" font-size="12px" text-anchor="middle">
+                    Receives request fro...
+                </text>
+            </switch>
+        </g>
+        <path d="M 961 114 L 961 91 L 1241 91 L 1241 114" fill="#ffffff" stroke="#000000" stroke-width="2" stroke-miterlimit="10" pointer-events="none"/>
+        <path d="M 961 114 L 961 1191 L 1241 1191 L 1241 114" fill="none" stroke="#000000" stroke-width="2" stroke-miterlimit="10" pointer-events="none"/>
+        <path d="M 961 114 L 1241 114" fill="none" stroke="#000000" stroke-width="2" stroke-miterlimit="10" pointer-events="none"/>
+        <g fill="#000000" font-family="Helvetica" font-weight="bold" pointer-events="none" text-anchor="middle" font-size="12px">
+            <text x="1100.5" y="107">
+                Database
+            </text>
+        </g>
+        <rect x="1106" y="686" width="130" height="50" rx="20" ry="20" fill="#ffffc0" stroke="#ff0000" pointer-events="none"/>
+        <g transform="translate(-0.5 -0.5)">
+            <switch>
+                <foreignObject pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow: visible; text-align: left;">
+                    <div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 128px; height: 1px; padding-top: 711px; margin-left: 1107px;">
+                        <div data-drawio-colors="color: #000000; " style="box-sizing: border-box; font-size: 0px; text-align: center;">
+                            <div style="display: inline-block; font-size: 12px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; pointer-events: none; white-space: normal; overflow-wrap: normal;">
+                                <span class="hljs-string">
+                                    Deletes
+                                </span>
+                                <span class="hljs-string">
+                                    the
+                                </span>
+                                <span class="hljs-string">
+                                    garden
+                                </span>
+                                <span class="hljs-string">
+                                    and
+                                </span>
+                                <span class="hljs-string">
+                                    any
+                                </span>
+                                <span class="hljs-string">
+                                    associated
+                                </span>
+                                <span class="hljs-string">
+                                    data
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </foreignObject>
+                <text x="1171" y="715" fill="#000000" font-family="Helvetica" font-size="12px" text-anchor="middle">
+                    Deletes the garden an...
+                </text>
+            </switch>
+        </g>
+        <path d="M 81 114 L 81 91 L 361 91 L 361 114" fill="#ffffff" stroke="#000000" stroke-width="2" stroke-miterlimit="10" pointer-events="none"/>
+        <path d="M 81 114 L 81 1191 L 361 1191 L 361 114" fill="none" stroke="#000000" stroke-width="2" stroke-miterlimit="10" pointer-events="none"/>
+        <path d="M 81 114 L 361 114" fill="none" stroke="#000000" stroke-width="2" stroke-miterlimit="10" pointer-events="none"/>
+        <g fill="#000000" font-family="Helvetica" font-weight="bold" pointer-events="none" text-anchor="middle" font-size="12px">
+            <text x="220.5" y="107">
+                User
+            </text>
+        </g>
+        <path d="M 361 114 L 361 91 L 641 91 L 641 114" fill="#ffffff" stroke="#000000" stroke-width="2" stroke-miterlimit="10" pointer-events="none"/>
+        <path d="M 361 114 L 361 1191 L 641 1191 L 641 114" fill="none" stroke="#000000" stroke-width="2" stroke-miterlimit="10" pointer-events="none"/>
+        <path d="M 361 114 L 641 114" fill="none" stroke="#000000" stroke-width="2" stroke-miterlimit="10" pointer-events="none"/>
+        <g fill="#000000" font-family="Helvetica" font-weight="bold" pointer-events="none" text-anchor="middle" font-size="12px">
+            <text x="500.5" y="107">
+                Frontend
+            </text>
+        </g>
+        <rect x="421" y="573.5" width="160" height="65" rx="26" ry="26" fill="#ffffc0" stroke="#ff0000" pointer-events="none"/>
+        <g transform="translate(-0.5 -0.5)">
+            <switch>
+                <foreignObject pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow: visible; text-align: left;">
+                    <div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 158px; height: 1px; padding-top: 606px; margin-left: 422px;">
+                        <div data-drawio-colors="color: #000000; " style="box-sizing: border-box; font-size: 0px; text-align: center;">
+                            <div style="display: inline-block; font-size: 12px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; pointer-events: none; white-space: normal; overflow-wrap: normal;">
+                                <span class="hljs-string">
+                                    Shows
+                                </span>
+                                <span class="hljs-string">
+                                    a
+                                </span>
+                                <span class="hljs-string">
+                                    confirmation
+                                </span>
+                                <span class="hljs-string">
+                                    dialog
+                                </span>
+                                <span class="hljs-string">
+                                    (e.g.,
+                                </span>
+                                <span class="hljs-string">
+                                    "Are you sure you want to delete this garden?"
+                                </span>
+                                <span class="hljs-string">
+                                    )
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </foreignObject>
+                <text x="501" y="610" fill="#000000" font-family="Helvetica" font-size="12px" text-anchor="middle">
+                    Shows a confirmation dialo...
+                </text>
+            </switch>
+        </g>
+        <rect x="421" y="686" width="170" height="50" rx="20" ry="20" fill="#ffffc0" stroke="#ff0000" pointer-events="none"/>
+        <g transform="translate(-0.5 -0.5)">
+            <switch>
+                <foreignObject pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow: visible; text-align: left;">
+                    <div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 168px; height: 1px; padding-top: 711px; margin-left: 422px;">
+                        <div data-drawio-colors="color: #000000; " style="box-sizing: border-box; font-size: 0px; text-align: center;">
+                            <div style="display: inline-block; font-size: 12px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; pointer-events: none; white-space: normal; overflow-wrap: normal;">
+                                <span class="hljs-string">
+                                    Sends
+                                </span>
+                                <span class="hljs-string">
+                                    a
+                                </span>
+                                <span class="hljs-string">
+                                    delete
+                                </span>
+                                <span class="hljs-string">
+                                    request
+                                </span>
+                                <span class="hljs-string">
+                                    to
+                                </span>
+                                <span class="hljs-string">
+                                    the
+                                </span>
+                                <span class="hljs-string">
+                                    backend
+                                </span>
+                                <span class="hljs-string">
+                                    with
+                                </span>
+                                <span class="hljs-string">
+                                    the
+                                </span>
+                                <span class="hljs-string">
+                                    garden's
+                                </span>
+                                <span class="hljs-string">
+                                    ID
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </foreignObject>
+                <text x="506" y="715" fill="#000000" font-family="Helvetica" font-size="12px" text-anchor="middle">
+                    Sends a delete request to th...
+                </text>
+            </switch>
+        </g>
+        <rect x="371" y="941" width="150" height="70" rx="28" ry="28" fill="#ffffc0" stroke="#ff0000" pointer-events="none"/>
+        <g transform="translate(-0.5 -0.5)">
+            <switch>
+                <foreignObject pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow: visible; text-align: left;">
+                    <div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 148px; height: 1px; padding-top: 976px; margin-left: 372px;">
+                        <div data-drawio-colors="color: #000000; " style="box-sizing: border-box; font-size: 0px; text-align: center;">
+                            <div style="display: inline-block; font-size: 12px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; pointer-events: none; white-space: normal; overflow-wrap: normal;">
+                                <span class="hljs-string">
+                                    Displays
+                                </span>
+                                <span class="hljs-string">
+                                    a
+                                </span>
+                                <span class="hljs-string">
+                                    success
+                                </span>
+                                <span class="hljs-string">
+                                    message
+                                </span>
+                                <span class="hljs-string">
+                                    (e.g.,
+                                </span>
+                                <span class="hljs-string">
+                                    "Garden deleted successfully"
+                                </span>
+                                <span class="hljs-string">
+                                    )
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </foreignObject>
+                <text x="446" y="980" fill="#000000" font-family="Helvetica" font-size="12px" text-anchor="middle">
+                    Displays a success messag...
+                </text>
+            </switch>
+        </g>
+        <rect x="451" y="1051" width="120" height="40" rx="16" ry="16" fill="#ffffc0" stroke="#ff0000" pointer-events="none"/>
+        <g transform="translate(-0.5 -0.5)">
+            <switch>
+                <foreignObject pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow: visible; text-align: left;">
+                    <div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 118px; height: 1px; padding-top: 1071px; margin-left: 452px;">
+                        <div data-drawio-colors="color: #000000; " style="box-sizing: border-box; font-size: 0px; text-align: center;">
+                            <div style="display: inline-block; font-size: 12px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; pointer-events: none; white-space: normal; overflow-wrap: normal;">
+                                Displays an error message to the user
+                            </div>
+                        </div>
+                    </div>
+                </foreignObject>
+                <text x="511" y="1075" fill="#000000" font-family="Helvetica" font-size="12px" text-anchor="middle">
+                    Displays an error me...
+                </text>
+            </switch>
+        </g>
+        <path d="M 641 114 L 641 91 L 961 91 L 961 114" fill="#ffffff" stroke="#000000" stroke-width="2" stroke-miterlimit="10" pointer-events="none"/>
+        <path d="M 641 114 L 641 1191 L 961 1191 L 961 114" fill="none" stroke="#000000" stroke-width="2" stroke-miterlimit="10" pointer-events="none"/>
+        <path d="M 641 114 L 961 114" fill="none" stroke="#000000" stroke-width="2" stroke-miterlimit="10" pointer-events="none"/>
+        <g fill="#000000" font-family="Helvetica" font-weight="bold" pointer-events="none" text-anchor="middle" font-size="12px">
+            <text x="800.5" y="107">
+                Backend
+            </text>
+        </g>
+        <rect x="656" y="686" width="130" height="50" rx="20" ry="20" fill="#ffffc0" stroke="#ff0000" pointer-events="none"/>
+        <g transform="translate(-0.5 -0.5)">
+            <switch>
+                <foreignObject pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow: visible; text-align: left;">
+                    <div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 128px; height: 1px; padding-top: 711px; margin-left: 657px;">
+                        <div data-drawio-colors="color: #000000; " style="box-sizing: border-box; font-size: 0px; text-align: center;">
+                            <div style="display: inline-block; font-size: 12px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; pointer-events: none; white-space: normal; overflow-wrap: normal;">
+                                <span class="hljs-string">
+                                    Receives
+                                </span>
+                                <span class="hljs-string">
+                                    the
+                                </span>
+                                <span class="hljs-string">
+                                    delete
+                                </span>
+                                <span class="hljs-string">
+                                    request
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </foreignObject>
+                <text x="721" y="715" fill="#000000" font-family="Helvetica" font-size="12px" text-anchor="middle">
+                    Receives the delete r...
+                </text>
+            </switch>
+        </g>
+        <rect x="811" y="686" width="130" height="50" rx="20" ry="20" fill="#ffffc0" stroke="#ff0000" pointer-events="none"/>
+        <g transform="translate(-0.5 -0.5)">
+            <switch>
+                <foreignObject pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow: visible; text-align: left;">
+                    <div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 128px; height: 1px; padding-top: 711px; margin-left: 812px;">
+                        <div data-drawio-colors="color: #000000; " style="box-sizing: border-box; font-size: 0px; text-align: center;">
+                            <div style="display: inline-block; font-size: 12px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; pointer-events: none; white-space: normal; overflow-wrap: normal;">
+                                <span class="hljs-string">
+                                    Sends
+                                </span>
+                                <span class="hljs-string">
+                                    a
+                                </span>
+                                <span class="hljs-string">
+                                    request
+                                </span>
+                                <span class="hljs-string">
+                                    to
+                                </span>
+                                <span class="hljs-string">
+                                    the
+                                </span>
+                                <span class="hljs-string">
+                                    database
+                                </span>
+                                <span class="hljs-string">
+                                    to
+                                </span>
+                                <span class="hljs-string">
+                                    delete
+                                </span>
+                                <span class="hljs-string">
+                                    the
+                                </span>
+                                <span class="hljs-string">
+                                    garden
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </foreignObject>
+                <text x="876" y="715" fill="#000000" font-family="Helvetica" font-size="12px" text-anchor="middle">
+                    Sends a request to th...
+                </text>
+            </switch>
+        </g>
+        <path d="M 786 711 L 804.63 711" fill="none" stroke="#ff0000" stroke-miterlimit="10" pointer-events="none"/>
+        <path d="M 809.88 711 L 802.88 714.5 L 804.63 711 L 802.88 707.5 Z" fill="#ff0000" stroke="#ff0000" stroke-miterlimit="10" pointer-events="none"/>
+        <rect x="661" y="1051" width="120" height="40" rx="16" ry="16" fill="#ffffc0" stroke="#ff0000" pointer-events="none"/>
+        <g transform="translate(-0.5 -0.5)">
+            <switch>
+                <foreignObject pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow: visible; text-align: left;">
+                    <div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 118px; height: 1px; padding-top: 1071px; margin-left: 662px;">
+                        <div data-drawio-colors="color: #000000; " style="box-sizing: border-box; font-size: 0px; text-align: center;">
+                            <div style="display: inline-block; font-size: 12px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; pointer-events: none; white-space: normal; overflow-wrap: normal;">
+                                Sends the
+                                <span class="hljs-keyword">
+                                    error
+                                </span>
+                                <span class="hljs-keyword">
+                                    to
+                                </span>
+                                the frontend
+                            </div>
+                        </div>
+                    </div>
+                </foreignObject>
+                <text x="721" y="1075" fill="#000000" font-family="Helvetica" font-size="12px" text-anchor="middle">
+                    Sends the error to t...
+                </text>
+            </switch>
+        </g>
+        <rect x="801" y="966" width="120" height="40" rx="16" ry="16" fill="#ffffc0" stroke="#ff0000" pointer-events="none"/>
+        <g transform="translate(-0.5 -0.5)">
+            <switch>
+                <foreignObject pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow: visible; text-align: left;">
+                    <div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 118px; height: 1px; padding-top: 986px; margin-left: 802px;">
+                        <div data-drawio-colors="color: #000000; " style="box-sizing: border-box; font-size: 0px; text-align: center;">
+                            <div style="display: inline-block; font-size: 12px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; pointer-events: none; white-space: normal; overflow-wrap: normal;">
+                                Receives the
+                                <span class="hljs-keyword">
+                                    error
+                                </span>
+                                <span class="hljs-keyword">
+                                    from
+                                </span>
+                                the database
+                            </div>
+                        </div>
+                    </div>
+                </foreignObject>
+                <text x="861" y="990" fill="#000000" font-family="Helvetica" font-size="12px" text-anchor="middle">
+                    Receives the error f...
+                </text>
+            </switch>
+        </g>
+        <path d="M 801 986 L 731 986 Q 721 986 721 996 L 721 1044.63" fill="none" stroke="#ff0000" stroke-miterlimit="10" pointer-events="none"/>
+        <path d="M 721 1049.88 L 717.5 1042.88 L 721 1044.63 L 724.5 1042.88 Z" fill="#ff0000" stroke="#ff0000" stroke-miterlimit="10" pointer-events="none"/>
+        <path d="M 501 638.5 L 501 651 Q 501 661 491 661 L 226 661 Q 216 661 216 671 L 216 684.63" fill="none" stroke="#ff0000" stroke-miterlimit="10" pointer-events="none"/>
+        <path d="M 216 689.88 L 212.5 682.88 L 216 684.63 L 219.5 682.88 Z" fill="#ff0000" stroke="#ff0000" stroke-miterlimit="10" pointer-events="none"/>
+        <path d="M 591 711 L 649.63 711" fill="none" stroke="#ff0000" stroke-miterlimit="10" pointer-events="none"/>
+        <path d="M 654.88 711 L 647.88 714.5 L 649.63 711 L 647.88 707.5 Z" fill="#ff0000" stroke="#ff0000" stroke-miterlimit="10" pointer-events="none"/>
+        <path d="M 661 1071 L 577.37 1071" fill="none" stroke="#ff0000" stroke-miterlimit="10" pointer-events="none"/>
+        <path d="M 572.12 1071 L 579.12 1067.5 L 577.37 1071 L 579.12 1074.5 Z" fill="#ff0000" stroke="#ff0000" stroke-miterlimit="10" pointer-events="none"/>
+        <path d="M 941 711 L 1099.63 711" fill="none" stroke="#ff0000" stroke-miterlimit="10" pointer-events="none"/>
+        <path d="M 1104.88 711 L 1097.88 714.5 L 1099.63 711 L 1097.88 707.5 Z" fill="#ff0000" stroke="#ff0000" stroke-miterlimit="10" pointer-events="none"/>
+        <path d="M 216 491 L 216 574.63" fill="none" stroke="#ff0000" stroke-miterlimit="10" pointer-events="none"/>
+        <path d="M 216 579.88 L 212.5 572.88 L 216 574.63 L 219.5 572.88 Z" fill="#ff0000" stroke="#ff0000" stroke-miterlimit="10" pointer-events="none"/>
+        <rect x="151" y="441" width="130" height="50" rx="20" ry="20" fill="#ffffc0" stroke="#ff0000" pointer-events="none"/>
+        <g transform="translate(-0.5 -0.5)">
+            <switch>
+                <foreignObject pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow: visible; text-align: left;">
+                    <div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 128px; height: 1px; padding-top: 466px; margin-left: 152px;">
+                        <div data-drawio-colors="color: #000000; " style="box-sizing: border-box; font-size: 0px; text-align: center;">
+                            <div style="display: inline-block; font-size: 12px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; pointer-events: none; white-space: normal; overflow-wrap: normal;">
+                                <span class="hljs-string">
+                                    Selects
+                                </span>
+                                <span class="hljs-string">
+                                    a
+                                </span>
+                                <span class="hljs-string">
+                                    specific
+                                </span>
+                                <span class="hljs-string">
+                                    garden
+                                </span>
+                                <span class="hljs-string">
+                                    from
+                                </span>
+                                <span class="hljs-string">
+                                    the
+                                </span>
+                                <span class="hljs-string">
+                                    list
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </foreignObject>
+                <text x="216" y="470" fill="#000000" font-family="Helvetica" font-size="12px" text-anchor="middle">
+                    Selects a specific ga...
+                </text>
+            </switch>
+        </g>
+        <path d="M 281 606 L 414.63 606" fill="none" stroke="#ff0000" stroke-miterlimit="10" pointer-events="none"/>
+        <path d="M 419.88 606 L 412.88 609.5 L 414.63 606 L 412.88 602.5 Z" fill="#ff0000" stroke="#ff0000" stroke-miterlimit="10" pointer-events="none"/>
+        <rect x="151" y="581" width="130" height="50" rx="20" ry="20" fill="#ffffc0" stroke="#ff0000" pointer-events="none"/>
+        <g transform="translate(-0.5 -0.5)">
+            <switch>
+                <foreignObject pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow: visible; text-align: left;">
+                    <div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 128px; height: 1px; padding-top: 606px; margin-left: 152px;">
+                        <div data-drawio-colors="color: #000000; " style="box-sizing: border-box; font-size: 0px; text-align: center;">
+                            <div style="display: inline-block; font-size: 12px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; pointer-events: none; white-space: normal; overflow-wrap: normal;">
+                                <span class="hljs-string">
+                                    Clicks
+                                </span>
+                                <span class="hljs-string">
+                                    on
+                                </span>
+                                <span class="hljs-string">
+                                    the
+                                </span>
+                                <span class="hljs-string">
+                                    "Delete Garden"
+                                </span>
+                                <span class="hljs-string">
+                                    button
+                                </span>
+                                <span class="hljs-string">
+                                    next
+                                </span>
+                                <span class="hljs-string">
+                                    to
+                                </span>
+                                <span class="hljs-string">
+                                    the
+                                </span>
+                                <span class="hljs-string">
+                                    selected
+                                </span>
+                                <span class="hljs-string">
+                                    garden
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </foreignObject>
+                <text x="216" y="610" fill="#000000" font-family="Helvetica" font-size="12px" text-anchor="middle">
+                    Clicks on the "Delete...
+                </text>
+            </switch>
+        </g>
+        <path d="M 176 711 L 101 711 Q 91 711 91 701 L 91 321 Q 91 311 101 311 L 374.63 311" fill="none" stroke="#ff0000" stroke-miterlimit="10" pointer-events="none"/>
+        <path d="M 379.88 311 L 372.88 314.5 L 374.63 311 L 372.88 307.5 Z" fill="#ff0000" stroke="#ff0000" stroke-miterlimit="10" pointer-events="none"/>
+        <path d="M 256 711 L 414.63 711" fill="none" stroke="#ff0000" stroke-miterlimit="10" pointer-events="none"/>
+        <path d="M 419.88 711 L 412.88 714.5 L 414.63 711 L 412.88 707.5 Z" fill="#ff0000" stroke="#ff0000" stroke-miterlimit="10" pointer-events="none"/>
+        <path d="M 216 691 L 256 711 L 216 731 L 176 711 Z" fill="#ffffc0" stroke="#ff0000" stroke-miterlimit="10" pointer-events="none"/>
+        <g transform="translate(-0.5 -0.5)">
+            <switch>
+                <foreignObject pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow: visible; text-align: left;">
+                    <div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 78px; height: 1px; padding-top: 711px; margin-left: 177px;">
+                        <div data-drawio-colors="color: #000000; " style="box-sizing: border-box; font-size: 0px; text-align: center;">
+                            <div style="display: inline-block; font-size: 12px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; pointer-events: none; white-space: normal; overflow-wrap: normal;">
+                                Confirm?
+                            </div>
+                        </div>
+                    </div>
+                </foreignObject>
+                <text x="216" y="715" fill="#000000" font-family="Helvetica" font-size="12px" text-anchor="middle">
+                    Confirm?
+                </text>
+            </switch>
+        </g>
+        <g transform="translate(-0.5 -0.5)">
+            <switch>
+                <foreignObject pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow: visible; text-align: left;">
+                    <div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 1px; height: 1px; padding-top: 709px; margin-left: 159px;">
+                        <div data-drawio-colors="color: #000000; background-color: #ffffc0; " style="box-sizing: border-box; font-size: 0px; text-align: center;">
+                            <div style="display: inline-block; font-size: 11px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; pointer-events: none; background-color: rgb(255, 255, 192); white-space: nowrap;">
+                                No
+                            </div>
+                        </div>
+                    </div>
+                </foreignObject>
+                <text x="159" y="712" fill="#000000" font-family="Helvetica" font-size="11px" text-anchor="middle">
+                    No
+                </text>
+            </switch>
+        </g>
+        <g transform="translate(-0.5 -0.5)">
+            <switch>
+                <foreignObject pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow: visible; text-align: left;">
+                    <div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 1px; height: 1px; padding-top: 709px; margin-left: 269px;">
+                        <div data-drawio-colors="color: #000000; background-color: #ffffc0; " style="box-sizing: border-box; font-size: 0px; text-align: center;">
+                            <div style="display: inline-block; font-size: 11px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; pointer-events: none; background-color: rgb(255, 255, 192); white-space: nowrap;">
+                                Yes
+                            </div>
+                        </div>
+                    </div>
+                </foreignObject>
+                <text x="269" y="712" fill="#000000" font-family="Helvetica" font-size="11px" text-anchor="middle">
+                    Yes
+                </text>
+            </switch>
+        </g>
+        <path d="M 1171 736 L 1171 821 Q 1171 831 1181 831 L 1191 831 Q 1201 831 1201 841 L 1201 874.63" fill="none" stroke="#ff0000" stroke-miterlimit="10" pointer-events="none"/>
+        <path d="M 1201 879.88 L 1197.5 872.88 L 1201 874.63 L 1204.5 872.88 Z" fill="#ff0000" stroke="#ff0000" stroke-miterlimit="10" pointer-events="none"/>
+        <path d="M 1101 986 L 927.37 986" fill="none" stroke="#ff0000" stroke-miterlimit="10" pointer-events="none"/>
+        <path d="M 922.12 986 L 929.12 982.5 L 927.37 986 L 929.12 989.5 Z" fill="#ff0000" stroke="#ff0000" stroke-miterlimit="10" pointer-events="none"/>
+        <rect x="1101" y="961" width="140" height="50" rx="20" ry="20" fill="#ffffc0" stroke="#ff0000" pointer-events="none"/>
+        <g transform="translate(-0.5 -0.5)">
+            <switch>
+                <foreignObject pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow: visible; text-align: left;">
+                    <div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 138px; height: 1px; padding-top: 986px; margin-left: 1102px;">
+                        <div data-drawio-colors="color: #000000; " style="box-sizing: border-box; font-size: 0px; text-align: center;">
+                            <div style="display: inline-block; font-size: 12px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; pointer-events: none; white-space: normal; overflow-wrap: normal;">
+                                <span class="hljs-keyword">
+                                    If
+                                </span>
+                                an
+                                <span class="hljs-keyword">
+                                    error
+                                </span>
+                                occurs, it sends an
+                                <span class="hljs-keyword">
+                                    error
+                                </span>
+                                response
+                                <span class="hljs-keyword">
+                                    to
+                                </span>
+                                the backend
+                            </div>
+                        </div>
+                    </div>
+                </foreignObject>
+                <text x="1171" y="990" fill="#000000" font-family="Helvetica" font-size="12px" text-anchor="middle">
+                    If an error occurs, it...
+                </text>
+            </switch>
+        </g>
+        <path d="M 1201 921 L 1201 931 Q 1201 941 1191 941 L 1181 941 Q 1171 941 1171 947.82 L 1171 954.63" fill="none" stroke="#ff0000" stroke-miterlimit="10" pointer-events="none"/>
+        <path d="M 1171 959.88 L 1167.5 952.88 L 1171 954.63 L 1174.5 952.88 Z" fill="#ff0000" stroke="#ff0000" stroke-miterlimit="10" pointer-events="none"/>
+        <g transform="translate(-0.5 -0.5)">
+            <switch>
+                <foreignObject pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow: visible; text-align: left;">
+                    <div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 1px; height: 1px; padding-top: 942px; margin-left: 1196px;">
+                        <div data-drawio-colors="color: #000000; background-color: #ffffc0; " style="box-sizing: border-box; font-size: 0px; text-align: center;">
+                            <div style="display: inline-block; font-size: 11px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; pointer-events: none; background-color: rgb(255, 255, 192); white-space: nowrap;">
+                                Yes
+                            </div>
+                        </div>
+                    </div>
+                </foreignObject>
+                <text x="1196" y="945" fill="#000000" font-family="Helvetica" font-size="11px" text-anchor="middle">
+                    Yes
+                </text>
+            </switch>
+        </g>
+        <path d="M 1161 901 L 1117.37 901" fill="none" stroke="#ff0000" stroke-miterlimit="10" pointer-events="none"/>
+        <path d="M 1112.12 901 L 1119.12 897.5 L 1117.37 901 L 1119.12 904.5 Z" fill="#ff0000" stroke="#ff0000" stroke-miterlimit="10" pointer-events="none"/>
+        <g transform="translate(-0.5 -0.5)">
+            <switch>
+                <foreignObject pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow: visible; text-align: left;">
+                    <div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 1px; height: 1px; padding-top: 902px; margin-left: 1142px;">
+                        <div data-drawio-colors="color: #000000; background-color: #ffffc0; " style="box-sizing: border-box; font-size: 0px; text-align: center;">
+                            <div style="display: inline-block; font-size: 11px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; pointer-events: none; background-color: rgb(255, 255, 192); white-space: nowrap;">
+                                No
+                            </div>
+                        </div>
+                    </div>
+                </foreignObject>
+                <text x="1142" y="905" fill="#000000" font-family="Helvetica" font-size="11px" text-anchor="middle">
+                    No
+                </text>
+            </switch>
+        </g>
+        <path d="M 1201 881 L 1241 901 L 1201 921 L 1161 901 Z" fill="#ffffc0" stroke="#ff0000" stroke-miterlimit="10" pointer-events="none"/>
+        <g transform="translate(-0.5 -0.5)">
+            <switch>
+                <foreignObject pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow: visible; text-align: left;">
+                    <div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 78px; height: 1px; padding-top: 901px; margin-left: 1162px;">
+                        <div data-drawio-colors="color: #000000; " style="box-sizing: border-box; font-size: 0px; text-align: center;">
+                            <div style="display: inline-block; font-size: 12px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; pointer-events: none; white-space: normal; overflow-wrap: normal;">
+                                Error
+                            </div>
+                        </div>
+                    </div>
+                </foreignObject>
+                <text x="1201" y="905" fill="#000000" font-family="Helvetica" font-size="12px" text-anchor="middle">
+                    Error
+                </text>
+            </switch>
+        </g>
+        <path d="M 966 901 L 832.37 901" fill="none" stroke="#ff0000" stroke-miterlimit="10" pointer-events="none"/>
+        <path d="M 827.12 901 L 834.12 897.5 L 832.37 901 L 834.12 904.5 Z" fill="#ff0000" stroke="#ff0000" stroke-miterlimit="10" pointer-events="none"/>
+        <rect x="966" y="881" width="145" height="40" rx="16" ry="16" fill="#ffffc0" stroke="#ff0000" pointer-events="none"/>
+        <g transform="translate(-0.5 -0.5)">
+            <switch>
+                <foreignObject pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow: visible; text-align: left;">
+                    <div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 143px; height: 1px; padding-top: 901px; margin-left: 967px;">
+                        <div data-drawio-colors="color: #000000; " style="box-sizing: border-box; font-size: 0px; text-align: center;">
+                            <div style="display: inline-block; font-size: 12px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; pointer-events: none; white-space: normal; overflow-wrap: normal;">
+                                <span class="hljs-string">
+                                    Sends
+                                </span>
+                                <span class="hljs-string">
+                                    confirmation
+                                </span>
+                                <span class="hljs-string">
+                                    of
+                                </span>
+                                <span class="hljs-string">
+                                    deletion
+                                </span>
+                                <span class="hljs-string">
+                                    to
+                                </span>
+                                <span class="hljs-string">
+                                    the
+                                </span>
+                                <span class="hljs-string">
+                                    backend
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </foreignObject>
+                <text x="1039" y="905" fill="#000000" font-family="Helvetica" font-size="12px" text-anchor="middle">
+                    Sends confirmation of de...
+                </text>
+            </switch>
+        </g>
+        <path d="M 681 901 L 632.37 901" fill="none" stroke="#ff0000" stroke-miterlimit="10" pointer-events="none"/>
+        <path d="M 627.12 901 L 634.12 897.5 L 632.37 901 L 634.12 904.5 Z" fill="#ff0000" stroke="#ff0000" stroke-miterlimit="10" pointer-events="none"/>
+        <rect x="681" y="881" width="145" height="40" rx="16" ry="16" fill="#ffffc0" stroke="#ff0000" pointer-events="none"/>
+        <g transform="translate(-0.5 -0.5)">
+            <switch>
+                <foreignObject pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow: visible; text-align: left;">
+                    <div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 143px; height: 1px; padding-top: 901px; margin-left: 682px;">
+                        <div data-drawio-colors="color: #000000; " style="box-sizing: border-box; font-size: 0px; text-align: center;">
+                            <div style="display: inline-block; font-size: 12px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; pointer-events: none; white-space: normal; overflow-wrap: normal;">
+                                <span class="hljs-string">
+                                    Sends
+                                </span>
+                                <span class="hljs-string">
+                                    the
+                                </span>
+                                <span class="hljs-string">
+                                    deletion
+                                </span>
+                                <span class="hljs-string">
+                                    confirmation
+                                </span>
+                                <span class="hljs-string">
+                                    to
+                                </span>
+                                <span class="hljs-string">
+                                    the
+                                </span>
+                                <span class="hljs-string">
+                                    frontend
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </foreignObject>
+                <text x="754" y="905" fill="#000000" font-family="Helvetica" font-size="12px" text-anchor="middle">
+                    Sends the deletion confi...
+                </text>
+            </switch>
+        </g>
+        <path d="M 471 901 L 456 901 Q 446 901 446 911 L 446 934.63" fill="none" stroke="#ff0000" stroke-miterlimit="10" pointer-events="none"/>
+        <path d="M 446 939.88 L 442.5 932.88 L 446 934.63 L 449.5 932.88 Z" fill="#ff0000" stroke="#ff0000" stroke-miterlimit="10" pointer-events="none"/>
+        <rect x="471" y="881" width="155" height="40" rx="16" ry="16" fill="#ffffc0" stroke="#ff0000" pointer-events="none"/>
+        <g transform="translate(-0.5 -0.5)">
+            <switch>
+                <foreignObject pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow: visible; text-align: left;">
+                    <div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 153px; height: 1px; padding-top: 901px; margin-left: 472px;">
+                        <div data-drawio-colors="color: #000000; " style="box-sizing: border-box; font-size: 0px; text-align: center;">
+                            <div style="display: inline-block; font-size: 12px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; pointer-events: none; white-space: normal; overflow-wrap: normal;">
+                                <span class="hljs-string">
+                                    Removes
+                                </span>
+                                <span class="hljs-string">
+                                    the
+                                </span>
+                                <span class="hljs-string">
+                                    deleted
+                                </span>
+                                <span class="hljs-string">
+                                    garden
+                                </span>
+                                <span class="hljs-string">
+                                    from
+                                </span>
+                                <span class="hljs-string">
+                                    the
+                                </span>
+                                <span class="hljs-string">
+                                    list
+                                </span>
+                                <span class="hljs-string">
+                                    and
+                                </span>
+                                <span class="hljs-string">
+                                    updates
+                                </span>
+                                <span class="hljs-string">
+                                    the
+                                </span>
+                                <span class="hljs-string">
+                                    UI
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </foreignObject>
+                <text x="549" y="905" fill="#000000" font-family="Helvetica" font-size="12px" text-anchor="middle">
+                    Removes the deleted garden...
+                </text>
+            </switch>
+        </g>
+        <rect x="371" y="11" width="565" height="70" fill="#ffffff" stroke="#4d4d4d" pointer-events="none"/>
+        <g transform="translate(-0.5 -0.5)">
+            <switch>
+                <foreignObject pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow: visible; text-align: left;">
+                    <div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 563px; height: 1px; padding-top: 46px; margin-left: 372px;">
+                        <div data-drawio-colors="color: rgb(0, 0, 0); " style="box-sizing: border-box; font-size: 0px; text-align: center;">
+                            <div style="display: inline-block; font-size: 12px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; pointer-events: none; white-space: normal; overflow-wrap: normal;">
+                                <font color="#000000" style="background-color: rgb(255, 255, 255); font-size: 37px;">
+                                    Remove Garden(s)
+                                </font>
+                            </div>
+                        </div>
+                    </div>
+                </foreignObject>
+                <text x="654" y="50" fill="rgb(0, 0, 0)" font-family="Helvetica" font-size="12px" text-anchor="middle">
+                    Remove Garden(s)
+                </text>
+            </switch>
+        </g>
+    </g>
+    <switch>
+        <g requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"/>
+        <a transform="translate(0,-5)" xlink:href="https://www.diagrams.net/doc/faq/svg-export-text-problems" target="_blank">
+            <text text-anchor="middle" font-size="10px" x="50%" y="100%">
+                Text is not SVG - cannot display
+            </text>
+        </a>
+    </switch>
+</svg>
