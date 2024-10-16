@@ -1,3 +1,7 @@
+Feature: Show Gardens
+  In order to view an overview of all gardens
+  As a user
+  I want to see a list of all gardens
   Scenario: User views an overview of all gardens
     Given the user is on the "Home" page
     When the user clicks on the "Garden" icon in the navigation bar
