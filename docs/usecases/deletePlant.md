@@ -9,11 +9,7 @@ This use case can be performed by a **User**.
 
 The user wants to **delete a plant** from a specific garden.
 
-## 1.3 Preconditions
-
-The user is **logged in** and has at least **one garden in their account** and at least **one plant in the garden**.
-
-## 1.4 Summary
+## 1.3 Summary
 
 To **delete a plant** from a garden, the user navigates to the garden overview by clicking in the navigation bar on the **garden icon**. The user selects the garden they want to delete the plant from. The user click on the **more options** icon of the plant they want to delete and selects **delete plant**. The use has to **confirm the deletion**. The plant will be removed from the garden and deleted from the database with all its data.
 
@@ -37,7 +33,7 @@ To **delete a plant** from a garden, the user navigates to the garden overview b
 
 ### 2.1.2 Mock-Up
 
-![Delte plant wireframes](/docs/assets/svg/useCaseWireframes/deletePlant.png)
+![Delete plant wireframes](/docs/assets/svg/useCaseWireframes/deletePlant.png)
 
 ### 2.1.3 Narrative
 
@@ -90,6 +86,6 @@ The user has deleted a plant from the garden.
 
 # 6 Extension Points
 
-# 7 CRUD Classifiction
+# 7 CRUD Classification
 
 The **Delete Plant** use case is a **Delete** operation. The user deletes a plant from the garden.
