@@ -41,20 +41,26 @@ To **delete a plant** from a garden, the user navigates to the garden overview b
 
 ### 2.1.3 Narrative
 
-**Feature:** Delete Plant from Garden
-
 ```gherkin
-  Scenario: User deletes a plant from their garden
-    Given the user is on the "Manage Gardens" section
-    And the user views the list of gardens
-    When the user selects the garden they want to modify
-    And the user clicks on the "More options" icon next to the plant they want to delete
-    And the user selects "Delete Plant"
-    Then a confirmation dialog appears asking "Are you sure you want to delete this plant?"
-    When the user clicks "Confirm"
-    Then the system permanently deletes the plant and its related data
-    And a success message is shown to the user
-    And the user is returned to the garden's plant list
+Feature: Delete Plant from Garden
+  In order to remove a plant from a garden
+  As a user
+  I want to delete a plant from a garden
+
+  Scenario: User deletes a plant from a garden
+    Given the user is on the "Home" page
+    When the user clicks on the "Garden" icon in the navigation bar
+    Then the system loads the garden overview
+    And the user is presented with a list of all gardens
+    When the user selects a garden
+    Then the system loads the garden details
+    And the user is presented with a list of all plants in the garden
+    When the user clicks on the "more options" icon of a plant
+    And the user selects "delete plant"
+    Then the system presents a confirmation dialog
+    When the user confirms the deletion
+    Then the plant is removed from the garden
+    And the plant is deleted from the database
 ```
 
 ### 2.2 Alternative Flows
@@ -76,6 +82,7 @@ User can retry the deletion.
 # 4 Preconditions
 
 The user is **logged in** and has at least **one garden in their account** and the garden has **one plant in the garden**.
+The user is at the **Home** page.
 
 # 5 Postconditions
 
