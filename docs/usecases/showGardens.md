@@ -8,7 +8,7 @@ This use case can be performed by a **User**.
 
 The user wants to see an **overview of all gardens** they have.
 
-## 1.4 Summary
+## 1.3 Summary
 
 To see an **overview of all gardens**, the user navigate to the garden overview by clicking in the navigation bar on the **garden icon**. The user will see a list of all gardens they have. Each garden card contains the following information:
 
@@ -33,15 +33,19 @@ To see an **overview of all gardens**, the user navigate to the garden overview 
 
 ### 2.1.3 Narrative
 
-**Feature:** Show Gardens
 
 ```gherkin
-  Scenario: User views an overview of all gardens
-    Given the user is on the "Home" page
-    When the user clicks on the "Garden" icon in the navigation bar
-    Then the system loads the garden overview
-    And the user is presented with a list of all gardens
-    And each garden card contains the garden name, an image of the garden, and the status of the garden
+Feature: Show Gardens
+    In order to view an overview of all gardens
+    As a user
+    I want to see a list of all gardens
+
+    Scenario: User views an overview of all gardens
+        Given the user is on the "Home" page
+        When the user clicks on the "Garden" icon in the navigation bar
+        Then the system loads the garden overview
+        And the user is presented with a list of all gardens
+        And each garden card contains the garden name, an image of the garden, and the status of the garden
 ```
 
 ### 2.2 Alternative Flows
