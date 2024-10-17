@@ -19,9 +19,11 @@ Along the plant will be set a short description, the information about the Senso
 
 ### 2.1.1 Activity Diagram
 
-![UML flowchart]()
+![UML flowchart](/docs/assets/svg/useCaseDiagrams/addPlant.drawio.svg)
 
 ### 2.1.2 Mock-Up
+
+![add plant wireframes](/docs/assets/svg/useCaseWireframes/addPlant.png)
 
 ### 2.1.3 Narrative
 
