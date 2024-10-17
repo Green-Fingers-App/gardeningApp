@@ -1,17 +1,18 @@
 import { Tabs } from "expo-router";
 import { MaterialIcons } from "@expo/vector-icons";
+import colors from "@/constants/colors";
 
 const ProfileLayout = () => {
   return (
     <Tabs
       screenOptions={{
         headerStyle: {
-          backgroundColor: "#A9A9A9",
+          backgroundColor: colors.primary,
         },
         tabBarActiveTintColor: "#FFFFFF",
         tabBarInactiveTintColor: "#565656",
         tabBarStyle: {
-          backgroundColor: "#A9A9A9",
+          backgroundColor: colors.primary,
         },
       }}
     >
