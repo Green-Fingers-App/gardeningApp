@@ -1,8 +1,9 @@
 import { Tabs } from "expo-router";
 import { MaterialIcons } from "@expo/vector-icons";
 import colors from "@/constants/colors";
+import React from "react";
 
-const ProfileLayout = () => {
+const ProfileLayout: React.FC = () => {
   return (
     <Tabs
       screenOptions={{

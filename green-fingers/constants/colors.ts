@@ -1,7 +1,7 @@
 
 const colors = {
   primary: "#A9A9A9",
-  secondary: "",
+  secondary: "#DEDEDE",
   textHeader: "#FFFFFF",
   textParagraph: "#000000",
   textError: "",
@@ -9,8 +9,8 @@ const colors = {
   bgError: "",
   bgSucces: "",
   bgCard: "",
-  backGroundPrimary: "",
-  backGroundSecondary: "",
+  backGroundPrimary: "#A9A9A9",
+  backGroundSecondary: "#CCCCCC",
   detail: ""
 }
 

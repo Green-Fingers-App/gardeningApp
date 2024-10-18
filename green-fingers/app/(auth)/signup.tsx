@@ -9,6 +9,8 @@ import React, { useState } from "react";
 import { router, Link } from "expo-router";
 import { FontAwesome } from "@expo/vector-icons";
 import Input from "@/components/Input";
+import Button from "@/components/Button";
+import colors from "@/constants/colors";
 
 const Signup = () => {
   const [show, setShow] = useState<boolean>(false);
@@ -25,16 +27,6 @@ const Signup = () => {
   });
 
   type InputFieldName = keyof typeof inputValues;
-
-  const handleChange = (name: InputFieldName, value: string) => {
-    setInputValues((prevState) => ({ ...prevState, [name]: value }));
-  };
-
-  const toggleShow = () => {
-    setShow(!show);
-  };
-
-  // Firebase signup function with email verification, email verify before login not implemented
 
   const handleSignup = async () => {
     const { email, confirmEmail, password, confirmPassword } = inputValues;
@@ -72,16 +64,19 @@ const Signup = () => {
             iconName="lock-outline"
             password={true}
           />
-          <TouchableOpacity style={styles.signUpButton} onPress={handleSignup}>
-            <Text>Sign Up</Text>
-          </TouchableOpacity>
+          <Button
+            text="Sign Up"
+            onPress={handleSignup}
+            bgColor={colors.secondary}
+            style={{ width: "100%" }}
+          />
 
           <Text>Already have an account?</Text>
           <TouchableOpacity onPress={() => router.push("/")}>
             <Text>Login</Text>
           </TouchableOpacity>
           <Text>Forgot Password?</Text>
-          <Link href={"/(auth)forgotpassword"}>
+          <Link href={"/(auth)/forgotpassword"}>
             <Text>Click Here</Text>
           </Link>
         </View>
@@ -113,29 +108,6 @@ const styles = StyleSheet.create({
     width: "100%",
     gap: 12,
     opacity: 0.8,
-  },
-  loginButton: {
-    backgroundColor: "#FA7070",
-    paddingVertical: 10,
-    paddingHorizontal: 40,
-    borderRadius: 8,
-    opacity: 1,
-  },
-  signUpButton: {
-    backgroundColor: "#CCCCCC",
-    paddingHorizontal: 40,
-    paddingVertical: 10,
-    borderRadius: 8,
-    opacity: 1,
-    width: "100%",
-    textAlign: "center",
-  },
-  inputField: {
-    borderColor: "#fec7b4",
-    borderWidth: 2,
-    borderRadius: 4,
-    width: "90%",
-    paddingLeft: 5,
   },
   contentTitle: {
     color: "#BCBCBC",
