@@ -1,11 +1,13 @@
 import { Link, router } from "expo-router";
 import { StatusBar } from "expo-status-bar";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 import Input from "@/components/Input";
 import { useAuth } from "@/context/AuthContext";
+import Button from "@/components/Button";
+import colors from "@/constants/colors";
 
 export default function App() {
   const [inputValues, setInputvalues] = useState<{
@@ -89,20 +91,13 @@ export default function App() {
             onFocus={() => handleErrorMessage("password", undefined)}
           />
           <View style={styles.buttonContainer}>
-            <TouchableOpacity
-              style={styles.loginButton}
-              onPress={() => {
-                validate();
-              }}
-            >
-              <Text style={{ fontWeight: "bold" }}>Login</Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              style={styles.signUpButton}
+            <Button text="Login" onPress={validate} iconName="login" />
+            <Button
+              text="Sign Up"
               onPress={() => router.push("/(auth)/signup")}
-            >
-              <Text style={{ fontWeight: "bold" }}>Sign Up</Text>
-            </TouchableOpacity>
+              bgColor={colors.backGroundSecondary}
+              textColor="black"
+            />
           </View>
           <Text>Forgot Password?</Text>
           <Link href={"/(auth)/forgotpassword"}>
@@ -138,18 +133,6 @@ const styles = StyleSheet.create({
     width: "100%",
     gap: 12,
     opacity: 0.8,
-  },
-  loginButton: {
-    backgroundColor: "#A9A9A9",
-    paddingVertical: 10,
-    paddingHorizontal: 40,
-    opacity: 1,
-  },
-  signUpButton: {
-    backgroundColor: "#DEDEDE",
-    paddingHorizontal: 40,
-    paddingVertical: 10,
-    opacity: 1,
   },
   contentTitle: {
     color: "#BCBCBC",
