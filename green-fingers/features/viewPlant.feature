@@ -7,3 +7,4 @@ Feature: View Plant
     And I click on a plant card
     Then I switch pages
     And I see the plant's detailed information
+
