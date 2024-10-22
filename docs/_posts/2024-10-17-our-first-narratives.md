@@ -38,7 +38,7 @@ to our project's toolbox.
 We use the Cucumber (Gherkin) extension in our Visual Studio Code environment to give visual cues about the keywords. The extension also provides auto complete
 and code snippets that help with coding in Gherkin. In the screenshot below you can see an example of auto completion and code highlighting done by Visual
 Studio Code.
-![screenshot gherkin on Visual Studio Code](https://github.com/DHBW-Malte/gardeningApp/blob/main/docs/assets/screenshots/screenshot_gherkin.png)
+![screenshot gherkin on Visual Studio Code](/gardeningApp/assets/screenshots/screenshot_gherkin.png)
 
 To see how this all comes together in our documentation, check out our two completed use-cases:<br/><br/>
 [use-case Show Gardens](https://github.com/DHBW-Malte/gardeningApp/blob/main/docs/usecases/showGardens.md)
