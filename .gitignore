@@ -24,6 +24,7 @@ dist/
 .env.development.local
 .env.test.local
 .env.production.local
+app.json
 
 # Windows specific
 Thumbs.db
@@ -41,3 +42,4 @@ $RECYCLE.BIN/
 
 testReactNative/testReactNative/.env
 testReactNative/testReactNative/app/google-services.json
+green-fingers/app.json

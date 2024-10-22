@@ -1,67 +1,77 @@
 import { Link, router } from "expo-router";
 import { StatusBar } from "expo-status-bar";
 import React, { useEffect, useState } from "react";
-import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 import Input from "@/components/Input";
-import { useAuth } from "@/context/AuthContext";
 import Button from "@/components/Button";
 import colors from "@/constants/colors";
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from "@/firebase/firebaseConfig";
+
+interface InputValues {
+  email: string;
+  password: string;
+}
+
+type InputErrors = Partial<Record<keyof InputValues, string>>;
 
 export default function App() {
-  const [inputValues, setInputvalues] = useState<{
-    email: string;
-    password: string;
-  }>({
+  const [inputValues, setInputvalues] = useState<InputValues>({
     email: "",
     password: "",
   });
 
-  type InputFieldName = keyof typeof inputValues;
+  const [inputErrors, setInputErrors] = useState<InputErrors>({});
 
-  const [inputErrors, setInputErrors] = useState<{
-    [key in InputFieldName]?: string;
-  }>({});
-
-  const { login, user } = useAuth();
-
-  const handleChange = (name: InputFieldName, value: string): void => {
+  const handleChange = (name: keyof InputValues, value: string): void => {
     setInputvalues((prevState) => ({
       ...prevState,
       [name]: value,
     }));
   };
 
-  const handleErrorMessage = (name: InputFieldName, text?: string): void => {
+  const handleErrorMessage = (name: keyof InputValues, text?: string): void => {
     setInputErrors((prevState) => ({
       ...prevState,
       [name]: text,
     }));
   };
 
+  // Validate inputs and log the user in
   const validate = async (): Promise<void> => {
-    if (!inputValues.email) {
+    const { email, password } = inputValues;
+
+    if (!email) {
       handleErrorMessage("email", "Please enter your email");
       return;
     }
 
-    if (!inputValues.password) {
+    if (!password) {
       handleErrorMessage("password", "Please enter your password");
       return;
     }
 
     try {
-      const response = await login(inputValues.email, inputValues.password);
+      // Firebase login
+      await signInWithEmailAndPassword(auth, email, password);
+      
+      // Redirect to profile/home on successful login
       router.replace("/profile/home");
     } catch (error) {
+      // Handle Firebase login errors
       handleErrorMessage("email", "Invalid email or password");
       handleErrorMessage("password", "Invalid email or password");
       console.error("Login error:", error);
     }
   };
 
-  useEffect(() => console.log("this is a use effect" + user), [user]);
+  // Log the current user to console for debugging
+  useEffect(() => {
+    const currentUser = auth.currentUser;
+    console.log("Logged-in user:", currentUser);
+  }, []);
 
   return (
     <SafeAreaView style={styles.container}>
@@ -72,13 +82,11 @@ export default function App() {
           <Input
             iconName="account"
             label="Username"
-            placeholder="Enter your username"
+            placeholder="Enter your email"
             autoFocus={true}
             onChangeText={(text) => handleChange("email", text)}
             error={inputErrors.email}
-            onFocus={() => {
-              handleErrorMessage("email", undefined);
-            }}
+            onFocus={() => handleErrorMessage("email", undefined)}
           />
           <Input
             iconName="lock-outline"
@@ -86,7 +94,6 @@ export default function App() {
             placeholder="Enter your password"
             secureTextEntry={true}
             onChangeText={(text) => handleChange("password", text)}
-            password
             error={inputErrors.password}
             onFocus={() => handleErrorMessage("password", undefined)}
           />
@@ -110,6 +117,7 @@ export default function App() {
   );
 }
 
+// Styles
 const styles = StyleSheet.create({
   buttonContainer: {
     flexDirection: "row",

@@ -11,9 +11,10 @@ import { FontAwesome } from "@expo/vector-icons";
 import Input from "@/components/Input";
 import Button from "@/components/Button";
 import colors from "@/constants/colors";
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { auth } from "@/firebase/firebaseConfig";
 
 const Signup = () => {
-  const [show, setShow] = useState<boolean>(false);
   const [inputValues, setInputValues] = useState<{
     email: string;
     confirmEmail: string;
@@ -26,21 +27,39 @@ const Signup = () => {
     confirmPassword: "",
   });
 
+  const [error, setError] = useState<string | null>(null);
+
   type InputFieldName = keyof typeof inputValues;
+
+  const handleChange = (name: InputFieldName, value: string): void => {
+    setInputValues((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }));
+  };
 
   const handleSignup = async () => {
     const { email, confirmEmail, password, confirmPassword } = inputValues;
 
-    // Check if emails match
     if (email !== confirmEmail) {
-      alert("Emails do not match!");
+      setError("Emails do not match!");
       return;
     }
 
-    // Check if passwords match
     if (password !== confirmPassword) {
-      alert("Passwords do not match!");
+      setError("Passwords do not match!");
       return;
+    }
+
+    setError(null);
+
+    try {
+      // Firebase signup
+      await createUserWithEmailAndPassword(auth, email, password);
+      router.replace("/profile/home");
+    } catch (error) {
+      console.error("Error during signup: ", error);
+      setError("Signup failed. Please try again.");
     }
   };
 
@@ -50,19 +69,35 @@ const Signup = () => {
         <Text style={styles.title}>Green Fingers</Text>
         <View style={styles.content}>
           <Text style={styles.contentTitle}>Sign Up</Text>
-          <Input label="Email" placeholder="Email" iconName="email-outline" />
-          <Input label="Username" placeholder="Username" iconName="account" />
+
+          {/* Display error if any */}
+          {error && <Text style={{ color: "red" }}>{error}</Text>}
+
+          <Input
+            label="Email"
+            placeholder="Email"
+            iconName="email-outline"
+            onChangeText={(text) => handleChange("email", text)}
+          />
+          <Input
+            label="Confirm Email"
+            placeholder="Confirm Email"
+            iconName="email-outline"
+            onChangeText={(text) => handleChange("confirmEmail", text)}
+          />
           <Input
             label="Password"
             placeholder="Password"
             iconName="lock-outline"
             password={true}
+            onChangeText={(text) => handleChange("password", text)}
           />
           <Input
             label="Confirm Password"
             placeholder="Confirm Password"
             iconName="lock-outline"
             password={true}
+            onChangeText={(text) => handleChange("confirmPassword", text)}
           />
           <Button
             text="Sign Up"
