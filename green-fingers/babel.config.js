@@ -3,7 +3,12 @@ module.exports = function (api) {
   return {
     presets: [
       'babel-preset-expo',
-      '@babel/preset-react',
+      [
+        '@babel/preset-react',
+        {
+          runtime: 'automatic',
+        },
+      ],
       '@babel/preset-typescript',
     ],
   };
