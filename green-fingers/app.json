@@ -32,13 +32,5 @@
     "experiments": {
       "typedRoutes": true
     },
-    "extra": {
-      "FIREBASE_API_KEY": "AIzaSyCbHILucpqARtfONB4y5emRro3m5YFevtU",
-      "FIREBASE_AUTH_DOMAIN": "green-fingers-6bcc9.firebaseapp.com",
-      "FIREBASE_PROJECT_ID": "green-fingers-6bcc9",
-      "FIREBASE_STORAGE_BUCKET": "green-fingers-6bcc9.appspot.com",
-      "FIREBASE_MESSAGING_SENDER_ID": "3365839561",
-      "FIREBASE_APP_ID": "1:3365839561:android:3591952638a4f6fc4ba318"
-    }
   }
 }
