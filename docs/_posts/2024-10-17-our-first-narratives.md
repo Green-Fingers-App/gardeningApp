@@ -30,7 +30,7 @@ Feature: Show Gardens
     Then the system displays an error message
 ```
 
-[showGardens feature file](https://github.com/DHBW-Malte/gardeningApp/blob/main/green-fingers/features/viewGarden.feature)
+[showGardens feature file](https://github.com/DHBW-Malte/gardeningApp/blob/main/green-fingers/features/showGardens.feature)
 In this code snippet we see the paths of our use-case "Show Gardens". It looks like it is written in plain English, but looks can be decieving.
 This piece of text is actually executable code. That will test if the use-case paths do what they say they will do. This makes cucumbur a fantastic addage
 to our project's toolbox.
