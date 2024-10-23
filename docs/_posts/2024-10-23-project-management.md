@@ -38,7 +38,7 @@ We’ve set up our public Scrum board, where everything is laid out with burn-do
 
 Here’s the burndown chart for our first sprint. The chart helps us track how much work remains and whether we’re on pace to finish the sprint on time.
 
-![Burndown chart](https://github.com/user-attachments/assets/a61fee44-4df4-40c3-9c9f-2459279a6886)
+![Burndown Chart](https://github.com/user-attachments/assets/2734f8ce-5b67-483e-b721-c2fcfde39433)
 
 ### 4.2 Cumulative Flowchart
 
