@@ -56,7 +56,7 @@ export default function App() {
     try {
       // Firebase login
       await signInWithEmailAndPassword(auth, email, password);
-      
+
       // Redirect to profile/home on successful login
       router.replace("/profile/home");
     } catch (error) {
@@ -101,13 +101,13 @@ export default function App() {
             <Button text="Login" onPress={validate} iconName="login" />
             <Button
               text="Sign Up"
-              onPress={() => router.push("/(auth)/signup")}
+              onPress={() => router.push("/signup")}
               bgColor={colors.backGroundSecondary}
               textColor="black"
             />
           </View>
           <Text>Forgot Password?</Text>
-          <Link href={"/(auth)/forgotpassword"}>
+          <Link href={"/forgotpassword"}>
             <Text>Click Here</Text>
           </Link>
         </View>

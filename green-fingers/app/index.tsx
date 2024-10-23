@@ -14,9 +14,9 @@ const Index = () => {
 
     if (!loading) {
       if (!user) {
-        router.replace("/(auth)/login");
+        router.replace("/login");
       } else {
-        router.replace("/profile");
+        router.replace("/profile/home");
       }
     }
   }, [loading, user]); // Added loading to dependencies
