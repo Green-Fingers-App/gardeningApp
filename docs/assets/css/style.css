@@ -119,8 +119,7 @@ main {
 }
 
 .postContentContainer {
-  gap: 16px;
-
+    gap: 16px;
 }
 
 hr {
@@ -201,6 +200,14 @@ footer {
   font-style: normal;
   font-weight: 400;
   line-height: 16px;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 /* Responsive Media Queries for Mobile */
