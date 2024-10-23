@@ -203,7 +203,7 @@ footer {
   line-height: 16px;
 }
 
-.image-container img {
+img {
   max-width: 100%;
   height: auto;
   display: block;
