@@ -28,7 +28,7 @@ const pests: Pest[] = [
 ];
 
 // Plants
-const plants: Plant[] = [
+export const plants: Plant[] = [
   {
     id: 1,
     name: { commonName: "Tomato", scientificName: "Solanum lycopersicum" },
