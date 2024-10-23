@@ -1,6 +1,6 @@
-import { Plant } from '../../databaseStructure/models'
+import { UserPlant } from './models'
 
 export interface PlantContextProps {
-  plants: Plant[] | null;
+  plants: UserPlant[];
   fetchPlants: (userId: number, token: string) => void;
 }

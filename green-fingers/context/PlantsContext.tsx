@@ -1,14 +1,14 @@
 import React, { createContext, ReactNode, useContext, useState } from "react";
 import { PlantContextProps } from "@/types/plantTypes";
-import { Plant } from "../../databaseStructure/models";
-import { plants as importPlants } from "../../databaseStructure/dummyData";
+import { userPlants as importPlants } from "../dummyData/dummyData";
+import { UserPlant } from "../types/models";
 
 const PlantsContext = createContext<PlantContextProps | undefined>(undefined);
 
 export const PlantsProvider: React.FC<{ children: ReactNode }> = ({
   children,
 }) => {
-  const [plants, setPlants] = useState<Plant[] | null>(null);
+  const [plants, setPlants] = useState<UserPlant[]>([]);
 
   const fetchPlants = (userId: number, token: string) => {
     const newPlants = importPlants;
