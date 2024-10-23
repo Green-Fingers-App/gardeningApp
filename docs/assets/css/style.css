@@ -119,8 +119,9 @@ main {
 }
 
 .postContentContainer {
-  gap: 16px;
-
+    width: 100%;
+    max-width: 100%;
+    gap: 16px;
 }
 
 hr {
