@@ -1,8 +1,9 @@
-import { View, Text, StyleSheet, Image } from "react-native";
+import { View, Text, StyleSheet, Image, Pressable } from "react-native";
 import React from "react";
 import { UserPlant } from "../types/models";
 import colors from "@/constants/colors";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { router } from "expo-router";
 
 interface PlantCardProps {
   plant: UserPlant;
@@ -10,7 +11,10 @@ interface PlantCardProps {
 
 const PlantCard: React.FC<PlantCardProps> = ({ plant }) => {
   return (
-    <View style={styles.cardContainer}>
+    <Pressable
+      style={styles.cardContainer}
+      onPress={() => router.push(`/plantDetail/${plant.id}`)}
+    >
       <View style={{ flexDirection: "row", alignItems: "center" }}>
         <Text style={styles.commonName}>{plant.plant.name.commonName}</Text>
         <MaterialCommunityIcons name="delete-outline" size={20} />
@@ -30,7 +34,7 @@ const PlantCard: React.FC<PlantCardProps> = ({ plant }) => {
           <Text>I'm okay</Text>
         </View>
       )}
-    </View>
+    </Pressable>
   );
 };
 

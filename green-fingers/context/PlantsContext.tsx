@@ -15,8 +15,14 @@ export const PlantsProvider: React.FC<{ children: ReactNode }> = ({
     setPlants(newPlants);
     return;
   };
+
+  const fetchPlantDetail = (plantId: number): UserPlant | undefined => {
+    const plant = plants.find((plant) => plant.id === plantId);
+    return plant;
+  };
+
   return (
-    <PlantsContext.Provider value={{ plants, fetchPlants }}>
+    <PlantsContext.Provider value={{ plants, fetchPlants, fetchPlantDetail }}>
       {children}
     </PlantsContext.Provider>
   );
@@ -25,7 +31,7 @@ export const PlantsProvider: React.FC<{ children: ReactNode }> = ({
 export const usePlants = () => {
   const context = useContext(PlantsContext);
   if (!context) {
-    throw new Error("usePlants must be used within an Authprovider");
+    throw new Error("usePlants must be used within an PlantsProvider");
   }
   return context;
 };
