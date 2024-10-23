@@ -203,6 +203,14 @@ footer {
   line-height: 16px;
 }
 
+.image-container img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 /* Responsive Media Queries for Mobile */
 @media screen and (max-width: 768px) {
   h1 {
