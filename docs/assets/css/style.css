@@ -119,8 +119,6 @@ main {
 }
 
 .postContentContainer {
-    width: 100%;
-    max-width: 100%;
     gap: 16px;
 }
 
