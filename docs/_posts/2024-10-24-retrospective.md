@@ -6,7 +6,7 @@ author: "Sima, Casimir, Ruan & Malte"
 ---
 
 # Our Retrospective: What Went Well, What Didn't, and How we Can Improve
-![Retro diagram](https://github.com/DHBW-Malte/gardeningApp/blob/main/docs/assets/screenshots/retro.png)
+![Retro diagram](/gardeningApp/assets/screenshots/screenshots/retro.png)
 
 ## What Went Well
 - **Motivation & Commitment**: We are all motivated to create a good product, which is keeping us commited to our project. We show up in our meetings and lectures and we are doing the weekly tasks. We don't do the bare minimum for this task, but we try to create real value for our product and ourselves.
