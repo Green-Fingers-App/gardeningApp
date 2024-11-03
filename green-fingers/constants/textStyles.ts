@@ -32,14 +32,20 @@ const textStyles: { [key:string]: TextStyle } = {
         color: colors.textPrimary,
         fontFamily: "Montserrat-Regular",
     },
-    caption: {
+    label: {
         fontSize: 12,
         lineHeight: 16,
         color: colors.textPrimary,
         fontFamily: "Montserrat-Regular",
     },
+    caption: {
+        fontSize: 10,
+        lineHeight: 14,
+        color: colors.textPrimary,
+        fontFamily: "Montserrat-Regular",
+    },
     button: {
-        fontSize: 14,
+        fontSize: 16,
         lineHeight: 20,
         color: colors.textPrimary,
         fontFamily: "Montserrat-Medium",
