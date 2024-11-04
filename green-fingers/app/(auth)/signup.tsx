@@ -9,9 +9,13 @@ import React, { useState } from "react";
 import { router, Link } from "expo-router";
 import { FontAwesome } from "@expo/vector-icons";
 import Input from "@/components/Input";
+import Button from "@/components/Button";
+import colors from "@/constants/colors";
+import textStyles from "@/constants/textStyles";
+// import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+// import { auth } from "@/firebase/firebaseConfig";
 
 const Signup = () => {
-  const [show, setShow] = useState<boolean>(false);
   const [inputValues, setInputValues] = useState<{
     email: string;
     confirmEmail: string;
@@ -24,131 +28,141 @@ const Signup = () => {
     confirmPassword: "",
   });
 
+  const [error, setError] = useState<string | null>(null);
+
   type InputFieldName = keyof typeof inputValues;
 
-  const handleChange = (name: InputFieldName, value: string) => {
-    setInputValues((prevState) => ({ ...prevState, [name]: value }));
+  const handleChange = (name: InputFieldName, value: string): void => {
+    setInputValues((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }));
   };
-
-  const toggleShow = () => {
-    setShow(!show);
-  };
-
-  // Firebase signup function with email verification, email verify before login not implemented
 
   const handleSignup = async () => {
     const { email, confirmEmail, password, confirmPassword } = inputValues;
 
-    // Check if emails match
     if (email !== confirmEmail) {
-      alert("Emails do not match!");
+      setError("Emails do not match!");
       return;
     }
 
-    // Check if passwords match
     if (password !== confirmPassword) {
-      alert("Passwords do not match!");
+      setError("Passwords do not match!");
       return;
+    }
+
+    setError(null);
+
+    try {
+      // Firebase signup
+      // await createUserWithEmailAndPassword(auth, email, password);
+      router.replace("/profile/home");
+    } catch (error) {
+      console.error("Error during signup: ", error);
+      setError("Signup failed. Please try again.");
     }
   };
 
   return (
     <SafeAreaView style={styles.container}>
-      <View style={[styles.background, { width: "100%", height: "100%" }]}>
-        <Text style={styles.title}>Green Fingers</Text>
+      
+      <Text style={textStyles.h1}>TAKE CARE OF YOUR PLANTS WITH EASE</Text>
+      <Text style={textStyles.h3}>Sign Up Now</Text>
         <View style={styles.content}>
-          <Text style={styles.contentTitle}>Sign Up</Text>
-          <Input label="Email" placeholder="Email" iconName="email-outline" />
-          <Input label="Username" placeholder="Username" iconName="account" />
-          <Input
-            label="Password"
-            placeholder="Password"
-            iconName="lock-outline"
-            password={true}
-          />
-          <Input
-            label="Confirm Password"
-            placeholder="Confirm Password"
-            iconName="lock-outline"
-            password={true}
-          />
-          <TouchableOpacity style={styles.signUpButton} onPress={handleSignup}>
-            <Text>Sign Up</Text>
-          </TouchableOpacity>
-
+          {/* Display error if any */}
+          {error && <Text style={{ color: "red" }}>{error}</Text>}
+          <View style={styles.signUpFormContainer}>
+            <View style={styles.inputFieldContainer}>
+              <Input
+                label="Email"
+                placeholder="Email"
+                iconName="email-outline"
+                onChangeText={(text) => handleChange("email", text)}
+              />
+              <Input
+                label="Confirm Email"
+                placeholder="Confirm Email"
+                iconName="email-outline"
+                onChangeText={(text) => handleChange("confirmEmail", text)}
+              />
+              <Input
+                label="Password"
+                placeholder="Password"
+                iconName="lock-outline"
+                password={true}
+                onChangeText={(text) => handleChange("password", text)}
+              />
+              <Input
+                label="Confirm Password"
+                placeholder="Confirm Password"
+                iconName="lock-outline"
+                password={true}
+                onChangeText={(text) => handleChange("confirmPassword", text)}
+              />
+            </View>
+            <Button
+              text="Sign Up"
+              onPress={handleSignup}
+              style={{ width: "100%" }}
+            />
+          </View>
+          <View style={styles.loginContainer}>
           <Text>Already have an account?</Text>
-          <TouchableOpacity onPress={() => router.push("/")}>
-            <Text>Login</Text>
-          </TouchableOpacity>
-          <Text>Forgot Password?</Text>
-          <Link href={"/(auth)forgotpassword"}>
-            <Text>Click Here</Text>
-          </Link>
+            <Button
+              text="Login"
+              type="secondary"
+              onPress={() => router.push("/login")}
+            />
+          </View>
         </View>
-      </View>
     </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
-  buttonContainer: {
-    flexDirection: "row",
-    justifyContent: "space-evenly",
-    width: "100%",
-  },
   container: {
-    flex: 1,
-  },
-  background: {
-    flex: 1,
+    flexDirection: "column",
+    backgroundColor: colors.bgLight,
     alignItems: "center",
-    justifyContent: "center",
-    gap: 20,
+    justifyContent: "flex-end",
+    padding: 32,
+    paddingBottom: 0,
+    gap: 40,
+    width: "100%",
+    height: "100%",
   },
   content: {
+    flexDirection: "column",
     alignItems: "center",
     justifyContent: "center",
-    backgroundColor: "#fff",
-    padding: 10,
-    width: "100%",
-    gap: 12,
-    opacity: 0.8,
-  },
-  loginButton: {
-    backgroundColor: "#FA7070",
-    paddingVertical: 10,
+    backgroundColor: colors.secondaryDefault,
+    paddingTop: 100,
+    paddingBottom: 40,
     paddingHorizontal: 40,
-    borderRadius: 8,
-    opacity: 1,
+    borderTopLeftRadius: 160,
+    borderTopRightRadius: 160,
+    borderBottomLeftRadius: 0,
+    borderBottomRightRadius: 0,
+    width: 320,
+    gap: 48,
   },
-  signUpButton: {
-    backgroundColor: "#CCCCCC",
-    paddingHorizontal: 40,
-    paddingVertical: 10,
-    borderRadius: 8,
-    opacity: 1,
+  inputFieldContainer: {
+    flexDirection: "column",
+    gap: 8,
     width: "100%",
-    textAlign: "center",
   },
-  inputField: {
-    borderColor: "#fec7b4",
-    borderWidth: 2,
-    borderRadius: 4,
-    width: "90%",
-    paddingLeft: 5,
+  signUpFormContainer: {
+    flexDirection: "column",
+    gap: 32,
+    width: "100%",
   },
-  contentTitle: {
-    color: "#BCBCBC",
-    fontSize: 26,
-    fontWeight: "bold",
-  },
-  title: {
-    fontWeight: "bold",
-    fontSize: 55,
-    color: "#ABABAB",
-    position: "absolute",
-    top: 30,
-  },
+  loginContainer: {
+    flexDirection: "column",
+    alignItems: "center",
+    gap: 24,
+    width: "100%",
+  }
 });
 
 export default Signup;
