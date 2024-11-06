@@ -93,12 +93,14 @@ export interface Soil {
 }
 
 // Harvest period and details
-export interface Harvest {
-  start: Month;
-  end: Month;
-  yield: number;
-  edibleParts: string;
-}
+export type Harvest =
+  | false
+  | {
+      start: Month;
+      end: Month;
+      yield: number;
+      edibleParts: string;
+  };
 
 // Temperature details
 export interface Temperature {
@@ -170,6 +172,7 @@ export interface UserPlant {
   plant: Plant;
   wateredDate: string;
   plantedDate: string;
+  feededDate: string;
   moistureLevel: Level;
   sunlightLevel: Level;
   harvested: boolean;

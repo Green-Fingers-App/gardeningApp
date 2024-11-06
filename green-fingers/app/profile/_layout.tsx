@@ -2,6 +2,7 @@ import { Tabs } from "expo-router";
 import { MaterialIcons } from "@expo/vector-icons";
 import colors from "@/constants/colors";
 import React from "react";
+import { PlantsProvider } from "@/context/PlantsContext";
 
 const ProfileLayout: React.FC = () => {
   return (

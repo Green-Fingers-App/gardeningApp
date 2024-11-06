@@ -14,7 +14,7 @@ const Index = () => {
 
     if (!loading) {
       if (!user) {
-        router.replace("/login");
+        router.replace("/profile/home");
       } else {
         router.replace("/profile/home");
       }
