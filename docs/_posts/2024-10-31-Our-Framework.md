@@ -26,4 +26,4 @@ Thanks for following along, and we're excited to see how MVVM with React Native 
 ## Screencast of Demo
 
 We made a first screencast of logging into our app.
-![screencast login](/gardeningApp/docs/assets/screencasts/screencast-login.mp4)
+![screencast login](/gardeningApp/assets/screencasts/screencast-login.mp4)
