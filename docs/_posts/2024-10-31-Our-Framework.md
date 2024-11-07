@@ -22,3 +22,8 @@ By following this framework, we achieve better **code organization**, **testabil
 We also started to fill our Software Archtecture Document (SAD), you can take a look [here](https://github.com/DHBW-Malte/gardeningApp/blob/main/green-fingers/docs/SoftwareArchitectureDocument.md).
 
 Thanks for following along, and we're excited to see how MVVM with React Native and Firebase will enhance our project!
+
+## Screencast of Demo
+
+We made a first screencast of logging into our app.
+![screencast login](/gardeningApp/docs/assets/screencasts/screencast-login.mp4)
