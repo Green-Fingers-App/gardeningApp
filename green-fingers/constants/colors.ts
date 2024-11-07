@@ -20,7 +20,7 @@ const colors = {
   greyDark: "#757575",
   white: "#FFFFFF",
   black: "#000000",
-  bgCard: "",
+  bgCard: "#89BF9C",
   detail: ""
 }
 
