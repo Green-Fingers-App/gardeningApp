@@ -63,6 +63,8 @@ As mentioned earlier, the "Green Fingers" application follows the MVVM architect
 
 **ViewModel**: With React native we manage the data ans state of the application using React hooks and context API. The ViewModel is responsible for handling the data and business logic of the application. It acts as an intermediary between the Model and the View, providing the data to be displayed in the View.
 
+![Use-Case Diagram](../../docs/assets/svg/architecturalDiagrams/logicalViewDiagram.drawio.svg)
+
 ### 5.2 Class Diagram
 
 **Model Classes**:
