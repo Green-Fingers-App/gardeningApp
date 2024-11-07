@@ -3,36 +3,69 @@ import {
   StyleSheet,
   Text,
   View,
-  TouchableOpacity,
   TouchableOpacityProps,
+  Pressable,
 } from "react-native";
 import colors from "@/constants/colors";
+import textStyles from "@/constants/textStyles";
 import React from "react";
 
 type MaterialCommunityIconName = keyof typeof MaterialCommunityIcons.glyphMap;
+
+type ButtonType = "primary" | "secondary" | "tertiary";
+type ButtonState = "default" | "disabled";
 
 interface ButtonProps extends TouchableOpacityProps {
   iconName?: MaterialCommunityIconName;
   text: string;
   iconSize?: number;
-  iconColor?: string;
-  textColor?: string;
-  bgColor?: string;
+  type?: ButtonType;
+  buttonState?: ButtonState;
 }
 
 const Button: React.FC<ButtonProps> = ({
   iconName,
   text,
-  iconSize = 24,
-  iconColor = "#fff",
-  textColor = "#fff",
-  bgColor = colors.backGroundPrimary,
+  iconSize = 16,
+  type = "primary",
+  buttonState = "default",
   style,
   ...props
 }) => {
+  const getButtonStyles = () => {
+    switch (type) {
+      case "secondary":
+        return {
+          buttonStyle: [styles.secondaryButton, buttonState === "disabled" && styles.secondaryDisabled],
+          pressedStyle: styles.secondaryPressed,
+          textColor: buttonState === "disabled" ? colors.textMuted : colors.primaryDefault,
+        };
+      case "tertiary":
+        return {
+          buttonStyle: [styles.tertiaryButton, buttonState === "disabled" && styles.tertiaryDisabled],
+          pressedStyle: { textColor: colors.primaryDark },
+          textColor: buttonState === "disabled" ? colors.textMuted : colors.primaryDefault,
+        };
+      case "primary":
+      default:
+        return {
+          buttonStyle: [styles.primaryButton, buttonState === "disabled" && styles.primaryDisabled],
+          pressedStyle: styles.primaryPressed,
+          textColor: buttonState === "disabled" ? colors.textMuted : colors.bgLight,
+        };
+    }
+  };
+
+  const { buttonStyle, pressedStyle, textColor } = getButtonStyles();
+
   return (
-    <TouchableOpacity
-      style={[styles.button, { backgroundColor: bgColor }, style]}
+    <Pressable
+      style={({ pressed }) => [
+        buttonStyle,
+        pressed && pressedStyle,
+        style,
+      ]}
+      disabled={buttonState === "disabled"}
       {...props}
     >
       <View style={styles.content}>
@@ -40,35 +73,68 @@ const Button: React.FC<ButtonProps> = ({
           <MaterialCommunityIcons
             name={iconName}
             size={iconSize}
-            color={iconColor}
-            style={[styles.icon, { marginRight: iconSize * 0.4 }]}
+            color={textColor}
           />
         )}
-        <Text style={[styles.text, { color: textColor }]}>{text}</Text>
+        <Text style={[textStyles.buttonText, { color: textColor }, type === "tertiary" && styles.tertiaryText]}>
+          {text}
+        </Text>
       </View>
-    </TouchableOpacity>
+    </Pressable>
   );
 };
 
 export default Button;
 
 const styles = StyleSheet.create({
-  button: {
-    flexDirection: "row", // Ensure layout direction
-    alignItems: "center", // Center vertically
-    justifyContent: "center", // Center horizontally
-    paddingHorizontal: 20,
-    paddingVertical: 12,
-  },
   content: {
     flexDirection: "row",
     alignItems: "center",
+    gap: 8,
   },
-  icon: {
-    marginRight: 10,
+  primaryButton: {
+    paddingVertical: 12,
+    paddingHorizontal: 16,
+    justifyContent: "center",
+    alignItems: "center",
+    borderRadius: 8,
+    backgroundColor: colors.primaryDefault,
+    width: "100%",
   },
-  text: {
-    fontSize: 16,
-    fontWeight: "bold",
+  secondaryButton: {
+    paddingVertical: 12,
+    paddingHorizontal: 16,
+    justifyContent: "center",
+    alignItems: "center",
+    borderRadius: 8,
+    backgroundColor: colors.secondaryDefault,
+    borderColor: colors.primaryDefault,
+    borderWidth: 1,
+    width: "100%",
+  },
+  tertiaryButton: {
+    padding: 4,
+    justifyContent: "center",
+    alignItems: "center",
+    borderRadius: 8,
+  },
+  tertiaryText: {
+    textDecorationLine: "underline",
+  },
+  primaryDisabled: {
+    backgroundColor: colors.greyMedium,
+  },
+  secondaryDisabled: {
+    backgroundColor: colors.greyMedium,
+    borderColor: colors.textMuted,
+  },
+  tertiaryDisabled: {
+    color: colors.textMuted,
+  },
+  primaryPressed: {
+    backgroundColor: colors.primaryDark,
+  },
+  secondaryPressed: {
+    backgroundColor: colors.secondaryDark,
   },
 });

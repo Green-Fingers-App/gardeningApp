@@ -7,8 +7,9 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import Input from "@/components/Input";
 import Button from "@/components/Button";
 import colors from "@/constants/colors";
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
-import { auth } from "@/firebase/firebaseConfig";
+import textStyles from "@/constants/textStyles";
+// import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+// import { auth } from "@/firebase/firebaseConfig";
 
 interface InputValues {
   email: string;
@@ -55,7 +56,7 @@ export default function App() {
 
     try {
       // Firebase login
-      await signInWithEmailAndPassword(auth, email, password);
+      // await signInWithEmailAndPassword(auth, email, password);
 
       // Redirect to profile/home on successful login
       router.replace("/profile/home");
@@ -69,49 +70,58 @@ export default function App() {
 
   // Log the current user to console for debugging
   useEffect(() => {
-    const currentUser = auth.currentUser;
-    console.log("Logged-in user:", currentUser);
+    // const currentUser = auth.currentUser;
+    // console.log("Logged-in user:", currentUser);
+    console.log("Logged-in user");
   }, []);
 
   return (
     <SafeAreaView style={styles.container}>
-      <View style={[styles.background, { width: "100%", height: "100%" }]}>
-        <Text style={styles.title}>Green Fingers</Text>
+        <Text style={textStyles.h1}>WELCOME BACK</Text>
+        <Text style={textStyles.h3}>Log in Now</Text>
         <View style={styles.content}>
-          <Text style={styles.contentTitle}>Login</Text>
-          <Input
-            iconName="account"
-            label="Username"
-            placeholder="Enter your email"
-            autoFocus={true}
-            onChangeText={(text) => handleChange("email", text)}
-            error={inputErrors.email}
-            onFocus={() => handleErrorMessage("email", undefined)}
-          />
-          <Input
-            iconName="lock-outline"
-            label="Password"
-            placeholder="Enter your password"
-            secureTextEntry={true}
-            onChangeText={(text) => handleChange("password", text)}
-            error={inputErrors.password}
-            onFocus={() => handleErrorMessage("password", undefined)}
-          />
-          <View style={styles.buttonContainer}>
-            <Button text="Login" onPress={validate} iconName="login" />
-            <Button
-              text="Sign Up"
-              onPress={() => router.push("/signup")}
-              bgColor={colors.backGroundSecondary}
-              textColor="black"
+          <View style={styles.loginFormContainer}>
+            <View style={styles.inputFieldContainer}>
+              <Input
+                iconName="account"
+                label="Email"
+                placeholder="Enter your email"
+                autoFocus
+                onChangeText={(text) => handleChange("email", text)}
+                error={inputErrors.email}
+                onFocus={() => handleErrorMessage("email", undefined)}
+              />
+              <Input
+                iconName="lock-outline"
+                label="Password"
+                placeholder="Enter your password"
+                password
+                secureTextEntry={true}
+                onChangeText={(text) => handleChange("password", text)}
+                error={inputErrors.password}
+                onFocus={() => handleErrorMessage("password", undefined)}
+              />
+            </View>
+            <Button 
+              text="Login"
+              onPress={validate}
+              iconName="login"
+            />
+            <Button 
+              type="tertiary" 
+              text="Forgot Password?"
+              onPress={() => router.push("/forgotpassword")}
             />
           </View>
-          <Text>Forgot Password?</Text>
-          <Link href={"/forgotpassword"}>
-            <Text>Click Here</Text>
-          </Link>
+          <View style={styles.signUpContainer}>
+            <Text>Don't have an account?</Text>
+            <Button
+                type="secondary"
+                text="Sign Up"
+                onPress={() => router.push("/signup")}
+            />
+          </View>
         </View>
-      </View>
       <StatusBar style="auto" />
     </SafeAreaView>
   );
@@ -119,39 +129,46 @@ export default function App() {
 
 // Styles
 const styles = StyleSheet.create({
-  buttonContainer: {
-    flexDirection: "row",
-    justifyContent: "space-evenly",
-    width: "100%",
-  },
   container: {
-    flex: 1,
-  },
-  background: {
-    flex: 1,
+    flexDirection: "column",
+    backgroundColor: colors.bgLight,
     alignItems: "center",
-    justifyContent: "center",
-    gap: 20,
+    justifyContent: "flex-end",
+    padding: 32,
+    paddingBottom: 0,
+    gap: 40,
+    width: "100%",
+    height: "100%",
   },
   content: {
+    flexDirection: "column",
     alignItems: "center",
     justifyContent: "center",
-    backgroundColor: "#fff",
-    padding: 10,
+    backgroundColor: colors.secondaryDefault,
+    paddingTop: 100,
+    paddingBottom: 40,
+    paddingHorizontal: 40,
+    borderTopLeftRadius: 160,
+    borderTopRightRadius: 160,
+    borderBottomLeftRadius: 0,
+    borderBottomRightRadius: 0,
+    width: 320,
+    gap: 48,
+  },
+  inputFieldContainer: {
+    flexDirection: "column",
+    gap: 8,
     width: "100%",
-    gap: 12,
-    opacity: 0.8,
   },
-  contentTitle: {
-    color: "#BCBCBC",
-    fontSize: 26,
-    fontWeight: "bold",
+  loginFormContainer: {
+    flexDirection: "column",
+    gap: 32,
+    width: "100%",
   },
-  title: {
-    fontWeight: "bold",
-    fontSize: 55,
-    color: "#ABABAB",
-    position: "absolute",
-    top: 30,
-  },
+  signUpContainer: {
+    flexDirection: "column",
+    alignItems: "center",
+    gap: 24,
+    width: "100%",
+  }
 });
