@@ -19,4 +19,6 @@ As you already know, we chose **React Native** for our front-end framework, pair
 
 By following this framework, we achieve better **code organization**, **testability**, and **scalability**. This structure helps us keep the app modular and easier to manage as it grows.
 
+We also started to fill our Software Archtecture Document (SAD), you can take a look [here](https://github.com/DHBW-Malte/gardeningApp/blob/main/GreenFingers/docs/SoftwareArchitectureDocument.md)
+
 Thanks for following along, and we're excited to see how MVVM with React Native and Firebase will enhance our project!
