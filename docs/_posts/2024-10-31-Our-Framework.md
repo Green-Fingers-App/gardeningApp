@@ -26,7 +26,7 @@ Thanks for following along, and we're excited to see how MVVM with React Native 
 ## Screencast of Demo
 
 We made a first screencast of logging into our app.
-<video width="320" height="240" controls>
+<video width="100%" height="auto" controls>
 
   <source src="/gardeningApp/assets/screencasts/screencast-login.mp4" type="video/mp4">
   Your browser doesn't support video tags
