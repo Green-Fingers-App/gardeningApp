@@ -132,7 +132,7 @@ export const plants: Plant[] = [
 ];
 
 // Gardens
-const gardens: Garden[] = [
+export const gardens: Garden[] = [
   { id: 1, location: "Backyard", plantIds: [1, 2] },
   { id: 2, location: "Front Yard", plantIds: [3, 4] },
   { id: 3, location: "Community Garden", plantIds: [5] }
