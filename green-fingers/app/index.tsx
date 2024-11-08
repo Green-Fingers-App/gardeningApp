@@ -9,12 +9,9 @@ const Index = () => {
   const { user } = useAuth();
 
   useEffect(() => {
-    // This effect will fire every time 'user' changes
-    console.log("User in useEffect:", user); // Log the user state
-
     if (!loading) {
       if (!user) {
-        router.replace("/profile/home");
+        router.replace("/login");
       } else {
         router.replace("/profile/home");
       }

@@ -6,14 +6,13 @@ import {
   TouchableOpacity,
 } from "react-native";
 import React, { useState } from "react";
-import { router, Link } from "expo-router";
-import { FontAwesome } from "@expo/vector-icons";
+import { router } from "expo-router";
 import Input from "@/components/Input";
 import Button from "@/components/Button";
 import colors from "@/constants/colors";
 import textStyles from "@/constants/textStyles";
-// import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
-// import { auth } from "@/firebase/firebaseConfig";
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { auth } from "@/firebase/firebaseConfig";
 
 const Signup = () => {
   const [inputValues, setInputValues] = useState<{
@@ -55,8 +54,7 @@ const Signup = () => {
     setError(null);
 
     try {
-      // Firebase signup
-      // await createUserWithEmailAndPassword(auth, email, password);
+      await createUserWithEmailAndPassword(auth, email, password);
       router.replace("/profile/home");
     } catch (error) {
       console.error("Error during signup: ", error);
@@ -66,56 +64,59 @@ const Signup = () => {
 
   return (
     <SafeAreaView style={styles.container}>
-      
       <Text style={textStyles.h1}>TAKE CARE OF YOUR PLANTS WITH EASE</Text>
       <Text style={textStyles.h3}>Sign Up Now</Text>
-        <View style={styles.content}>
-          {/* Display error if any */}
-          {error && <Text style={{ color: "red" }}>{error}</Text>}
-          <View style={styles.signUpFormContainer}>
-            <View style={styles.inputFieldContainer}>
-              <Input
-                label="Email"
-                placeholder="Email"
-                iconName="email-outline"
-                onChangeText={(text) => handleChange("email", text)}
-              />
-              <Input
-                label="Confirm Email"
-                placeholder="Confirm Email"
-                iconName="email-outline"
-                onChangeText={(text) => handleChange("confirmEmail", text)}
-              />
-              <Input
-                label="Password"
-                placeholder="Password"
-                iconName="lock-outline"
-                password={true}
-                onChangeText={(text) => handleChange("password", text)}
-              />
-              <Input
-                label="Confirm Password"
-                placeholder="Confirm Password"
-                iconName="lock-outline"
-                password={true}
-                onChangeText={(text) => handleChange("confirmPassword", text)}
-              />
-            </View>
-            <Button
-              text="Sign Up"
-              onPress={handleSignup}
-              style={{ width: "100%" }}
+      <View style={styles.content}>
+        {/* Display error if any */}
+        {error && <Text style={{ color: "red" }}>{error}</Text>}
+        <View style={styles.signUpFormContainer}>
+          <View style={styles.inputFieldContainer}>
+            <Input
+              label="Email"
+              placeholder="Email"
+              iconName="email-outline"
+              onChangeText={(text) => handleChange("email", text)}
+              value={inputValues.email}
+            />
+            <Input
+              label="Confirm Email"
+              placeholder="Confirm Email"
+              iconName="email-outline"
+              onChangeText={(text) => handleChange("confirmEmail", text)}
+              value={inputValues.confirmEmail}
+            />
+            <Input
+              label="Password"
+              placeholder="Password"
+              iconName="lock-outline"
+              password={true}
+              onChangeText={(text) => handleChange("password", text)}
+              value={inputValues.password}
+            />
+            <Input
+              label="Confirm Password"
+              placeholder="Confirm Password"
+              iconName="lock-outline"
+              password={true}
+              onChangeText={(text) => handleChange("confirmPassword", text)}
+              value={inputValues.confirmPassword}
             />
           </View>
-          <View style={styles.loginContainer}>
-          <Text>Already have an account?</Text>
-            <Button
-              text="Login"
-              type="secondary"
-              onPress={() => router.push("/login")}
-            />
-          </View>
+          <Button
+            text="Sign Up"
+            onPress={handleSignup}
+            style={{ width: "100%" }}
+          />
         </View>
+        <View style={styles.loginContainer}>
+          <Text>Already have an account?</Text>
+          <Button
+            text="Login"
+            type="secondary"
+            onPress={() => router.push("/login")}
+          />
+        </View>
+      </View>
     </SafeAreaView>
   );
 };
@@ -162,7 +163,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     gap: 24,
     width: "100%",
-  }
+  },
 });
 
 export default Signup;

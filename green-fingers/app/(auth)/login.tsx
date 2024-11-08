@@ -8,8 +8,8 @@ import Input from "@/components/Input";
 import Button from "@/components/Button";
 import colors from "@/constants/colors";
 import textStyles from "@/constants/textStyles";
-// import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
-// import { auth } from "@/firebase/firebaseConfig";
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from "@/firebase/firebaseConfig";
 
 interface InputValues {
   email: string;
@@ -56,7 +56,7 @@ export default function App() {
 
     try {
       // Firebase login
-      // await signInWithEmailAndPassword(auth, email, password);
+      await signInWithEmailAndPassword(auth, email, password);
 
       // Redirect to profile/home on successful login
       router.replace("/profile/home");
@@ -70,58 +70,56 @@ export default function App() {
 
   // Log the current user to console for debugging
   useEffect(() => {
-    // const currentUser = auth.currentUser;
-    // console.log("Logged-in user:", currentUser);
+    const currentUser = auth.currentUser;
+    console.log("Logged-in user:", currentUser);
     console.log("Logged-in user");
   }, []);
 
   return (
     <SafeAreaView style={styles.container}>
-        <Text style={textStyles.h1}>WELCOME BACK</Text>
-        <Text style={textStyles.h3}>Log in Now</Text>
-        <View style={styles.content}>
-          <View style={styles.loginFormContainer}>
-            <View style={styles.inputFieldContainer}>
-              <Input
-                iconName="account"
-                label="Email"
-                placeholder="Enter your email"
-                autoFocus
-                onChangeText={(text) => handleChange("email", text)}
-                error={inputErrors.email}
-                onFocus={() => handleErrorMessage("email", undefined)}
-              />
-              <Input
-                iconName="lock-outline"
-                label="Password"
-                placeholder="Enter your password"
-                password
-                secureTextEntry={true}
-                onChangeText={(text) => handleChange("password", text)}
-                error={inputErrors.password}
-                onFocus={() => handleErrorMessage("password", undefined)}
-              />
-            </View>
-            <Button 
-              text="Login"
-              onPress={validate}
-              iconName="login"
+      <Text style={textStyles.h1}>WELCOME BACK</Text>
+      <Text style={textStyles.h3}>Log in Now</Text>
+      <View style={styles.content}>
+        <View style={styles.loginFormContainer}>
+          <View style={styles.inputFieldContainer}>
+            <Input
+              iconName="account"
+              label="Email"
+              placeholder="Enter your email"
+              autoFocus
+              onChangeText={(text) => handleChange("email", text)}
+              error={inputErrors.email}
+              onFocus={() => handleErrorMessage("email", undefined)}
+              value={inputValues.email}
             />
-            <Button 
-              type="tertiary" 
-              text="Forgot Password?"
-              onPress={() => router.push("/forgotpassword")}
+            <Input
+              iconName="lock-outline"
+              label="Password"
+              placeholder="Enter your password"
+              password
+              secureTextEntry={true}
+              onChangeText={(text) => handleChange("password", text)}
+              error={inputErrors.password}
+              onFocus={() => handleErrorMessage("password", undefined)}
+              value={inputValues.password}
             />
           </View>
-          <View style={styles.signUpContainer}>
-            <Text>Don't have an account?</Text>
-            <Button
-                type="secondary"
-                text="Sign Up"
-                onPress={() => router.push("/signup")}
-            />
-          </View>
+          <Button text="Login" onPress={validate} iconName="login" />
+          <Button
+            type="tertiary"
+            text="Forgot Password?"
+            onPress={() => router.push("/forgotpassword")}
+          />
         </View>
+        <View style={styles.signUpContainer}>
+          <Text>Don't have an account?</Text>
+          <Button
+            type="secondary"
+            text="Sign Up"
+            onPress={() => router.push("/signup")}
+          />
+        </View>
+      </View>
       <StatusBar style="auto" />
     </SafeAreaView>
   );
@@ -170,5 +168,5 @@ const styles = StyleSheet.create({
     alignItems: "center",
     gap: 24,
     width: "100%",
-  }
+  },
 });
