@@ -1,24 +1,24 @@
-import React, { useState, ReactElement, isValidElement } from "react";
-import { View, StyleSheet } from "react-native";
-import { AccordionItemProps } from "./AccordionItem";
+import React, { useState } from "react";
+import { View } from "react-native";
+import AccordionItem, { AccordionItemProps } from "@/components/AccordionItem";
 
 interface AccordionProps {
-  children: ReactElement<AccordionItemProps>[];
+  children: React.ReactElement<AccordionItemProps>[];
 }
 
 const Accordion: React.FC<AccordionProps> = ({ children }) => {
-  const [openIndex, setOpenIndex] = useState<number | null>(null);
+  const [openIndex, setOpenIndex] = useState<number | null>(0);
 
   const handleToggle = (index: number) => {
-    setOpenIndex(index === openIndex ? null : index);
+    setOpenIndex(openIndex === index ? null : index); // Toggle open/close
   };
 
   return (
-    <View style={styles.accordion}>
+    <View>
       {React.Children.map(children, (child, index) => {
-        if (isValidElement(child)) {
-          return React.cloneElement(child as ReactElement<AccordionItemProps>, {
-            isOpen: index === openIndex,
+        if (React.isValidElement(child)) {
+          return React.cloneElement(child, {
+            isOpen: openIndex === index,
             onToggle: () => handleToggle(index),
           });
         }
@@ -27,12 +27,5 @@ const Accordion: React.FC<AccordionProps> = ({ children }) => {
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  accordion: {
-    width: "100%",
-    gap: 0,
-  },
-});
 
 export default Accordion;

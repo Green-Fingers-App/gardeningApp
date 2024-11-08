@@ -1,4 +1,5 @@
-import React, { useRef, useState } from "react";
+import colors from "@/constants/colors";
+import React, { useEffect, useRef, useState } from "react";
 import {
   View,
   Text,
@@ -24,40 +25,32 @@ const AccordionItem: React.FC<AccordionItemProps> = ({
   const animation = useRef(new Animated.Value(0)).current;
   const [contentHeight, setContentHeight] = useState(0);
 
-  const toggleAccordion = () => {
-    if (onToggle) onToggle(); // Toggle state in parent
-
-    Animated.timing(animation, {
-      toValue: isOpen ? 0 : contentHeight, // Animate to 0 if closing, or to content height if opening
-      duration: 200,
-      useNativeDriver: false,
-    }).start();
-  };
-
   const handleLayout = (event: LayoutChangeEvent) => {
     if (contentHeight === 0) {
-      // Set height only once
       setContentHeight(event.nativeEvent.layout.height);
-      animation.setValue(isOpen ? event.nativeEvent.layout.height : 0); // Sync initial animation value
+      animation.setValue(isOpen ? event.nativeEvent.layout.height : 0);
     }
   };
 
+  useEffect(() => {
+    Animated.timing(animation, {
+      toValue: isOpen ? 300 : 0, // Open if isOpen is true, close otherwise
+      duration: 200,
+      useNativeDriver: false,
+    }).start();
+  }, [isOpen, contentHeight]);
+
   return (
     <View style={styles.container}>
-      <TouchableOpacity onPress={toggleAccordion}>
+      <TouchableOpacity onPress={onToggle}>
         <View style={styles.header}>
           <Text style={styles.title}>{title}</Text>
         </View>
       </TouchableOpacity>
 
-      {/* Animated height for the content */}
       <Animated.View style={[styles.contentContainer, { height: animation }]}>
         <View onLayout={handleLayout} style={styles.content}>
-          {children ? (
-            <Text>{children}</Text>
-          ) : (
-            <Text style={styles.placeholder}>No content available</Text>
-          )}
+          {children}
         </View>
       </Animated.View>
     </View>
@@ -65,12 +58,15 @@ const AccordionItem: React.FC<AccordionItemProps> = ({
 };
 
 const styles = StyleSheet.create({
-  container: { marginVertical: 5, borderWidth: 1, borderColor: "lightgray" },
-  header: { padding: 10, backgroundColor: "#f1f1f1" },
+  container: {},
+  header: {
+    padding: 10,
+    backgroundColor: colors.primaryDefault,
+    color: colors.textSecondary,
+  },
   title: { fontSize: 16 },
   contentContainer: { overflow: "hidden" },
-  content: { padding: 10, backgroundColor: "lightyellow" },
-  placeholder: { color: "gray" },
+  content: { padding: 10, backgroundColor: colors.bgLight, height: "100%" },
 });
 
 export default AccordionItem;

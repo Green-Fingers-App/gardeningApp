@@ -25,7 +25,7 @@ const PlantDetailPage = () => {
     <>
       <Stack.Screen
         options={{
-          title: plant?.plant.name.commonName || "Plant Details", // Fallback title
+          title: plant?.plant.name.commonName || "Plant Details",
           headerLeft: () => (
             <MaterialCommunityIcons
               name="arrow-left"
@@ -34,23 +34,39 @@ const PlantDetailPage = () => {
             />
           ),
           headerStyle: {
-            backgroundColor: colors.primary,
+            backgroundColor: colors.primaryDefault,
           },
         }}
       />
-      <SafeAreaView>
-        <Accordion>
-          <AccordionItem title="Status">
-            <Text>hello</Text>
-          </AccordionItem>
-          <AccordionItem title="Overview">
-            <Text>bloop plaaaaappppp</Text>
-          </AccordionItem>
-          <AccordionItem title="Sensors">
-            <Text style={{ color: "black" }}>Blap</Text>
-          </AccordionItem>
-        </Accordion>
-      </SafeAreaView>
+      {plant ? (
+        <SafeAreaView>
+          <Accordion>
+            <AccordionItem title="Status">
+              <Text>Last watered: {plant.wateredDate}</Text>
+              <Text>Last fed: {plant.feededDate}</Text>
+            </AccordionItem>
+            <AccordionItem title="Overview">
+              <Text>Common name: {plant.plant.name.commonName}</Text>
+              <Text>Scientific name: {plant.plant.name.scientificName}</Text>
+              <Text>
+                Blooming: {plant.plant.blooming.start} till{" "}
+                {plant.plant.blooming.end}
+              </Text>
+              <Text>
+                Harvest:{" "}
+                {plant.plant.harvest
+                  ? `${plant.plant.harvest.start} till ${plant.plant.harvest.end}`
+                  : "This plant cannot be harvest"}
+              </Text>
+            </AccordionItem>
+            <AccordionItem title="Sensors">
+              <Text style={{ color: "black" }}>Blap</Text>
+            </AccordionItem>
+          </Accordion>
+        </SafeAreaView>
+      ) : (
+        <Text>Loading...</Text>
+      )}
     </>
   );
 };
