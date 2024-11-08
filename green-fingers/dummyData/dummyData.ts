@@ -30,9 +30,9 @@ const pests: Pest[] = [
 
 // Gardens
 export const gardens: Garden[] = [
-  { id: '1', name: "Backyard", location: "Backyard"},
-  { id: '2', name: "Front Yard", location: "Front Yard"},
-  { id: '3', name: "Community Garden", location: "Community Garden"}
+  { id: 1, location: "Backyard", plantIds: [1, 2] },
+  { id: 2, location: "Front Yard", plantIds: [3, 4] },
+  { id: 3, location: "Community Garden", plantIds: [5] }
 ];
 
 // Users

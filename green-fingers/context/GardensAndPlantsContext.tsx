@@ -1,49 +1,7 @@
-import React, {
-  createContext,
-  ReactNode,
-  useContext,
-  useState,
-  useEffect,
-} from "react";
-import {
-  Garden,
-  CatalogPlant,
-  UserPlant,
-  AddUserPlant,
-  AddGarden,
-} from "../types/models";
-import { db } from "@/firebase/firebaseConfig";
-import {
-  collection,
-  doc,
-  query,
-  getDocs,
-  where,
-  addDoc,
-  updateDoc,
-  arrayUnion,
-} from "firebase/firestore";
-import { db } from "@/firebase/firebaseConfig";
-import { useAuth } from "@/context/AuthContext";
-import { addGarden, addPlant, deletePlant, deleteGarden } from "@/firebase/plantService";
-
-
-interface PlantContextProps {
-  plants: UserPlant[];
-  gardens: Garden[];
-  databasePlants: CatalogPlant[];
-  fetchPlants: () => void;
-  fetchAllPlants: () => void;
-  fetchPlantsByCommonName: (input: string) => Promise<CatalogPlant[]>;
-  createPlant: (plantData: AddUserPlant) => void;
-  deleteUserPlant: (plantId: string) => void;
-  fetchGardens: () => void;
-  fetchPlantDetail: (plantId: string) => UserPlant | undefined;
-  fetchGardenDetail: (gardenId: string) => Garden | undefined;
-  fetchGardenPlants: (gardenId: string) => UserPlant[] | undefined;
-  createGarden: (gardenData: AddGarden) => void;
-  deleteUserGarden: (gardenId: string) => void;
-}
+import React, { createContext, ReactNode, useContext, useState } from "react";
+import { PlantContextProps } from "@/types/plantTypes";
+import { userPlants as importPlants } from "../dummyData/dummyData";
+import { UserPlant } from "../types/models";
 
 const PlantsContext = createContext<PlantContextProps | undefined>(undefined);
 
@@ -51,223 +9,26 @@ export const PlantsProvider: React.FC<{ children: ReactNode }> = ({
   children,
 }) => {
   const [plants, setPlants] = useState<UserPlant[]>([]);
-  const [gardens, setGardens] = useState<Garden[]>([]);
-  const [databasePlants, setDatabasePlants] = useState<CatalogPlant[]>([]);
 
-  const { user } = useAuth();
-
-  // Fetch user's gardens from Firestore
-  const fetchGardens = async () => {
-    if (!user?.id) return;
-
-    try {
-      const gardensQuery = query(
-        collection(db, "gardens"),
-        where("userId", "==", user.id)
-      );
-
-      const snapshot = await getDocs(gardensQuery);
-      const userGardens = snapshot.docs.map(
-        (doc) => ({ id: doc.id, ...doc.data() } as Garden)
-      );
-
-      setGardens(userGardens);
-    } catch (error) {
-      console.error("Error fetching gardens:", error);
-    }
+  const fetchPlants = (userId: number, token: string) => {
+    const newPlants = importPlants;
+    setPlants(newPlants);
+    return;
   };
 
-  // Fetch user's plants from Firestore
-  const fetchPlants = async () => {
-    if (!user?.id) return;
-
-    try {
-      const plantsQuery = query(
-        collection(db, "user-plants"),
-        where("userId", "==", user.id)
-      );
-
-      const snapshot = await getDocs(plantsQuery);
-      const userPlants = snapshot.docs.map(
-        (doc) => ({ id: doc.id, ...doc.data() } as UserPlant)
-      );
-      setPlants(userPlants);
-    } catch (error) {
-      console.error("Error fetching plants:", error);
-    }
+  const fetchPlantDetail = (plantId: number): UserPlant | undefined => {
+    const plant = plants.find((plant) => plant.id === plantId);
+    return plant;
   };
-
-  // Fetch all plants in the global catalog
-  const fetchAllPlants = async () => {
-    try {
-      const plantsCollection = collection(db, "plant-catalog");
-      const querySnapshot = await getDocs(plantsCollection);
-      const allPlants = querySnapshot.docs.map(
-        (doc) => ({ id: doc.id, ...doc.data() } as CatalogPlant)
-      );
-      setDatabasePlants(allPlants);
-    } catch (err) {
-      console.error("Error fetching plants:", err);
-    }
-  };
-
-  // Add a plant to a specific garden
-  const addPlantToGarden = async (plant: UserPlant, gardenId: string): Promise<void> => {
-    try {
-      // Add plant to the global "plants" collection
-      const plantRef = await addDoc(collection(db, "plants"), {
-        ...plant,
-        userId: user?.id,
-      });
-
-      // Update the garden's plantIds
-      const gardenRef = doc(db, "gardens", gardenId);
-      await updateDoc(gardenRef, {
-        plantIds: arrayUnion(plantRef.id),
-      });
-
-      console.log("Plant added to garden successfully!");
-      fetchGardens(); // Refresh gardens
-      fetchPlants(); // Refresh plants
-    } catch (error) {
-      console.error("Error adding plant to garden:", error);
-    }
-  };
-
-  // Fetch plants by common name
-  const fetchPlantsByCommonName = async (input: string): Promise<CatalogPlant[]> => {
-    try {
-      const plantsCollection = collection(db, "plant-catalog");
-      const q = query(
-        plantsCollection,
-        orderBy("name.commonName"),
-        startAt(input),
-        endAt(input + "\uf8ff")
-      );
-      const querySnapshot = await getDocs(q);
-      const plants: CatalogPlant[] = querySnapshot.docs.map((doc) => ({
-        id: doc.id,
-        ...doc.data(),
-      })) as CatalogPlant[];
-      setDatabasePlants(plants);
-      return plants;
-    } catch (err) {
-      console.error("Error fetching plants by common name:", err);
-      throw err;
-    }
-  };
-
-  // Fetch all plants in the catalog
-  const fetchAllPlants = async () => {
-    try {
-      const plantsCollection = collection(db, "plant-catalog");
-      const querySnapshot = await getDocs(plantsCollection);
-      const allPlants = querySnapshot.docs.map(
-        (doc) => ({ id: doc.id, ...doc.data() } as CatalogPlant)
-      );
-      setDatabasePlants(allPlants);
-    } catch (err) {
-      console.error("Error fetching plants:", err);
-    }
-  };
-
-  // Fetch plant details by ID
-  const fetchPlantDetail = (plantId: string): UserPlant | undefined => {
-    return plants.find((plant) => plant.id === plantId);
-  };
-
-  // Fetch garden details by ID
-  const fetchGardenDetail = (gardenId: string): Garden | undefined => {
-    return gardens.find((garden) => garden.id === gardenId);
-  };
-
-  // Fetch plants linked to a specific garden
-  const fetchGardenPlants = (gardenId: string): UserPlant[] | undefined => {
-    const gardenPlants = plants.filter((plant) => plant.garden_id === gardenId);
-    return gardenPlants;
-  };
-
-  // Create new plant
-  const createPlant = async (plantData: AddUserPlant) => {
-    try {
-      const id = await addPlant(plantData);
-      if (id) {
-        setPlants((prevPlants) => [...prevPlants, { ...plantData, id }]);
-      }
-    } catch (error) {
-      console.error("Error creating plant:", error);
-    }
-  };
-
-  // Delete plant
-  const deleteUserPlant = async (plantId: string) => {
-    try {
-      await deletePlant(plantId);
-      setPlants((prevPlants) => prevPlants.filter((plant) => plant.id !== plantId));
-    } catch (error) {
-      console.error("Error deleting plant:", error);
-    }
-  };
-
-  // Create new garden
-  const createGarden = async (gardenData: AddGarden) => {
-    try {
-      const id = await addGarden(gardenData);
-      if (id) {
-        setGardens((prevGardens) => [...prevGardens, { ...gardenData, id }]);
-      }
-    } catch (error) {
-      console.error("Error creating garden: ", error);
-    }
-  };
-
-  // Delete garden
-  const deleteUserGarden = async (gardenId: string) => {
-    try {
-      const plantsInGarden = plants.filter((plant) => plant.garden_id === gardenId);
-      await Promise.all(plantsInGarden.map((plant) => deleteUserPlant(plant.id)));
-      await deleteGarden(gardenId);
-      setPlants((prevPlants) => prevPlants.filter((plant) => plant.garden_id !== gardenId));
-      setGardens((prevGardens) => prevGardens.filter((garden) => garden.id !== gardenId));
-    } catch (error) {
-      console.error("Error deleting garden:", error);
-    }
-  }
-
-
-  useEffect(() => {
-    if (user?.id) {
-      fetchGardens();
-      fetchPlants();
-      fetchAllPlants();
-    }
-  }, [user?.id]);
 
   return (
-    <PlantsContext.Provider
-      value={{
-        plants,
-        fetchPlants,
-        fetchAllPlants,
-        fetchPlantsByCommonName,
-        createPlant,
-        deleteUserPlant,
-        gardens,
-        fetchGardens,
-        fetchPlantDetail,
-        fetchGardenDetail,
-        fetchGardenPlants,
-        createGarden,
-        deleteUserGarden,
-        databasePlants,
-      }}
-    >
+    <PlantsContext.Provider value={{ plants, fetchPlants, fetchPlantDetail }}>
       {children}
     </PlantsContext.Provider>
   );
 };
 
-export const useGardensAndPlants = () => {
+export const usePlants = () => {
   const context = useContext(PlantsContext);
   if (!context) {
     throw new Error("useGardensAndPlants must be used within a PlantsProvider");
