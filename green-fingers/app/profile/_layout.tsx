@@ -2,10 +2,8 @@ import React, { useEffect, useState } from "react";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import { Tabs, useRouter } from "expo-router";
 import { MaterialIcons } from "@expo/vector-icons";
-import { useAuth } from "@/context/AuthContext";
-import { useGardensAndPlants } from "@/context/GardensAndPlantsContext";
-import AddMenu from "@/components/AddMenu";
 import colors from "@/constants/colors";
+import React from "react";
 
 const ProfileLayout: React.FC = () => {
   const router = useRouter();

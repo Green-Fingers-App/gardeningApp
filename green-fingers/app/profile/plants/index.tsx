@@ -1,19 +1,7 @@
-import React, { useEffect, useState } from "react";
-import { View, Text, Button, TextInput, StyleSheet, FlatList } from "react-native";
-import { usePlants } from "../../hooks/usePlants";
-
-// Define the custom order for displaying plant fields
-const customOrder = [
-  "name",
-  "scientific_name",
-  "type",
-  "water_frequency",
-  "light",
-  "temperature",
-  "soil_type",
-  "fertilizer_type",
-  "fertilizer_frequency"
-];
+import { View } from "react-native";
+import React, { useEffect } from "react";
+import { usePlants } from "@/context/GardensAndPlantsContext";
+import PlantCard from "@/components/PlantCard";
 
 const Plants = () => {
   const { plants, error, fetchAllPlants, createPlant, removePlant } = usePlants();
@@ -27,16 +15,6 @@ const Plants = () => {
   useEffect(() => {
     fetchAllPlants();
   }, []);
-
-  const handleAddPlant = () => {
-    createPlant(newPlantData);
-    setShowAddForm(false);
-    setNewPlantData({ name: "", type: "", water_frequency: "" });
-  };
-
-  const handleInputChange = (name, value) => {
-    setNewPlantData((prevData) => ({ ...prevData, [name]: value }));
-  };
 
   return (
     <View style={styles.container}>
