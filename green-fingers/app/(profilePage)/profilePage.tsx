@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { useAuth } from "@/context/AuthContext";
 
 import textStyles from "@/constants/textStyles";
+import colors from "@/constants/colors";
 
 import Button from "@/components/Button";
 import Input from "@/components/Input";
@@ -57,10 +58,10 @@ const Profile = () => {
       ) : (
         <View style={styles.viewMode}>
           <Text style={textStyles.h3}>Profile Information</Text>
-          <Text>Username:</Text>
-          <Text>{values.username}</Text>
-          <Text>Email:</Text>
-          <Text>{values.email}</Text>
+          <Text style={textStyles.label}>Username:</Text>
+          <Text style={textStyles.body}>{values.username}</Text>
+          <Text style={textStyles.label}>Email:</Text>
+          <Text style={textStyles.body}>{values.email}</Text>
           <Button 
             type="secondary"
             text="Edit Profile"
