@@ -27,8 +27,12 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
     router.replace("/login");
   };
 
+  const updateUser = (newUserData: Partial<User>) => {
+    setUser((prevUser) => ( prevUser ? {...prevUser, ...newUserData } : null));
+  };
+
   return (
-    <AuthContext.Provider value={{ user, login, logout }}>
+    <AuthContext.Provider value={{ user, login, logout, updateUser }}>
       {children}
     </AuthContext.Provider>
   );
