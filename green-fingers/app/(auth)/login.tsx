@@ -16,7 +16,7 @@ interface InputValues {
 type InputErrors = Partial<Record<keyof InputValues, string>>;
 
 export default function LoginForm() {
-  const { login } = useAuth();
+  const { login, authError } = useAuth();
   const [inputValues, setInputValues] = useState<InputValues>({
     email: "",
     password: "",
