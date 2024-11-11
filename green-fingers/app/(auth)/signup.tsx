@@ -1,21 +1,14 @@
-import {
-  View,
-  Text,
-  SafeAreaView,
-  StyleSheet,
-  TouchableOpacity,
-} from "react-native";
 import React, { useState } from "react";
-import { router, Link } from "expo-router";
-import { FontAwesome } from "@expo/vector-icons";
+import { View, Text, SafeAreaView, StyleSheet } from "react-native";
+import { router } from "expo-router";
+import { useAuth } from "@/context/AuthContext"; // Import useAuth
 import Input from "@/components/Input";
 import Button from "@/components/Button";
 import colors from "@/constants/colors";
 import textStyles from "@/constants/textStyles";
-// import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
-// import { auth } from "@/firebase/firebaseConfig";
 
 const Signup = () => {
+  const { signup, authError } = useAuth();
   const [inputValues, setInputValues] = useState<{
     email: string;
     confirmEmail: string;
@@ -39,7 +32,7 @@ const Signup = () => {
     }));
   };
 
-  const handleSignup = async () => {
+  const validateAndSignup = async () => {
     const { email, confirmEmail, password, confirmPassword } = inputValues;
 
     if (email !== confirmEmail) {
@@ -54,68 +47,60 @@ const Signup = () => {
 
     setError(null);
 
-    try {
-      // Firebase signup
-      // await createUserWithEmailAndPassword(auth, email, password);
-      router.replace("/profile/home");
-    } catch (error) {
-      console.error("Error during signup: ", error);
-      setError("Signup failed. Please try again.");
-    }
+    await signup(email, password);
   };
 
   return (
     <SafeAreaView style={styles.container}>
-      
       <Text style={textStyles.h1}>TAKE CARE OF YOUR PLANTS WITH EASE</Text>
       <Text style={textStyles.h3}>Sign Up Now</Text>
-        <View style={styles.content}>
-          {/* Display error if any */}
-          {error && <Text style={{ color: "red" }}>{error}</Text>}
-          <View style={styles.signUpFormContainer}>
-            <View style={styles.inputFieldContainer}>
-              <Input
-                label="Email"
-                placeholder="Email"
-                iconName="email-outline"
-                onChangeText={(text) => handleChange("email", text)}
-              />
-              <Input
-                label="Confirm Email"
-                placeholder="Confirm Email"
-                iconName="email-outline"
-                onChangeText={(text) => handleChange("confirmEmail", text)}
-              />
-              <Input
-                label="Password"
-                placeholder="Password"
-                iconName="lock-outline"
-                password={true}
-                onChangeText={(text) => handleChange("password", text)}
-              />
-              <Input
-                label="Confirm Password"
-                placeholder="Confirm Password"
-                iconName="lock-outline"
-                password={true}
-                onChangeText={(text) => handleChange("confirmPassword", text)}
-              />
-            </View>
-            <Button
-              text="Sign Up"
-              onPress={handleSignup}
-              style={{ width: "100%" }}
+      <View style={styles.content}>
+        {error && <Text style={{ color: "red" }}>{error}</Text>}
+        {authError && <Text style={{ color: "red" }}>{authError}</Text>}
+        <View style={styles.signUpFormContainer}>
+          <View style={styles.inputFieldContainer}>
+            <Input
+              label="Email"
+              placeholder="Email"
+              iconName="email-outline"
+              onChangeText={(text) => handleChange("email", text)}
+            />
+            <Input
+              label="Confirm Email"
+              placeholder="Confirm Email"
+              iconName="email-outline"
+              onChangeText={(text) => handleChange("confirmEmail", text)}
+            />
+            <Input
+              label="Password"
+              placeholder="Password"
+              iconName="lock-outline"
+              secureTextEntry
+              onChangeText={(text) => handleChange("password", text)}
+            />
+            <Input
+              label="Confirm Password"
+              placeholder="Confirm Password"
+              iconName="lock-outline"
+              secureTextEntry
+              onChangeText={(text) => handleChange("confirmPassword", text)}
             />
           </View>
-          <View style={styles.loginContainer}>
-          <Text>Already have an account?</Text>
-            <Button
-              text="Login"
-              type="secondary"
-              onPress={() => router.push("/login")}
-            />
-          </View>
+          <Button
+            text="Sign Up"
+            onPress={validateAndSignup}
+            style={{ width: "100%" }}
+          />
         </View>
+        <View style={styles.loginContainer}>
+          <Text>Already have an account?</Text>
+          <Button
+            text="Login"
+            type="secondary"
+            onPress={() => router.push("/login")}
+          />
+        </View>
+      </View>
     </SafeAreaView>
   );
 };
