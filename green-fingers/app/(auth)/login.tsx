@@ -1,5 +1,9 @@
 import { router } from "expo-router";
+import { router } from "expo-router";
 import { StatusBar } from "expo-status-bar";
+import React, { useState } from "react";
+import { SafeAreaView, Text, View, StyleSheet } from "react-native";
+import { useAuth } from "@/context/AuthContext";
 import React, { useState } from "react";
 import { SafeAreaView, Text, View, StyleSheet } from "react-native";
 import { useAuth } from "@/context/AuthContext";
@@ -19,6 +23,9 @@ type InputErrors = Partial<Record<keyof InputValues, string>>;
 export default function LoginForm() {
   const { login } = useAuth();
   const [inputValues, setInputValues] = useState<InputValues>({
+export default function LoginForm() {
+  const { login } = useAuth();
+  const [inputValues, setInputValues] = useState<InputValues>({
     email: "",
     password: "",
   });
@@ -26,6 +33,7 @@ export default function LoginForm() {
   const [inputErrors, setInputErrors] = useState<InputErrors>({});
 
   const handleChange = (name: keyof InputValues, value: string): void => {
+    setInputValues((prevState) => ({
     setInputValues((prevState) => ({
       ...prevState,
       [name]: value,
@@ -40,6 +48,7 @@ export default function LoginForm() {
   };
 
   const validateAndLogin = async (): Promise<void> => {
+  const validateAndLogin = async (): Promise<void> => {
     const { email, password } = inputValues;
 
     if (!email) {
@@ -52,6 +61,8 @@ export default function LoginForm() {
       return;
     }
 
+    await login(email, password);
+  };
     await login(email, password);
   };
 
@@ -71,23 +82,28 @@ export default function LoginForm() {
               onChangeText={(text) => handleChange("email", text)}
               error={inputErrors.email}
               onFocus={() => handleErrorMessage("email", undefined)}
-              value={inputValues.email}
             />
             <Input
               iconName="lock-outline"
               label="Password"
               placeholder="Enter your password"
-              password
-              secureTextEntry={true}
+              secureTextEntry
               onChangeText={(text) => handleChange("password", text)}
               error={inputErrors.password}
               onFocus={() => handleErrorMessage("password", undefined)}
-              value={inputValues.password}
             />
           </View>
           <Button text="Login" onPress={validateAndLogin} iconName="login" />
           <Button
             type="tertiary"
+          {authError && <Text style={{ color: "red" }}>{authError}</Text>}
+          <Button 
+            text="Login"
+            onPress={validateAndLogin} // Triggers validateAndLogin, which calls login from AuthContext
+            iconName="login"
+          />
+          <Button 
+            type="tertiary" 
             text="Forgot Password?"
             onPress={() => router.push("/forgotpassword")}
           />
