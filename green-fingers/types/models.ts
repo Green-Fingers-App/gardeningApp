@@ -126,20 +126,12 @@ export interface Plant {
   name: PlantName;
   blooming: Blooming;
   waterFrequency: WaterFrequency;
-  soil: Soil;
   harvest: Harvest;
   sunLight: SunLight;
   temperature: Temperature;
   size: Size;
-  hardinessZone: HardinessZone;
-  growthRate: GrowthRate;
   fertilizerType: string;
-  toxicity: ToxicityLevel;
-  commonPests: Pest[];
   planting: Planting;
-  region: string;
-  pruning: string;
-  companion: Plant[];
 }
 
 //Garden interface
@@ -170,6 +162,7 @@ export enum Level {
 export interface UserPlant {
   id: number;
   plant: Plant;
+  nickName: string;
   wateredDate: string;
   plantedDate: string;
   feededDate: string;

@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { View, Text, SafeAreaView, StyleSheet } from "react-native";
 import { router } from "expo-router";
 import { useAuth } from "@/context/AuthContext"; // Import useAuth
-import { router } from "expo-router";
 import Input from "@/components/Input";
 import Button from "@/components/Button";
 import colors from "@/constants/colors";
@@ -65,7 +64,6 @@ const Signup = () => {
               iconName="email-outline"
               onChangeText={(text) => handleChange("email", text)}
               value={inputValues.email}
-
             />
             <Input
               label="Confirm Email"

@@ -28,7 +28,7 @@ export const PlantsProvider: React.FC<{ children: ReactNode }> = ({
   );
 };
 
-export const usePlants = () => {
+export const useGardensAndPlants = () => {
   const context = useContext(PlantsContext);
   if (!context) {
     throw new Error("usePlants must be used within an PlantsProvider");

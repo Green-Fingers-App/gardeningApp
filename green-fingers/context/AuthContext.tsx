@@ -1,6 +1,11 @@
 import React, { createContext, useState, ReactNode, useContext } from "react";
 import { router } from "expo-router";
-import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut } from "firebase/auth";
+import {
+  getAuth,
+  signInWithEmailAndPassword,
+  createUserWithEmailAndPassword,
+  signOut,
+} from "firebase/auth";
 import { auth } from "@/firebase/firebaseConfig";
 import { User, AuthContextProps } from "@/types/authtypes";
 
@@ -14,7 +19,9 @@ export const useAuth = () => {
   return context;
 };
 
-export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
+export const AuthProvider: React.FC<{ children: ReactNode }> = ({
+  children,
+}) => {
   const [user, setUser] = useState<User | null>(null);
   const [authError, setAuthError] = useState<string | null>(null);
 
@@ -28,7 +35,11 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
   // Login function
   const login = async (email: string, password: string) => {
     try {
-      const userCredential = await signInWithEmailAndPassword(auth, email, password);
+      const userCredential = await signInWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
       const mappedUser = mapFirebaseUserToAppUser(userCredential.user);
       setUser(mappedUser);
       router.replace("/profile/home");
@@ -41,7 +52,11 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
   // Signup function
   const signup = async (email: string, password: string) => {
     try {
-      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+      const userCredential = await createUserWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
       const mappedUser = mapFirebaseUserToAppUser(userCredential.user);
       setUser(mappedUser);
       router.replace("/profile/home");
@@ -63,11 +78,13 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
   };
 
   const updateUser = (newUserData: Partial<User>) => {
-    setUser((prevUser) => ( prevUser ? {...prevUser, ...newUserData } : null));
+    setUser((prevUser) => (prevUser ? { ...prevUser, ...newUserData } : null));
   };
 
   return (
-    <AuthContext.Provider value={{ user, login, signup, logout, authError }}>
+    <AuthContext.Provider
+      value={{ user, login, signup, logout, authError, updateUser }}
+    >
       {children}
     </AuthContext.Provider>
   );

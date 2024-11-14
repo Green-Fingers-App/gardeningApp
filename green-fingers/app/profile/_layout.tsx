@@ -1,19 +1,17 @@
-import { Tabs, UseRouter } from "expo-router";
+import { Tabs, useRouter } from "expo-router";
 import { MaterialIcons } from "@expo/vector-icons";
 import colors from "@/constants/colors";
 import React from "react";
-import { PlantsProvider } from "@/context/PlantsContext";
+import { PlantsProvider } from "@/context/GardensAndPlantsContext";
 import { TouchableOpacity } from "react-native";
 import { View, Text } from "react-native";
 import { useAuth } from "@/context/AuthContext";
-
 
 const ProfileLayout: React.FC = () => {
   const router = useRouter();
   const { user } = useAuth();
 
   return (
-    
     <Tabs
       screenOptions={{
         headerStyle: {
@@ -31,12 +29,16 @@ const ProfileLayout: React.FC = () => {
               style={{ marginRight: 15 }}
               onPress={() => router.push("/profilePage")}
             >
-              <MaterialIcons name="account-circle" size={24} color={colors.bgLight} />
+              <MaterialIcons
+                name="account-circle"
+                size={24}
+                color={colors.bgLight}
+              />
             </TouchableOpacity>
           </View>
         ),
       }}
-    > 
+    >
       <Tabs.Screen
         name="home"
         options={{

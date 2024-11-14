@@ -1,7 +1,7 @@
 import { Text, SafeAreaView } from "react-native";
 import { Stack, useLocalSearchParams, useRouter } from "expo-router";
 import React, { useEffect, useState } from "react";
-import { usePlants } from "@/context/GardensAndPlantsContext";
+import { useGardensAndPlants } from "@/context/GardensAndPlantsContext";
 import { UserPlant } from "@/types/models";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import colors from "@/constants/colors";
@@ -10,7 +10,7 @@ import AccordionItem from "@/components/AccordionItem";
 
 const PlantDetailPage = () => {
   const { plantId } = useLocalSearchParams();
-  const { fetchPlantDetail } = usePlants();
+  const { fetchPlantDetail } = useGardensAndPlants();
   const [plant, setPlant] = useState<UserPlant | null>(null);
   const router = useRouter();
 

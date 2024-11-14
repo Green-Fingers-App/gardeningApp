@@ -16,7 +16,7 @@ interface InputValues {
 type InputErrors = Partial<Record<keyof InputValues, string>>;
 
 export default function LoginForm() {
-  const { login, authError } = useAuth();
+  const { login } = useAuth();
   const [inputValues, setInputValues] = useState<InputValues>({
     email: "",
     password: "",
@@ -83,7 +83,7 @@ export default function LoginForm() {
               value={inputValues.password}
             />
           </View>
-          <Button text="Login" onPress={validate} iconName="login" />
+          <Button text="Login" onPress={validateAndLogin} iconName="login" />
           <Button
             type="tertiary"
             text="Forgot Password?"
