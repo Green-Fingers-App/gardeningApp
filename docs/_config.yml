@@ -9,6 +9,7 @@ plugins:
   - jekyll-feed
   - jekyll-livereload
   - jekyll-seo-tag
+  - jekyll-mermaid
 
 # Livereload
 livereload:
