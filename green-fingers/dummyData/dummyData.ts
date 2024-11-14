@@ -27,6 +27,69 @@ const pests: Pest[] = [
   }
 ];
 
+// Plants
+export const plants: Plant[] = [
+  {
+    id: "1",
+    name: { commonName: "Tomato", scientificName: "Solanum lycopersicum" },
+    blooming: { start: Month.JUNE, end: Month.AUGUST, flowerColor: "Yellow" },
+    waterFrequency: WaterFrequency.WEEKLY,
+    harvest: { start: Month.JULY, end: Month.SEPTEMBER, yield: 20, edibleParts: "Fruit" },
+    sunLight: SunLight.FULL_SUN,
+    temperature: { min: 15, max: 35 },
+    size: { height: 100, width: 60 },
+    fertilizerType: "Organic compost",
+    planting: { start: Month.MARCH, end: Month.APRIL },
+  },
+  {
+    id: "2",
+    name: { commonName: "Rose", scientificName: "Rosa" },
+    blooming: { start: Month.MAY, end: Month.OCTOBER, flowerColor: "Red" },
+    waterFrequency: WaterFrequency.WEEKLY,
+    harvest: false,
+    sunLight: SunLight.PARTIAL_SUN,
+    temperature: { min: 10, max: 30 },
+    size: { height: 150, width: 100 },
+    fertilizerType: "Rose fertilizer",
+    planting: { start: Month.MARCH, end: Month.MAY },
+  },
+  {
+    id: "3",
+    name: { commonName: "Carrot", scientificName: "Daucus carota" },
+    blooming: { start: Month.JUNE, end: Month.AUGUST, flowerColor: "White" },
+    waterFrequency: WaterFrequency.WEEKLY,
+    harvest: { start: Month.AUGUST, end: Month.SEPTEMBER, yield: 50, edibleParts: "Root" },
+    sunLight: SunLight.FULL_SUN,
+    temperature: { min: 10, max: 25 },
+    size: { height: 30, width: 5 },
+    fertilizerType: "All-purpose fertilizer",
+    planting: { start: Month.MARCH, end: Month.JUNE },
+  },
+  {
+    id: "4",
+    name: { commonName: "Basil", scientificName: "Ocimum basilicum" },
+    blooming: { start: Month.JUNE, end: Month.AUGUST, flowerColor: "Purple" },
+    waterFrequency: WaterFrequency.DAILY,
+    harvest: { start: Month.JUNE, end: Month.AUGUST, yield: 30, edibleParts: "Leaves" },
+    sunLight: SunLight.FULL_SUN,
+    temperature: { min: 15, max: 30 },
+    size: { height: 45, width: 30 },
+    fertilizerType: "Balanced fertilizer",
+    planting: { start: Month.APRIL, end: Month.MAY },
+  },
+  {
+    id: "5",
+    name: { commonName: "Lavender", scientificName: "Lavandula" },
+    blooming: { start: Month.JUNE, end: Month.AUGUST, flowerColor: "Purple" },
+    waterFrequency: WaterFrequency.BIWEEKLY,
+    harvest: false,
+    sunLight: SunLight.FULL_SUN,
+    temperature: { min: 10, max: 30 },
+    size: { height: 60, width: 90 },
+    fertilizerType: "No fertilizer required",
+    planting: { start: Month.MARCH, end: Month.APRIL },
+  }
+];
 
 // Gardens
 export const gardens: Garden[] = [
@@ -38,6 +101,7 @@ export const gardens: Garden[] = [
 // Users
 const users: User[] = [
   {
+    id: "1",
     username: "gardener_john",
     firstName: "John",
     lastName: "Doe",
@@ -45,6 +109,7 @@ const users: User[] = [
     plantIds: [1, 2]
   },
   {
+    id: "2",
     username: "green_thumb",
     firstName: "Jane",
     lastName: "Smith",
@@ -52,6 +117,7 @@ const users: User[] = [
     plantIds: [3, 4]
   },
   {
+    id: "3",
     username: "plant_lover",
     firstName: "Emily",
     lastName: "Brown",
@@ -63,7 +129,7 @@ const users: User[] = [
 // UserPlants
 export const userPlants: UserPlant[] = [
   {
-    id: 1,
+    id: "1",
     nickName: "Tommy Tomato",
     plant: plants[0],
     wateredDate: "2024-09-12",
@@ -74,7 +140,7 @@ export const userPlants: UserPlant[] = [
     harvested: false
   },
   {
-    id: 2,
+    id: "2",
     nickName: "Red Rose",
     plant: plants[1],
     wateredDate: "2024-09-10",
@@ -85,7 +151,7 @@ export const userPlants: UserPlant[] = [
     harvested: false
   },
   {
-    id: 3,
+    id: "3",
     nickName: "Orange King",
     plant: plants[2],
     wateredDate: "2024-09-14",
@@ -96,7 +162,7 @@ export const userPlants: UserPlant[] = [
     harvested: true
   },
   {
-    id: 4,
+    id: "4",
     nickName: "Basilico",
     plant: plants[3],
     wateredDate: "2024-09-13",
@@ -107,7 +173,7 @@ export const userPlants: UserPlant[] = [
     harvested: false
   },
   {
-    id: 5,
+    id: "5",
     nickName: "Frensh Princess",
     plant: plants[4],
     wateredDate: "2024-09-11",

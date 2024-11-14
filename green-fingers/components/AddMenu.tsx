@@ -3,9 +3,6 @@ import React, { useState } from "react";
 import colors from "@/constants/colors";
 import textStyles from "@/constants/textStyles";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-import AddPlantOption from "@/components/AddPlantOption";
-import AddGardenOption from "@/components/AddGardenOption";
-import Button from "@/components/Button";
 
 const AddMenu = () => {
   const [plantChosen, setPlantChosen] = useState(false);
@@ -44,18 +41,23 @@ const AddMenu = () => {
         </View>
       )}
       {plantChosen && (
-        <AddPlantOption
-          plantChosen={plantChosen}
-          togglePlantMenu={togglePlantMenu}
-          setPlantChosen={setPlantChosen}
-        />
+        <View style={styles.menuOption}>
+          <Input
+            label="Search Plant"
+            placeholder="Search Plant..."
+            iconName="magnify"
+          />
+          <Input label="Nickname" placeholder="Nickname..." iconName="flower" />
+        </View>
       )}
       {gardenChosen && (
-        <AddGardenOption
-          gardenChosen={gardenChosen}
-          toggleGardenMenu={() => setGardenChosen(false)}
-          setGardenChosen={setGardenChosen}
-        />
+        <View style={styles.menuOption}>
+          <Input
+            label="Garden Name"
+            iconName="nature"
+            placeholder="Garden Name..."
+          />
+        </View>
       )}
     </View>
   );
@@ -81,6 +83,9 @@ const styles = StyleSheet.create({
     padding: 8,
     borderTopLeftRadius: 8,
     borderTopRightRadius: 8,
+  },
+  menuOption: {
+    padding: 8,
   },
   titleText: {
     fontSize: 20,
