@@ -62,6 +62,10 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     }
   };
 
+  const updateUser = (newUserData: Partial<User>) => {
+    setUser((prevUser) => ( prevUser ? {...prevUser, ...newUserData } : null));
+  };
+
   return (
     <AuthContext.Provider value={{ user, login, signup, logout, authError }}>
       {children}
