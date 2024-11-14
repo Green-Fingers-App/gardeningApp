@@ -2,7 +2,7 @@ import React from "react";
 import { View, StyleSheet } from "react-native";
 import LandingSVG from '@/app/LandingSVG';
 import Button from "./Button";
-
+import { router } from "expo-router";
 const LandingScreen = () => (
   <View style={styles.container}>
     <LandingSVG />
@@ -10,12 +10,12 @@ const LandingScreen = () => (
       <Button
         text="Log In"
         type="primary"
-        onPress={() => console.log("Log In Pressed")}
+        onPress={() => router.push("/login")}
       />
       <Button
         text="Sign Up"
         type="secondary"
-        onPress={() => console.log("Sign Up Pressed")}
+        onPress={() => router.push("/signup")}
       />
     </View>
   </View>
