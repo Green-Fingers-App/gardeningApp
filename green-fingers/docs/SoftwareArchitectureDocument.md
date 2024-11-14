@@ -44,7 +44,7 @@ Because the "Green Fingers" appliactions is a mobile application, we have chosen
 - **ViewModel**: Acts as an intermediary between the Model and the View, handling the data and business logic to be displayed in the View. React Native takes care of the ViewModel part by using the React hooks and context API.
 
 ### 2.2 MVVM High-Level Overview
-The following diagram illustrates the high-level overview of the MVVM architectural pattern in the "Green Fingers" application:
+The following diagrams are manual created, thats why they are not up to date. The diagrams are created with draw.io and exported as svg files. The diagrams are stored in the docs/assets/svg/architecturalDiagrams folder. The following diagram illustrates the high-level overview of the MVVM architectural pattern in the "Green Fingers" application:
 
 ![MVVM High-Level Overview](../../docs/assets/svg/architecturalDiagrams/mvvmDiagram.drawio.svg)
 
