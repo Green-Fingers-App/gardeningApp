@@ -1,7 +1,7 @@
-import { View, Text, SafeAreaView } from "react-native";
+import { Text, SafeAreaView } from "react-native";
 import { Stack, useLocalSearchParams, useRouter } from "expo-router";
 import React, { useEffect, useState } from "react";
-import { usePlants } from "@/context/PlantsContext";
+import { usePlants } from "@/context/GardensAndPlantsContext";
 import { UserPlant } from "@/types/models";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import colors from "@/constants/colors";
@@ -53,7 +53,7 @@ const PlantDetailPage = () => {
                 {plant.plant.blooming.end}
               </Text>
               <Text>
-                Harvest:{" "}
+                Harvest:
                 {plant.plant.harvest
                   ? `${plant.plant.harvest.start} till ${plant.plant.harvest.end}`
                   : "This plant cannot be harvest"}

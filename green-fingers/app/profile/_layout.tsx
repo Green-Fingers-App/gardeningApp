@@ -1,12 +1,12 @@
-import { Tabs } from "expo-router";
+import { Tabs, UseRouter } from "expo-router";
 import { MaterialIcons } from "@expo/vector-icons";
 import colors from "@/constants/colors";
 import React from "react";
 import { PlantsProvider } from "@/context/PlantsContext";
 import { TouchableOpacity } from "react-native";
-import { useRouter } from "expo-router";
 import { View, Text } from "react-native";
 import { useAuth } from "@/context/AuthContext";
+
 
 const ProfileLayout: React.FC = () => {
   const router = useRouter();
