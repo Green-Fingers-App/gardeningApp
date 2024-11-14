@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { View, Text, SafeAreaView, StyleSheet } from "react-native";
 import { router } from "expo-router";
 import { useAuth } from "@/context/AuthContext"; // Import useAuth
+import { router } from "expo-router";
 import Input from "@/components/Input";
 import Button from "@/components/Button";
 import colors from "@/constants/colors";
@@ -46,7 +47,6 @@ const Signup = () => {
     }
 
     setError(null);
-
     await signup(email, password);
   };
 
@@ -64,26 +64,31 @@ const Signup = () => {
               placeholder="Email"
               iconName="email-outline"
               onChangeText={(text) => handleChange("email", text)}
+              value={inputValues.email}
+
             />
             <Input
               label="Confirm Email"
               placeholder="Confirm Email"
               iconName="email-outline"
               onChangeText={(text) => handleChange("confirmEmail", text)}
+              value={inputValues.confirmEmail}
             />
             <Input
               label="Password"
               placeholder="Password"
               iconName="lock-outline"
-              secureTextEntry
+              password={true}
               onChangeText={(text) => handleChange("password", text)}
+              value={inputValues.password}
             />
             <Input
               label="Confirm Password"
               placeholder="Confirm Password"
               iconName="lock-outline"
-              secureTextEntry
+              password={true}
               onChangeText={(text) => handleChange("confirmPassword", text)}
+              value={inputValues.confirmPassword}
             />
           </View>
           <Button
@@ -147,7 +152,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     gap: 24,
     width: "100%",
-  }
+  },
 });
 
 export default Signup;

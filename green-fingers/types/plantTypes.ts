@@ -1,3 +1,12 @@
+
+import { UserPlant } from './models'
+
+export interface PlantContextProps {
+  plants: UserPlant[];
+  fetchPlants: (userId: number, token: string) => void;
+  fetchPlantDetail: (plantId: number) => UserPlant | undefined;
+}
+
 export interface Plant {
     name: string;
     scientific_name?: string;
@@ -11,4 +20,3 @@ export interface Plant {
     fertilizer_type?: string;
     fertilizer_frequency?: string;
   }
-  

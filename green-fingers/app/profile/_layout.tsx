@@ -8,12 +8,12 @@ const ProfileLayout: React.FC = () => {
     <Tabs
       screenOptions={{
         headerStyle: {
-          backgroundColor: colors.primary,
+          backgroundColor: colors.primaryDefault,
         },
         tabBarActiveTintColor: "#FFFFFF",
         tabBarInactiveTintColor: "#565656",
         tabBarStyle: {
-          backgroundColor: colors.primary,
+          backgroundColor: colors.primaryDefault,
         },
       }}
     >

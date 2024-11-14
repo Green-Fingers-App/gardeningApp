@@ -13,3 +13,4 @@ Feature: Show Gardens
     Given the user is on the "Home" page
     When the user clicks on the "Garden" icon in the navigation bar
     Then the system displays an error message
+

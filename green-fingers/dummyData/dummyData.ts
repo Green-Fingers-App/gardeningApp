@@ -1,6 +1,6 @@
 // Dummy Data
 
-import { Pest, PestSeverity, Plant, Month, WaterFrequency, SunLight, HardinessZone, GrowthRate, ToxicityLevel, Garden, User, UserPlant, Level } from "./models";
+import { Pest, PestSeverity, Plant, Month, WaterFrequency, SunLight, HardinessZone, GrowthRate, ToxicityLevel, Garden, User, UserPlant, Level } from "../types/models";
 
 // Pests
 const pests: Pest[] = [
@@ -28,7 +28,7 @@ const pests: Pest[] = [
 ];
 
 // Plants
-const plants: Plant[] = [
+export const plants: Plant[] = [
   {
     id: 1,
     name: { commonName: "Tomato", scientificName: "Solanum lycopersicum" },
@@ -55,7 +55,7 @@ const plants: Plant[] = [
     blooming: { start: Month.MAY, end: Month.OCTOBER, flowerColor: "Red" },
     waterFrequency: WaterFrequency.WEEKLY,
     soil: { ph: 6.5, type: "Sandy loam" },
-    harvest: { start: Month.JUNE, end: Month.JULY, yield: 10, edibleParts: "Petals" },
+    harvest: false,
     sunLight: SunLight.PARTIAL_SUN,
     temperature: { min: 10, max: 30 },
     size: { height: 150, width: 100 },
@@ -115,7 +115,7 @@ const plants: Plant[] = [
     blooming: { start: Month.JUNE, end: Month.AUGUST, flowerColor: "Purple" },
     waterFrequency: WaterFrequency.BIWEEKLY,
     soil: { ph: 7.0, type: "Well-drained" },
-    harvest: { start: Month.JULY, end: Month.AUGUST, yield: 15, edibleParts: "Flowers" },
+    harvest: false,
     sunLight: SunLight.FULL_SUN,
     temperature: { min: 10, max: 30 },
     size: { height: 60, width: 90 },
@@ -132,7 +132,7 @@ const plants: Plant[] = [
 ];
 
 // Gardens
-const gardens: Garden[] = [
+export const gardens: Garden[] = [
   { id: 1, location: "Backyard", plantIds: [1, 2] },
   { id: 2, location: "Front Yard", plantIds: [3, 4] },
   { id: 3, location: "Community Garden", plantIds: [5] }
@@ -167,12 +167,13 @@ const users: User[] = [
 ];
 
 // UserPlants
-const userPlants: UserPlant[] = [
+export const userPlants: UserPlant[] = [
   {
     id: 1,
     plant: plants[0],
     wateredDate: "2024-09-12",
     plantedDate: "2024-04-10",
+    feededDate: "2024-10-10",
     moistureLevel: Level.OPTIMAL,
     sunlightLevel: Level.OPTIMAL,
     harvested: false
@@ -182,6 +183,7 @@ const userPlants: UserPlant[] = [
     plant: plants[1],
     wateredDate: "2024-09-10",
     plantedDate: "2024-05-01",
+    feededDate: "2024-10-23",
     moistureLevel: Level.TOO_LOW,
     sunlightLevel: Level.OPTIMAL,
     harvested: false
@@ -191,6 +193,7 @@ const userPlants: UserPlant[] = [
     plant: plants[2],
     wateredDate: "2024-09-14",
     plantedDate: "2024-03-15",
+    feededDate: "2024-11-01",
     moistureLevel: Level.OPTIMAL,
     sunlightLevel: Level.TOO_HIGH,
     harvested: true
@@ -200,6 +203,7 @@ const userPlants: UserPlant[] = [
     plant: plants[3],
     wateredDate: "2024-09-13",
     plantedDate: "2024-05-01",
+    feededDate: "2024-10-22",
     moistureLevel: Level.TOO_HIGH,
     sunlightLevel: Level.OPTIMAL,
     harvested: false
@@ -209,6 +213,7 @@ const userPlants: UserPlant[] = [
     plant: plants[4],
     wateredDate: "2024-09-11",
     plantedDate: "2024-04-01",
+    feededDate: "2024-10-13",
     moistureLevel: Level.OPTIMAL,
     sunlightLevel: Level.OPTIMAL,
     harvested: true
