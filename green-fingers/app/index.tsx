@@ -11,7 +11,7 @@ const Index = () => {
   useEffect(() => {
     if (!loading) {
       if (!user) {
-        router.replace("/profile/home");
+        router.replace("/landingpage");
       } else {
         router.replace("/profile/home");
       }
