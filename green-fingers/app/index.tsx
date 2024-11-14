@@ -2,28 +2,33 @@ import React, { useEffect, useState } from "react";
 import { View, ActivityIndicator } from "react-native";
 import { useRouter } from "expo-router";
 import { useAuth } from "@/context/AuthContext";
+import { useGardensAndPlants } from "@/context/GardensAndPlantsContext";
 
 const Index = () => {
   const [loading, setLoading] = useState(true);
   const router = useRouter();
   const { user } = useAuth();
+  const { fetchPlants } = useGardensAndPlants();
 
   useEffect(() => {
-    if (!loading) {
+    const handleFetchAndNavigate = async () => {
       if (!user) {
         router.replace("/landingpage");
       } else {
         router.replace("/profile/home");
       }
+    };
+
+    if (!loading) {
+      handleFetchAndNavigate();
     }
-  }, [loading, user]); // Added loading to dependencies
+  }, [loading, user]);
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      setLoading(false);
+      setLoading(false); // Stop loading after a delay
     }, 1000);
 
-    // Cleanup the timer on unmount
     return () => clearTimeout(timer);
   }, []);
 

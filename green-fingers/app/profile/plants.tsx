@@ -1,12 +1,17 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { View, StyleSheet } from "react-native";
 import PlantCard from "@/components/PlantCard";
 import { useGardensAndPlants } from "@/context/GardensAndPlantsContext";
+import { UserPlant } from "@/types/models";
 
 const Plants = () => {
-  const { plants, fetchPlants } = useGardensAndPlants();
+  const [plants, setPlants] = useState<UserPlant[]>([]);
+  const { plants: contextPlants } = useGardensAndPlants();
 
-  useEffect(() => fetchPlants(1, "a"));
+  useEffect(() => {
+    setPlants(contextPlants);
+  }, []);
+
   return (
     <View style={styles.pageContainer}>
       {plants.map((plant, index) => (

@@ -1,10 +1,14 @@
 
-import { UserPlant } from './models'
+import { Garden, UserPlant } from './models'
 
 export interface PlantContextProps {
   plants: UserPlant[];
-  fetchPlants: (userId: number, token: string) => void;
+  gardens: Garden[];
+  fetchPlants: (userId: string, token: string) => void;
   fetchPlantDetail: (plantId: string) => UserPlant | undefined;
+  fetchGardens: (userId: string, token: string) => void;
+  fetchGardenDetail: (gardenId: string) => Garden | undefined;
+  fetchGardenPlants: (gardenId: string) => (UserPlant[] | undefined);
 }
 
 export interface Plant {

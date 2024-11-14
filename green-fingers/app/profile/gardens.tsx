@@ -1,13 +1,12 @@
-import { View, StyleSheet } from "react-native";
+import { View } from "react-native";
 import React, { useEffect, useState } from "react";
-import { Garden } from "@/types/models";
-import { gardens as importGardens } from "@/dummyData/dummyData";
 import GardenCard from "@/components/GardenCard";
+import { useGardensAndPlants } from "@/context/GardensAndPlantsContext";
 
 const gardens: React.FC = () => {
-  const [gardens, setGardens] = useState<Garden[]>([]);
+  const { gardens, fetchGardens } = useGardensAndPlants();
 
-  useEffect(() => setGardens(importGardens), []);
+  useEffect(() => fetchGardens("a", "b"), []);
   return (
     <View style={{ flex: 1, gap: 8, marginTop: 8, marginHorizontal: "2.5%" }}>
       {gardens.map((garden, index) => (
