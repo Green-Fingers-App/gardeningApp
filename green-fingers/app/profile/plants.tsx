@@ -9,8 +9,8 @@ const Plants = () => {
   useEffect(() => fetchPlants(1, "a"));
   return (
     <View style={styles.pageContainer}>
-      {plants.map((plant) => (
-        <PlantCard plant={plant} />
+      {plants.map((plant, index) => (
+        <PlantCard plant={plant} key={index} />
       ))}
     </View>
   );

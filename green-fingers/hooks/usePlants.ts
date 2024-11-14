@@ -3,18 +3,20 @@ import { useState, useEffect } from "react";
 import { addPlant, getPlant, updatePlant, deletePlant } from "../firebase/plantService";
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "../firebase/firebaseConfig";
-import { Plant } from "../types/plantTypes";
+import { Plant } from "../types/models";
 
 export const usePlants = () => {
   const [plants, setPlants] = useState<Plant[]>([]);
-  const [plant, setPlant] = useState<Plant | null>(null);
+  const [plant, setPlant] = useState<Plant | undefined>(undefined);
   const [error, setError] = useState<string | null>(null);
 
   // Fetch a single plant by ID
   const fetchPlant = async (plantId: string) => {
     try {
       const data = await getPlant(plantId);
-      setPlant(data || null);
+      if (data) {
+        setPlant(data);
+      }
     } catch (err) {
       setError("Failed to fetch plant.");
     }
@@ -25,7 +27,7 @@ export const usePlants = () => {
     try {
       const plantsCollection = collection(db, "plants");
       const querySnapshot = await getDocs(plantsCollection);
-      const allPlants = querySnapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
+      const allPlants = querySnapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() } as Plant));
       setPlants(allPlants);
     } catch (err) {
       console.error("Error fetching plants:", err);
