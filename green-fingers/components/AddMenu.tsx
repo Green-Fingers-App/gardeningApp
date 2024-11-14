@@ -4,6 +4,7 @@ import colors from "@/constants/colors";
 import Input from "./Input";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import Button from "./Button";
+import DropDown from "./DropDown";
 
 const AddMenu = () => {
   const [plantChosen, setPlantChosen] = useState(false);
@@ -57,6 +58,7 @@ const AddMenu = () => {
             iconName="magnify"
           />
           <Input label="Nickname" placeholder="Nickname..." iconName="flower" />
+          <DropDown />
           <Button text="Add plant" type="primary" iconName="plus" />
         </View>
       )}

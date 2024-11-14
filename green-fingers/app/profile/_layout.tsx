@@ -15,7 +15,7 @@ const ProfileLayout: React.FC = () => {
   const router = useRouter();
   const { user } = useAuth();
   const [menuOpen, setMenuOpen] = useState<boolean>(false);
-  const { fetchPlants } = useGardensAndPlants();
+  const { fetchPlants, fetchGardens } = useGardensAndPlants();
 
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
@@ -23,6 +23,7 @@ const ProfileLayout: React.FC = () => {
 
   useEffect(() => {
     fetchPlants("a", "hallo");
+    fetchGardens("a", "hello");
   }, []);
 
   return (

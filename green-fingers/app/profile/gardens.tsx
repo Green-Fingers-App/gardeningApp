@@ -4,9 +4,7 @@ import GardenCard from "@/components/GardenCard";
 import { useGardensAndPlants } from "@/context/GardensAndPlantsContext";
 
 const gardens: React.FC = () => {
-  const { gardens, fetchGardens } = useGardensAndPlants();
-
-  useEffect(() => fetchGardens("a", "b"), []);
+  const { gardens } = useGardensAndPlants();
   return (
     <View style={{ flex: 1, gap: 8, marginTop: 8, marginHorizontal: "2.5%" }}>
       {gardens.map((garden, index) => (
