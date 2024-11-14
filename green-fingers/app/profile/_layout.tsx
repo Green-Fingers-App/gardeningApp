@@ -3,12 +3,20 @@ import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import { Tabs, useRouter } from "expo-router";
 import { MaterialIcons } from "@expo/vector-icons";
 import colors from "@/constants/colors";
+<<<<<<< HEAD
 import React, { useState } from "react";
 import { PlantsProvider } from "@/context/GardensAndPlantsContext";
 <<<<<<< HEAD
 import { TouchableOpacity } from "react-native";
 import { useRouter } from "expo-router";
 =======
+=======
+import React, { useEffect, useState } from "react";
+import {
+  PlantsProvider,
+  useGardensAndPlants,
+} from "@/context/GardensAndPlantsContext";
+>>>>>>> a29e080 (add plant cards to garden detail)
 import { StyleSheet, TouchableOpacity } from "react-native";
 >>>>>>> fdb88b5 (Add add-button component)
 import { View, Text } from "react-native";
@@ -19,10 +27,15 @@ const ProfileLayout: React.FC = () => {
   const router = useRouter();
   const { user } = useAuth();
   const [menuOpen, setMenuOpen] = useState<boolean>(false);
+  const { fetchPlants } = useGardensAndPlants();
 
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
   };
+
+  useEffect(() => {
+    fetchPlants("a", "hallo");
+  }, []);
 
   return (
     <>
@@ -92,7 +105,7 @@ const ProfileLayout: React.FC = () => {
       </Tabs>
       <View style={styles.addButtonContainer}>
         <TouchableOpacity style={styles.addButton} onPress={() => toggleMenu()}>
-          <MaterialIcons name="add" size={45} />
+          <MaterialIcons name={menuOpen ? "close" : "add"} size={45} />
         </TouchableOpacity>
       </View>
       {menuOpen && <AddMenu />}
@@ -130,5 +143,6 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     borderRadius: 30,
     transform: [{ translateX: -30 }],
+    transitionDuration: "200ms",
   },
 });
