@@ -122,7 +122,7 @@ erDiagram
     USERS ||--o{ GARDENS : "owns"
     PLANTS }o--|| PLANT_CATALOG : "refers to"
     GARDENS ||--o{ PLANTS : "contains"
-    USERS ||--|{ PLANT_CATALOG : "can access"
+    USERS ||--|{ PLANT_CATALOG : "read access"
 ```
 ## 10. Size and Performance
 TBD
