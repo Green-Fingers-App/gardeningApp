@@ -1,15 +1,12 @@
-import { Link, router } from "expo-router";
+import { router } from "expo-router";
 import { StatusBar } from "expo-status-bar";
-import React, { useEffect, useState } from "react";
-import { StyleSheet, Text, View } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
-
+import React, { useState } from "react";
+import { SafeAreaView, Text, View, StyleSheet } from "react-native";
+import { useAuth } from "@/context/AuthContext";
 import Input from "@/components/Input";
 import Button from "@/components/Button";
 import colors from "@/constants/colors";
 import textStyles from "@/constants/textStyles";
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
-import { auth } from "@/firebase/firebaseConfig";
 
 interface InputValues {
   email: string;
@@ -18,8 +15,9 @@ interface InputValues {
 
 type InputErrors = Partial<Record<keyof InputValues, string>>;
 
-export default function App() {
-  const [inputValues, setInputvalues] = useState<InputValues>({
+export default function LoginForm() {
+  const { login, authError } = useAuth();
+  const [inputValues, setInputValues] = useState<InputValues>({
     email: "",
     password: "",
   });
@@ -27,7 +25,7 @@ export default function App() {
   const [inputErrors, setInputErrors] = useState<InputErrors>({});
 
   const handleChange = (name: keyof InputValues, value: string): void => {
-    setInputvalues((prevState) => ({
+    setInputValues((prevState) => ({
       ...prevState,
       [name]: value,
     }));
@@ -40,8 +38,7 @@ export default function App() {
     }));
   };
 
-  // Validate inputs and log the user in
-  const validate = async (): Promise<void> => {
+  const validateAndLogin = async (): Promise<void> => {
     const { email, password } = inputValues;
 
     if (!email) {
@@ -54,26 +51,8 @@ export default function App() {
       return;
     }
 
-    try {
-      // Firebase login
-      await signInWithEmailAndPassword(auth, email, password);
-
-      // Redirect to profile/home on successful login
-      router.replace("/profile/home");
-    } catch (error) {
-      // Handle Firebase login errors
-      handleErrorMessage("email", "Invalid email or password");
-      handleErrorMessage("password", "Invalid email or password");
-      console.error("Login error:", error);
-    }
+    await login(email, password);
   };
-
-  // Log the current user to console for debugging
-  useEffect(() => {
-    const currentUser = auth.currentUser;
-    console.log("Logged-in user:", currentUser);
-    console.log("Logged-in user");
-  }, []);
 
   return (
     <SafeAreaView style={styles.container}>

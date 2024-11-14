@@ -1,20 +1,15 @@
-import {
-  View,
-  Text,
-  SafeAreaView,
-  StyleSheet,
-  TouchableOpacity,
-} from "react-native";
 import React, { useState } from "react";
+import { View, Text, SafeAreaView, StyleSheet } from "react-native";
+import { router } from "expo-router";
+import { useAuth } from "@/context/AuthContext"; // Import useAuth
 import { router } from "expo-router";
 import Input from "@/components/Input";
 import Button from "@/components/Button";
 import colors from "@/constants/colors";
 import textStyles from "@/constants/textStyles";
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
-import { auth } from "@/firebase/firebaseConfig";
 
 const Signup = () => {
+  const { signup, authError } = useAuth();
   const [inputValues, setInputValues] = useState<{
     email: string;
     confirmEmail: string;
@@ -38,7 +33,7 @@ const Signup = () => {
     }));
   };
 
-  const handleSignup = async () => {
+  const validateAndSignup = async () => {
     const { email, confirmEmail, password, confirmPassword } = inputValues;
 
     if (email !== confirmEmail) {
@@ -52,14 +47,7 @@ const Signup = () => {
     }
 
     setError(null);
-
-    try {
-      await createUserWithEmailAndPassword(auth, email, password);
-      router.replace("/profile/home");
-    } catch (error) {
-      console.error("Error during signup: ", error);
-      setError("Signup failed. Please try again.");
-    }
+    await signup(email, password);
   };
 
   return (
@@ -67,8 +55,8 @@ const Signup = () => {
       <Text style={textStyles.h1}>TAKE CARE OF YOUR PLANTS WITH EASE</Text>
       <Text style={textStyles.h3}>Sign Up Now</Text>
       <View style={styles.content}>
-        {/* Display error if any */}
         {error && <Text style={{ color: "red" }}>{error}</Text>}
+        {authError && <Text style={{ color: "red" }}>{authError}</Text>}
         <View style={styles.signUpFormContainer}>
           <View style={styles.inputFieldContainer}>
             <Input
@@ -77,6 +65,7 @@ const Signup = () => {
               iconName="email-outline"
               onChangeText={(text) => handleChange("email", text)}
               value={inputValues.email}
+
             />
             <Input
               label="Confirm Email"
@@ -104,7 +93,7 @@ const Signup = () => {
           </View>
           <Button
             text="Sign Up"
-            onPress={handleSignup}
+            onPress={validateAndSignup}
             style={{ width: "100%" }}
           />
         </View>

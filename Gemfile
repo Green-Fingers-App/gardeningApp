@@ -1,7 +1,7 @@
 source "https://rubygems.org"
 
 # Specify the Ruby version you're using
-ruby "3.3.5"
+ruby "3.3.6"
 
 gem "kramdown-parser-gfm"
 
@@ -15,6 +15,9 @@ gem "bundler", "~> 2.0"
 # Add Jekyll plugins here
 gem "jekyll-feed", "~> 0.15"
 gem "jekyll-seo-tag", "~> 2.7"
+
+# Add jekyll-mermaid for Mermaid diagrams
+gem 'jekyll-mermaid'
 
 # Optional: Add jekyll-livereload for live reloading during development
 gem "jekyll-livereload", "~> 0.2.0"
