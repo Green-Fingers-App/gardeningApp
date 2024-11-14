@@ -136,9 +136,9 @@ export interface Plant {
 
 //Garden interface
 export interface Garden {
-  id: number;
+  id: string;
   location: string;
-  plantIds: number[];  
+  plantIds: string[];  
 }
 
 //User interface
