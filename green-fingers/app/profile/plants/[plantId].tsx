@@ -2,7 +2,7 @@ import { Text, SafeAreaView } from "react-native";
 import { Text, SafeAreaView } from "react-native";
 import { Stack, useLocalSearchParams, useRouter } from "expo-router";
 import React, { useEffect, useState } from "react";
-import { usePlants } from "@/context/GardensAndPlantsContext";
+import { useGardensAndPlants } from "@/context/GardensAndPlantsContext";
 import { UserPlant } from "@/types/models";
 import colors from "@/constants/colors";
 import Accordion from "@/components/Accordion";

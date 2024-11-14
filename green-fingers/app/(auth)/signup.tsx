@@ -69,6 +69,7 @@ const Signup = () => {
               placeholder="Email"
               iconName="email-outline"
               onChangeText={(text) => handleChange("email", text)}
+              value={inputValues.email}
             />
             <Input
               label="Confirm Email"

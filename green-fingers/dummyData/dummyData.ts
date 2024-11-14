@@ -59,3 +59,62 @@ const users: User[] = [
     plantIds: [5]
   }
 ];
+
+// UserPlants
+export const userPlants: UserPlant[] = [
+  {
+    id: 1,
+    nickName: "Tommy Tomato",
+    plant: plants[0],
+    wateredDate: "2024-09-12",
+    plantedDate: "2024-04-10",
+    feededDate: "2024-10-10",
+    moistureLevel: Level.OPTIMAL,
+    sunlightLevel: Level.OPTIMAL,
+    harvested: false
+  },
+  {
+    id: 2,
+    nickName: "Red Rose",
+    plant: plants[1],
+    wateredDate: "2024-09-10",
+    plantedDate: "2024-05-01",
+    feededDate: "2024-10-23",
+    moistureLevel: Level.TOO_LOW,
+    sunlightLevel: Level.OPTIMAL,
+    harvested: false
+  },
+  {
+    id: 3,
+    nickName: "Orange King",
+    plant: plants[2],
+    wateredDate: "2024-09-14",
+    plantedDate: "2024-03-15",
+    feededDate: "2024-11-01",
+    moistureLevel: Level.OPTIMAL,
+    sunlightLevel: Level.TOO_HIGH,
+    harvested: true
+  },
+  {
+    id: 4,
+    nickName: "Basilico",
+    plant: plants[3],
+    wateredDate: "2024-09-13",
+    plantedDate: "2024-05-01",
+    feededDate: "2024-10-22",
+    moistureLevel: Level.TOO_HIGH,
+    sunlightLevel: Level.OPTIMAL,
+    harvested: false
+  },
+  {
+    id: 5,
+    nickName: "Frensh Princess",
+    plant: plants[4],
+    wateredDate: "2024-09-11",
+    plantedDate: "2024-04-01",
+    feededDate: "2024-10-13",
+    moistureLevel: Level.OPTIMAL,
+    sunlightLevel: Level.OPTIMAL,
+    harvested: true
+  }
+];

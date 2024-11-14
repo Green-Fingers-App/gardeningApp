@@ -12,4 +12,5 @@ export interface AuthContextProps {
   logout: () => void;
   explore: () => void;
   updateUser: (newUserData: Partial<User>) => void;
+  authError: string | null;
 }

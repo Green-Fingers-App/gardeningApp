@@ -6,7 +6,12 @@ import React, {
   useEffect,
 } from "react";
 import { router } from "expo-router";
-import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut } from "firebase/auth";
+import {
+  getAuth,
+  signInWithEmailAndPassword,
+  createUserWithEmailAndPassword,
+  signOut,
+} from "firebase/auth";
 import { auth } from "@/firebase/firebaseConfig";
 import { User, AuthContextProps } from "@/types/authtypes";
 
@@ -21,8 +26,9 @@ export const useAuth = () => {
   return context;
 };
 
-export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
-export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
+export const AuthProvider: React.FC<{ children: ReactNode }> = ({
+  children,
+}) => {
   const [user, setUser] = useState<User | null>(null);
   const [authError, setAuthError] = useState<string | null>(null);
 
@@ -46,21 +52,57 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
 
   // Login function
   const login = async (email: string, password: string) => {
-    const userData = await mockAuth(email, password);
-    setUser(userData);
+    try {
+      const userCredential = await signInWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+      const mappedUser = mapFirebaseUserToAppUser(userCredential.user);
+      setUser(mappedUser);
+      router.replace("/profile/home");
+    } catch (error) {
+      setAuthError("Invalid email or password");
+      console.error("Login error:", error);
+    }
   };
 
-  const logout = () => {
-    setUser(null);
-    router.replace("/login");
+  // Signup function
+  const signup = async (email: string, password: string) => {
+    try {
+      const userCredential = await createUserWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+      const mappedUser = mapFirebaseUserToAppUser(userCredential.user);
+      setUser(mappedUser);
+      router.replace("/profile/home");
+    } catch (error) {
+      setAuthError("Signup failed. Please try again.");
+      console.error("Signup error:", error);
+    }
+  };
+
+  // Logout function
+  const logout = async () => {
+    try {
+      await signOut(auth);
+      setUser(null);
+      router.replace("/login");
+    } catch (error) {
+      console.error("Logout error:", error);
+    }
   };
 
   const updateUser = (newUserData: Partial<User>) => {
-    setUser((prevUser) => ( prevUser ? {...prevUser, ...newUserData } : null));
+    setUser((prevUser) => (prevUser ? { ...prevUser, ...newUserData } : null));
   };
 
   return (
-    <AuthContext.Provider value={{ user, login, logout, updateUser }}>
+    <AuthContext.Provider
+      value={{ user, login, signup, logout, authError, updateUser }}
+    >
       {children}
     </AuthContext.Provider>
   );
