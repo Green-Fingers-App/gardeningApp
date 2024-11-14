@@ -87,7 +87,6 @@ const styles = StyleSheet.create({
     position: "relative",
     height: 96,
     paddingLeft: 8,
-    marginVertical: 5,
     borderRadius: 8,
     justifyContent: "center",
   },

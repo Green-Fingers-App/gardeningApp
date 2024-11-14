@@ -1,6 +1,6 @@
-import { View, Text } from "react-native";
+import { View } from "react-native";
 import React, { useEffect } from "react";
-import { usePlants } from "@/context/PlantsContext";
+import { usePlants } from "@/context/GardensAndPlantsContext";
 import PlantCard from "@/components/PlantCard";
 
 const plants = () => {
@@ -9,6 +9,7 @@ const plants = () => {
   useEffect(() => {
     fetchPlants(1, "a");
   }, []);
+
   return (
     <View style={{ gap: 8, flex: 1, alignItems: "center", marginTop: 8 }}>
       {plants.map((plant, index) => (
