@@ -67,20 +67,9 @@ As mentioned earlier, the "Green Fingers" application follows the MVVM architect
 
 ### 5.2 Class Diagram
 
-**Model Classes**:
-- **User Collection**: Represents the user data stored in the Firestore database.
-- **Plant Collection**: Represents the plant data stored in the Firestore database.
-- **Garden Collection**: Represents the garden data stored in the Firestore database.
+The following class diagram provides a high-level overview of the classes and their relationships in the "Green Fingers" application. The diagram includes the main classes such as User, Plant, Garden, and UserPlant.
 
-**View Components**:
-- **User Profile**: Displays the user's profile information.
-- **Plant Details**: Displays the details of a specific plant.
-- **Garden Overview**: Displays an overview of the user's garden.
-
-**ViewModel Classes**:
-- **UserViewModel**: Handles the user data and business logic.
-- **PlantViewModel**: Handles the plant data and business logic.
-- **GardenViewModel**: Handles the garden data and business logic.
+![Class Diagram](../../docs/assets/svg/architecturalDiagrams/classDiagram.drawio.svg)
 
 ## 6. Process View
 TBD
