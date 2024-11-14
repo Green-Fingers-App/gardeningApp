@@ -129,13 +129,17 @@ erDiagram
         string name
     }
 
-    USERS ||--o{ PLANTS : "has"
-    USERS ||--o{ GARDENS : "has"
+    %% Define relationships to indicate subcollections
+    USERS ||--o{ PLANTS : "owns" 
+    USERS ||--o{ GARDENS : "owns"
     PLANTS ||--o{ WATERING_SCHEDULES : "has"
     PLANTS ||--o{ FERTILIZER_SCHEDULES : "has"
     PLANTS }o--|| SOIL_TYPES : "uses"
     PLANTS }o--|| PLANT_TYPES : "belongs to"
     GARDENS ||--o{ PLANTS : "contains"
+    
+    %% Additional Relationships for Shared Collections
+    USERS ||--|{ PLANTS : "can access plant catalog"
 ```
 ## 10. Size and Performance
 TBD
