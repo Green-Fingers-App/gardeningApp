@@ -1,5 +1,7 @@
-import LandingScreen from "@/components/LandingScreen"
+import LandingScreen from "@/components/LandingScreen";
 
 const LandingPage = () => {
-    return <LandingScreen />
-}
+  return <LandingScreen />;
+};
+
+export default LandingPage;

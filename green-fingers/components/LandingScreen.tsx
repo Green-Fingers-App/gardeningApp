@@ -1,25 +1,29 @@
 import React from "react";
 import { View, StyleSheet } from "react-native";
-import LandingSVG from '@/app/LandingSVG';
+import LandingSVG from "@/components/LandingSVG";
 import Button from "./Button";
+import { useRouter } from "expo-router";
 
-const LandingScreen = () => (
-  <View style={styles.container}>
-    <LandingSVG />
-    <View style={styles.buttonContainer}>
-      <Button
-        text="Log In"
-        type="primary"
-        onPress={() => console.log("Log In Pressed")}
-      />
-      <Button
-        text="Sign Up"
-        type="secondary"
-        onPress={() => console.log("Sign Up Pressed")}
-      />
+const LandingScreen = () => {
+  const router = useRouter();
+  return (
+    <View style={styles.container}>
+      <LandingSVG />
+      <View style={styles.buttonContainer}>
+        <Button
+          text="Log In"
+          type="primary"
+          onPress={() => router.push("/login")}
+        />
+        <Button
+          text="Sign Up"
+          type="secondary"
+          onPress={() => router.push("/signup")}
+        />
+      </View>
     </View>
-  </View>
-);
+  );
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -29,9 +33,9 @@ const styles = StyleSheet.create({
     backgroundColor: "#cbddd1",
   },
   buttonContainer: {
-    width: "80%", 
+    width: "80%",
     marginTop: 20,
-    gap: 10, 
+    gap: 10,
   },
 });
 

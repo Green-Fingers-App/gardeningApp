@@ -1,6 +1,6 @@
 import React from "react";
 import { View, Text, ActivityIndicator, StyleSheet } from "react-native";
-import LoadingSVG from '@/app/LoadingSVG';
+import LoadingSVG from "@/components/LoadingSVG";
 
 const LoadingScreen = () => (
   <View style={styles.container}>
@@ -15,24 +15,24 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "#457d58"
+    backgroundColor: "#457d58",
   },
   text: {
     marginTop: 20,
     fontSize: 18,
   },
   logo: {
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-  }
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+  },
 });
 
 export default LoadingScreen;
 
 // import React, { useEffect, useRef } from "react";
 // import { View, Text, Animated, StyleSheet } from "react-native";
-// import LoadingSVG from "@/app/LoadingSVG"; 
+// import LoadingSVG from "@/app/LoadingSVG";
 
 // const LoadingScreen = () => {
 //   const fadeAnim = useRef(new Animated.Value(0)).current;
@@ -75,7 +75,7 @@ export default LoadingScreen;
 //   text: {
 //     marginTop: 20,
 //     fontSize: 18,
-    
+
 //   },
 // });
 
