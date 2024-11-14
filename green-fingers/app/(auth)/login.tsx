@@ -23,9 +23,6 @@ type InputErrors = Partial<Record<keyof InputValues, string>>;
 export default function LoginForm() {
   const { login } = useAuth();
   const [inputValues, setInputValues] = useState<InputValues>({
-export default function LoginForm() {
-  const { login } = useAuth();
-  const [inputValues, setInputValues] = useState<InputValues>({
     email: "",
     password: "",
   });
@@ -93,17 +90,9 @@ export default function LoginForm() {
               onFocus={() => handleErrorMessage("password", undefined)}
             />
           </View>
-          <Button text="Login" onPress={validateAndLogin} iconName="login" />
+          <Button text="Login" onPress={validate} iconName="login" />
           <Button
             type="tertiary"
-          {authError && <Text style={{ color: "red" }}>{authError}</Text>}
-          <Button 
-            text="Login"
-            onPress={validateAndLogin} // Triggers validateAndLogin, which calls login from AuthContext
-            iconName="login"
-          />
-          <Button 
-            type="tertiary" 
             text="Forgot Password?"
             onPress={() => router.push("/forgotpassword")}
           />

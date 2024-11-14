@@ -11,4 +11,5 @@ export interface AuthContextProps {
   signup: (email: string, password: string) => Promise<void>;
   logout: () => void;
   updateUser: (newUserData: Partial<User>) => void;
+  authError: string | null;
 }
