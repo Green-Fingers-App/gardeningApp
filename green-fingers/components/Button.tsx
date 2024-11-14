@@ -76,7 +76,7 @@ const Button: React.FC<ButtonProps> = ({
             color={textColor}
           />
         )}
-        <Text style={[textStyles.buttonText, { color: textColor }, type === "tertiary" && styles.tertiaryText]}>
+        <Text style={[textStyles.button, { color: textColor }, type === "tertiary" && styles.tertiaryText]}>
           {text}
         </Text>
       </View>

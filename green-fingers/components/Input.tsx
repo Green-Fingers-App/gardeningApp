@@ -107,7 +107,7 @@ const Input: React.FC<InputProps> = ({
           )}
           <TextInput
             {...props}
-            style={{ flex: 1, color: textColor }}
+            style={[textStyles.body,{ flex: 1, color: textColor }]}
             onFocus={() => {
               onFocus?.();
               setIsFocused(true);
