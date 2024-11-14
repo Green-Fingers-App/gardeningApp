@@ -122,7 +122,7 @@ export interface Planting {
 
 // Main Plant interface
 export interface Plant {
-  id: number;
+  id: string;
   name: PlantName;
   blooming: Blooming;
   waterFrequency: WaterFrequency;
@@ -143,7 +143,7 @@ export interface Garden {
 
 //User interface
 export interface User {
-  id: number;
+  id: string;
   username: string;
   firstName: string;
   lastName: string;
@@ -160,7 +160,7 @@ export enum Level {
 
 //User's own plant interface
 export interface UserPlant {
-  id: number;
+  id: string;
   plant: Plant;
   nickName: string;
   wateredDate: string;

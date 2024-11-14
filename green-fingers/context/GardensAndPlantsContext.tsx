@@ -16,7 +16,7 @@ export const PlantsProvider: React.FC<{ children: ReactNode }> = ({
     return;
   };
 
-  const fetchPlantDetail = (plantId: number): UserPlant | undefined => {
+  const fetchPlantDetail = (plantId: string): UserPlant | undefined => {
     const plant = plants.find((plant) => plant.id === plantId);
     return plant;
   };

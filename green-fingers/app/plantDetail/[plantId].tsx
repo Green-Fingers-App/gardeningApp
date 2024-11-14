@@ -15,7 +15,7 @@ const PlantDetailPage = () => {
   const router = useRouter();
 
   useEffect(() => {
-    const newPlant = fetchPlantDetail(Number(plantId));
+    const newPlant = fetchPlantDetail(plantId.toString());
     if (newPlant) {
       setPlant(newPlant);
     }
