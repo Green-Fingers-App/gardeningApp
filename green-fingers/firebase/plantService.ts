@@ -2,7 +2,7 @@
 
 import { db } from "./firebaseConfig";
 import { collection, addDoc, getDoc, doc, updateDoc, deleteDoc } from "firebase/firestore";
-import { Plant } from "../types/plantTypes";
+import { Plant } from "../types/models";
 
 // Define the `plants` collection
 const plantsCollection = collection(db, "plant-catalog");

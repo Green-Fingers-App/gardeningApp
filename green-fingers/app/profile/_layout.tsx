@@ -13,6 +13,7 @@ import { StyleSheet, TouchableOpacity } from "react-native";
 >>>>>>> fdb88b5 (Add add-button component)
 import { View, Text } from "react-native";
 import { useAuth } from "@/context/AuthContext";
+import AddMenu from "@/components/AddMenu";
 
 const ProfileLayout: React.FC = () => {
   const router = useRouter();
@@ -94,11 +95,7 @@ const ProfileLayout: React.FC = () => {
           <MaterialIcons name="add" size={45} />
         </TouchableOpacity>
       </View>
-      {menuOpen && (
-        <View>
-          <Text>menu</Text>
-        </View>
-      )}
+      {menuOpen && <AddMenu />}
     </>
   );
 };
