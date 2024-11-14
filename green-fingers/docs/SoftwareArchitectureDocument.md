@@ -135,7 +135,8 @@ erDiagram
     PLANTS ||--o{ FERTILIZER_SCHEDULES : "has"
     PLANTS }o--|| SOIL_TYPES : "uses"
     PLANTS }o--|| PLANT_TYPES : "belongs to"
-    GARDENS ||--o{ PLANTS : "contains" ```
+    GARDENS ||--o{ PLANTS : "contains"
+```
 ## 10. Size and Performance
 TBD
 ## 11. Quality
