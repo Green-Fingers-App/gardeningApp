@@ -104,6 +104,10 @@ erDiagram
         int garden_id FK
         string name
         datetime created_at
+        datetime last_watered
+        datetime next_water
+        datetime last_fertilized
+        datetime next_fertilization
     }
     GARDENS {
         int id PK
@@ -113,10 +117,12 @@ erDiagram
         datetime created_at
     }
 
+    %% Relationships
     USERS ||--o{ PLANTS : "owns"
     USERS ||--o{ GARDENS : "owns"
     PLANTS }o--|| PLANT_CATALOG : "refers to"
     GARDENS ||--o{ PLANTS : "contains"
+    USERS ||--|{ PLANT_CATALOG : "can access"
 ```
 ## 10. Size and Performance
 TBD
