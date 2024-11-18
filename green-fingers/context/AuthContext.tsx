@@ -6,7 +6,8 @@ import {
   createUserWithEmailAndPassword,
   signOut,
 } from "firebase/auth";
-import { auth } from "@/firebase/firebaseConfig";
+import { doc, setDoc } from "firebase/firestore";
+import { auth, db } from "@/firebase/firebaseConfig";
 import { User, AuthContextProps } from "@/types/authtypes";
 
 const AuthContext = createContext<AuthContextProps | undefined>(undefined);
@@ -19,13 +20,11 @@ export const useAuth = () => {
   return context;
 };
 
-export const AuthProvider: React.FC<{ children: ReactNode }> = ({
-  children,
-}) => {
+export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [user, setUser] = useState<User | null>(null);
   const [authError, setAuthError] = useState<string | null>(null);
 
-  // map Firebase User to custom User type
+  // Map Firebase User to custom User type
   const mapFirebaseUserToAppUser = (firebaseUser: any): User => ({
     id: firebaseUser.uid,
     email: firebaseUser.email || "",
@@ -35,11 +34,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
   // Login function
   const login = async (email: string, password: string) => {
     try {
-      const userCredential = await signInWithEmailAndPassword(
-        auth,
-        email,
-        password
-      );
+      const userCredential = await signInWithEmailAndPassword(auth, email, password);
       const mappedUser = mapFirebaseUserToAppUser(userCredential.user);
       setUser(mappedUser);
       router.replace("/profile/home");
@@ -52,12 +47,22 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
   // Signup function
   const signup = async (email: string, password: string) => {
     try {
-      const userCredential = await createUserWithEmailAndPassword(
-        auth,
-        email,
-        password
-      );
-      const mappedUser = mapFirebaseUserToAppUser(userCredential.user);
+      // Create user with Firebase Auth
+      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+      const firebaseUser = userCredential.user;
+
+      // Map Firebase user to custom User type
+      const mappedUser = mapFirebaseUserToAppUser(firebaseUser);
+
+      // Create user document in Firestore
+      await setDoc(doc(db, "users", firebaseUser.uid), {
+        email: firebaseUser.email,
+        username: firebaseUser.displayName || "Flower Lover",
+        profile_picture: firebaseUser.photoURL || "",
+        created_at: new Date().toISOString(),
+      });
+
+      // Set the user in the state
       setUser(mappedUser);
       router.replace("/profile/home");
     } catch (error) {
@@ -77,6 +82,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
     }
   };
 
+  // Update user in state
   const updateUser = (newUserData: Partial<User>) => {
     setUser((prevUser) => (prevUser ? { ...prevUser, ...newUserData } : null));
   };

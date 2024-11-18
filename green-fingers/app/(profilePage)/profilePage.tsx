@@ -1,5 +1,5 @@
 import { View, Text, StyleSheet } from "react-native";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useAuth } from "@/context/AuthContext";
 
 import textStyles from "@/constants/textStyles";
@@ -9,27 +9,89 @@ import Button from "@/components/Button";
 import Input from "@/components/Input";
 
 import useForm from "@/hooks/useForm";
+import { db } from "@/firebase/firebaseConfig";
+import { doc, getDoc, setDoc, updateDoc } from "firebase/firestore";
 
 const Profile = () => {
   const { user, updateUser } = useAuth();
   const [editMode, setEditMode] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   // Initialize the form with existing user values
-  const { values, handleChange, resetForm } = useForm({
+  const { values, handleChange, resetForm, setValues } = useForm({
     username: user?.username || "",
     email: user?.email || "",
   });
 
+  useEffect(() => {
+    if (user?.id) {
+      fetchOrCreateUserProfile();
+    }
+  }, [user?.id]);
+
+  const fetchOrCreateUserProfile = async () => {
+    try {
+      setLoading(true);
+      const userDocRef = doc(db, "users", user.id);
+      const userDoc = await getDoc(userDocRef);
+
+      if (userDoc.exists()) {
+        // If the document exists, set form values
+        const userData = userDoc.data();
+        setValues({
+          username: userData.username || "",
+          email: userData.email || "",
+        });
+      } else {
+        // If the document does not exist, create it with default values
+        const initialData = {
+          username: user.username || "New User",
+          email: user.email || "",
+          profile_picture: "",
+          created_at: new Date().toISOString(),
+        };
+        await setDoc(userDocRef, initialData);
+        setValues({
+          username: initialData.username,
+          email: initialData.email,
+        });
+      }
+    } catch (error) {
+      console.error("Error fetching or creating user profile:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   const enableEditMode = () => setEditMode(true);
 
-  const saveChanges = () => {
-    updateUser(values);
-    setEditMode(false);
+  const saveChanges = async () => {
+    try {
+      if (user?.id) {
+        const userDocRef = doc(db, "users", user.id);
+        await updateDoc(userDocRef, {
+          username: values.username,
+          email: values.email,
+        });
+        updateUser(values);
+        setEditMode(false);
+      }
+    } catch (error) {
+      console.error("Error updating user profile:", error);
+    }
   };
+
+  if (loading) {
+    return (
+      <View style={styles.container}>
+        <Text style={textStyles.h1}>Loading profile...</Text>
+      </View>
+    );
+  }
 
   return (
     <View style={styles.container}>
-      <Text style={textStyles.h1}>Hello, {user?.username}</Text>
+      <Text style={textStyles.h1}>Hello, {values.username}</Text>
       {editMode ? (
         <View style={styles.editForm}>
           <Input
@@ -44,15 +106,14 @@ const Profile = () => {
             placeholder="Email"
             label="Enter new Email"
           />
-          <Button 
-            type="primary"
-            text="Save Changes"
-            onPress={saveChanges}
-          />
-          <Button 
+          <Button type="primary" text="Save Changes" onPress={saveChanges} />
+          <Button
             type="secondary"
             text="Cancel"
-            onPress={() => { resetForm(); setEditMode(false); }}
+            onPress={() => {
+              resetForm();
+              setEditMode(false);
+            }}
           />
         </View>
       ) : (
@@ -62,11 +123,7 @@ const Profile = () => {
           <Text style={textStyles.body}>{values.username}</Text>
           <Text style={textStyles.label}>Email:</Text>
           <Text style={textStyles.body}>{values.email}</Text>
-          <Button 
-            type="secondary"
-            text="Edit Profile"
-            onPress={enableEditMode}
-          />
+          <Button type="secondary" text="Edit Profile" onPress={enableEditMode} />
         </View>
       )}
     </View>

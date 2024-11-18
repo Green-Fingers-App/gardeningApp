@@ -6,7 +6,7 @@ import { Plant } from "../types/models";
 import { AddPlant } from "../types/models";
 
 // Define the `plants` collection
-const plantsCollection = collection(db, "plants");
+const plantsCollection = collection(db, "plant-catalog");
 
 // Add a new plant species
 export const addPlant = async (plantData: AddPlant): Promise<string | undefined> => {
@@ -22,7 +22,7 @@ export const addPlant = async (plantData: AddPlant): Promise<string | undefined>
 // Retrieve a plant species by ID
 export const getPlant = async (plantId: string): Promise<Plant | undefined> => {
   try {
-    const docRef = doc(db, "plants", plantId);
+    const docRef = doc(db, "plant-catalog", plantId);
     const docSnap = await getDoc(docRef);
     if (docSnap.exists()) {
       return docSnap.data() as Plant;
@@ -37,7 +37,7 @@ export const getPlant = async (plantId: string): Promise<Plant | undefined> => {
 // Update plant information
 export const updatePlant = async (plantId: string, updatedData: Partial<Plant>): Promise<void> => {
   try {
-    const docRef = doc(db, "plants", plantId);
+    const docRef = doc(db, "plant-catalog", plantId);
     await updateDoc(docRef, updatedData);
     console.log("Plant updated");
   } catch (error) {
@@ -48,7 +48,7 @@ export const updatePlant = async (plantId: string, updatedData: Partial<Plant>):
 // Delete a plant species
 export const deletePlant = async (plantId: string): Promise<void> => {
   try {
-    const docRef = doc(db, "plants", plantId);
+    const docRef = doc(db, "plant-catalog", plantId);
     await deleteDoc(docRef);
     console.log("Plant deleted");
   } catch (error) {
