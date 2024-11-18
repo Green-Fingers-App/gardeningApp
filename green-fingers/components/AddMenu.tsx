@@ -8,8 +8,16 @@ import Button from "./Button";
 import DropDown from "./DropDown";
 import PlantSearch from "./PlantSearch";
 import { Plant } from "@/types/plantTypes";
+import { useGardensAndPlants } from "@/context/GardensAndPlantsContext";
 
 const AddMenu = () => {
+  const { gardens } = useGardensAndPlants();
+
+  const gardenOptions = gardens.map((garden) => ({
+    value: garden.id,
+    label: garden.location,
+  }));
+
   const [plantChosen, setPlantChosen] = useState(false);
   const [gardenChosen, setGardenChosen] = useState(false);
   const [selectedPlant, setSelectedPlant] = useState<Plant | null>(null);
@@ -24,6 +32,10 @@ const AddMenu = () => {
 
   const handlePlantSelection = (plant: Plant) => {
     setSelectedPlant(plant);
+  };
+
+  const handleGardenSelect = (gardenId: string) => {
+    console.log("Selected Garden ID:", gardenId);
   };
 
   return (
@@ -62,7 +74,12 @@ const AddMenu = () => {
         <View style={[styles.menuOption, { gap: 8 }]}>
           <PlantSearch onSelectPlant={handlePlantSelection} />
           <Input label="Nickname" placeholder="Nickname..." iconName="flower" />
-          <DropDown />
+          <DropDown 
+            label="Select a Garden"
+            placeholder="Choose a garden..."
+            options={gardenOptions}
+            onSelect={handleGardenSelect}
+          />
           <Button text="Add plant" type="primary" iconName="plus" />
         </View>
       )}
