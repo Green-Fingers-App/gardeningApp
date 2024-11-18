@@ -4,7 +4,9 @@ import {
   userPlants as importPlants,
   gardens as importGardens,
 } from "../dummyData/dummyData";
-import { Garden, UserPlant } from "../types/models";
+import { Garden, Plant, UserPlant } from "../types/models";
+import { db } from "@/firebase/firebaseConfig";
+import { collection, getDocs } from "firebase/firestore";
 
 const PlantsContext = createContext<PlantContextProps | undefined>(undefined);
 
@@ -13,10 +15,24 @@ export const PlantsProvider: React.FC<{ children: ReactNode }> = ({
 }) => {
   const [plants, setPlants] = useState<UserPlant[]>([]);
   const [gardens, setGardens] = useState<Garden[]>([]);
+  const [databasePlants, setDatabasePlants] = useState<Plant[]>([]);
 
   const fetchPlants = async (userId: string, token: string): Promise<void> => {
     const newPlants = importPlants;
     setPlants(newPlants);
+  };
+
+  const fetchAllPlants = async () => {
+    try {
+      const plantsCollection = collection(db, "plants");
+      const querySnapshot = await getDocs(plantsCollection);
+      const allPlants = querySnapshot.docs.map(
+        (doc) => ({ id: doc.id, ...doc.data() } as Plant)
+      );
+      setDatabasePlants(allPlants);
+    } catch (err) {
+      console.error("Error fetching plants:", err);
+    }
   };
 
   const fetchGardens = (userId: string, token: string) => {
@@ -52,6 +68,7 @@ export const PlantsProvider: React.FC<{ children: ReactNode }> = ({
         plants,
         fetchPlants,
         fetchPlantDetail,
+        fetchAllPlants,
         gardens,
         fetchGardens,
         fetchGardenDetail,
