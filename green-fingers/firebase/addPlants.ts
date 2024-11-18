@@ -75,14 +75,14 @@ const plants: AddPlant[] = [
 
 // Function to check if a plant with the same name exists
 const plantExists = async (name: string) => {
-  const plantsCollection = db.collection("plants");
+  const plantsCollection = db.collection("plant-catalog");
   const querySnapshot = await plantsCollection.where("commonName", "==", name).get();
   return !querySnapshot.empty; // Returns true if plant with the same name exists
 };
 
 // Function to add plants to Firestore
 const addPlantsToFirestore = async () => {
-  const plantsCollection = db.collection("plants");
+  const plantsCollection = db.collection("plant-catalog");
 
   for (const plant of plants) {
     try {
