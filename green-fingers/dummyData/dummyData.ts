@@ -1,6 +1,6 @@
 // Dummy Data
 
-import { Pest, PestSeverity, Plant, Month, WaterFrequency, SunLight, HardinessZone, GrowthRate, ToxicityLevel, Garden, User, UserPlant, Level } from "../types/models";
+import { Pest, PestSeverity, Plant, Month, WaterFrequency, SunLight, Garden, User, UserPlant, Level } from "../types/models";
 
 // Pests
 const pests: Pest[] = [
@@ -30,7 +30,7 @@ const pests: Pest[] = [
 // Plants
 export const plants: Plant[] = [
   {
-    id: "1",
+    id: '1',
     name: { commonName: "Tomato", scientificName: "Solanum lycopersicum" },
     blooming: { start: Month.JUNE, end: Month.AUGUST, flowerColor: "Yellow" },
     waterFrequency: WaterFrequency.WEEKLY,
@@ -42,7 +42,7 @@ export const plants: Plant[] = [
     planting: { start: Month.MARCH, end: Month.APRIL },
   },
   {
-    id: "2",
+    id: '2',
     name: { commonName: "Rose", scientificName: "Rosa" },
     blooming: { start: Month.MAY, end: Month.OCTOBER, flowerColor: "Red" },
     waterFrequency: WaterFrequency.WEEKLY,
@@ -54,7 +54,7 @@ export const plants: Plant[] = [
     planting: { start: Month.MARCH, end: Month.MAY },
   },
   {
-    id: "3",
+    id: '3',
     name: { commonName: "Carrot", scientificName: "Daucus carota" },
     blooming: { start: Month.JUNE, end: Month.AUGUST, flowerColor: "White" },
     waterFrequency: WaterFrequency.WEEKLY,
@@ -66,7 +66,7 @@ export const plants: Plant[] = [
     planting: { start: Month.MARCH, end: Month.JUNE },
   },
   {
-    id: "4",
+    id: '4',
     name: { commonName: "Basil", scientificName: "Ocimum basilicum" },
     blooming: { start: Month.JUNE, end: Month.AUGUST, flowerColor: "Purple" },
     waterFrequency: WaterFrequency.DAILY,
@@ -78,7 +78,7 @@ export const plants: Plant[] = [
     planting: { start: Month.APRIL, end: Month.MAY },
   },
   {
-    id: "5",
+    id: '5',
     name: { commonName: "Lavender", scientificName: "Lavandula" },
     blooming: { start: Month.JUNE, end: Month.AUGUST, flowerColor: "Purple" },
     waterFrequency: WaterFrequency.BIWEEKLY,
@@ -93,15 +93,14 @@ export const plants: Plant[] = [
 
 // Gardens
 export const gardens: Garden[] = [
-  { id: "1", location: "Backyard", plantIds: ["1", "2"] },
-  { id: "2", location: "Front Yard", plantIds: ["3", "4"] },
-  { id: "3", location: "Community Garden", plantIds: ["5"] }
+  { id: '1', location: "Backyard", plantIds: ["1", "2"] },
+  { id: '2', location: "Front Yard", plantIds: ["3", "4"] },
+  { id: '3', location: "Community Garden", plantIds: ["5"] }
 ];
 
 // Users
 const users: User[] = [
   {
-    id: "1",
     username: "gardener_john",
     firstName: "John",
     lastName: "Doe",
@@ -109,7 +108,6 @@ const users: User[] = [
     plantIds: [1, 2]
   },
   {
-    id: "2",
     username: "green_thumb",
     firstName: "Jane",
     lastName: "Smith",
@@ -117,7 +115,6 @@ const users: User[] = [
     plantIds: [3, 4]
   },
   {
-    id: "3",
     username: "plant_lover",
     firstName: "Emily",
     lastName: "Brown",
@@ -129,7 +126,7 @@ const users: User[] = [
 // UserPlants
 export const userPlants: UserPlant[] = [
   {
-    id: "1",
+    id: '1',
     nickName: "Tommy Tomato",
     plant: plants[0],
     wateredDate: "2024-09-12",

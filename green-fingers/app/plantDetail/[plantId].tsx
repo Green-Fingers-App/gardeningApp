@@ -60,7 +60,7 @@ const PlantDetailPage = () => {
               </Text>
             </AccordionItem>
             <AccordionItem title="Sensors">
-              <Text style={{ color: "black" }}>Blap</Text>
+              <Text style={{ color: "black" }}>No sensors available</Text>
             </AccordionItem>
           </Accordion>
         </SafeAreaView>

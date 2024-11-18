@@ -5,6 +5,7 @@ export interface PlantContextProps {
   plants: UserPlant[];
   gardens: Garden[];
   fetchPlants: (userId: string, token: string) => void;
+  fetchAllPlants: () => Promise<void>;
   fetchPlantDetail: (plantId: string) => UserPlant | undefined;
   fetchGardens: (userId: string, token: string) => void;
   fetchGardenDetail: (gardenId: string) => Garden | undefined;

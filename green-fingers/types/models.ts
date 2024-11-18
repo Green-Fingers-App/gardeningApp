@@ -134,6 +134,19 @@ export interface Plant {
   planting: Planting;
 }
 
+
+export interface AddPlant {
+  name: PlantName;
+  blooming: Blooming;
+  waterFrequency: WaterFrequency;
+  harvest: Harvest;
+  sunLight: SunLight;
+  temperature: Temperature;
+  size: Size;
+  fertilizerType: string;
+  planting: Planting;
+}
+
 //Garden interface
 export interface Garden {
   id: string;
@@ -143,7 +156,6 @@ export interface Garden {
 
 //User interface
 export interface User {
-  id: string;
   username: string;
   firstName: string;
   lastName: string;
