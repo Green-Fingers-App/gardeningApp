@@ -41,24 +41,31 @@ const AddMenu = () => {
   // Handle the "Add Plant" action
   const handleAddPlant = () => {
     if (!selectedPlant || !selectedGarden || !nickName) return;
-
+  
     const addPlant: AddPlant = {
       nickName,
       garden_id: selectedGarden,
       catalogPlant_id: selectedPlant.id || "",
       name: selectedPlant.name,
-      type: selectedPlant.type,
-      water_frequency: selectedPlant.water_frequency,
-      water_amount: selectedPlant.water_amount,
-      temperature: selectedPlant.temperature,
-      humidity: selectedPlant.humidity,
-      light: selectedPlant.light,
-      soil_type: selectedPlant.soil_type,
-      fertilizer_type: selectedPlant.fertilizer_type,
-      fertilizer_frequency: selectedPlant.fertilizer_frequency,
+      type: selectedPlant.type || "Unknown",
+      water_frequency: selectedPlant.water_frequency || "Not specified",
+      water_amount: selectedPlant.water_amount || "N/A",
+      temperature: selectedPlant.temperature || { min: 0, max: 0 },
+      humidity: selectedPlant.humidity || "N/A",
+      light: selectedPlant.light || "N/A",
+      soil_type: selectedPlant.soil_type || "N/A",
+      fertilizer_type: selectedPlant.fertilizer_type || "N/A",
+      fertilizer_frequency: selectedPlant.fertilizer_frequency || "N/A",
     };
+  
+    // Call the createPlant function to save to the database
     createPlant(addPlant);
-    setPlantChosen(!plantChosen);
+  
+    // Reset state after adding
+    setPlantChosen(false);
+    setNickName("");
+    setSelectedGarden("");
+    setSelectedPlant(null);
   };
 
   return (
