@@ -4,17 +4,17 @@ import { Garden, UserPlant } from './models'
 export interface PlantContextProps {
   plants: UserPlant[];
   gardens: Garden[];
-  databasePlants: Plant[];
+  databasePlants: CatalogPlant[];
   fetchPlants: (userId: string, token: string) => void;
   fetchAllPlants: () => Promise<void>;
-  fetchPlantsByCommonName: (input: string) => Promise<Plant[]>;
+  fetchPlantsByCommonName: (input: string) => Promise<CatalogPlant[]>;
   fetchPlantDetail: (plantId: string) => UserPlant | undefined;
   fetchGardens: (userId: string, token: string) => void;
   fetchGardenDetail: (gardenId: string) => Garden | undefined;
   fetchGardenPlants: (gardenId: string) => UserPlant[] | undefined;
 }
 
-export interface Plant {
+export interface CatalogPlant {
   id?: string;
   name: {
     commonName: string;

@@ -7,19 +7,19 @@ import {
   StyleSheet,
 } from "react-native";
 import { useGardensAndPlants } from "@/context/GardensAndPlantsContext";
-import { Plant } from "@/types/plantTypes";
+import { CatalogPlant } from "@/types/plantTypes";
 import Input from "@/components/Input";
 import colors from "@/constants/colors";
 import textStyles from "@/constants/textStyles";
 
 interface PlantSearchProps {
-    onSelectPlant: (plant: Plant) => void;
+    onSelectPlant: (plant: CatalogPlant) => void;
   }
   
   const PlantSearch: React.FC<PlantSearchProps> = ({ onSelectPlant }) => {
     const { fetchPlantsByCommonName } = useGardensAndPlants();
     const [input, setInput] = useState<string>("");
-    const [suggestions, setSuggestions] = useState<Plant[]>([]);
+    const [suggestions, setSuggestions] = useState<CatalogPlant[]>([]);
     const [showDropdown, setShowDropdown] = useState<boolean>(false);
   
     const handleSearch = async (text: string) => {
@@ -35,7 +35,7 @@ interface PlantSearchProps {
       }
     };
   
-    const handleSelectPlant = (plant: Plant) => {
+    const handleSelectPlant = (plant: CatalogPlant) => {
       onSelectPlant(plant);
       setInput(plant.name.commonName);
       setShowDropdown(false);
