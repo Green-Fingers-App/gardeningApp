@@ -1,21 +1,29 @@
 import { View, Text, StyleSheet, Pressable } from "react-native";
 import React, { useState } from "react";
 import colors from "@/constants/colors";
+import textStyles from "@/constants/textStyles";
 import Input from "./Input";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import Button from "./Button";
 import DropDown from "./DropDown";
+import PlantSearch from "./PlantSearch";
+import { Plant } from "@/types/plantTypes";
 
 const AddMenu = () => {
   const [plantChosen, setPlantChosen] = useState(false);
   const [gardenChosen, setGardenChosen] = useState(false);
-
+  const [selectedPlant, setSelectedPlant] = useState<Plant | null>(null);
+  
   const toggleGardenMenu = () => {
     setGardenChosen(!gardenChosen);
   };
 
   const togglePlantMenu = () => {
     setPlantChosen(!plantChosen);
+  };
+
+  const handlePlantSelection = (plant: Plant) => {
+    setSelectedPlant(plant);
   };
 
   return (
@@ -52,11 +60,7 @@ const AddMenu = () => {
       )}
       {plantChosen && (
         <View style={[styles.menuOption, { gap: 8 }]}>
-          <Input
-            label="Search Plant"
-            placeholder="Search Plant..."
-            iconName="magnify"
-          />
+          <PlantSearch onSelectPlant={handlePlantSelection} />
           <Input label="Nickname" placeholder="Nickname..." iconName="flower" />
           <DropDown />
           <Button text="Add plant" type="primary" iconName="plus" />
