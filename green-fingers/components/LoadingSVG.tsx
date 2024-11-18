@@ -1,14 +1,15 @@
 import { Svg, G, Path, Defs, ClipPath } from "react-native-svg";
 import React from "react";
+import { Dimensions } from "react-native";
+
+const { width: screenWidth, height: screenHeight } = Dimensions.get("window");
 
 const LoadingSVG: React.FC = () => (
   <Svg
-    width="865"
-    zoomAndPan="magnify"
-    viewBox="0 0 648.75 1277.99994"
-    height="1704"
+    width={screenWidth}
+    height={screenHeight}
     preserveAspectRatio="xMidYMid meet"
-    version="1.0"
+    viewBox="0 0 650 1260"
   >
     <Defs>
       <G />

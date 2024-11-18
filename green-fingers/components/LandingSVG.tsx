@@ -1,14 +1,15 @@
 import { Svg, G, ClipPath, Path, Defs } from "react-native-svg";
 import React from "react";
+import { Dimensions } from "react-native";
+
+const { width: screenWidth, height: screenHeight } = Dimensions.get("window");
 
 const LandingSVG: React.FC = () => (
   <Svg
-    width="962"
-    zoomAndPan="magnify"
-    viewBox="0 0 721.5 442.499987"
-    height="590"
+    width={screenWidth}
+    height={screenHeight}
     preserveAspectRatio="xMidYMid meet"
-    version="1.0"
+    viewBox="0 0 720 800"
   >
     <Defs>
       <G />

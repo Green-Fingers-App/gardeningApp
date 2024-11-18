@@ -31,11 +31,14 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     backgroundColor: "#cbddd1",
+    zIndex: 20,
   },
   buttonContainer: {
     width: "80%",
     marginTop: 20,
     gap: 10,
+    position: "absolute",
+    bottom: "20%",
   },
 });
 

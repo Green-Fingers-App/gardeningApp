@@ -2,10 +2,7 @@ import { Tabs, useRouter } from "expo-router";
 import { MaterialIcons } from "@expo/vector-icons";
 import colors from "@/constants/colors";
 import React, { useEffect, useState } from "react";
-import {
-  PlantsProvider,
-  useGardensAndPlants,
-} from "@/context/GardensAndPlantsContext";
+import { useGardensAndPlants } from "@/context/GardensAndPlantsContext";
 import { StyleSheet, TouchableOpacity } from "react-native";
 import { View, Text } from "react-native";
 import { useAuth } from "@/context/AuthContext";
