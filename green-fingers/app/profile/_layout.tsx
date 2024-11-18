@@ -12,11 +12,15 @@ import { useRouter } from "expo-router";
 =======
 =======
 import React, { useEffect, useState } from "react";
+<<<<<<< HEAD
 import {
   PlantsProvider,
   useGardensAndPlants,
 } from "@/context/GardensAndPlantsContext";
 >>>>>>> a29e080 (add plant cards to garden detail)
+=======
+import { useGardensAndPlants } from "@/context/GardensAndPlantsContext";
+>>>>>>> a2c8fd0 (center landingscreen svg)
 import { StyleSheet, TouchableOpacity } from "react-native";
 >>>>>>> fdb88b5 (Add add-button component)
 import { View, Text } from "react-native";
