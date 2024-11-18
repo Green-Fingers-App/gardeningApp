@@ -4,9 +4,10 @@ import {
   userPlants as importPlants,
   gardens as importGardens,
 } from "../dummyData/dummyData";
-import { Garden, Plant, UserPlant } from "../types/models";
+import { Garden, UserPlant } from "../types/models";
+import { Plant } from "../types/plantTypes";
 import { db } from "@/firebase/firebaseConfig";
-import { collection, getDocs } from "firebase/firestore";
+import { collection, query, orderBy, startAt, endAt, getDocs } from "firebase/firestore";
 
 const PlantsContext = createContext<PlantContextProps | undefined>(undefined);
 
@@ -32,6 +33,28 @@ export const PlantsProvider: React.FC<{ children: ReactNode }> = ({
       setDatabasePlants(allPlants);
     } catch (err) {
       console.error("Error fetching plants:", err);
+    }
+  };
+
+  const fetchPlantsByCommonName = async (input: string): Promise<Plant[]> => {
+    try {
+      const plantsCollection = collection(db, "plant-catalog");
+      const q = query(
+        plantsCollection,
+        orderBy("name.commonName"),
+        startAt(input),
+        endAt(input + "\uf8ff")
+      );
+      const querySnapshot = await getDocs(q);
+      const plants: Plant[] = querySnapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+      })) as Plant[];
+      setDatabasePlants(plants);
+      return plants;
+    } catch (err) {
+      console.error("Error fetching plants by common name:", err);
+      throw err;
     }
   };
 
@@ -69,10 +92,12 @@ export const PlantsProvider: React.FC<{ children: ReactNode }> = ({
         fetchPlants,
         fetchPlantDetail,
         fetchAllPlants,
+        fetchPlantsByCommonName,
         gardens,
         fetchGardens,
         fetchGardenDetail,
         fetchGardenPlants,
+        databasePlants,
       }}
     >
       {children}
