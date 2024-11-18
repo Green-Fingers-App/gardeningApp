@@ -122,10 +122,10 @@ const styles = StyleSheet.create({
     textDecorationLine: "underline",
   },
   primaryDisabled: {
-    backgroundColor: colors.greyMedium,
+    backgroundColor: colors.greyLight,
   },
   secondaryDisabled: {
-    backgroundColor: colors.greyMedium,
+    backgroundColor: colors.greyLight,
     borderColor: colors.textMuted,
   },
   tertiaryDisabled: {

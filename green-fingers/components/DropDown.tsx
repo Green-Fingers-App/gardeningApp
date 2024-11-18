@@ -32,7 +32,7 @@ const DropDown: React.FC<DropDownProps> = ({
   const [menuOpen, setMenuOpen] = useState<boolean>(false);
   const [selectedOption, setSelectedOption] = useState<DropDownOption | null>(
     null
-  ); // Store the selected option
+  );
   const slideAnim = React.useRef(new Animated.Value(0)).current;
 
   const toggleMenu = () => {
@@ -46,24 +46,21 @@ const DropDown: React.FC<DropDownProps> = ({
 
   const animatedHeight = slideAnim.interpolate({
     inputRange: [0, 1],
-    outputRange: [0, options.length * 40], // Adjust height dynamically
+    outputRange: [0, options.length * 40],
   });
 
   const handleSelect = (value: string) => {
     const selected = options.find((option) => option.value === value);
     if (selected) {
-      setSelectedOption(selected); // Store the selected option
-      onSelect(value); // Call the parent's onSelect with the value
+      setSelectedOption(selected);
+      onSelect(value);
       toggleMenu();
     }
   };
 
   return (
     <View style={styles.container}>
-      {/* Label */}
       <Text style={[textStyles.label, styles.label]}>{label}</Text>
-
-      {/* Dropdown Input */}
       <Pressable
         onPress={toggleMenu}
         style={[
@@ -81,7 +78,6 @@ const DropDown: React.FC<DropDownProps> = ({
         />
       </Pressable>
 
-      {/* Dropdown Menu */}
       <Animated.View style={{ maxHeight: animatedHeight, overflow: "hidden" }}>
         {menuOpen && (
           <FlatList
