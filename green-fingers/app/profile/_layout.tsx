@@ -1,28 +1,27 @@
+import React, { useEffect, useState } from "react";
+import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import { Tabs, useRouter } from "expo-router";
 import { MaterialIcons } from "@expo/vector-icons";
-import colors from "@/constants/colors";
-import React, { useEffect, useState } from "react";
-import { useGardensAndPlants } from "@/context/GardensAndPlantsContext";
-import { StyleSheet, TouchableOpacity } from "react-native";
-import { View, Text } from "react-native";
 import { useAuth } from "@/context/AuthContext";
+import { useGardensAndPlants } from "@/context/GardensAndPlantsContext";
 import AddMenu from "@/components/AddMenu";
+import colors from "@/constants/colors";
 
 const ProfileLayout: React.FC = () => {
   const router = useRouter();
-  const { user } = useAuth();
-  const [menuOpen, setMenuOpen] = useState<boolean>(false);
+  const { user, isLoggedIn } = useAuth();
+  const [menuOpen, setMenuOpen] = useState(false);
   const { fetchPlants, fetchGardens, fetchAllPlants } = useGardensAndPlants();
 
-  const toggleMenu = () => {
-    setMenuOpen(!menuOpen);
-  };
+  const toggleMenu = () => setMenuOpen(!menuOpen);
 
   useEffect(() => {
-    fetchPlants("a", "hallo");
-    fetchGardens("a", "hello");
-    fetchAllPlants();
-  }, []);
+    if (isLoggedIn && user?.id) {
+      fetchPlants();
+      fetchGardens();
+      fetchAllPlants();
+    }
+  }, [isLoggedIn, user?.id, fetchPlants, fetchGardens, fetchAllPlants]);
 
   return (
     <>
@@ -37,18 +36,22 @@ const ProfileLayout: React.FC = () => {
             backgroundColor: colors.primaryDefault,
           },
           headerRight: () => (
-            <View>
-              <Text>Hello, {user?.email}</Text>
-              <TouchableOpacity
-                style={{ marginRight: 15 }}
-                onPress={() => router.push("/profilePage")}
-              >
-                <MaterialIcons
-                  name="account-circle"
-                  size={24}
-                  color={colors.bgLight}
-                />
-              </TouchableOpacity>
+            <View style={styles.headerRight}>
+              <Text style={styles.headerText}>
+                {isLoggedIn ? `Hello, ${user?.email}` : "Welcome"}
+              </Text>
+              {isLoggedIn && (
+                <TouchableOpacity
+                  style={styles.profileButton}
+                  onPress={() => router.push("/profilePage")}
+                >
+                  <MaterialIcons
+                    name="account-circle"
+                    size={24}
+                    color={colors.bgLight}
+                  />
+                </TouchableOpacity>
+              )}
             </View>
           ),
         }}
@@ -90,11 +93,13 @@ const ProfileLayout: React.FC = () => {
           }}
         />
       </Tabs>
-      <View style={styles.addButtonContainer}>
-        <TouchableOpacity style={styles.addButton} onPress={() => toggleMenu()}>
-          <MaterialIcons name={menuOpen ? "close" : "add"} size={45} />
-        </TouchableOpacity>
-      </View>
+      {isLoggedIn && (
+        <View style={styles.addButtonContainer}>
+          <TouchableOpacity style={styles.addButton} onPress={toggleMenu}>
+            <MaterialIcons name={menuOpen ? "close" : "add"} size={45} />
+          </TouchableOpacity>
+        </View>
+      )}
       {menuOpen && <AddMenu />}
     </>
   );
@@ -103,10 +108,24 @@ const ProfileLayout: React.FC = () => {
 export default ProfileLayout;
 
 const styles = StyleSheet.create({
+  headerRight: {
+    flexDirection: "row",
+    alignItems: "center",
+    marginRight: 15,
+  },
+  headerText: {
+    color: colors.bgLight,
+    marginRight: 8,
+    fontSize: 14,
+  },
+  profileButton: {
+    marginLeft: 8,
+  },
   addButtonContainer: {
     position: "absolute",
     bottom: 20,
     left: "50%",
+    transform: [{ translateX: -30 }],
   },
   addButton: {
     height: 60,
@@ -115,7 +134,5 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     borderRadius: 30,
-    transform: [{ translateX: -30 }],
-    transitionDuration: "200ms",
   },
 });
