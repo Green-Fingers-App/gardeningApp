@@ -1,4 +1,4 @@
-import React, { createContext, useState, ReactNode, useContext } from "react";
+import React, { createContext, useState, ReactNode, useContext, useEffect } from "react";
 import { router } from "expo-router";
 import {
   getAuth,
@@ -24,12 +24,28 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
   const [user, setUser] = useState<User | null>(null);
   const [authError, setAuthError] = useState<string | null>(null);
 
+  // Check if the user is logged in (derived from the user state)
+  const isLoggedIn = !!user;
+
   // Map Firebase User to custom User type
   const mapFirebaseUserToAppUser = (firebaseUser: any): User => ({
     id: firebaseUser.uid,
     email: firebaseUser.email || "",
     username: firebaseUser.displayName || "Anonymous",
   });
+
+  // Listen for authentication state changes (optional)
+  useEffect(() => {
+    const unsubscribe = getAuth().onAuthStateChanged((firebaseUser) => {
+      if (firebaseUser) {
+        const mappedUser = mapFirebaseUserToAppUser(firebaseUser);
+        setUser(mappedUser);
+      } else {
+        setUser(null);
+      }
+    });
+    return () => unsubscribe();
+  }, []);
 
   // Login function
   const login = async (email: string, password: string) => {
@@ -47,14 +63,11 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
   // Signup function
   const signup = async (email: string, password: string) => {
     try {
-      // Create user with Firebase Auth
       const userCredential = await createUserWithEmailAndPassword(auth, email, password);
       const firebaseUser = userCredential.user;
 
-      // Map Firebase user to custom User type
       const mappedUser = mapFirebaseUserToAppUser(firebaseUser);
 
-      // Create user document in Firestore
       await setDoc(doc(db, "users", firebaseUser.uid), {
         email: firebaseUser.email,
         username: firebaseUser.displayName || "Flower Lover",
@@ -62,7 +75,6 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
         created_at: new Date().toISOString(),
       });
 
-      // Set the user in the state
       setUser(mappedUser);
       router.replace("/profile/home");
     } catch (error) {
@@ -89,7 +101,15 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
 
   return (
     <AuthContext.Provider
-      value={{ user, login, signup, logout, authError, updateUser }}
+      value={{
+        user,
+        isLoggedIn,
+        login,
+        signup,
+        logout,
+        authError,
+        updateUser,
+      }}
     >
       {children}
     </AuthContext.Provider>

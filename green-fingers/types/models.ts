@@ -150,6 +150,7 @@ export interface AddPlant {
 //Garden interface
 export interface Garden {
   id: string;
+  name: string;
   location: string;
   plantIds: string[];  
 }

@@ -1,5 +1,5 @@
-import { View, Text, StyleSheet } from "react-native";
 import React, { useState, useEffect } from "react";
+import { View, Text, StyleSheet } from "react-native";
 import { useAuth } from "@/context/AuthContext";
 
 import textStyles from "@/constants/textStyles";
@@ -12,10 +12,11 @@ import useForm from "@/hooks/useForm";
 import { db } from "@/firebase/firebaseConfig";
 import { doc, getDoc, setDoc, updateDoc } from "firebase/firestore";
 
-const Profile = () => {
+const Profile: React.FC = () => {
   const { user, updateUser } = useAuth();
   const [editMode, setEditMode] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   // Initialize the form with existing user values
   const { values, handleChange, resetForm, setValues } = useForm({
@@ -30,17 +31,21 @@ const Profile = () => {
   }, [user?.id]);
 
   const fetchOrCreateUserProfile = async () => {
+    if (!user?.id) return;
+
     try {
       setLoading(true);
-      const userDocRef = doc(db, "users", user.id);
+      setError(null);
+
+      const userDocRef = doc(db, "users", `${user.id}`);
       const userDoc = await getDoc(userDocRef);
 
       if (userDoc.exists()) {
         // If the document exists, set form values
         const userData = userDoc.data();
         setValues({
-          username: userData.username || "",
-          email: userData.email || "",
+          username: userData?.username || "",
+          email: userData?.email || "",
         });
       } else {
         // If the document does not exist, create it with default values
@@ -58,26 +63,31 @@ const Profile = () => {
       }
     } catch (error) {
       console.error("Error fetching or creating user profile:", error);
+      setError("Failed to load user profile. Please try again.");
     } finally {
       setLoading(false);
     }
   };
 
-  const enableEditMode = () => setEditMode(true);
+  const enableEditMode = () => {
+    setEditMode(true);
+    setError(null);
+  };
 
   const saveChanges = async () => {
+    if (!user?.id) return;
+
     try {
-      if (user?.id) {
-        const userDocRef = doc(db, "users", user.id);
-        await updateDoc(userDocRef, {
-          username: values.username,
-          email: values.email,
-        });
-        updateUser(values);
-        setEditMode(false);
-      }
+      const userDocRef = doc(db, "users", `${user.id}`);
+      await updateDoc(userDocRef, {
+        username: values.username,
+        email: values.email,
+      });
+      updateUser(values); // Update user in Auth context
+      setEditMode(false);
     } catch (error) {
       console.error("Error updating user profile:", error);
+      setError("Failed to save changes. Please try again.");
     }
   };
 
@@ -91,6 +101,7 @@ const Profile = () => {
 
   return (
     <View style={styles.container}>
+      {error && <Text style={styles.errorText}>{error}</Text>}
       <Text style={textStyles.h1}>Hello, {values.username}</Text>
       {editMode ? (
         <View style={styles.editForm}>
@@ -103,8 +114,8 @@ const Profile = () => {
           <Input
             value={values.email}
             onChangeText={(text) => handleChange("email", text)}
-            placeholder="Email"
-            label="Enter new Email"
+            placeholder="Enter new Email"
+            label="Email"
           />
           <Button type="primary" text="Save Changes" onPress={saveChanges} />
           <Button
@@ -145,5 +156,9 @@ const styles = StyleSheet.create({
   viewMode: {
     flexDirection: "column",
     gap: 8,
+  },
+  errorText: {
+    color: colors.bgError,
+    marginBottom: 8,
   },
 });
