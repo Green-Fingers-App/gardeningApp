@@ -26,7 +26,7 @@ import {
 import { db } from "@/firebase/firebaseConfig";
 import { useAuth } from "@/context/AuthContext";
 import { addGarden, addPlant } from "@/firebase/plantService";
-import { gardens as importGardens } from "@/dummyData/dummyData";
+
 
 interface PlantContextProps {
   plants: UserPlant[];
@@ -65,10 +65,9 @@ export const PlantsProvider: React.FC<{ children: ReactNode }> = ({
       );
 
       const snapshot = await getDocs(gardensQuery);
-      // const userGardens = snapshot.docs.map(
-      //   (doc) => ({ id: doc.id, ...doc.data() } as Garden)
-      // );
-      const userGardens = importGardens;
+      const userGardens = snapshot.docs.map(
+        (doc) => ({ id: doc.id, ...doc.data() } as Garden)
+      );
 
       setGardens(userGardens);
     } catch (error) {

@@ -34,7 +34,7 @@ const AddPlantOption: React.FC<AddPlantOptionProps> = ({
 
   const gardenOptions = gardens.map((garden) => ({
     value: garden.id,
-    label: garden.location,
+    label: garden.name,
   }));
 
   const { user } = useAuth();
