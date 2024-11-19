@@ -20,6 +20,7 @@ import { useAuth } from "@/context/AuthContext";
 import { addPlant } from "@/firebase/plantService";
 import { gardens as importGardens } from "@/dummyData/dummyData";
 
+
 interface PlantContextProps {
   plants: UserPlant[];
   gardens: Garden[];
@@ -29,6 +30,11 @@ interface PlantContextProps {
   fetchPlantsByCommonName: (input: string) => Promise<CatalogPlant[]>;
   createPlant: (plantData: AddUserPlant) => void;
   fetchGardens: () => void;
+  addGarden: (gardenName: string, location: string) => Promise<void>;
+  addPlantToGarden: (
+    plant: UserPlant,
+    gardenId: string
+  ) => Promise<void>;
   fetchPlantDetail: (plantId: string) => UserPlant | undefined;
   fetchGardenDetail: (gardenId: string) => Garden | undefined;
   fetchGardenPlants: (gardenId: string) => UserPlant[] | undefined;
@@ -45,16 +51,14 @@ export const PlantsProvider: React.FC<{ children: ReactNode }> = ({
 
   const { user } = useAuth();
 
-  // Fetch user's gardens from Firestore
+  // Fetch user's gardens
   const fetchGardens = async () => {
     if (!user?.id) return;
-
     try {
       const gardensQuery = query(
         collection(db, "gardens"),
         where("userId", "==", user.id)
       );
-
       const snapshot = await getDocs(gardensQuery);
       // const userGardens = snapshot.docs.map(
       //   (doc) => ({ id: doc.id, ...doc.data() } as Garden)
@@ -67,16 +71,33 @@ export const PlantsProvider: React.FC<{ children: ReactNode }> = ({
     }
   };
 
-  // Fetch user's plants from Firestore
+  // Add a new garden
+  const addGarden = async (gardenName: string, location: string): Promise<void> => {
+    if (!user?.id) return;
+    try {
+      const newGarden = {
+        userId: user.id,
+        name: gardenName,
+        location,
+        createdAt: new Date().toISOString(),
+        plantIds: [],
+      };
+      await addDoc(collection(db, "gardens"), newGarden);
+      console.log("Garden added successfully!");
+      fetchGardens(); // Refresh gardens
+    } catch (error) {
+      console.error("Error adding garden:", error);
+    }
+  };
+
+  // Fetch user's plants
   const fetchPlants = async () => {
     if (!user?.id) return;
-
     try {
       const plantsQuery = query(
         collection(db, "user-plants"),
         where("userId", "==", user.id)
       );
-
       const snapshot = await getDocs(plantsQuery);
       const userPlants = snapshot.docs.map(
         (doc) => ({ id: doc.id, ...doc.data() } as UserPlant)
@@ -92,12 +113,7 @@ export const PlantsProvider: React.FC<{ children: ReactNode }> = ({
   ): Promise<CatalogPlant[]> => {
     try {
       const plantsCollection = collection(db, "plant-catalog");
-      const q = query(
-        plantsCollection,
-        orderBy("name.commonName"),
-        startAt(input),
-        endAt(input + "\uf8ff")
-      );
+      const q = query(plantsCollection, where("name.commonName", ">=", input));
       const querySnapshot = await getDocs(q);
       const plants: CatalogPlant[] = querySnapshot.docs.map((doc) => ({
         id: doc.id,
@@ -110,7 +126,7 @@ export const PlantsProvider: React.FC<{ children: ReactNode }> = ({
       throw err;
     }
   };
-
+  
   // Fetch all plants in the catalog
   const fetchAllPlants = async () => {
     try {
@@ -124,6 +140,7 @@ export const PlantsProvider: React.FC<{ children: ReactNode }> = ({
       console.error("Error fetching plants:", err);
     }
   };
+
 
   // Fetch plant details by ID
   const fetchPlantDetail = (plantId: string): UserPlant | undefined => {
@@ -174,6 +191,8 @@ export const PlantsProvider: React.FC<{ children: ReactNode }> = ({
         fetchPlantDetail,
         fetchGardenDetail,
         fetchGardenPlants,
+        addGarden,
+        addPlantToGarden,
         databasePlants,
       }}
     >
