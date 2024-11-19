@@ -1,9 +1,8 @@
-import { Text, SafeAreaView } from "react-native";
+import { Text, SafeAreaView, Image } from "react-native";
 import { Stack, useLocalSearchParams, useRouter } from "expo-router";
 import React, { useEffect, useState } from "react";
 import { useGardensAndPlants } from "@/context/GardensAndPlantsContext";
 import { UserPlant } from "@/types/models";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
 import colors from "@/constants/colors";
 import Accordion from "@/components/Accordion";
 import AccordionItem from "@/components/AccordionItem";
@@ -12,7 +11,6 @@ const PlantDetailPage = () => {
   const { plantId } = useLocalSearchParams();
   const { fetchPlantDetail } = useGardensAndPlants();
   const [plant, setPlant] = useState<UserPlant | null>(null);
-  const router = useRouter();
 
   useEffect(() => {
     const newPlant = fetchPlantDetail(plantId.toString());
@@ -26,13 +24,6 @@ const PlantDetailPage = () => {
       <Stack.Screen
         options={{
           title: plant?.name.commonName || "Plant Details",
-          headerLeft: () => (
-            <MaterialCommunityIcons
-              name="arrow-left"
-              size={25}
-              onPress={() => router.back()}
-            />
-          ),
           headerStyle: {
             backgroundColor: colors.primaryDefault,
           },
@@ -40,6 +31,12 @@ const PlantDetailPage = () => {
       />
       {plant ? (
         <SafeAreaView>
+          <Image
+            source={{
+              uri: "https://www.istockphoto.com/de/foto/orange-gerbera-flower-head-macro-top-view-gm2111424340-566975557",
+            }}
+            style={{ width: "100%", height: 100 }}
+          />
           <Accordion>
             <AccordionItem title="Status">
               <Text>Last watered: {plant.wateredDate}</Text>
