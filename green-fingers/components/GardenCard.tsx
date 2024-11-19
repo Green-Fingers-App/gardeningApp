@@ -23,7 +23,7 @@ const GardenCard: React.FC<GardenCardProps> = ({ garden }) => {
   return (
     <TouchableOpacity
       style={styles.cardContainer}
-      onPress={() => router.push(`/gardenDetail/${garden.id}`)}
+      onPress={() => router.push(`/profile/gardens/${garden.id}`)}
     >
       <View style={{ flexDirection: "row", alignItems: "center", gap: 8 }}>
         <MaterialCommunityIcons
