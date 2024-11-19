@@ -2,12 +2,13 @@
 
 import { db } from "./firebaseConfig";
 import { collection, addDoc, getDoc, doc, updateDoc, deleteDoc } from "firebase/firestore";
-import { Plant } from "../types/models";
+import { AddGarden, Plant } from "../types/models";
 import { AddUserPlant } from "../types/models";
 
 // Define the `plants` collection
 const plantsCollection = collection(db, "plant-catalog");
-const userPlantsCollection = collection(db, "user-plants")
+const userPlantsCollection = collection(db, "user-plants");
+const gardenCollection = collection(db, "gardens")
 
 // Add a new plant species
 export const addPlant = async (plantData: AddUserPlant): Promise<string | undefined> => {
@@ -19,6 +20,16 @@ export const addPlant = async (plantData: AddUserPlant): Promise<string | undefi
     console.error("Error adding plant: ", error);
   }
 };
+
+export const addGarden = async (gardenData: AddGarden): Promise<string | undefined> => {
+  try {
+    const docRef= await addDoc(gardenCollection, gardenData);
+    console.log("Garden add with ID: ", docRef.id);
+    return docRef.id;
+  } catch (error) {
+    console.error("Error adding plant: ", error);
+  }
+}
 
 // Retrieve a plant species by ID
 export const getPlant = async (plantId: string): Promise<Plant | undefined> => {
