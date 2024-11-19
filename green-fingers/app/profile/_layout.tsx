@@ -20,6 +20,7 @@ const ProfileLayout: React.FC = () => {
       fetchPlants();
       fetchGardens();
       fetchAllPlants();
+      console.log("Fetching plants and gardens");
     }
   }, [isLoggedIn, user?.id]);
 
