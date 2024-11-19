@@ -1,4 +1,4 @@
-import { Plant, Month, WaterFrequency, SunLight, AddPlant} from "../types/models";
+import { Plant, Month, WaterFrequency, SunLight, AddUserPlant} from "../types/models";
 import {v4 as uuidv4} from 'uuid'
 
 // addPlants.js
@@ -14,7 +14,7 @@ admin.initializeApp({
 const db = admin.firestore();
 
 // Array of plant data to add to Firestore
-const plants: AddPlant[] = [
+const plants: AddUserPlant[] = [
   {
     name: { commonName: "Tomato", scientificName: "Solanum lycopersicum" },
     blooming: { start: Month.JUNE, end: Month.AUGUST, flowerColor: "Yellow" },
