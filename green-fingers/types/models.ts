@@ -134,17 +134,49 @@ export interface Plant {
   planting: Planting;
 }
 
+// Catalog Plant interface
+export interface CatalogPlant {
+  id?: string;
+  name: {
+    commonName: string;
+    scientificName?: string;
+  };
+  type: string;
+  water_frequency: string;
+  water_amount?: string;
+  temperature?: {
+    min?: number;
+    max?: number;
+  };
+  humidity?: string;
+  light?: string;
+  soil_type?: string;
+  fertilizer_type?: string;
+  fertilizer_frequency?: string;
+}
+
 
 export interface AddPlant {
-  name: PlantName;
-  blooming: Blooming;
-  waterFrequency: WaterFrequency;
-  harvest: Harvest;
-  sunLight: SunLight;
-  temperature: Temperature;
-  size: Size;
-  fertilizerType: string;
-  planting: Planting;
+  id?: string;
+  nickName: string;
+  garden_id: string;
+  catalogPlant_id: string;
+  name: {
+    commonName: string;
+    scientificName?: string;
+  };
+  type: string;
+  water_frequency: string;
+  water_amount?: string;
+  temperature?: {
+    min?: number;
+    max?: number;
+  };
+  humidity?: string;
+  light?: string;
+  soil_type?: string;
+  fertilizer_type?: string;
+  fertilizer_frequency?: string;
 }
 
 //Garden interface

@@ -4,9 +4,10 @@ import { addPlant, getPlant, updatePlant, deletePlant } from "../firebase/plantS
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "../firebase/firebaseConfig";
 import { Plant } from "../types/models";
+import { AddPlant } from "../types/models";
 
 export const usePlants = () => {
-  const [plants, setPlants] = useState<Plant[]>([]);
+  const [plants, setPlants] = useState<AddPlant[]>([]);
   const [plant, setPlant] = useState<Plant | undefined>(undefined);
   const [error, setError] = useState<string | null>(null);
 
@@ -35,7 +36,7 @@ export const usePlants = () => {
     }
   };
 
-  const createPlant = async (plantData: Plant) => {
+  const createPlant = async (plantData: AddPlant) => {
     try {
       const id = await addPlant(plantData);
       if (id) {

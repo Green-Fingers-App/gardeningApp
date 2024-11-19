@@ -1,75 +1,125 @@
 import { View, Text, StyleSheet, Pressable } from "react-native";
 import React, { useState } from "react";
 import colors from "@/constants/colors";
+import textStyles from "@/constants/textStyles";
 import Input from "./Input";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import Button from "./Button";
 import DropDown from "./DropDown";
+import PlantSearch from "./PlantSearch";
+import { CatalogPlant } from "@/types/plantTypes";
+import { AddPlant } from "@/types/models";
+import { useGardensAndPlants } from "@/context/GardensAndPlantsContext";
+import { usePlants } from "@/hooks/usePlants";
 
 const AddMenu = () => {
+  const { gardens } = useGardensAndPlants();
+  const { createPlant } = usePlants();
+
+  // Transform gardens into options for the dropdown
+  const gardenOptions = gardens.map((garden) => ({
+    value: garden.id,
+    label: garden.location,
+  }));
+
   const [plantChosen, setPlantChosen] = useState(false);
-  const [gardenChosen, setGardenChosen] = useState(false);
+  const [nickName, setNickName] = useState<string>("");
+  const [selectedGarden, setSelectedGarden] = useState<string>("");
+  const [selectedPlant, setSelectedPlant] = useState<CatalogPlant | null>(null);
 
-  const toggleGardenMenu = () => {
-    setGardenChosen(!gardenChosen);
-  };
+  // Handle toggling menus
+  const togglePlantMenu = () => setPlantChosen(!plantChosen);
 
-  const togglePlantMenu = () => {
-    setPlantChosen(!plantChosen);
+  // Handle updates to inputs
+  const handlePlantSelection = (plant: CatalogPlant) => setSelectedPlant(plant);
+  const handleNickNameChange = (text: string) => setNickName(text);
+  const handleGardenSelect = (gardenId: string) => setSelectedGarden(gardenId);
+
+  // Determine if the Add Plant button should be disabled
+  const isAddPlantDisabled = !nickName || !selectedGarden || !selectedPlant;
+
+  // Handle the "Add Plant" action
+  const handleAddPlant = () => {
+    if (!selectedPlant || !selectedGarden || !nickName) return;
+  
+    const addPlant: AddPlant = {
+      nickName,
+      garden_id: selectedGarden,
+      catalogPlant_id: selectedPlant.id || "",
+      name: selectedPlant.name,
+      type: selectedPlant.type || "Unknown",
+      water_frequency: selectedPlant.water_frequency || "Not specified",
+      water_amount: selectedPlant.water_amount || "N/A",
+      temperature: selectedPlant.temperature || { min: 0, max: 0 },
+      humidity: selectedPlant.humidity || "N/A",
+      light: selectedPlant.light || "N/A",
+      soil_type: selectedPlant.soil_type || "N/A",
+      fertilizer_type: selectedPlant.fertilizer_type || "N/A",
+      fertilizer_frequency: selectedPlant.fertilizer_frequency || "N/A",
+    };
+  
+    // Call the createPlant function to save to the database
+    createPlant(addPlant);
+  
+    // Reset state after adding
+    setPlantChosen(false);
+    setNickName("");
+    setSelectedGarden("");
+    setSelectedPlant(null);
   };
 
   return (
     <View style={styles.menuContainer}>
       <View style={styles.menuHeaderContainer}>
-        <Text style={styles.titleText}>
-          {!plantChosen && !gardenChosen ? (
-            "Add"
-          ) : plantChosen ? (
-            <Pressable onPress={() => setPlantChosen(!plantChosen)}>
-              <Text style={styles.titleText}>
+        <Text style={textStyles.h3}>
+          {plantChosen ? (
+            <Pressable onPress={() => setPlantChosen(false)}>
+              <Text style={textStyles.h3}>
                 <MaterialCommunityIcons name="arrow-left" size={20} /> Add Plant
               </Text>
             </Pressable>
           ) : (
-            <Pressable onPress={() => setGardenChosen(!gardenChosen)}>
-              <Text style={styles.titleText}>
-                <MaterialCommunityIcons name="arrow-left" size={20} /> Add
-                Garden
-              </Text>
-            </Pressable>
+            "Add"
           )}
         </Text>
       </View>
-      {!plantChosen && !gardenChosen && (
-        <View style={{}}>
-          <Pressable onPress={() => togglePlantMenu()}>
-            <Text style={styles.menuOption}>Plant</Text>
-          </Pressable>
-          <Pressable onPress={() => toggleGardenMenu()}>
-            <Text style={styles.menuOption}>Garden</Text>
-          </Pressable>
-        </View>
-      )}
-      {plantChosen && (
-        <View style={[styles.menuOption, { gap: 8 }]}>
-          <Input
-            label="Search Plant"
-            placeholder="Search Plant..."
-            iconName="magnify"
+      {!plantChosen ? (
+        <View style={styles.optionContainer}>
+          <Button 
+            text="Plant"
+            iconName="flower"
+            type="tertiary"
+            onPress={togglePlantMenu}
           />
-          <Input label="Nickname" placeholder="Nickname..." iconName="flower" />
-          <DropDown />
-          <Button text="Add plant" type="primary" iconName="plus" />
-        </View>
-      )}
-      {gardenChosen && (
-        <View style={[styles.menuOption, { gap: 8 }]}>
-          <Input
-            label="Garden Name"
+          <Button 
+            text="Garden"
             iconName="nature"
-            placeholder="Garden Name..."
+            type="tertiary"
           />
-          <Button type="primary" text="Add Garden" iconName="plus" />
+        </View>
+      ) : (
+        <View style={[styles.menuOption, { gap: 8 }]}>
+          <PlantSearch onSelectPlant={handlePlantSelection} />
+          <Input
+            label="Nickname"
+            placeholder="Nickname..."
+            iconName="flower"
+            value={nickName}
+            onChangeText={handleNickNameChange}
+          />
+          <DropDown
+            label="Select a Garden"
+            placeholder="Choose a garden..."
+            options={gardenOptions}
+            onSelect={handleGardenSelect}
+          />
+          <Button
+            text="Add plant"
+            type="primary"
+            iconName="plus"
+            onPress={handleAddPlant}
+            buttonState={isAddPlantDisabled ? "disabled" : "default"}
+          />
         </View>
       )}
     </View>
@@ -80,12 +130,15 @@ export default AddMenu;
 
 const styles = StyleSheet.create({
   menuContainer: {
+    flexDirection: "column",
+    gap: 8,
     backgroundColor: "#fff",
     borderRadius: 8,
     position: "absolute",
     bottom: 70,
     width: "95%",
     margin: "2.5%",
+    paddingBottom: 16,
   },
   menuHeaderContainer: {
     backgroundColor: colors.primaryDefault,
@@ -94,12 +147,19 @@ const styles = StyleSheet.create({
     borderTopLeftRadius: 8,
     borderTopRightRadius: 8,
   },
-  menuOption: {
-    padding: 8,
-    fontSize: 18,
-  },
   titleText: {
     fontSize: 20,
     fontWeight: "bold",
+    color: colors.bgLight,
+  },
+  optionContainer: {
+    flexDirection: "column",
+    gap: 8,
+    padding: 8,
+  },
+  menuOption: {
+    padding: 8,
+    fontSize: 18,
+    color: colors.textPrimary,
   },
 });
