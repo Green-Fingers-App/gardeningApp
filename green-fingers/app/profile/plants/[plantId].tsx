@@ -1,4 +1,4 @@
-import { Text, SafeAreaView, Image } from "react-native";
+import { Text, SafeAreaView, Image, ActivityIndicator, View } from "react-native";
 import { Stack, useLocalSearchParams, useRouter } from "expo-router";
 import React, { useEffect, useState } from "react";
 import { useGardensAndPlants } from "@/context/GardensAndPlantsContext";
@@ -6,11 +6,19 @@ import { UserPlant } from "@/types/models";
 import colors from "@/constants/colors";
 import Accordion from "@/components/Accordion";
 import AccordionItem from "@/components/AccordionItem";
+import OptionsMenu from "@/components/OptionMenu";
+import { useDeletePlant } from "@/hooks/useDeletePlant";
 
 const PlantDetailPage = () => {
   const { plantId } = useLocalSearchParams();
   const { fetchPlantDetail } = useGardensAndPlants();
   const [plant, setPlant] = useState<UserPlant | null>(null);
+  const { deleting, handleDeletePlant } = useDeletePlant();
+
+  const options = [
+    { label: "Edit", onPress: () => console.log("Edit plant") },
+    { label: "Delete", onPress: () => plant && handleDeletePlant(plant) },
+  ];
 
   useEffect(() => {
     const newPlant = fetchPlantDetail(plantId.toString());
@@ -27,9 +35,12 @@ const PlantDetailPage = () => {
           headerStyle: {
             backgroundColor: colors.primaryDefault,
           },
+          headerRight: () => {
+            return <OptionsMenu options={options} />;
+          },
         }}
       />
-      {plant ? (
+      {plant && !deleting ? (
         <SafeAreaView>
           <Image
             source={{
@@ -63,6 +74,11 @@ const PlantDetailPage = () => {
             </AccordionItem>
           </Accordion>
         </SafeAreaView>
+      ) : deleting ? (
+        <View style={{ alignItems: "center" }}>
+          <ActivityIndicator size="small" color="#457D58" />
+          <Text> Deleting... </Text>
+        </View>
       ) : (
         <Text>Loading...</Text>
       )}
