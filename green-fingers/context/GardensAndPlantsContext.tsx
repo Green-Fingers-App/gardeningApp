@@ -1,12 +1,11 @@
 
 import React, { createContext, ReactNode, useContext, useState, useEffect } from "react";
-import { PlantContextProps } from "@/types/plantTypes";
+
 import {
   userPlants as importPlants,
   gardens as importGardens,
 } from "../dummyData/dummyData";
-import { Garden,Plant, UserPlant } from "../types/models";
-import { CatalogPlant } from "../types/plantTypes";
+import { Garden, CatalogPlant, UserPlant } from "../types/models";
 import { db } from "@/firebase/firebaseConfig";
 import { collection, doc, query, orderBy, startAt, endAt, getDocs, onSnapshot, where} from "firebase/firestore";
 import { useAuth } from "@/context/AuthContext";
@@ -14,9 +13,10 @@ import { useAuth } from "@/context/AuthContext";
 interface PlantContextProps {
   plants: UserPlant[];
   gardens: Garden[];
-  databasePlants: Plant[];
+  databasePlants: CatalogPlant[];
   fetchPlants: () => void;
   fetchAllPlants: () => void;
+  fetchPlantsByCommonName: (input: string) => Promise<CatalogPlant[]>;
   fetchGardens: () => void;
   fetchPlantDetail: (plantId: string) => UserPlant | undefined;
   fetchGardenDetail: (gardenId: string) => Garden | undefined;
@@ -95,11 +95,6 @@ export const PlantsProvider: React.FC<{ children: ReactNode }> = ({ children }) 
       throw err;
     }
   };
-
-  const fetchGardens = (userId: string, token: string) => {
-    const newGardens = importGardens;
-    setGardens(newGardens);
-  };
     
   // Fetch all plants in the catalog
   const fetchAllPlants = async () => {
@@ -149,8 +144,6 @@ export const PlantsProvider: React.FC<{ children: ReactNode }> = ({ children }) 
     <PlantsContext.Provider
       value={{
         plants,
-        gardens,
-        databasePlants,
         fetchPlants,
         fetchAllPlants,
         fetchPlantsByCommonName,

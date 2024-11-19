@@ -134,6 +134,27 @@ export interface Plant {
   planting: Planting;
 }
 
+// Catalog Plant interface
+export interface CatalogPlant {
+  id?: string;
+  name: {
+    commonName: string;
+    scientificName?: string;
+  };
+  type: string;
+  water_frequency: string;
+  water_amount?: string;
+  temperature?: {
+    min?: number;
+    max?: number;
+  };
+  humidity?: string;
+  light?: string;
+  soil_type?: string;
+  fertilizer_type?: string;
+  fertilizer_frequency?: string;
+}
+
 
 export interface AddPlant {
   id?: string;
