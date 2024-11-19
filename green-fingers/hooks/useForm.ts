@@ -16,6 +16,7 @@ const useForm = (initialValues: any) => {
 
   return {
     values,
+    setValues,
     handleChange,
     resetForm,
   };
