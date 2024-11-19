@@ -1,15 +1,15 @@
-import { Plant, Month, WaterFrequency, SunLight, AddUserPlant} from "../types/models";
-import {v4 as uuidv4} from 'uuid'
+import { Plant, Month, WaterFrequency, SunLight, AddPlant } from "../types/models";
+import { v4 as uuidv4 } from "uuid";
 
-// addPlants.js
+// Firebase Admin Initialization
 const admin = require("firebase-admin");
-
-// Initialize Firebase with service account
 const serviceAccount = require("./serviceAccountKey.json");
 
-admin.initializeApp({
-  credential: admin.credential.cert(serviceAccount),
-});
+if (!admin.apps.length) {
+  admin.initializeApp({
+    credential: admin.credential.cert(serviceAccount),
+  });
+}
 
 const db = admin.firestore();
 
@@ -69,42 +69,60 @@ const plants: Plant[] = [
     size: { height: 60, width: 90 },
     fertilizerType: "No fertilizer required",
     planting: { start: Month.MARCH, end: Month.APRIL },
-  }
+  },
 ];
 
-
-// Function to check if a plant with the same name exists
-const plantExists = async (name: string) => {
-  const plantsCollection = db.collection("plant-catalog");
-  const querySnapshot = await plantsCollection.where("commonName", "==", name).get();
-  return !querySnapshot.empty; // Returns true if plant with the same name exists
+// Function to check if a plant with the same name already exists in Firestore
+const plantExists = async (commonName: string): Promise<boolean> => {
+  try {
+    const plantsCollection = db.collection("plant-catalog");
+    const querySnapshot = await plantsCollection.where("name.commonName", "==", commonName).get();
+    return !querySnapshot.empty; // Returns true if a plant with the same name exists
+  } catch (error) {
+    console.error("Error checking if plant exists:", error);
+    throw error;
+  }
 };
 
-// Function to add plants to Firestore
-const addPlantsToFirestore = async () => {
-  const plantsCollection = db.collection("plant-catalog");
+// Function to add a single plant to Firestore
+const addPlantToFirestore = async (plant: AddPlant): Promise<void> => {
+  try {
+    const plantsCollection = db.collection("plant-catalog");
 
-  for (const plant of plants) {
-    try {
-      // Check if plant with the same name already exists
-      const exists = await plantExists(plant.name.commonName);
-      if (exists) {
-        console.log(`Plant with name "${plant.name.commonName}" already exists. Skipping...`);
-        continue; // Skip to the next plant if duplicate is found
-      }
-
-      // Add plant if it doesn't exist
-      const docRef = await plantsCollection.add(plant);
-      console.log(`Added plant with ID: ${docRef.id}`);
-    } catch (error) {
-      console.error("Error adding plant: ", error);
+    // Check if the plant already exists
+    const exists = await plantExists(plant.name.commonName);
+    if (exists) {
+      console.log(`Plant with name "${plant.name.commonName}" already exists. Skipping...`);
+      return;
     }
-  }
 
+    // Add the plant
+    const plantId = uuidv4(); // Assign a unique ID for consistency
+    await plantsCollection.doc(plantId).set({
+      id: plantId,
+      ...plant,
+    });
+    console.log(`Successfully added plant "${plant.name.commonName}" with ID: ${plantId}`);
+  } catch (error) {
+    console.error("Error adding plant:", error);
+  }
+};
+
+// Function to add multiple plants to Firestore
+const addPlantsToFirestore = async () => {
+  for (const plant of plants) {
+    await addPlantToFirestore(plant);
+  }
   console.log("Finished adding plants.");
 };
 
-addPlantsToFirestore().then(() => {
-  console.log("Script completed");
-  process.exit(0);
-});
+// Execute the script
+addPlantsToFirestore()
+  .then(() => {
+    console.log("All plants processed successfully.");
+    process.exit(0);
+  })
+  .catch((error) => {
+    console.error("Error processing plants:", error);
+    process.exit(1);
+  });
