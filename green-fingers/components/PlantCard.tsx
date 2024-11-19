@@ -29,7 +29,7 @@ const PlantCard: React.FC<PlantCardProps> = ({ plant }) => {
       {!deleting ? (
         <>
           <View style={{ flexDirection: "row", alignItems: "center" }}>
-            <Text style={styles.commonName}>{plant.plant.name.commonName}</Text>
+            <Text style={styles.commonName}>{plant.name.commonName}</Text>
             <Pressable
               onPress={() => handleDeletePlant(plant)}
               style={({ pressed }) => [
@@ -49,7 +49,7 @@ const PlantCard: React.FC<PlantCardProps> = ({ plant }) => {
             </Pressable>
           </View>
           <Text style={styles.scientificName}>
-            {plant.plant.name.scientificName}
+            {plant.name.scientificName}
           </Text>
           <Image width={80} height={80} style={styles.picture} />
           {plant.moistureLevel === "Too Low" ? (

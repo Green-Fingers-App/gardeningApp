@@ -7,14 +7,13 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 import Button from "./Button";
 import DropDown from "./DropDown";
 import PlantSearch from "./PlantSearch";
-import { CatalogPlant } from "@/types/plantTypes";
-import { AddPlant } from "@/types/models";
+import { CatalogPlant, AddUserPlant } from "@/types/models";
 import { useGardensAndPlants } from "@/context/GardensAndPlantsContext";
-import { usePlants } from "@/hooks/usePlants";
+import { useAuth } from "@/context/AuthContext";
 
 const AddMenu = () => {
-  const { gardens, addGarden } = useGardensAndPlants();
-  const { createPlant } = usePlants();
+  const { gardens, createPlant } = useGardensAndPlants();
+  const { user } = useAuth();
 
   // Garden dropdown options
   const gardenOptions = gardens.map((garden) => ({
@@ -58,21 +57,39 @@ const AddMenu = () => {
   const handleAddPlant = async () => {
     if (!selectedPlant || !selectedGarden || !nickName.trim()) return;
 
-    const addPlant: AddPlant = {
+  // Handle the "Add Plant" action
+  const handleAddPlant = () => {
+    if (!selectedPlant || !selectedGarden || !nickName) return;
+
+    const addPlant: AddUserPlant = {
       nickName,
       garden_id: selectedGarden,
       catalogPlant_id: selectedPlant.id || "",
+      userId: user?.id || -1,
       name: selectedPlant.name,
-      type: selectedPlant.type || "Unknown",
-      water_frequency: selectedPlant.water_frequency || "Not specified",
-      water_amount: selectedPlant.water_amount || "N/A",
-      temperature: selectedPlant.temperature || { min: 0, max: 0 },
-      humidity: selectedPlant.humidity || "N/A",
-      light: selectedPlant.light || "N/A",
-      soil_type: selectedPlant.soil_type || "N/A",
-      fertilizer_type: selectedPlant.fertilizer_type || "N/A",
-      fertilizer_frequency: selectedPlant.fertilizer_frequency || "N/A",
+      blooming: selectedPlant.blooming,
+      waterFrequency: selectedPlant.waterFrequency,
+      harvest: selectedPlant.harvest,
+      sunLight: selectedPlant.sunLight,
+      temperature: selectedPlant.temperature,
+      size: selectedPlant.size,
+      fertilizerType: selectedPlant.fertilizerType,
+      planting: selectedPlant.planting,
+      wateredDate: "",
+      plantedDate: "",
+      feededDate: "",
+      moistureLevel: "Optimal",
+      sunlightLevel: "Optimal",
+      harvested: false,
     };
+    // Call the createPlant function to save to the database
+    createPlant(addPlant);
+
+    // Reset state after adding
+    setPlantChosen(false);
+    setNickName("");
+    setSelectedGarden("");
+    setSelectedPlant(null);
 
     try {
       await createPlant(addPlant); // Save plant to Firestore
@@ -111,12 +128,7 @@ const AddMenu = () => {
             type="tertiary"
             onPress={() => toggleMenu("plant")}
           />
-          <Button
-            text="Garden"
-            iconName="nature"
-            type="tertiary"
-            onPress={() => toggleMenu("garden")}
-          />
+          <Button text="Garden" iconName="nature" type="tertiary" />
         </View>
       )}
 

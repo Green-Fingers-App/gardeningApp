@@ -3,15 +3,16 @@
 import { db } from "./firebaseConfig";
 import { collection, addDoc, getDoc, doc, updateDoc, deleteDoc } from "firebase/firestore";
 import { Plant } from "../types/models";
-import { AddPlant } from "../types/models";
+import { AddUserPlant } from "../types/models";
 
 // Define the `plants` collection
 const plantsCollection = collection(db, "plant-catalog");
+const userPlantsCollection = collection(db, "user-plants")
 
 // Add a new plant species
-export const addPlant = async (plantData: AddPlant): Promise<string | undefined> => {
+export const addPlant = async (plantData: AddUserPlant): Promise<string | undefined> => {
   try {
-    const docRef = await addDoc(plantsCollection, plantData);
+    const docRef = await addDoc(userPlantsCollection, plantData);
     console.log("Plant added with ID: ", docRef.id);
     return docRef.id;
   } catch (error) {
