@@ -5,7 +5,13 @@ import React, {
   useState,
   useEffect,
 } from "react";
-import { Garden, CatalogPlant, UserPlant, AddUserPlant } from "../types/models";
+import {
+  Garden,
+  CatalogPlant,
+  UserPlant,
+  AddUserPlant,
+  AddGarden,
+} from "../types/models";
 import { db } from "@/firebase/firebaseConfig";
 import {
   collection,
@@ -17,7 +23,7 @@ import {
   where,
 } from "firebase/firestore";
 import { useAuth } from "@/context/AuthContext";
-import { addPlant } from "@/firebase/plantService";
+import { addGarden, addPlant } from "@/firebase/plantService";
 import { gardens as importGardens } from "@/dummyData/dummyData";
 
 interface PlantContextProps {
@@ -32,6 +38,7 @@ interface PlantContextProps {
   fetchPlantDetail: (plantId: string) => UserPlant | undefined;
   fetchGardenDetail: (gardenId: string) => Garden | undefined;
   fetchGardenPlants: (gardenId: string) => UserPlant[] | undefined;
+  createGarden: (gardenData: AddGarden) => void;
 }
 
 const PlantsContext = createContext<PlantContextProps | undefined>(undefined);
@@ -148,8 +155,19 @@ export const PlantsProvider: React.FC<{ children: ReactNode }> = ({
       if (id) {
         setPlants((prevPlants) => [...prevPlants, { ...plantData, id }]);
       }
-    } catch (err) {
-      console.error("Error creating plant:", err);
+    } catch (error) {
+      console.error("Error creating plant:", error);
+    }
+  };
+
+  const createGarden = async (gardenData: AddGarden) => {
+    try {
+      const id = await addGarden(gardenData);
+      if (id) {
+        setGardens((prevGardens) => [...prevGardens, { ...gardenData, id }]);
+      }
+    } catch (error) {
+      console.error("Error creating garden: ", error);
     }
   };
 
@@ -174,6 +192,7 @@ export const PlantsProvider: React.FC<{ children: ReactNode }> = ({
         fetchPlantDetail,
         fetchGardenDetail,
         fetchGardenPlants,
+        createGarden,
         databasePlants,
       }}
     >
