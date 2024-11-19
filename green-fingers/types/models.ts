@@ -165,6 +165,7 @@ export interface Garden extends AddGarden {
 export interface AddGarden {
   name: string;
   location: string;
+  userId: number;
 }
 
 //User interface

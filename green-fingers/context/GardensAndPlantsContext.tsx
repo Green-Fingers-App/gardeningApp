@@ -23,8 +23,8 @@ import {
   where,
 } from "firebase/firestore";
 import { useAuth } from "@/context/AuthContext";
-import { addGarden, addPlant } from "@/firebase/plantService";
-import { gardens as importGardens } from "@/dummyData/dummyData";
+import { addGarden, addPlant, deletePlant } from "@/firebase/plantService";
+
 
 interface PlantContextProps {
   plants: UserPlant[];
@@ -34,6 +34,7 @@ interface PlantContextProps {
   fetchAllPlants: () => void;
   fetchPlantsByCommonName: (input: string) => Promise<CatalogPlant[]>;
   createPlant: (plantData: AddUserPlant) => void;
+  deleteUserPlant: (plantId: string) => void;
   fetchGardens: () => void;
   fetchPlantDetail: (plantId: string) => UserPlant | undefined;
   fetchGardenDetail: (gardenId: string) => Garden | undefined;
@@ -63,10 +64,9 @@ export const PlantsProvider: React.FC<{ children: ReactNode }> = ({
       );
 
       const snapshot = await getDocs(gardensQuery);
-      // const userGardens = snapshot.docs.map(
-      //   (doc) => ({ id: doc.id, ...doc.data() } as Garden)
-      // );
-      const userGardens = importGardens;
+      const userGardens = snapshot.docs.map(
+        (doc) => ({ id: doc.id, ...doc.data() } as Garden)
+      );
 
       setGardens(userGardens);
     } catch (error) {
@@ -160,6 +160,16 @@ export const PlantsProvider: React.FC<{ children: ReactNode }> = ({
     }
   };
 
+  // Delete plant
+  const deleteUserPlant = async (plantId: string) => {
+    try {
+      await deletePlant(plantId);
+      setPlants((prevPlants) => prevPlants.filter((plant) => plant.id !== plantId));
+    } catch (error) {
+      console.error("Error deleting plant:", error);
+    }
+  };
+
   const createGarden = async (gardenData: AddGarden) => {
     try {
       const id = await addGarden(gardenData);
@@ -187,6 +197,7 @@ export const PlantsProvider: React.FC<{ children: ReactNode }> = ({
         fetchAllPlants,
         fetchPlantsByCommonName,
         createPlant,
+        deleteUserPlant,
         gardens,
         fetchGardens,
         fetchPlantDetail,

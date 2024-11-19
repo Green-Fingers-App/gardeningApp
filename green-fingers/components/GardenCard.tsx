@@ -1,6 +1,7 @@
 import { View, Text, StyleSheet } from "react-native";
 import React from "react";
 import colors from "@/constants/colors";
+import textStyles from "@/constants/textStyles";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { Garden } from "@/types/models";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
@@ -11,23 +12,26 @@ interface GardenCardProps {
 }
 
 const GardenCard: React.FC<GardenCardProps> = ({ garden }) => {
+  const handleUpdate = () => {
+    console.log(`Update garden: ${garden.id}`);
+  };
+
+  const handleDelete = () => {
+    console.log(`Delete garden: ${garden.id}`);
+  };
+
   return (
     <TouchableOpacity
       style={styles.cardContainer}
-      onPress={() => router.push(`/gardenDetail/${garden.id}`)}
+      onPress={() => router.push(`/profile/gardens/${garden.id}`)}
     >
-      <View
-        style={{
-          flexDirection: "row",
-          alignItems: "center",
-        }}
-      >
+      <View style={{ flexDirection: "row", alignItems: "center", gap: 8 }}>
         <MaterialCommunityIcons
           name="nature"
-          size={20}
+          size={24}
           color={colors.secondaryDefault}
         />
-        <Text style={styles.title}>{garden.location}</Text>
+        <Text style={textStyles.h3}>{garden.name}</Text>
       </View>
     </TouchableOpacity>
   );
@@ -45,9 +49,5 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     justifyContent: "center",
     paddingHorizontal: 8,
-  },
-  title: {
-    fontWeight: "bold",
-    fontSize: 16,
   },
 });

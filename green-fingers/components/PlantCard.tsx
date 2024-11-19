@@ -24,7 +24,7 @@ const PlantCard: React.FC<PlantCardProps> = ({ plant }) => {
   return (
     <TouchableOpacity
       style={styles.cardContainer}
-      onPress={() => router.push(`/plantDetail/${plant.id}`)}
+      onPress={() => router.push(`profile/plants/${plant.id}`)}
     >
       {!deleting ? (
         <>
@@ -48,9 +48,7 @@ const PlantCard: React.FC<PlantCardProps> = ({ plant }) => {
               />
             </Pressable>
           </View>
-          <Text style={styles.scientificName}>
-            {plant.name.scientificName}
-          </Text>
+          <Text style={styles.scientificName}>{plant.name.scientificName}</Text>
           <Image width={80} height={80} style={styles.picture} />
           {plant.moistureLevel === "Too Low" ? (
             <View
