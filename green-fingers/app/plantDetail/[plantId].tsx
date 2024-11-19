@@ -49,8 +49,7 @@ const PlantDetailPage = () => {
               <Text>Common name: {plant.name.commonName}</Text>
               <Text>Scientific name: {plant.name.scientificName}</Text>
               <Text>
-                Blooming: {plant.blooming.start} till{" "}
-                {plant.blooming.end}
+                Blooming: {plant.blooming.start} till {plant.blooming.end}
               </Text>
               <Text>
                 Harvest:
@@ -58,6 +57,9 @@ const PlantDetailPage = () => {
                   ? `${plant.harvest.start} till ${plant.harvest.end}`
                   : "This plant cannot be harvest"}
               </Text>
+              <Text>Fertilizer type: {plant.fertilizerType}</Text>
+              <Text>Water Frequency: {plant.waterFrequency}</Text>
+              <Text>Sunlight requirement: {plant.sunLight}</Text>
             </AccordionItem>
             <AccordionItem title="Sensors">
               <Text style={{ color: "black" }}>No sensors available</Text>
