@@ -10,7 +10,7 @@ const Plants = () => {
 
   useEffect(() => {
     setPlants(contextPlants);
-  }, []);
+  }, [contextPlants]);
 
   return (
     <View style={styles.pageContainer}>

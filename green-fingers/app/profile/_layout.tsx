@@ -21,7 +21,7 @@ const ProfileLayout: React.FC = () => {
       fetchGardens();
       fetchAllPlants();
     }
-  }, [isLoggedIn, user?.id, fetchPlants, fetchGardens, fetchAllPlants]);
+  }, [isLoggedIn, user?.id]);
 
   return (
     <>

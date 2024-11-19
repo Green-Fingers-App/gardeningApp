@@ -29,11 +29,11 @@ const RootLayout = () => {
 
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
-      <PlantsProvider>
-        <AuthProvider>
+      <AuthProvider>
+        <PlantsProvider>
           <Stack screenOptions={{ headerShown: false }} />
-        </AuthProvider>
-      </PlantsProvider>
+        </PlantsProvider>
+      </AuthProvider>
     </GestureHandlerRootView>
   );
 };

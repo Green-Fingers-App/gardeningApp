@@ -14,7 +14,7 @@ admin.initializeApp({
 const db = admin.firestore();
 
 // Array of plant data to add to Firestore
-const plants: AddUserPlant[] = [
+const plants: Plant[] = [
   {
     name: { commonName: "Tomato", scientificName: "Solanum lycopersicum" },
     blooming: { start: Month.JUNE, end: Month.AUGUST, flowerColor: "Yellow" },
