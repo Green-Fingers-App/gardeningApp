@@ -1,15 +1,24 @@
-
-import React, { createContext, ReactNode, useContext, useState, useEffect } from "react";
-
-import {
-  userPlants as importPlants,
-  gardens as importGardens,
-} from "../dummyData/dummyData";
+import React, {
+  createContext,
+  ReactNode,
+  useContext,
+  useState,
+  useEffect,
+} from "react";
 import { Garden, CatalogPlant, UserPlant, AddUserPlant } from "../types/models";
 import { db } from "@/firebase/firebaseConfig";
-import { collection, doc, query, orderBy, startAt, endAt, getDocs, onSnapshot, where} from "firebase/firestore";
+import {
+  collection,
+  query,
+  orderBy,
+  startAt,
+  endAt,
+  getDocs,
+  where,
+} from "firebase/firestore";
 import { useAuth } from "@/context/AuthContext";
 import { addPlant } from "@/firebase/plantService";
+import { gardens as importGardens } from "@/dummyData/dummyData";
 
 interface PlantContextProps {
   plants: UserPlant[];
@@ -25,10 +34,11 @@ interface PlantContextProps {
   fetchGardenPlants: (gardenId: string) => UserPlant[] | undefined;
 }
 
-
 const PlantsContext = createContext<PlantContextProps | undefined>(undefined);
 
-export const PlantsProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
+export const PlantsProvider: React.FC<{ children: ReactNode }> = ({
+  children,
+}) => {
   const [plants, setPlants] = useState<UserPlant[]>([]);
   const [gardens, setGardens] = useState<Garden[]>([]);
   const [databasePlants, setDatabasePlants] = useState<CatalogPlant[]>([]);
@@ -46,9 +56,11 @@ export const PlantsProvider: React.FC<{ children: ReactNode }> = ({ children }) 
       );
 
       const snapshot = await getDocs(gardensQuery);
-      const userGardens = snapshot.docs.map(
-        (doc) => ({ id: doc.id, ...doc.data() } as Garden)
-      );
+      // const userGardens = snapshot.docs.map(
+      //   (doc) => ({ id: doc.id, ...doc.data() } as Garden)
+      // );
+      const userGardens = importGardens;
+
       setGardens(userGardens);
     } catch (error) {
       console.error("Error fetching gardens:", error);
@@ -61,7 +73,7 @@ export const PlantsProvider: React.FC<{ children: ReactNode }> = ({ children }) 
 
     try {
       const plantsQuery = query(
-        collection(db, "plants"),
+        collection(db, "user-plants"),
         where("userId", "==", user.id)
       );
 
@@ -75,8 +87,9 @@ export const PlantsProvider: React.FC<{ children: ReactNode }> = ({ children }) 
     }
   };
 
-
-  const fetchPlantsByCommonName = async (input: string): Promise<CatalogPlant[]> => {
+  const fetchPlantsByCommonName = async (
+    input: string
+  ): Promise<CatalogPlant[]> => {
     try {
       const plantsCollection = collection(db, "plant-catalog");
       const q = query(
@@ -97,7 +110,7 @@ export const PlantsProvider: React.FC<{ children: ReactNode }> = ({ children }) 
       throw err;
     }
   };
-    
+
   // Fetch all plants in the catalog
   const fetchAllPlants = async () => {
     try {
@@ -124,14 +137,8 @@ export const PlantsProvider: React.FC<{ children: ReactNode }> = ({ children }) 
 
   // Fetch plants linked to a specific garden
   const fetchGardenPlants = (gardenId: string): UserPlant[] | undefined => {
-    const garden = gardens.find((garden) => garden.id === gardenId);
-    if (garden) {
-      const plantMap = new Map(plants.map((plant) => [plant.id, plant]));
-      return garden.plantIds
-        .map((plantId) => plantMap.get(plantId))
-        .filter(Boolean) as UserPlant[];
-    }
-    return undefined;
+    const gardenPlants = plants.filter((plant) => plant.garden_id === gardenId);
+    return gardenPlants;
   };
 
   // Create new plant

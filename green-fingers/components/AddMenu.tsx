@@ -40,7 +40,7 @@ const AddMenu = () => {
   // Handle the "Add Plant" action
   const handleAddPlant = () => {
     if (!selectedPlant || !selectedGarden || !nickName) return;
-  
+
     const addPlant: AddUserPlant = {
       nickName,
       garden_id: selectedGarden,
@@ -62,10 +62,10 @@ const AddMenu = () => {
       sunlightLevel: "Optimal",
       harvested: false,
     };
-  
+
     // Call the createPlant function to save to the database
     createPlant(addPlant);
-  
+
     // Reset state after adding
     setPlantChosen(false);
     setNickName("");
@@ -90,17 +90,13 @@ const AddMenu = () => {
       </View>
       {!plantChosen ? (
         <View style={styles.optionContainer}>
-          <Button 
+          <Button
             text="Plant"
             iconName="flower"
             type="tertiary"
             onPress={togglePlantMenu}
           />
-          <Button 
-            text="Garden"
-            iconName="nature"
-            type="tertiary"
-          />
+          <Button text="Garden" iconName="nature" type="tertiary" />
         </View>
       ) : (
         <View style={[styles.menuOption, { gap: 8 }]}>

@@ -158,11 +158,13 @@ export interface UserPlant extends AddUserPlant {
 }
 
 //Garden interface
-export interface Garden {
-  id: string;
+export interface Garden extends AddGarden {
+  id: string;  
+}
+
+export interface AddGarden {
   name: string;
   location: string;
-  plantIds: string[];  
 }
 
 //User interface
