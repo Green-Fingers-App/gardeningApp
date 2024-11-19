@@ -1,5 +1,12 @@
 import React, { useState } from "react";
-import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+  Modal,
+  Pressable,
+} from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import colors from "@/constants/colors";
 
@@ -22,22 +29,32 @@ const OptionsMenu: React.FC<OptionsMenuProps> = ({ options }) => {
           color={colors.textPrimary}
         />
       </TouchableOpacity>
-      {visible && (
-        <View style={styles.menu}>
-          {options.map((option, index) => (
-            <TouchableOpacity
-              key={index}
-              style={styles.menuItem}
-              onPress={() => {
-                option.onPress();
-                setVisible(false);
-              }}
-            >
-              <Text style={styles.menuText}>{option.label}</Text>
-            </TouchableOpacity>
-          ))}
-        </View>
-      )}
+      <Modal
+        transparent
+        visible={visible}
+        animationType="fade"
+        onRequestClose={() => setVisible(false)}
+      >
+        <Pressable
+          style={styles.modalBackdrop}
+          onPress={() => setVisible(false)}
+        >
+          <View style={styles.menu}>
+            {options.map((option, index) => (
+              <TouchableOpacity
+                key={index}
+                style={styles.menuItem}
+                onPress={() => {
+                  option.onPress();
+                  setVisible(false);
+                }}
+              >
+                <Text style={styles.menuText}>{option.label}</Text>
+              </TouchableOpacity>
+            ))}
+          </View>
+        </Pressable>
+      </Modal>
     </View>
   );
 };
@@ -46,16 +63,21 @@ export default OptionsMenu;
 
 const styles = StyleSheet.create({
   container: {
-    position: "absolute",
-    right: 8,
-    top: 8,
-    borderColor: colors.primaryDefault,
-    borderWidth: 1,
+    position: "relative",
   },
   iconButton: {
     padding: 8,
   },
+  modalBackdrop: {
+    flex: 1,
+    justifyContent: "flex-start",
+    alignItems: "flex-end",
+
+  },
   menu: {
+    position: "absolute",
+    top: 110,
+    right: 24,
     backgroundColor: colors.bgCard,
     borderRadius: 8,
     paddingVertical: 4,

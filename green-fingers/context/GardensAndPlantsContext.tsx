@@ -25,7 +25,7 @@ import {
 } from "firebase/firestore";
 import { db } from "@/firebase/firebaseConfig";
 import { useAuth } from "@/context/AuthContext";
-import { addGarden, addPlant } from "@/firebase/plantService";
+import { addGarden, addPlant, deletePlant } from "@/firebase/plantService";
 
 
 interface PlantContextProps {
@@ -36,6 +36,7 @@ interface PlantContextProps {
   fetchAllPlants: () => void;
   fetchPlantsByCommonName: (input: string) => Promise<CatalogPlant[]>;
   createPlant: (plantData: AddUserPlant) => void;
+  deleteUserPlant: (plantId: string) => void;
   fetchGardens: () => void;
   fetchPlantDetail: (plantId: string) => UserPlant | undefined;
   fetchGardenDetail: (gardenId: string) => Garden | undefined;
@@ -197,6 +198,16 @@ export const PlantsProvider: React.FC<{ children: ReactNode }> = ({
     }
   };
 
+  // Delete plant
+  const deleteUserPlant = async (plantId: string) => {
+    try {
+      await deletePlant(plantId);
+      setPlants((prevPlants) => prevPlants.filter((plant) => plant.id !== plantId));
+    } catch (error) {
+      console.error("Error deleting plant:", error);
+    }
+  };
+
   const createGarden = async (gardenData: AddGarden) => {
     try {
       const id = await addGarden(gardenData);
@@ -224,6 +235,7 @@ export const PlantsProvider: React.FC<{ children: ReactNode }> = ({
         fetchAllPlants,
         fetchPlantsByCommonName,
         createPlant,
+        deleteUserPlant,
         gardens,
         fetchGardens,
         fetchPlantDetail,

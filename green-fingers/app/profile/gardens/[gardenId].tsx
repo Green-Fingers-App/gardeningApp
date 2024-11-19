@@ -5,12 +5,18 @@ import { useGardensAndPlants } from "@/context/GardensAndPlantsContext";
 import { Garden, UserPlant } from "@/types/models";
 import PlantCard from "@/components/PlantCard";
 import colors from "@/constants/colors";
+import OptionMenu from "@/components/OptionMenu";
 
 const GardenDetailPage = () => {
   const { gardenId } = useLocalSearchParams();
   const { fetchGardenPlants, fetchGardenDetail } = useGardensAndPlants();
   const [plants, setPlants] = useState<UserPlant[] | undefined>(undefined);
   const [garden, setGarden] = useState<Garden | undefined>(undefined);
+
+  const options = [
+    { label: "Edit", onPress: () => console.log("Edit garden") },
+    { label: "Delete", onPress: () => console.log("Delete garden") },
+  ]
 
   useEffect(() => {
     const fetchGardenData = async () => {
@@ -34,7 +40,8 @@ const GardenDetailPage = () => {
       <Stack.Screen
         options={{
           title: garden?.name || "Garden Details",
-          headerStyle: { backgroundColor: colors.primaryDefault },
+          headerStyle: { backgroundColor: colors.primaryDefault, },
+          headerRight: () => <OptionMenu options={options} />,
         }}
       />
       <View style={styles.pageContainer}>

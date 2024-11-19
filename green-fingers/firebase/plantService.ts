@@ -58,7 +58,7 @@ export const updatePlant = async (plantId: string, updatedData: Partial<Plant>):
 };
 
 // Delete a plant species
-export const deletePlant = async (plantId: string): Promise<void> => {
+export const deleteCatalogPlant = async (plantId: string): Promise<void> => {
   try {
     const docRef = doc(db, "plant-catalog", plantId);
     await deleteDoc(docRef);
@@ -67,3 +67,14 @@ export const deletePlant = async (plantId: string): Promise<void> => {
     console.error("Error deleting plant: ", error);
   }
 };
+
+// Delete a user plant
+export const deletePlant = async (plantId: string): Promise<void> => {
+  try {
+    const docRef = doc(db, "user-plants", plantId);
+    await deleteDoc(docRef);
+    console.log("Plant deleted");
+  } catch (error) {
+    console.error("Error deleting plant: ", error);
+  }
+}
