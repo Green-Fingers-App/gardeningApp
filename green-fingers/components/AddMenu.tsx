@@ -4,6 +4,7 @@ import colors from "@/constants/colors";
 import textStyles from "@/constants/textStyles";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import AddPlantOption from "@/components/AddPlantOption";
+import AddGardenOption from "@/components/AddGardenOption";
 import Button from "@/components/Button";
 
 const AddMenu = () => {
@@ -47,6 +48,13 @@ const AddMenu = () => {
           plantChosen={plantChosen}
           togglePlantMenu={togglePlantMenu}
           setPlantChosen={setPlantChosen}
+        />
+      )}
+      {gardenChosen && (
+        <AddGardenOption
+          gardenChosen={gardenChosen}
+          toggleGardenMenu={() => setGardenChosen(false)}
+          setGardenChosen={setGardenChosen}
         />
       )}
     </View>
