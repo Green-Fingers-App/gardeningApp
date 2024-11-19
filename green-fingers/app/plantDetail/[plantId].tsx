@@ -25,7 +25,7 @@ const PlantDetailPage = () => {
     <>
       <Stack.Screen
         options={{
-          title: plant?.plant.name.commonName || "Plant Details",
+          title: plant?.name.commonName || "Plant Details",
           headerLeft: () => (
             <MaterialCommunityIcons
               name="arrow-left"
@@ -46,16 +46,16 @@ const PlantDetailPage = () => {
               <Text>Last fed: {plant.feededDate}</Text>
             </AccordionItem>
             <AccordionItem title="Overview">
-              <Text>Common name: {plant.plant.name.commonName}</Text>
-              <Text>Scientific name: {plant.plant.name.scientificName}</Text>
+              <Text>Common name: {plant.name.commonName}</Text>
+              <Text>Scientific name: {plant.name.scientificName}</Text>
               <Text>
-                Blooming: {plant.plant.blooming.start} till{" "}
-                {plant.plant.blooming.end}
+                Blooming: {plant.blooming.start} till{" "}
+                {plant.blooming.end}
               </Text>
               <Text>
                 Harvest:
-                {plant.plant.harvest
-                  ? `${plant.plant.harvest.start} till ${plant.plant.harvest.end}`
+                {plant.harvest
+                  ? `${plant.harvest.start} till ${plant.harvest.end}`
                   : "This plant cannot be harvest"}
               </Text>
             </AccordionItem>

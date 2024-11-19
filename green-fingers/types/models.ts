@@ -122,7 +122,6 @@ export interface Planting {
 
 // Main Plant interface
 export interface Plant {
-  id: string;
   name: PlantName;
   blooming: Blooming;
   waterFrequency: WaterFrequency;
@@ -135,48 +134,27 @@ export interface Plant {
 }
 
 // Catalog Plant interface
-export interface CatalogPlant {
-  id?: string;
-  name: {
-    commonName: string;
-    scientificName?: string;
-  };
-  type: string;
-  water_frequency: string;
-  water_amount?: string;
-  temperature?: {
-    min?: number;
-    max?: number;
-  };
-  humidity?: string;
-  light?: string;
-  soil_type?: string;
-  fertilizer_type?: string;
-  fertilizer_frequency?: string;
+export interface CatalogPlant extends Plant {
+  id: string;
 }
 
-
-export interface AddPlant {
-  id?: string;
+// Add Plant interface
+export interface AddUserPlant extends Plant {
   nickName: string;
   garden_id: string;
+  userId: number;
   catalogPlant_id: string;
-  name: {
-    commonName: string;
-    scientificName?: string;
-  };
-  type: string;
-  water_frequency: string;
-  water_amount?: string;
-  temperature?: {
-    min?: number;
-    max?: number;
-  };
-  humidity?: string;
-  light?: string;
-  soil_type?: string;
-  fertilizer_type?: string;
-  fertilizer_frequency?: string;
+  wateredDate: string;
+  plantedDate: string;
+  feededDate: string;
+  moistureLevel: Level;
+  sunlightLevel: Level;
+  harvested: boolean;
+}
+
+//User's own plant interface
+export interface UserPlant extends AddUserPlant {
+  id: string;
 }
 
 //Garden interface
@@ -197,24 +175,7 @@ export interface User {
 }
 
 //expected Level interface
-export enum Level {
-  TOO_LOW = "Too Low",
-  OPTIMAL = "Optimal",
-  TOO_HIGH = "Too High"
-}
-
-//User's own plant interface
-export interface UserPlant {
-  id: string;
-  plant: Plant;
-  nickName: string;
-  wateredDate: string;
-  plantedDate: string;
-  feededDate: string;
-  moistureLevel: Level;
-  sunlightLevel: Level;
-  harvested: boolean;
-}
+export type Level = "Optimal" | "Too Low" | "High";
 
 export interface MoistureSensor {
   //tba

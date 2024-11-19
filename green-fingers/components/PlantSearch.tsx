@@ -7,7 +7,7 @@ import {
   StyleSheet,
 } from "react-native";
 import { useGardensAndPlants } from "@/context/GardensAndPlantsContext";
-import { CatalogPlant } from "@/types/plantTypes";
+import { CatalogPlant } from "@/types/models";
 import Input from "@/components/Input";
 import colors from "@/constants/colors";
 import textStyles from "@/constants/textStyles";
