@@ -5,7 +5,7 @@ import {
   gardens as importGardens,
 } from "../dummyData/dummyData";
 import { Garden, UserPlant } from "../types/models";
-import { Plant } from "../types/plantTypes";
+import { CatalogPlant } from "../types/plantTypes";
 import { db } from "@/firebase/firebaseConfig";
 import { collection, query, orderBy, startAt, endAt, getDocs } from "firebase/firestore";
 
@@ -16,7 +16,7 @@ export const PlantsProvider: React.FC<{ children: ReactNode }> = ({
 }) => {
   const [plants, setPlants] = useState<UserPlant[]>([]);
   const [gardens, setGardens] = useState<Garden[]>([]);
-  const [databasePlants, setDatabasePlants] = useState<Plant[]>([]);
+  const [databasePlants, setDatabasePlants] = useState<CatalogPlant[]>([]);
 
   const fetchPlants = async (userId: string, token: string): Promise<void> => {
     const newPlants = importPlants;
@@ -28,7 +28,7 @@ export const PlantsProvider: React.FC<{ children: ReactNode }> = ({
       const plantsCollection = collection(db, "plants");
       const querySnapshot = await getDocs(plantsCollection);
       const allPlants = querySnapshot.docs.map(
-        (doc) => ({ id: doc.id, ...doc.data() } as Plant)
+        (doc) => ({ id: doc.id, ...doc.data() } as CatalogPlant)
       );
       setDatabasePlants(allPlants);
     } catch (err) {
@@ -36,7 +36,7 @@ export const PlantsProvider: React.FC<{ children: ReactNode }> = ({
     }
   };
 
-  const fetchPlantsByCommonName = async (input: string): Promise<Plant[]> => {
+  const fetchPlantsByCommonName = async (input: string): Promise<CatalogPlant[]> => {
     try {
       const plantsCollection = collection(db, "plant-catalog");
       const q = query(
@@ -46,10 +46,10 @@ export const PlantsProvider: React.FC<{ children: ReactNode }> = ({
         endAt(input + "\uf8ff")
       );
       const querySnapshot = await getDocs(q);
-      const plants: Plant[] = querySnapshot.docs.map((doc) => ({
+      const plants: CatalogPlant[] = querySnapshot.docs.map((doc) => ({
         id: doc.id,
         ...doc.data(),
-      })) as Plant[];
+      })) as CatalogPlant[];
       setDatabasePlants(plants);
       return plants;
     } catch (err) {
