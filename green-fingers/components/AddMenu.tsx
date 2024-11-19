@@ -1,5 +1,5 @@
-import { View, Text, StyleSheet, Pressable } from "react-native";
 import React, { useState } from "react";
+import { View, Text, StyleSheet, Pressable } from "react-native";
 import colors from "@/constants/colors";
 import textStyles from "@/constants/textStyles";
 import Input from "./Input";
@@ -13,35 +13,51 @@ import { useGardensAndPlants } from "@/context/GardensAndPlantsContext";
 import { usePlants } from "@/hooks/usePlants";
 
 const AddMenu = () => {
-  const { gardens } = useGardensAndPlants();
+  const { gardens, addGarden } = useGardensAndPlants();
   const { createPlant } = usePlants();
 
-  // Transform gardens into options for the dropdown
+  // Garden dropdown options
   const gardenOptions = gardens.map((garden) => ({
     value: garden.id,
     label: garden.location,
   }));
 
-  const [plantChosen, setPlantChosen] = useState(false);
+  const [menuMode, setMenuMode] = useState<"none" | "plant" | "garden">("none"); // Toggle between modes
+  const [gardenName, setGardenName] = useState<string>("");
+  const [gardenLocation, setGardenLocation] = useState<string>("");
   const [nickName, setNickName] = useState<string>("");
   const [selectedGarden, setSelectedGarden] = useState<string>("");
   const [selectedPlant, setSelectedPlant] = useState<CatalogPlant | null>(null);
 
-  // Handle toggling menus
-  const togglePlantMenu = () => setPlantChosen(!plantChosen);
+  // Handle switching between menus
+  const toggleMenu = (mode: "none" | "plant" | "garden") => setMenuMode(mode);
 
-  // Handle updates to inputs
-  const handlePlantSelection = (plant: CatalogPlant) => setSelectedPlant(plant);
-  const handleNickNameChange = (text: string) => setNickName(text);
-  const handleGardenSelect = (gardenId: string) => setSelectedGarden(gardenId);
+  // Reset inputs
+  const resetInputs = () => {
+    setGardenName("");
+    setGardenLocation("");
+    setNickName("");
+    setSelectedGarden("");
+    setSelectedPlant(null);
+    setMenuMode("none");
+  };
 
-  // Determine if the Add Plant button should be disabled
-  const isAddPlantDisabled = !nickName || !selectedGarden || !selectedPlant;
+  // Add Garden Logic
+  const handleAddGarden = async () => {
+    if (!gardenName.trim() || !gardenLocation.trim()) return;
 
-  // Handle the "Add Plant" action
-  const handleAddPlant = () => {
-    if (!selectedPlant || !selectedGarden || !nickName) return;
-  
+    try {
+      await addGarden(gardenName, gardenLocation);
+      resetInputs();
+    } catch (error) {
+      console.error("Error adding garden:", error);
+    }
+  };
+
+  // Add Plant Logic
+  const handleAddPlant = async () => {
+    if (!selectedPlant || !selectedGarden || !nickName.trim()) return;
+
     const addPlant: AddPlant = {
       nickName,
       garden_id: selectedGarden,
@@ -57,25 +73,27 @@ const AddMenu = () => {
       fertilizer_type: selectedPlant.fertilizer_type || "N/A",
       fertilizer_frequency: selectedPlant.fertilizer_frequency || "N/A",
     };
-  
-    // Call the createPlant function to save to the database
-    createPlant(addPlant);
-  
-    // Reset state after adding
-    setPlantChosen(false);
-    setNickName("");
-    setSelectedGarden("");
-    setSelectedPlant(null);
+
+    try {
+      await createPlant(addPlant); // Save plant to Firestore
+      resetInputs();
+    } catch (error) {
+      console.error("Error adding plant:", error);
+    }
   };
+
+  // Determine button states
+  const isAddGardenDisabled = !gardenName.trim() || !gardenLocation.trim();
+  const isAddPlantDisabled = !nickName || !selectedGarden || !selectedPlant;
 
   return (
     <View style={styles.menuContainer}>
       <View style={styles.menuHeaderContainer}>
         <Text style={textStyles.h3}>
-          {plantChosen ? (
-            <Pressable onPress={() => setPlantChosen(false)}>
+          {menuMode !== "none" ? (
+            <Pressable onPress={() => toggleMenu("none")}>
               <Text style={textStyles.h3}>
-                <MaterialCommunityIcons name="arrow-left" size={20} /> Add Plant
+                <MaterialCommunityIcons name="arrow-left" size={20} /> Add
               </Text>
             </Pressable>
           ) : (
@@ -83,38 +101,71 @@ const AddMenu = () => {
           )}
         </Text>
       </View>
-      {!plantChosen ? (
+
+      {/* Main Menu */}
+      {menuMode === "none" && (
         <View style={styles.optionContainer}>
-          <Button 
+          <Button
             text="Plant"
             iconName="flower"
             type="tertiary"
-            onPress={togglePlantMenu}
+            onPress={() => toggleMenu("plant")}
           />
-          <Button 
+          <Button
             text="Garden"
             iconName="nature"
             type="tertiary"
+            onPress={() => toggleMenu("garden")}
           />
         </View>
-      ) : (
+      )}
+
+      {/* Garden Menu */}
+      {menuMode === "garden" && (
         <View style={[styles.menuOption, { gap: 8 }]}>
-          <PlantSearch onSelectPlant={handlePlantSelection} />
+          <Input
+            label="Garden Name"
+            placeholder="Enter garden name..."
+            iconName="nature"
+            value={gardenName}
+            onChangeText={setGardenName}
+          />
+          <Input
+            label="Location"
+            placeholder="Enter garden location..."
+            iconName="map-marker"
+            value={gardenLocation}
+            onChangeText={setGardenLocation}
+          />
+          <Button
+            text="Add Garden"
+            type="primary"
+            iconName="plus"
+            onPress={handleAddGarden}
+            buttonState={isAddGardenDisabled ? "disabled" : "default"}
+          />
+        </View>
+      )}
+
+      {/* Plant Menu */}
+      {menuMode === "plant" && (
+        <View style={[styles.menuOption, { gap: 8 }]}>
+          <PlantSearch onSelectPlant={setSelectedPlant} />
           <Input
             label="Nickname"
             placeholder="Nickname..."
             iconName="flower"
             value={nickName}
-            onChangeText={handleNickNameChange}
+            onChangeText={setNickName}
           />
           <DropDown
             label="Select a Garden"
             placeholder="Choose a garden..."
             options={gardenOptions}
-            onSelect={handleGardenSelect}
+            onSelect={setSelectedGarden}
           />
           <Button
-            text="Add plant"
+            text="Add Plant"
             type="primary"
             iconName="plus"
             onPress={handleAddPlant}
