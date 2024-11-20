@@ -3,16 +3,27 @@ import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import { Tabs, useRouter } from "expo-router";
 import { MaterialIcons } from "@expo/vector-icons";
 import colors from "@/constants/colors";
+<<<<<<< HEAD
 import React, { useState } from "react";
 import { PlantsProvider } from "@/context/GardensAndPlantsContext";
+<<<<<<< HEAD
 import { TouchableOpacity } from "react-native";
 import { useRouter } from "expo-router";
+=======
+=======
 import React, { useEffect, useState } from "react";
+<<<<<<< HEAD
 import {
   PlantsProvider,
   useGardensAndPlants,
 } from "@/context/GardensAndPlantsContext";
+>>>>>>> a29e080 (add plant cards to garden detail)
+=======
 import { useGardensAndPlants } from "@/context/GardensAndPlantsContext";
+>>>>>>> a2c8fd0 (center landingscreen svg)
+import { StyleSheet, TouchableOpacity } from "react-native";
+>>>>>>> fdb88b5 (Add add-button component)
+import { View, Text } from "react-native";
 import { useAuth } from "@/context/AuthContext";
 import AddMenu from "@/components/AddMenu";
 
@@ -43,22 +54,18 @@ const ProfileLayout: React.FC = () => {
             backgroundColor: colors.primaryDefault,
           },
           headerRight: () => (
-            <View style={styles.headerRight}>
-              <Text style={styles.headerText}>
-                {isLoggedIn ? `Hello, ${user?.username}` : "Welcome"}
-              </Text>
-              {isLoggedIn && (
-                <TouchableOpacity
-                  style={styles.profileButton}
-                  onPress={() => router.push("/profilePage")}
-                >
-                  <MaterialIcons
-                    name="account-circle"
-                    size={24}
-                    color={colors.bgLight}
-                  />
-                </TouchableOpacity>
-              )}
+            <View>
+              <Text>Hello, {user?.email}</Text>
+              <TouchableOpacity
+                style={{ marginRight: 15 }}
+                onPress={() => router.push("/profilePage")}
+              >
+                <MaterialIcons
+                  name="account-circle"
+                  size={24}
+                  color={colors.bgLight}
+                />
+              </TouchableOpacity>
             </View>
           ),
         }}
