@@ -55,7 +55,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
       setUser(mappedUser);
       router.replace("/profile/home");
     } catch (error) {
-      setAuthError("Invalid email or password");
+      setAuthError("Invalid email or password!");
       console.error("Login error:", error);
     }
   };
