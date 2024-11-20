@@ -1,4 +1,4 @@
-import { Text, View, StyleSheet, ActivityIndicator } from "react-native";
+import { Text, View, StyleSheet, ActivityIndicator, ImageBackground } from "react-native";
 import React, { useEffect, useState } from "react";
 import { Stack, useLocalSearchParams, useRouter } from "expo-router";
 import { useGardensAndPlants } from "@/context/GardensAndPlantsContext";
@@ -64,7 +64,10 @@ const GardenDetailPage = () => {
   }, [gardenId]);
 
   return (
-    <>
+    <ImageBackground
+      source={require("../../../assets/images/background.png")}
+      style={styles.backgroundImage}
+    >
       <Stack.Screen
         options={{
           title: garden?.name || "Garden Details",
@@ -99,13 +102,16 @@ const GardenDetailPage = () => {
         onSave={handleSave}
         onCancel={handleCancelEdit}
       />
-    </>
+    </ImageBackground>
   );
 };
 
 export default GardenDetailPage;
 
 const styles = StyleSheet.create({
+  backgroundImage: {
+    flex: 1,
+  },
   pageContainer: {
     alignItems: "center",
     flex: 1,

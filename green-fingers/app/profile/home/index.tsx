@@ -3,7 +3,7 @@ import React from "react";
 import { useAuth } from "@/context/AuthContext";
 import { useRouter } from "expo-router";
 import Button from "@/components/Button";
-import colors from "@/constants/colors";
+
 const Home = () => {
   const { user, logout } = useAuth();
   const router = useRouter();

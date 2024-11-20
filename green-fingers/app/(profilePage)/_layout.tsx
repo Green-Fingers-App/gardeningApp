@@ -11,11 +11,8 @@ const ProfileLayout = () => {
         options={{
             title: "Profile",
             headerStyle: {
-                backgroundColor: colors.secondaryDark,
+                backgroundColor: colors.primaryDefault,
             },
-            headerTitle: () => (
-              <Text style={textStyles.h3}>Your Profile</Text>
-            ),
         }}
     />
   </Stack>;
