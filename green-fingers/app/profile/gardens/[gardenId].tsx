@@ -11,7 +11,8 @@ import EntityEditModal from "@/components/EntityEditModal";
 
 const GardenDetailPage = () => {
   const { gardenId } = useLocalSearchParams();
-  const { fetchGardenPlants, fetchGardenDetail, updateUserGarden } = useGardensAndPlants();
+  const { fetchGardenPlants, fetchGardenDetail, updateUserGarden } =
+    useGardensAndPlants();
   const [plants, setPlants] = useState<UserPlant[] | undefined>(undefined);
   const [garden, setGarden] = useState<Garden | undefined>(undefined);
   const { deleting, handleDeleteEntity } = useDeleteEntity("Garden");
@@ -23,8 +24,12 @@ const GardenDetailPage = () => {
 
   const options = [
     { label: "Edit", onPress: () => setEditing(true) },
-    { label: "Delete", onPress: () => garden && handleDeleteEntity({ id: garden.id, name: garden.name }) },
-  ]
+    {
+      label: "Delete",
+      onPress: () =>
+        garden && handleDeleteEntity({ id: garden.id, name: garden.name }),
+    },
+  ];
 
   const handleChange = (key: string, value: string) => {
     setEditValues((prev) => ({ ...prev, [key]: value }));
@@ -63,14 +68,18 @@ const GardenDetailPage = () => {
       <Stack.Screen
         options={{
           title: garden?.name || "Garden Details",
-          headerStyle: { backgroundColor: colors.primaryDefault, },
+          headerStyle: { backgroundColor: colors.primaryDefault },
           headerRight: () => <OptionMenu options={options} />,
         }}
       />
       {garden && !deleting ? (
         <View style={styles.pageContainer}>
           {plants?.map((plant, index) => (
-            <PlantCard plant={plant} key={index} />
+            <PlantCard
+              plant={plant}
+              key={index}
+              onPress={() => router.push(`/profile/plants/${plant.id}`)}
+            />
           ))}
         </View>
       ) : deleting ? (
@@ -84,9 +93,7 @@ const GardenDetailPage = () => {
       <EntityEditModal
         visible={editing}
         entityName="Garden"
-        fields={[
-          { key: "name", label: "Name", type: "text" },
-        ]}
+        fields={[{ key: "name", label: "Name", type: "text" }]}
         values={editValues}
         onChange={handleChange}
         onSave={handleSave}
