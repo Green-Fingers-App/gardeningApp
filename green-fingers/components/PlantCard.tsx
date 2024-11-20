@@ -59,7 +59,7 @@ const PlantCard: React.FC<PlantCardProps> = ({ plant, ...props }) => {
               ? plant.name.commonName
               : plant.name.scientificName}
           </Text>
-          <Image width={80} height={80} style={styles.picture} />
+          <Image source={{uri:plant.imageUrl}} width={80} height={80} style={styles.picture} />
           {"nickName" in plant && plant.moistureLevel === "Too Low" ? (
             <View
               style={{ flexDirection: "row", alignItems: "center", gap: 4 }}

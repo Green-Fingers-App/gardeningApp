@@ -27,7 +27,7 @@ const CatalogPlantDetail = () => {
       {plant ? (
         <View style={styles.pageContainer}>
           <Image
-            source={{ uri: "https://via.placeholder.com/400" }}
+            source={{ uri: plant.imageUrl }}
             style={{ width: "100%", height: "50%" }}
           />
           <View style={styles.contentContainer}>
