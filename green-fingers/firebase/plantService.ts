@@ -78,3 +78,14 @@ export const deletePlant = async (plantId: string): Promise<void> => {
     console.error("Error deleting plant: ", error);
   }
 }
+
+// Delete a garden
+export const deleteGarden = async (gardenId: string): Promise<void> => {
+  try {
+    const docRef = doc(db, "gardens", gardenId);
+    await deleteDoc(docRef);
+    console.log("Garden deleted");
+  } catch (error) {
+    console.error("Error deleting garden: ", error);
+  }
+}
