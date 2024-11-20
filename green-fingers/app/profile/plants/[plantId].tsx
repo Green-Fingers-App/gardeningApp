@@ -8,17 +8,17 @@ import colors from "@/constants/colors";
 import Accordion from "@/components/Accordion";
 import AccordionItem from "@/components/AccordionItem";
 import OptionsMenu from "@/components/OptionMenu";
-import { useDeleteEntity } from "@/hooks/useDeleteEntity";
+import { useDeletePlant } from "@/hooks/useDeletePlant";
 
 const PlantDetailPage = () => {
   const { plantId } = useLocalSearchParams();
   const { fetchPlantDetail } = useGardensAndPlants();
   const [plant, setPlant] = useState<UserPlant | null>(null);
-  const { deleting, handleDeleteEntity } = useDeleteEntity("Plant");
+  const { deleting, handleDeletePlant } = useDeletePlant();
 
   const options = [
     { label: "Edit", onPress: () => console.log("Edit plant") },
-    { label: "Delete", onPress: () => plant && handleDeleteEntity({ id: plant.id, name: plant.nickName}) },
+    { label: "Delete", onPress: () => plant && handleDeletePlant(plant) },
   ];
 
   useEffect(() => {
@@ -26,7 +26,7 @@ const PlantDetailPage = () => {
     if (newPlant) {
       setPlant(newPlant);
     }
-  }, [plantId]);
+  }, [plantId]); // Add plantId as dependency
 
   return (
     <>
