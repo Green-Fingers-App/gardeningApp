@@ -1,4 +1,12 @@
-import { Text, SafeAreaView, Image, ActivityIndicator, View } from "react-native";
+import {
+  Text,
+  SafeAreaView,
+  Image,
+  ActivityIndicator,
+  View,
+  Modal,
+  StyleSheet,
+} from "react-native";
 import { Stack, useLocalSearchParams, useRouter } from "expo-router";
 import React, { useEffect, useState } from "react";
 import { useGardensAndPlants } from "@/context/GardensAndPlantsContext";
@@ -8,17 +16,48 @@ import Accordion from "@/components/Accordion";
 import AccordionItem from "@/components/AccordionItem";
 import OptionsMenu from "@/components/OptionMenu";
 import { useDeleteEntity } from "@/hooks/useDeleteEntity";
+import Input from "@/components/Input";
+import DropDown from "@/components/DropDown";
+import Button from "@/components/Button";
+import textStyles from "@/constants/textStyles";
 
 const PlantDetailPage = () => {
   const { plantId } = useLocalSearchParams();
-  const { fetchPlantDetail } = useGardensAndPlants();
+  const { fetchPlantDetail, gardens } = useGardensAndPlants();
   const [plant, setPlant] = useState<UserPlant | null>(null);
   const { deleting, handleDeleteEntity } = useDeleteEntity("Plant");
+  const [editing, setEditing] = useState(false);
+  const [editValues, setEditValues] = useState({
+    nickName: "",
+    gardenId: "",
+  });
 
   const options = [
-    { label: "Edit", onPress: () => console.log("Edit plant") },
-    { label: "Delete", onPress: () => plant && handleDeleteEntity({ id: plant.id, name: plant.nickName}) },
+    { label: "Edit", onPress: () => setEditing(true) },
+    {
+      label: "Delete",
+      onPress: () =>
+        plant && handleDeleteEntity({ id: plant.id, name: plant.nickName }),
+    },
   ];
+
+  const gardenOptions = gardens.map((garden) => ({
+    value: garden.id,
+    label: garden.name,
+  }));
+
+  const handleChange = (key: string, value: string) => {
+    setEditValues((prev) => ({ ...prev, [key]: value }));
+  };
+
+  const handleGardenSelect = (value: string) => {
+    setEditValues((prev) => ({ ...prev, gardenId: value }));
+  };
+
+  const handleCancelEdit = () => {
+    setEditing(false);
+    setEditValues({ nickName: "", gardenId: "" });
+  };
 
   useEffect(() => {
     const newPlant = fetchPlantDetail(plantId.toString());
@@ -31,7 +70,7 @@ const PlantDetailPage = () => {
     <>
       <Stack.Screen
         options={{
-          title: plant?.name.commonName || "Plant Details",
+          title: plant?.nickName || "Plant Details",
           headerStyle: {
             backgroundColor: colors.primaryDefault,
           },
@@ -82,8 +121,43 @@ const PlantDetailPage = () => {
       ) : (
         <Text>Loading...</Text>
       )}
+      <Modal visible={editing} animationType="slide">
+        <View style={styles.modalContainer}>
+          <Text style={textStyles.h1}>Set Your Plant Data</Text>
+          <Input
+            label="Nickname"
+            value={editValues.nickName}
+            onChangeText={(text) => handleChange("nickName", text)}
+          />
+          <DropDown
+            label="Garden"
+            placeholder="Select a garden..."
+            options={gardenOptions}
+            onSelect={handleGardenSelect}
+          />
+          <Button text="Save" iconName="floppy" />
+          <Button
+            text="Cancel"
+            iconName="close"
+            onPress={() => handleCancelEdit()}
+            type="secondary"
+          />
+        </View>
+      </Modal>
     </>
   );
 };
 
 export default PlantDetailPage;
+
+const styles = StyleSheet.create({
+  modalContainer: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    gap: 8,
+    width: "95%",
+    marginHorizontal: "2.5%",
+    backgroundColor: colors.bgLight,
+  },
+});
