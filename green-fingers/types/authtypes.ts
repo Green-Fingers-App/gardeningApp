@@ -10,6 +10,7 @@ export interface AuthContextProps {
   login: (email: string, password: string) => Promise<void>;
   signup: (email: string, password: string) => Promise<void>;
   logout: () => void;
+  explore: () => void;
   updateUser: (newUserData: Partial<User>) => void;
   authError: string | null;
 }
