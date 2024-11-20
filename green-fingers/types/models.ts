@@ -169,7 +169,7 @@ export interface AddGarden {
 }
 
 //expected Level interface
-export type Level = "Optimal" | "Too Low" | "High";
+export type Level = "Optimal" | "Too Low" | "Too High";
 
 export interface MoistureSensor {
   //tba
