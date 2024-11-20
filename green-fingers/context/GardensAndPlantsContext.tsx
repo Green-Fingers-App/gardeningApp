@@ -25,7 +25,7 @@ import {
 } from "firebase/firestore";
 import { db } from "@/firebase/firebaseConfig";
 import { useAuth } from "@/context/AuthContext";
-import { addGarden, addPlant, deletePlant } from "@/firebase/plantService";
+import { addGarden, addPlant, deletePlant, deleteGarden } from "@/firebase/plantService";
 
 
 interface PlantContextProps {
@@ -42,6 +42,7 @@ interface PlantContextProps {
   fetchGardenDetail: (gardenId: string) => Garden | undefined;
   fetchGardenPlants: (gardenId: string) => UserPlant[] | undefined;
   createGarden: (gardenData: AddGarden) => void;
+  deleteUserGarden: (gardenId: string) => void;
 }
 
 const PlantsContext = createContext<PlantContextProps | undefined>(undefined);
@@ -208,6 +209,7 @@ export const PlantsProvider: React.FC<{ children: ReactNode }> = ({
     }
   };
 
+  // Create new garden
   const createGarden = async (gardenData: AddGarden) => {
     try {
       const id = await addGarden(gardenData);
@@ -218,6 +220,20 @@ export const PlantsProvider: React.FC<{ children: ReactNode }> = ({
       console.error("Error creating garden: ", error);
     }
   };
+
+  // Delete garden
+  const deleteUserGarden = async (gardenId: string) => {
+    try {
+      const plantsInGarden = plants.filter((plant) => plant.garden_id === gardenId);
+      await Promise.all(plantsInGarden.map((plant) => deleteUserPlant(plant.id)));
+      await deleteGarden(gardenId);
+      setPlants((prevPlants) => prevPlants.filter((plant) => plant.garden_id !== gardenId));
+      setGardens((prevGardens) => prevGardens.filter((garden) => garden.id !== gardenId));
+    } catch (error) {
+      console.error("Error deleting garden:", error);
+    }
+  }
+
 
   useEffect(() => {
     if (user?.id) {
@@ -242,6 +258,7 @@ export const PlantsProvider: React.FC<{ children: ReactNode }> = ({
         fetchGardenDetail,
         fetchGardenPlants,
         createGarden,
+        deleteUserGarden,
         databasePlants,
       }}
     >
