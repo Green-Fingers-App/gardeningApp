@@ -86,17 +86,28 @@ erDiagram
         string profile_picture
         datetime created_at
     }
-    PLANTS {
+    PLANT_CATALOG {
         int id PK
-        int user_id FK
-        string name
         string scientific_name
+        string common_name
         string type
         string water_frequency
         string temperature_range
         string light_requirement
         string soil_type
+        string fertilizer_type
+    }
+    PLANTS {
+        int id PK
+        int user_id FK
+        int plant_catalog_id FK
+        int garden_id FK
+        string name
         datetime created_at
+        datetime last_watered
+        datetime next_water
+        datetime last_fertilized
+        datetime next_fertilization
     }
     GARDENS {
         int id PK

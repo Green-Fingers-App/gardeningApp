@@ -2,8 +2,7 @@
 
 import { db } from "./firebaseConfig";
 import { collection, addDoc, getDoc, doc, updateDoc, deleteDoc } from "firebase/firestore";
-import { AddGarden, Plant } from "../types/models";
-import { AddUserPlant } from "../types/models";
+import { Plant } from "../types/models";
 
 // Define the `plants` collection
 const plantsCollection = collection(db, "plant-catalog");
@@ -76,5 +75,16 @@ export const deletePlant = async (plantId: string): Promise<void> => {
     console.log("Plant deleted");
   } catch (error) {
     console.error("Error deleting plant: ", error);
+  }
+}
+
+// Delete a garden
+export const deleteGarden = async (gardenId: string): Promise<void> => {
+  try {
+    const docRef = doc(db, "gardens", gardenId);
+    await deleteDoc(docRef);
+    console.log("Garden deleted");
+  } catch (error) {
+    console.error("Error deleting garden: ", error);
   }
 }
