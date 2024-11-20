@@ -7,6 +7,7 @@ import Input from "@/components/Input";
 import Button from "@/components/Button";
 import colors from "@/constants/colors";
 import textStyles from "@/constants/textStyles";
+import LoginSignup from "@/components/LoginSignup";
 
 interface InputValues {
   email: string;
@@ -56,6 +57,7 @@ export default function LoginForm() {
 
   return (
     <SafeAreaView style={styles.container}>
+      <LoginSignup style={StyleSheet.absoluteFillObject} /> {/* SVG as Background */}
       <Text style={textStyles.h1}>WELCOME BACK</Text>
       <Text style={textStyles.h3}>Log in Now</Text>
       <View style={styles.content}>

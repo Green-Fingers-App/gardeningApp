@@ -1,6 +1,6 @@
 import React from "react";
 import { View, StyleSheet } from "react-native";
-import LandingSVG from "@/components/LandingSVG";
+import Landingpagelogo from "@/components/Landingpagelogo";
 import Button from "./Button";
 import { useRouter } from "expo-router";
 
@@ -8,7 +8,7 @@ const LandingScreen = () => {
   const router = useRouter();
   return (
     <View style={styles.container}>
-      <LandingSVG />
+      <Landingpagelogo />
       <View style={styles.buttonContainer}>
         <Button
           text="Log In"
