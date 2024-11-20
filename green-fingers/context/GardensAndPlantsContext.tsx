@@ -122,7 +122,7 @@ export const PlantsProvider: React.FC<{ children: ReactNode }> = ({
   // Fetch all plants in the catalog
   const fetchAllPlants = async () => {
     try {
-      const plantsCollection = collection(db, "plants");
+      const plantsCollection = collection(db, "plant-catalog");
       const querySnapshot = await getDocs(plantsCollection);
       const allPlants = querySnapshot.docs.map(
         (doc) => ({ id: doc.id, ...doc.data() } as CatalogPlant)
