@@ -37,18 +37,22 @@ const ProfileLayout: React.FC = () => {
             backgroundColor: colors.primaryDefault,
           },
           headerRight: () => (
-            <View>
-              <Text>Hello, {user?.email}</Text>
-              <TouchableOpacity
-                style={{ marginRight: 15 }}
-                onPress={() => router.push("/profilePage")}
-              >
-                <MaterialIcons
-                  name="account-circle"
-                  size={24}
-                  color={colors.bgLight}
-                />
-              </TouchableOpacity>
+            <View style={styles.headerRight}>
+              <Text style={styles.headerText}>
+                {isLoggedIn ? `Hello, ${user?.username}` : "Welcome"}
+              </Text>
+              {isLoggedIn && (
+                <TouchableOpacity
+                  style={styles.profileButton}
+                  onPress={() => router.push("/profilePage")}
+                >
+                  <MaterialIcons
+                    name="account-circle"
+                    size={24}
+                    color={colors.bgLight}
+                  />
+                </TouchableOpacity>
+              )}
             </View>
           ),
         }}

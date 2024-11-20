@@ -121,7 +121,8 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
       const userCredential = await createUserWithEmailAndPassword(
         auth,
         email,
-        password
+        password,
+        username
       );
       const firebaseUser = userCredential.user;
 

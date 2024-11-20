@@ -142,7 +142,7 @@ export interface CatalogPlant extends Plant {
 export interface AddUserPlant extends Plant {
   nickName: string;
   garden_id: string;
-  userId: number;
+  userId: string;
   catalogPlant_id: string;
   wateredDate: string;
   plantedDate: string;
@@ -165,16 +165,7 @@ export interface Garden extends AddGarden {
 export interface AddGarden {
   name: string;
   location: string;
-  userId: number;
-}
-
-//User interface
-export interface User {
-  username: string;
-  firstName: string;
-  lastName: string;
-  gardenIds: number[];
-  plantIds: number[];
+  userId: string;
 }
 
 //expected Level interface

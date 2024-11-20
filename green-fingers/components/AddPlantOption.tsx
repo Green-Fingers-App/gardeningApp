@@ -46,7 +46,7 @@ const AddPlantOption: React.FC<AddPlantOptionProps> = ({
       nickName,
       garden_id: selectedGarden,
       catalogPlant_id: selectedPlant.id || "",
-      userId: user?.id || -1,
+      userId: user?.id || "",
       name: selectedPlant.name,
       blooming: selectedPlant.blooming,
       waterFrequency: selectedPlant.waterFrequency,
