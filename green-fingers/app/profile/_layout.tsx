@@ -39,7 +39,7 @@ const ProfileLayout: React.FC = () => {
           headerRight: () => (
             <View style={styles.headerRight}>
               <Text style={styles.headerText}>
-                {isLoggedIn ? `Hello, ${user?.email}` : "Welcome"}
+                {isLoggedIn ? `Hello, ${user?.username}` : "Welcome"}
               </Text>
               {isLoggedIn && (
                 <TouchableOpacity
