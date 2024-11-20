@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
+import { View, StyleSheet, ImageBackground } from "react-native";
 import React from "react";
 import { useAuth } from "@/context/AuthContext";
 import { useRouter } from "expo-router";
@@ -8,6 +8,10 @@ const Home = () => {
   const { user, logout } = useAuth();
   const router = useRouter();
   return (
+    <ImageBackground
+      source={require("../../../assets/images/background.png")}
+      style={styles.backgroundImage}
+    >
     <View style={styles.container}>
       <Button
         onPress={() => router.push("/profile/home/plantexplorer")}
@@ -22,17 +26,20 @@ const Home = () => {
         iconName="logout"
       />
     </View>
+    </ImageBackground>
   );
 };
 export default Home;
 const styles = StyleSheet.create({
+  backgroundImage: {
+    flex: 1,
+  },
   container: {
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
     padding: 20,
     gap: 8,
-    backgroundColor: colors.bgLight,
   },
   header: {
     fontSize: 24,
