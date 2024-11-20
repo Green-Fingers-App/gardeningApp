@@ -40,6 +40,7 @@ interface PlantContextProps {
   fetchGardenDetail: (gardenId: string) => Garden | undefined;
   fetchGardenPlants: (gardenId: string) => UserPlant[] | undefined;
   createGarden: (gardenData: AddGarden) => void;
+  deleteUserGarden: (gardenId: string) => void;
 }
 
 const PlantsContext = createContext<PlantContextProps | undefined>(undefined);
@@ -181,6 +182,19 @@ export const PlantsProvider: React.FC<{ children: ReactNode }> = ({
     }
   };
 
+  // Delete garden
+  const deleteUserGarden = async (gardenId: string) => {
+    try {
+      const plantsInGarden = plants.filter((plant) => plant.garden_id === gardenId);
+      await Promise.all(plantsInGarden.map((plant) => deleteUserPlant(plant.id)));
+      await deleteGarden(gardenId);
+      setPlants((prevPlants) => prevPlants.filter((plant) => plant.garden_id !== gardenId));
+      setGardens((prevGardens) => prevGardens.filter((garden) => garden.id !== gardenId));
+    } catch (error) {
+      console.error("Error deleting garden:", error);
+    }
+  }
+
   useEffect(() => {
     if (user?.id) {
       fetchGardens();
@@ -204,6 +218,7 @@ export const PlantsProvider: React.FC<{ children: ReactNode }> = ({
         fetchGardenDetail,
         fetchGardenPlants,
         createGarden,
+        deleteUserGarden,
         databasePlants,
       }}
     >
