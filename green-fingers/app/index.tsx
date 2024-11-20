@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { View, ActivityIndicator } from "react-native";
+import { View, StyleSheet, ActivityIndicator, ImageBackground } from "react-native";
 import { useRouter } from "expo-router";
 import { useAuth } from "@/context/AuthContext";
 import { useGardensAndPlants } from "@/context/GardensAndPlantsContext";
@@ -34,9 +34,14 @@ const Index = () => {
 
   if (loading) {
     return (
-      <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+      <ImageBackground
+      source={require("../assets/images/background.png")}
+      style={styles.backgroundImage}
+    >
+      <View style={styles.pageContainer}>
         <ActivityIndicator size="large" />
       </View>
+      </ImageBackground>
     );
   }
 
@@ -44,3 +49,15 @@ const Index = () => {
 };
 
 export default Index;
+
+const styles = StyleSheet.create({
+  backgroundImage: {
+    flex: 1,
+    resizeMode: "cover",
+  },
+  pageContainer: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+});
