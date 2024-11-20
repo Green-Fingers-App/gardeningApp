@@ -21,6 +21,17 @@ export const addPlant = async (plantData: AddUserPlant): Promise<string | undefi
   }
 };
 
+// Update User Plant
+export const updateUserPlant = async (plantId: string, updatedData: Partial<AddUserPlant>): Promise<void> => {
+  try {
+    const docRef = doc(db, "user-plants", plantId);
+    await updateDoc(docRef, updatedData);
+    console.log("Plant updated");
+  } catch (error) {
+    console.error("Error updating plant: ", error);
+  }
+};
+
 export const addGarden = async (gardenData: AddGarden): Promise<string | undefined> => {
   try {
     const docRef= await addDoc(gardenCollection, gardenData);

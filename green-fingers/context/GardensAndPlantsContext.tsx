@@ -28,6 +28,7 @@ import {
   addPlant,
   deletePlant,
   deleteGarden,
+  updateUserPlant,
 } from "@/firebase/plantService";
 
 interface PlantContextProps {
@@ -38,6 +39,7 @@ interface PlantContextProps {
   fetchAllPlants: () => void;
   fetchPlantsByCommonName: (input: string) => Promise<CatalogPlant[]>;
   createPlant: (plantData: AddUserPlant) => void;
+  updatePlant: (plantId: string, plantData: Partial<AddUserPlant>) => void;
   deleteUserPlant: (plantId: string) => void;
   fetchGardens: () => void;
   fetchPlantDetail: (plantId: string) => UserPlant | undefined;
@@ -165,6 +167,23 @@ export const PlantsProvider: React.FC<{ children: ReactNode }> = ({
     }
   };
 
+  // Update plant
+  const updatePlant = async (
+    plantId: string,
+    plantData: Partial<AddUserPlant>
+  ) => {
+    try {
+      await updateUserPlant(plantId, plantData);
+      setPlants((prevPlants) =>
+        prevPlants.map((plant) =>
+          plant.id === plantId ? { ...plant, ...plantData } : plant
+        )
+      );
+    } catch (error) {
+      console.error("Error updating plant:", error);
+    }
+  };
+
   // Delete plant
   const deleteUserPlant = async (plantId: string) => {
     try {
@@ -225,6 +244,7 @@ export const PlantsProvider: React.FC<{ children: ReactNode }> = ({
         fetchAllPlants,
         fetchPlantsByCommonName,
         createPlant,
+        updatePlant,
         deleteUserPlant,
         gardens,
         fetchGardens,

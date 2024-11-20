@@ -4,7 +4,6 @@ import {
   Image,
   ActivityIndicator,
   View,
-  Modal,
   StyleSheet,
   TouchableOpacity,
 } from "react-native";
@@ -17,15 +16,12 @@ import Accordion from "@/components/Accordion";
 import AccordionItem from "@/components/AccordionItem";
 import OptionsMenu from "@/components/OptionMenu";
 import { useDeleteEntity } from "@/hooks/useDeleteEntity";
-import Input from "@/components/Input";
-import DropDown from "@/components/DropDown";
-import Button from "@/components/Button";
-import textStyles from "@/constants/textStyles";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import EntityEditModal from "@/components/EntityEditModal";
 
 const PlantDetailPage = () => {
   const { plantId } = useLocalSearchParams();
-  const { fetchPlantDetail, gardens } = useGardensAndPlants();
+  const { fetchPlantDetail, gardens, updatePlant } = useGardensAndPlants();
   const [plant, setPlant] = useState<UserPlant | null>(null);
   const { deleting, handleDeleteEntity } = useDeleteEntity("Plant");
   const [editing, setEditing] = useState(false);
@@ -33,6 +29,7 @@ const PlantDetailPage = () => {
     nickName: "",
     gardenId: "",
   });
+  const router = useRouter();
 
   const options = [
     { label: "Edit", onPress: () => setEditing(true) },
@@ -52,13 +49,15 @@ const PlantDetailPage = () => {
     setEditValues((prev) => ({ ...prev, [key]: value }));
   };
 
-  const handleGardenSelect = (value: string) => {
-    setEditValues((prev) => ({ ...prev, gardenId: value }));
-  };
-
   const handleCancelEdit = () => {
     setEditing(false);
     setEditValues({ nickName: "", gardenId: "" });
+  };
+
+  const handleSave = () => {
+    updatePlant(plantId.toString(), editValues);
+    setEditing(false);
+    router.replace(`/profile/plants/${plantId}`);
   };
 
   useEffect(() => {
@@ -134,29 +133,24 @@ const PlantDetailPage = () => {
       ) : (
         <Text>Loading...</Text>
       )}
-      <Modal visible={editing} animationType="slide">
-        <View style={styles.modalContainer}>
-          <Text style={textStyles.h1}>Set Your Plant Data</Text>
-          <Input
-            label="Nickname"
-            value={editValues.nickName}
-            onChangeText={(text) => handleChange("nickName", text)}
-          />
-          <DropDown
-            label="Garden"
-            placeholder="Select a garden..."
-            options={gardenOptions}
-            onSelect={handleGardenSelect}
-          />
-          <Button text="Save" iconName="floppy" />
-          <Button
-            text="Cancel"
-            iconName="close"
-            onPress={() => handleCancelEdit()}
-            type="secondary"
-          />
-        </View>
-      </Modal>
+       <EntityEditModal
+        visible={editing}
+        entityName="Plant"
+        fields={[
+          { key: "nickName", label: "Nickname", type: "text" },
+          {
+            key: "gardenId",
+            label: "Garden",
+            type: "dropdown",
+            placeholder: "Select a garden...",
+            options: gardenOptions,
+          },
+        ]}
+        values={editValues}
+        onChange={handleChange}
+        onSave={handleSave}
+        onCancel={handleCancelEdit}
+      />
     </>
   );
 };
