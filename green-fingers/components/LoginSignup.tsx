@@ -9,7 +9,7 @@ const LoginSignup = (props: SvgProps) => (
   width={screenWidth}
   height={screenHeight}
   preserveAspectRatio="xMidYMid meet"
-  viewBox="0 0 650 1260"
+  viewBox="0 0 720 800"
   
     {...props}
   >
