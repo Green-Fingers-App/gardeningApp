@@ -1,17 +1,20 @@
 import { View, StyleSheet, ScrollView } from "react-native";
 import React, { useEffect, useState } from "react";
-import { Stack } from "expo-router";
+import { Stack, useRouter } from "expo-router";
 import { useGardensAndPlants } from "@/context/GardensAndPlantsContext";
 import { CatalogPlant } from "@/types/models";
 import PlantCard from "@/components/PlantCard";
 import colors from "@/constants/colors";
+import ExplorerSearch from "@/components/ExplorerSearch";
 
 const PlantExplorerPage = () => {
   const { fetchAllPlants, databasePlants } = useGardensAndPlants();
   const [plants, setPlants] = useState<CatalogPlant[]>([]);
+  const [filteredPlants, setFilteredPlants] = useState<CatalogPlant[]>([]);
+  const router = useRouter();
 
   useEffect(() => {
-    console.log("im fetching");
+    console.log("im fetching:", plants);
     const fetchPlantsData = async () => {
       try {
         fetchAllPlants();
@@ -31,11 +34,28 @@ const PlantExplorerPage = () => {
           headerStyle: { backgroundColor: colors.primaryDefault },
         }}
       />
+      <ExplorerSearch
+        plants={plants}
+        filteredPlants={filteredPlants}
+        setFilteredPlants={setFilteredPlants}
+      />
       <ScrollView style={{ backgroundColor: colors.bgLight }}>
         <View style={styles.pageContainer}>
-          {plants.map((plant, index) => (
-            <PlantCard key={index} plant={plant} />
-          ))}
+          {filteredPlants.length === 0
+            ? plants.map((plant, index) => (
+                <PlantCard
+                  key={index}
+                  plant={plant}
+                  onPress={() => router.push(`/profile/home/${plant.id}`)}
+                />
+              ))
+            : filteredPlants.map((plant, index) => (
+                <PlantCard
+                  key={index}
+                  plant={plant}
+                  onPress={() => router.push(`/profile/home/${plant.id}`)}
+                />
+              ))}
         </View>
       </ScrollView>
     </>

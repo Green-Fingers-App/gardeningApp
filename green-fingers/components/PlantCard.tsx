@@ -14,18 +14,15 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { router } from "expo-router";
 import { useDeletePlant } from "@/hooks/useDeletePlant";
 
-interface PlantCardProps {
+interface PlantCardProps extends React.ComponentProps<typeof TouchableOpacity> {
   plant: UserPlant | CatalogPlant;
 }
 
-const PlantCard: React.FC<PlantCardProps> = ({ plant }) => {
+const PlantCard: React.FC<PlantCardProps> = ({ plant, ...props }) => {
   const { deleting, handleDeletePlant } = useDeletePlant();
 
   return (
-    <TouchableOpacity
-      style={styles.cardContainer}
-      onPress={() => router.push(`profile/plants/${plant.id}`)}
-    >
+    <TouchableOpacity {...props} style={styles.cardContainer}>
       {!deleting ? (
         <>
           <View
