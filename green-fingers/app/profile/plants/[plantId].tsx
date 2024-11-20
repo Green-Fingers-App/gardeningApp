@@ -1,4 +1,5 @@
-import { Text, SafeAreaView, Image, ActivityIndicator, View } from "react-native";
+import { Text, SafeAreaView } from "react-native";
+import { Text, SafeAreaView } from "react-native";
 import { Stack, useLocalSearchParams, useRouter } from "expo-router";
 import React, { useEffect, useState } from "react";
 import { useGardensAndPlants } from "@/context/GardensAndPlantsContext";
@@ -61,8 +62,9 @@ const PlantDetailPage = () => {
               </Text>
               <Text>
                 Harvest:
-                {plant.harvest
-                  ? `${plant.harvest.start} till ${plant.harvest.end}`
+                Harvest:
+                {plant.plant.harvest
+                  ? `${plant.plant.harvest.start} till ${plant.plant.harvest.end}`
                   : "This plant cannot be harvest"}
               </Text>
               <Text>Fertilizer type: {plant.fertilizerType}</Text>

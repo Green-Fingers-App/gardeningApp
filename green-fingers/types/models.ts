@@ -122,6 +122,7 @@ export interface Planting {
 
 // Main Plant interface
 export interface Plant {
+  id: string;
   name: PlantName;
   blooming: Blooming;
   waterFrequency: WaterFrequency;
@@ -133,43 +134,16 @@ export interface Plant {
   planting: Planting;
 }
 
-// Catalog Plant interface
-export interface CatalogPlant extends Plant {
-  id: string;
-}
-
-// Add Plant interface
-export interface AddUserPlant extends Plant {
-  nickName: string;
-  garden_id: string;
-  userId: number;
-  catalogPlant_id: string;
-  wateredDate: string;
-  plantedDate: string;
-  feededDate: string;
-  moistureLevel: Level;
-  sunlightLevel: Level;
-  harvested: boolean;
-}
-
-//User's own plant interface
-export interface UserPlant extends AddUserPlant {
-  id: string;
-}
-
 //Garden interface
-export interface Garden extends AddGarden {
-  id: string;  
-}
-
-export interface AddGarden {
-  name: string;
+export interface Garden {
+  id: string;
   location: string;
-  userId: number;
+  plantIds: string[];  
 }
 
 //User interface
 export interface User {
+  id: string;
   username: string;
   firstName: string;
   lastName: string;
@@ -178,7 +152,25 @@ export interface User {
 }
 
 //expected Level interface
-export type Level = "Optimal" | "Too Low" | "High";
+export enum Level {
+  TOO_LOW = "Too Low",
+  OPTIMAL = "Optimal",
+  TOO_HIGH = "Too High"
+}
+
+//User's own plant interface
+export interface UserPlant {
+  id: string;
+  id: string;
+  plant: Plant;
+  nickName: string;
+  wateredDate: string;
+  plantedDate: string;
+  feededDate: string;
+  moistureLevel: Level;
+  sunlightLevel: Level;
+  harvested: boolean;
+}
 
 export interface MoistureSensor {
   //tba
