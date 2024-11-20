@@ -6,8 +6,9 @@ import {
   View,
   Modal,
   StyleSheet,
+  TouchableOpacity,
 } from "react-native";
-import { Stack, useLocalSearchParams, useRouter } from "expo-router";
+import { router, Stack, useLocalSearchParams, useRouter } from "expo-router";
 import React, { useEffect, useState } from "react";
 import { useGardensAndPlants } from "@/context/GardensAndPlantsContext";
 import { UserPlant } from "@/types/models";
@@ -20,6 +21,7 @@ import Input from "@/components/Input";
 import DropDown from "@/components/DropDown";
 import Button from "@/components/Button";
 import textStyles from "@/constants/textStyles";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 const PlantDetailPage = () => {
   const { plantId } = useLocalSearchParams();
@@ -76,6 +78,17 @@ const PlantDetailPage = () => {
           },
           headerRight: () => {
             return <OptionsMenu options={options} />;
+          },
+          headerLeft: () => {
+            return (
+              <TouchableOpacity onPress={() => router.push("/profile/plants")}>
+                <MaterialCommunityIcons
+                  name="arrow-left"
+                  size={24}
+                  color="black"
+                />
+              </TouchableOpacity>
+            );
           },
         }}
       />
