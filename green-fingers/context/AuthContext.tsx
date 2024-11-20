@@ -30,7 +30,6 @@ export const useAuth = () => {
   const context = useContext(AuthContext);
   if (!context) {
     throw new Error("useAuth must be used within an AuthProvider");
-    throw new Error("useAuth must be used within an AuthProvider");
   }
   return context;
 };
@@ -164,6 +163,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
     }
   };
 
+  // Update user in state
   const updateUser = (newUserData: Partial<User>) => {
     setUser((prevUser) =>
       prevUser ? { ...prevUser, ...newUserData } : null
@@ -172,7 +172,15 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
 
   return (
     <AuthContext.Provider
-      value={{ user, login, signup, logout, authError, updateUser }}
+      value={{
+        user,
+        isLoggedIn,
+        login,
+        signup,
+        logout,
+        authError,
+        updateUser,
+      }}
     >
       {children}
     </AuthContext.Provider>

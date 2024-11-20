@@ -1,9 +1,5 @@
 import { router } from "expo-router";
-import { router } from "expo-router";
 import { StatusBar } from "expo-status-bar";
-import React, { useState } from "react";
-import { SafeAreaView, Text, View, StyleSheet } from "react-native";
-import { useAuth } from "@/context/AuthContext";
 import React, { useState } from "react";
 import { SafeAreaView, Text, View, StyleSheet } from "react-native";
 import { useAuth } from "@/context/AuthContext";
@@ -11,7 +7,6 @@ import Input from "@/components/Input";
 import Button from "@/components/Button";
 import colors from "@/constants/colors";
 import textStyles from "@/constants/textStyles";
-import LoginSignup from "@/components/LoginSignup";
 
 interface InputValues {
   email: string;
@@ -31,7 +26,6 @@ export default function LoginForm() {
 
   const handleChange = (name: keyof InputValues, value: string): void => {
     setInputValues((prevState) => ({
-    setInputValues((prevState) => ({
       ...prevState,
       [name]: value,
     }));
@@ -44,7 +38,6 @@ export default function LoginForm() {
     }));
   };
 
-  const validateAndLogin = async (): Promise<void> => {
   const validateAndLogin = async (): Promise<void> => {
     const { email, password } = inputValues;
 
@@ -60,12 +53,9 @@ export default function LoginForm() {
 
     await login(email, password);
   };
-    await login(email, password);
-  };
 
   return (
     <SafeAreaView style={styles.container}>
-      <LoginSignup style={StyleSheet.absoluteFillObject} /> {/* SVG as Background */}
       <Text style={textStyles.h1}>WELCOME BACK</Text>
       <Text style={textStyles.h3}>Log in Now</Text>
       <View style={styles.content}>
@@ -79,18 +69,21 @@ export default function LoginForm() {
               onChangeText={(text) => handleChange("email", text)}
               error={inputErrors.email}
               onFocus={() => handleErrorMessage("email", undefined)}
+              value={inputValues.email}
             />
             <Input
               iconName="lock-outline"
               label="Password"
               placeholder="Enter your password"
-              secureTextEntry
+              password
+              secureTextEntry={true}
               onChangeText={(text) => handleChange("password", text)}
               error={inputErrors.password}
               onFocus={() => handleErrorMessage("password", undefined)}
+              value={inputValues.password}
             />
           </View>
-          <Button text="Login" onPress={validate} iconName="login" />
+          <Button text="Login" onPress={validateAndLogin} iconName="login" />
           <Button
             type="tertiary"
             text="Forgot Password?"

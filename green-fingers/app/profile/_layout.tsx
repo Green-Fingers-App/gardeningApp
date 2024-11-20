@@ -2,33 +2,27 @@ import React, { useEffect, useState } from "react";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import { Tabs, useRouter } from "expo-router";
 import { MaterialIcons } from "@expo/vector-icons";
-import colors from "@/constants/colors";
-import React, { useState } from "react";
-import { PlantsProvider } from "@/context/GardensAndPlantsContext";
-import { TouchableOpacity } from "react-native";
-import { useRouter } from "expo-router";
-import React, { useEffect, useState } from "react";
-import {
-  PlantsProvider,
-  useGardensAndPlants,
-} from "@/context/GardensAndPlantsContext";
-import { useGardensAndPlants } from "@/context/GardensAndPlantsContext";
 import { useAuth } from "@/context/AuthContext";
+import { useGardensAndPlants } from "@/context/GardensAndPlantsContext";
 import AddMenu from "@/components/AddMenu";
+import colors from "@/constants/colors";
 
 const ProfileLayout: React.FC = () => {
   const router = useRouter();
-  const { user } = useAuth();
-  const [menuOpen, setMenuOpen] = useState<boolean>(false);
-  const { fetchPlants } = useGardensAndPlants();
+  const { user, isLoggedIn } = useAuth();
+  const [menuOpen, setMenuOpen] = useState(false);
+  const { fetchPlants, fetchGardens, fetchAllPlants } = useGardensAndPlants();
 
-  const toggleMenu = () => {
-    setMenuOpen(!menuOpen);
-  };
+  const toggleMenu = () => setMenuOpen(!menuOpen);
 
   useEffect(() => {
-    fetchPlants("a", "hallo");
-  }, []);
+    if (isLoggedIn && user?.id) {
+      fetchPlants();
+      fetchGardens();
+      fetchAllPlants();
+      console.log("Fetching plants and gardens");
+    }
+  }, [isLoggedIn, user?.id]);
 
   return (
     <>
@@ -100,11 +94,13 @@ const ProfileLayout: React.FC = () => {
           }}
         />
       </Tabs>
-      <View style={styles.addButtonContainer}>
-        <TouchableOpacity style={styles.addButton} onPress={() => toggleMenu()}>
-          <MaterialIcons name={menuOpen ? "close" : "add"} size={45} />
-        </TouchableOpacity>
-      </View>
+      {isLoggedIn && (
+        <View style={styles.addButtonContainer}>
+          <TouchableOpacity style={styles.addButton} onPress={toggleMenu}>
+            <MaterialIcons name={menuOpen ? "close" : "add"} size={45} />
+          </TouchableOpacity>
+        </View>
+      )}
       {menuOpen && <AddMenu />}
     </>
   );
@@ -139,7 +135,5 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     borderRadius: 30,
-    transform: [{ translateX: -30 }],
-    transitionDuration: "200ms",
   },
 });
