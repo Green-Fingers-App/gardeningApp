@@ -1,24 +1,45 @@
 import { Text, View, StyleSheet, ActivityIndicator } from "react-native";
 import React, { useEffect, useState } from "react";
-import { Stack, useLocalSearchParams } from "expo-router";
+import { Stack, useLocalSearchParams, useRouter } from "expo-router";
 import { useGardensAndPlants } from "@/context/GardensAndPlantsContext";
 import { Garden, UserPlant } from "@/types/models";
 import PlantCard from "@/components/PlantCard";
 import colors from "@/constants/colors";
 import OptionMenu from "@/components/OptionMenu";
 import { useDeleteEntity } from "@/hooks/useDeleteEntity";
+import EntityEditModal from "@/components/EntityEditModal";
 
 const GardenDetailPage = () => {
   const { gardenId } = useLocalSearchParams();
-  const { fetchGardenPlants, fetchGardenDetail } = useGardensAndPlants();
+  const { fetchGardenPlants, fetchGardenDetail, updateUserGarden } = useGardensAndPlants();
   const [plants, setPlants] = useState<UserPlant[] | undefined>(undefined);
   const [garden, setGarden] = useState<Garden | undefined>(undefined);
   const { deleting, handleDeleteEntity } = useDeleteEntity("Garden");
+  const [editing, setEditing] = useState(false);
+  const [editValues, setEditValues] = useState({
+    name: "",
+  });
+  const router = useRouter();
 
   const options = [
-    { label: "Edit", onPress: () => console.log("Edit garden") },
+    { label: "Edit", onPress: () => setEditing(true) },
     { label: "Delete", onPress: () => garden && handleDeleteEntity({ id: garden.id, name: garden.name }) },
   ]
+
+  const handleChange = (key: string, value: string) => {
+    setEditValues((prev) => ({ ...prev, [key]: value }));
+  };
+
+  const handleCancelEdit = () => {
+    setEditing(false);
+    setEditValues({ name: "" });
+  };
+
+  const handleSave = () => {
+    updateUserGarden(gardenId.toString(), editValues);
+    setEditing(false);
+    router.replace(`/profile/gardens/${gardenId}`);
+  };
 
   useEffect(() => {
     const fetchGardenData = async () => {
@@ -60,7 +81,17 @@ const GardenDetailPage = () => {
       ) : (
         <Text>Loading...</Text>
       )}
-      
+      <EntityEditModal
+        visible={editing}
+        entityName="Garden"
+        fields={[
+          { key: "name", label: "Name", type: "text" },
+        ]}
+        values={editValues}
+        onChange={handleChange}
+        onSave={handleSave}
+        onCancel={handleCancelEdit}
+      />
     </>
   );
 };

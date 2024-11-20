@@ -57,7 +57,7 @@ const PlantDetailPage = () => {
   const handleSave = () => {
     updatePlant(plantId.toString(), editValues);
     setEditing(false);
-    router.replace(`/profile/plants/${plantId}`);
+    router.push(`/profile/plants/${plantId}`);
   };
 
   useEffect(() => {

@@ -29,6 +29,7 @@ import {
   deletePlant,
   deleteGarden,
   updateUserPlant,
+  updateGarden,
 } from "@/firebase/plantService";
 
 interface PlantContextProps {
@@ -46,6 +47,7 @@ interface PlantContextProps {
   fetchGardenDetail: (gardenId: string) => Garden | undefined;
   fetchGardenPlants: (gardenId: string) => UserPlant[] | undefined;
   createGarden: (gardenData: AddGarden) => void;
+  updateUserGarden: (gardenId: string, gardenData: Partial<AddGarden>) => void;
   deleteUserGarden: (gardenId: string) => void;
 }
 
@@ -207,6 +209,23 @@ export const PlantsProvider: React.FC<{ children: ReactNode }> = ({
     }
   };
 
+  // Update user garden
+  const updateUserGarden = async (
+    gardenId: string,
+    gardenData: Partial<AddGarden>
+  ) => {
+    try {
+      await updateGarden(gardenId, gardenData);
+      setGardens((prevGardens) =>
+        prevGardens.map((garden) =>
+          garden.id === gardenId ? { ...garden, ...gardenData } : garden
+        )
+      );
+    } catch (error) {
+      console.error("Error updating garden:", error);
+    }
+  };
+
   // Delete garden
   const deleteUserGarden = async (gardenId: string) => {
     try {
@@ -252,6 +271,7 @@ export const PlantsProvider: React.FC<{ children: ReactNode }> = ({
         fetchGardenDetail,
         fetchGardenPlants,
         createGarden,
+        updateUserGarden,
         deleteUserGarden,
         databasePlants,
       }}
