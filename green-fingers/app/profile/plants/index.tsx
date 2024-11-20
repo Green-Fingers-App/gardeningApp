@@ -35,7 +35,6 @@ const Plants = () => {
 const styles = StyleSheet.create({
   backgroundImage: {
     flex: 1,
-    resizeMode: "cover",
   },
   pageContainer: {
     flex: 1,

@@ -1,4 +1,4 @@
-import { View, StyleSheet, ScrollView } from "react-native";
+import { View, StyleSheet, ScrollView, ImageBackground } from "react-native";
 import React, { useEffect, useState } from "react";
 import { Stack, useRouter } from "expo-router";
 import { useGardensAndPlants } from "@/context/GardensAndPlantsContext";
@@ -28,6 +28,10 @@ const PlantExplorerPage = () => {
 
   return (
     <>
+    <ImageBackground
+      source={require("../../../assets/images/background.png")}
+      style={styles.backgroundImage}
+    >
       <Stack.Screen
         options={{
           title: "Plant Explorer",
@@ -39,7 +43,7 @@ const PlantExplorerPage = () => {
         filteredPlants={filteredPlants}
         setFilteredPlants={setFilteredPlants}
       />
-      <ScrollView style={{ backgroundColor: colors.bgLight }}>
+      <ScrollView>
         <View style={styles.pageContainer}>
           {filteredPlants.length === 0
             ? plants.map((plant, index) => (
@@ -58,6 +62,7 @@ const PlantExplorerPage = () => {
               ))}
         </View>
       </ScrollView>
+      </ImageBackground>
     </>
   );
 };
@@ -65,6 +70,9 @@ const PlantExplorerPage = () => {
 export default PlantExplorerPage;
 
 const styles = StyleSheet.create({
+  backgroundImage: {
+    flex: 1,
+  },
   pageContainer: {
     flex: 1,
     padding: 16,
