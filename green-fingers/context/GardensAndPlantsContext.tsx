@@ -23,7 +23,7 @@ import {
   where,
 } from "firebase/firestore";
 import { useAuth } from "@/context/AuthContext";
-import { addGarden, addPlant, deletePlant } from "@/firebase/plantService";
+import { addGarden, addPlant, deletePlant, deleteGarden } from "@/firebase/plantService";
 
 
 interface PlantContextProps {
