@@ -11,6 +11,7 @@ const PlantExplorerPage = () => {
   const [plants, setPlants] = useState<CatalogPlant[]>([]);
 
   useEffect(() => {
+    console.log("im fetching");
     const fetchPlantsData = async () => {
       try {
         fetchAllPlants();
@@ -20,7 +21,8 @@ const PlantExplorerPage = () => {
       }
     };
     fetchPlantsData();
-  }, [databasePlants]);
+  }, []);
+
   return (
     <>
       <Stack.Screen

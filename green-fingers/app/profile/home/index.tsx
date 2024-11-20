@@ -3,6 +3,7 @@ import React from "react";
 import { useAuth } from "@/context/AuthContext";
 import { useRouter } from "expo-router";
 import Button from "@/components/Button";
+import colors from "@/constants/colors";
 const Home = () => {
   const { user, logout } = useAuth();
   const router = useRouter();
@@ -11,8 +12,15 @@ const Home = () => {
       <Button
         onPress={() => router.push("/profile/home/plantexplorer")}
         text="Plant Explorer"
+        type="primary"
+        iconName="magnify"
       />
-      <Button onPress={logout} text="Logout" type="secondary" />
+      <Button
+        onPress={logout}
+        text="Logout"
+        type="secondary"
+        iconName="logout"
+      />
     </View>
   );
 };
@@ -24,6 +32,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     padding: 20,
     gap: 8,
+    backgroundColor: colors.bgLight,
   },
   header: {
     fontSize: 24,

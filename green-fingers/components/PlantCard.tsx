@@ -28,7 +28,12 @@ const PlantCard: React.FC<PlantCardProps> = ({ plant }) => {
     >
       {!deleting ? (
         <>
-          <View style={{ flexDirection: "row", alignItems: "center" }}>
+          <View
+            style={{
+              flexDirection: "row",
+              alignItems: "center",
+            }}
+          >
             <Text style={styles.commonName}>
               {"nickName" in plant ? plant.nickName : plant.name.commonName}
             </Text>
@@ -66,12 +71,14 @@ const PlantCard: React.FC<PlantCardProps> = ({ plant }) => {
               <Text>I'm thirsty</Text>
             </View>
           ) : (
-            <View
-              style={{ flexDirection: "row", alignItems: "center", gap: 4 }}
-            >
-              <MaterialCommunityIcons name="check-circle" size={15} />
-              <Text>I'm okay</Text>
-            </View>
+            "nickName" in plant && (
+              <View
+                style={{ flexDirection: "row", alignItems: "center", gap: 4 }}
+              >
+                <MaterialCommunityIcons name="check-circle" size={15} />
+                <Text>I'm okay</Text>
+              </View>
+            )
           )}
         </>
       ) : (
