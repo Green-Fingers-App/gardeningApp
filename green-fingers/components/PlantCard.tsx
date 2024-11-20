@@ -8,14 +8,14 @@ import {
   ActivityIndicator,
 } from "react-native";
 import React from "react";
-import { UserPlant } from "../types/models";
+import { CatalogPlant, UserPlant } from "../types/models";
 import colors from "@/constants/colors";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { router } from "expo-router";
 import { useDeletePlant } from "@/hooks/useDeletePlant";
 
 interface PlantCardProps {
-  plant: UserPlant;
+  plant: UserPlant | CatalogPlant;
 }
 
 const PlantCard: React.FC<PlantCardProps> = ({ plant }) => {
@@ -29,28 +29,36 @@ const PlantCard: React.FC<PlantCardProps> = ({ plant }) => {
       {!deleting ? (
         <>
           <View style={{ flexDirection: "row", alignItems: "center" }}>
-            <Text style={styles.commonName}>{plant.name.commonName}</Text>
-            <Pressable
-              onPress={() => handleDeletePlant(plant)}
-              style={({ pressed }) => [
-                styles.deleteButton,
-                pressed && styles.activeDelete,
-                {
-                  opacity: pressed ? 0.7 : 1,
-                  transform: [{ scale: pressed ? 0.9 : 1 }],
-                },
-              ]}
-            >
-              <MaterialCommunityIcons
-                name="delete-outline"
-                size={20}
-                color={"black"}
-              />
-            </Pressable>
+            <Text style={styles.commonName}>
+              {"nickName" in plant ? plant.nickName : plant.name.commonName}
+            </Text>
+            {"nickName" in plant && (
+              <Pressable
+                onPress={() => handleDeletePlant(plant)}
+                style={({ pressed }) => [
+                  styles.deleteButton,
+                  pressed && styles.activeDelete,
+                  {
+                    opacity: pressed ? 0.7 : 1,
+                    transform: [{ scale: pressed ? 0.9 : 1 }],
+                  },
+                ]}
+              >
+                <MaterialCommunityIcons
+                  name="delete-outline"
+                  size={20}
+                  color={"black"}
+                />
+              </Pressable>
+            )}
           </View>
-          <Text style={styles.scientificName}>{plant.name.scientificName}</Text>
+          <Text style={styles.scientificName}>
+            {"nickName" in plant
+              ? plant.name.commonName
+              : plant.name.scientificName}
+          </Text>
           <Image width={80} height={80} style={styles.picture} />
-          {plant.moistureLevel === "Too Low" ? (
+          {"nickName" in plant && plant.moistureLevel === "Too Low" ? (
             <View
               style={{ flexDirection: "row", alignItems: "center", gap: 4 }}
             >
