@@ -27,7 +27,7 @@ const Index = () => {
   useEffect(() => {
     const timer = setTimeout(() => {
       setLoading(false); // Stop loading after a delay
-    }, 1000);
+    }, 1);
 
     return () => clearTimeout(timer);
   }, []);

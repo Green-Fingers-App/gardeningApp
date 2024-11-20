@@ -131,6 +131,7 @@ export interface Plant {
   size: Size;
   fertilizerType: string;
   planting: Planting;
+  imageUrl: string;
 }
 
 // Catalog Plant interface
