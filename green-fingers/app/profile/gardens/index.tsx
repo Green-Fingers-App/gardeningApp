@@ -1,17 +1,36 @@
-import { View } from "react-native";
-import React, { useEffect, useState } from "react";
+import { View, StyleSheet, ImageBackground } from "react-native";
+import React from "react";
 import GardenCard from "@/components/GardenCard";
 import { useGardensAndPlants } from "@/context/GardensAndPlantsContext";
 
-const gardens: React.FC = () => {
+const Gardens: React.FC = () => {
   const { gardens } = useGardensAndPlants();
+
   return (
-    <View style={{ flex: 1, gap: 8, marginTop: 8, marginHorizontal: "2.5%" }}>
-      {gardens.map((garden, index) => (
-        <GardenCard key={index} garden={garden} />
-      ))}
-    </View>
+    <ImageBackground
+      source={require("../../../assets/images/background.png")}
+      style={styles.backgroundImage}
+    >
+      <View style={styles.pageContainer}>
+        {gardens.map((garden, index) => (
+          <GardenCard key={index} garden={garden} />
+        ))}
+      </View>
+    </ImageBackground>
   );
 };
 
-export default gardens;
+export default Gardens;
+
+const styles = StyleSheet.create({
+  backgroundImage: {
+    flex: 1,
+    resizeMode: "cover",
+  },
+  pageContainer: {
+    flex: 1,
+    margin: 8,
+    gap: 8,
+    marginTop: 8,
+  },
+});
