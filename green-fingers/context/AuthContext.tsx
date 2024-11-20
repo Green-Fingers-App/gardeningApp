@@ -60,10 +60,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
         const unsubscribeUser = onSnapshot(userDocRef, (docSnapshot) => {
           if (docSnapshot.exists()) {
             const userData = docSnapshot.data();
-            const mappedUser = mapFirebaseUserToAppUser(
-              firebaseUser,
-              userData
-            );
+            const mappedUser = mapFirebaseUserToAppUser(firebaseUser, userData);
             setUser(mappedUser);
           } else {
             console.warn("User document does not exist in Firestore.");
@@ -112,17 +109,12 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
   };
 
   // Signup function
-  const signup = async (
-    email: string,
-    password: string,
-    username: string
-  ) => {
+  const signup = async (email: string, password: string, username: string) => {
     try {
       const userCredential = await createUserWithEmailAndPassword(
         auth,
         email,
-        password,
-        username
+        password
       );
       const firebaseUser = userCredential.user;
 
@@ -158,9 +150,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
 
   // Update user in state
   const updateUser = (newUserData: Partial<User>) => {
-    setUser((prevUser) =>
-      prevUser ? { ...prevUser, ...newUserData } : null
-    );
+    setUser((prevUser) => (prevUser ? { ...prevUser, ...newUserData } : null));
   };
 
   return (
