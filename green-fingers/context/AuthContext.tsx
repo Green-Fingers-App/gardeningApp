@@ -24,7 +24,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
 }) => {
   const [user, setUser] = useState<User | null>(null);
   const [authError, setAuthError] = useState<string | null>(null);
-
+  const isLoggedIn = !!user;
   // map Firebase User to custom User type
   const mapFirebaseUserToAppUser = (firebaseUser: any): User => ({
     id: firebaseUser.uid,
@@ -32,15 +32,8 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
     username: firebaseUser.displayName || "Anonymous",
   });
 
-  // Login function
-  const [authError, setAuthError] = useState<string | null>(null);
 
-  // map Firebase User to custom User type
-  const mapFirebaseUserToAppUser = (firebaseUser: any): User => ({
-    id: firebaseUser.uid,
-    email: firebaseUser.email || "",
-    username: firebaseUser.displayName || "Anonymous",
-  });
+  
 
   // Login function
   const login = async (email: string, password: string) => {

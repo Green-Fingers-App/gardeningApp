@@ -15,10 +15,10 @@ const Landingpagelogo = (props: SvgProps) => (
   <Svg
     
     
-  width={962}
-    viewBox="0 0 721.5 1278"
-    height={1704}
-  preserveAspectRatio="xMidYMid meet"
+  width={screenWidth}
+    height={screenHeight}
+    preserveAspectRatio="xMidYMid meet"
+    viewBox="10 10 720 1260"
   
   {...props}
   >

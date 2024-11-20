@@ -30,7 +30,7 @@ const AddMenu = () => {
       {!plantChosen && !gardenChosen && (
         <View style={styles.optionContainer}>
           <Button
-          <Button
+          
             text="Plant"
             iconName="flower"
             type="tertiary"
