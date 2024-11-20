@@ -13,7 +13,7 @@ const Index = () => {
   useEffect(() => {
     const handleFetchAndNavigate = async () => {
       if (!user) {
-        router.replace("/profile/home");
+        router.replace("/landingpage");
       } else {
         router.replace("/profile/home");
       }

@@ -134,11 +134,7 @@ const Profile: React.FC = () => {
           <Text style={textStyles.body}>{values.username}</Text>
           <Text style={textStyles.label}>Email:</Text>
           <Text style={textStyles.body}>{values.email}</Text>
-          <Button 
-            type="secondary"
-            text="Edit Profile"
-            onPress={enableEditMode}
-          />
+          <Button type="secondary" text="Edit Profile" onPress={enableEditMode} />
         </View>
       )}
     </View>

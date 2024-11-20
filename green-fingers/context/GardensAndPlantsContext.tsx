@@ -1,10 +1,46 @@
-import React, { createContext, ReactNode, useContext, useState } from "react";
-import { PlantContextProps } from "@/types/plantTypes";
+import React, {
+  createContext,
+  ReactNode,
+  useContext,
+  useState,
+  useEffect,
+} from "react";
 import {
-  userPlants as importPlants,
-  gardens as importGardens,
-} from "../dummyData/dummyData";
-import { Garden, UserPlant } from "../types/models";
+  Garden,
+  CatalogPlant,
+  UserPlant,
+  AddUserPlant,
+  AddGarden,
+} from "../types/models";
+import { db } from "@/firebase/firebaseConfig";
+import {
+  collection,
+  query,
+  orderBy,
+  startAt,
+  endAt,
+  getDocs,
+  where,
+} from "firebase/firestore";
+import { useAuth } from "@/context/AuthContext";
+import { addGarden, addPlant, deletePlant } from "@/firebase/plantService";
+
+
+interface PlantContextProps {
+  plants: UserPlant[];
+  gardens: Garden[];
+  databasePlants: CatalogPlant[];
+  fetchPlants: () => void;
+  fetchAllPlants: () => void;
+  fetchPlantsByCommonName: (input: string) => Promise<CatalogPlant[]>;
+  createPlant: (plantData: AddUserPlant) => void;
+  deleteUserPlant: (plantId: string) => void;
+  fetchGardens: () => void;
+  fetchPlantDetail: (plantId: string) => UserPlant | undefined;
+  fetchGardenDetail: (gardenId: string) => Garden | undefined;
+  fetchGardenPlants: (gardenId: string) => UserPlant[] | undefined;
+  createGarden: (gardenData: AddGarden) => void;
+}
 
 const PlantsContext = createContext<PlantContextProps | undefined>(undefined);
 
@@ -13,49 +49,162 @@ export const PlantsProvider: React.FC<{ children: ReactNode }> = ({
 }) => {
   const [plants, setPlants] = useState<UserPlant[]>([]);
   const [gardens, setGardens] = useState<Garden[]>([]);
+  const [databasePlants, setDatabasePlants] = useState<CatalogPlant[]>([]);
 
-  const fetchPlants = async (userId: string, token: string): Promise<void> => {
-    const newPlants = importPlants;
-    setPlants(newPlants);
-  };
+  const { user } = useAuth();
 
-  const fetchGardens = (userId: string, token: string) => {
-    const newGardens = importGardens;
-    setGardens(newGardens);
-  };
+  // Fetch user's gardens from Firestore
+  const fetchGardens = async () => {
+    if (!user?.id) return;
 
-  const fetchPlantDetail = (plantId: string): UserPlant | undefined => {
-    const plant = plants.find((plant) => plant.id === plantId);
-    return plant;
-  };
+    try {
+      const gardensQuery = query(
+        collection(db, "gardens"),
+        where("userId", "==", user.id)
+      );
 
-  const fetchGardenDetail = (gardenId: string): Garden | undefined => {
-    const garden = gardens.find((garden) => garden.id === gardenId);
-    return garden;
-  };
+      const snapshot = await getDocs(gardensQuery);
+      const userGardens = snapshot.docs.map(
+        (doc) => ({ id: doc.id, ...doc.data() } as Garden)
+      );
 
-  const plantMap = new Map(plants.map((plant) => [plant.id, plant]));
-
-  const fetchGardenPlants = (gardenId: string): UserPlant[] | undefined => {
-    const garden = gardens.find((garden) => gardenId === garden.id);
-    if (garden) {
-      return garden.plantIds
-        .map((plantId) => plantMap.get(plantId))
-        .filter(Boolean) as UserPlant[];
+      setGardens(userGardens);
+    } catch (error) {
+      console.error("Error fetching gardens:", error);
     }
-    return undefined;
   };
+
+  // Fetch user's plants from Firestore
+  const fetchPlants = async () => {
+    if (!user?.id) return;
+
+    try {
+      const plantsQuery = query(
+        collection(db, "user-plants"),
+        where("userId", "==", user.id)
+      );
+
+      const snapshot = await getDocs(plantsQuery);
+      const userPlants = snapshot.docs.map(
+        (doc) => ({ id: doc.id, ...doc.data() } as UserPlant)
+      );
+      setPlants(userPlants);
+    } catch (error) {
+      console.error("Error fetching plants:", error);
+    }
+  };
+
+  const fetchPlantsByCommonName = async (
+    input: string
+  ): Promise<CatalogPlant[]> => {
+    try {
+      const plantsCollection = collection(db, "plant-catalog");
+      const q = query(
+        plantsCollection,
+        orderBy("name.commonName"),
+        startAt(input),
+        endAt(input + "\uf8ff")
+      );
+      const querySnapshot = await getDocs(q);
+      const plants: CatalogPlant[] = querySnapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+      })) as CatalogPlant[];
+      setDatabasePlants(plants);
+      return plants;
+    } catch (err) {
+      console.error("Error fetching plants by common name:", err);
+      throw err;
+    }
+  };
+
+  // Fetch all plants in the catalog
+  const fetchAllPlants = async () => {
+    try {
+      const plantsCollection = collection(db, "plants");
+      const querySnapshot = await getDocs(plantsCollection);
+      const allPlants = querySnapshot.docs.map(
+        (doc) => ({ id: doc.id, ...doc.data() } as CatalogPlant)
+      );
+      setDatabasePlants(allPlants);
+    } catch (err) {
+      console.error("Error fetching plants:", err);
+    }
+  };
+
+  // Fetch plant details by ID
+  const fetchPlantDetail = (plantId: string): UserPlant | undefined => {
+    return plants.find((plant) => plant.id === plantId);
+  };
+
+  // Fetch garden details by ID
+  const fetchGardenDetail = (gardenId: string): Garden | undefined => {
+    return gardens.find((garden) => garden.id === gardenId);
+  };
+
+  // Fetch plants linked to a specific garden
+  const fetchGardenPlants = (gardenId: string): UserPlant[] | undefined => {
+    const gardenPlants = plants.filter((plant) => plant.garden_id === gardenId);
+    return gardenPlants;
+  };
+
+  // Create new plant
+  const createPlant = async (plantData: AddUserPlant) => {
+    try {
+      const id = await addPlant(plantData);
+      if (id) {
+        setPlants((prevPlants) => [...prevPlants, { ...plantData, id }]);
+      }
+    } catch (error) {
+      console.error("Error creating plant:", error);
+    }
+  };
+
+  // Delete plant
+  const deleteUserPlant = async (plantId: string) => {
+    try {
+      await deletePlant(plantId);
+      setPlants((prevPlants) => prevPlants.filter((plant) => plant.id !== plantId));
+    } catch (error) {
+      console.error("Error deleting plant:", error);
+    }
+  };
+
+  const createGarden = async (gardenData: AddGarden) => {
+    try {
+      const id = await addGarden(gardenData);
+      if (id) {
+        setGardens((prevGardens) => [...prevGardens, { ...gardenData, id }]);
+      }
+    } catch (error) {
+      console.error("Error creating garden: ", error);
+    }
+  };
+
+  useEffect(() => {
+    if (user?.id) {
+      fetchGardens();
+      fetchPlants();
+      fetchAllPlants();
+    }
+  }, [user?.id]);
 
   return (
     <PlantsContext.Provider
       value={{
         plants,
         fetchPlants,
-        fetchPlantDetail,
+        fetchAllPlants,
+        fetchPlantsByCommonName,
+        createPlant,
+        deleteUserPlant,
         gardens,
         fetchGardens,
+        fetchPlantDetail,
         fetchGardenDetail,
         fetchGardenPlants,
+        createGarden,
+        databasePlants,
       }}
     >
       {children}
