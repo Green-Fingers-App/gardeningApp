@@ -1,10 +1,4 @@
-import React, {
-  createContext,
-  useState,
-  ReactNode,
-  useContext,
-  useEffect,
-} from "react";
+import React, { createContext, useState, ReactNode, useContext, useEffect } from "react";
 import { router } from "expo-router";
 import {
   getAuth,
@@ -36,8 +30,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
   const mapFirebaseUserToAppUser = (firebaseUser: any): User => ({
     id: firebaseUser.uid,
     email: firebaseUser.email || "",
-    username: userData?.username || "Anonymous",
-    profile_picture: userData?.profile_picture || "",
+    username: firebaseUser.displayName || "Anonymous",
   });
 
   // Login function

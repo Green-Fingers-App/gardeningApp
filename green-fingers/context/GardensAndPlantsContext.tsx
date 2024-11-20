@@ -19,11 +19,45 @@ export const PlantsProvider: React.FC<{ children: ReactNode }> = ({
     setPlants(newPlants);
   };
 
-  const fetchGardens = (userId: string, token: string) => {
-    const newGardens = importGardens;
-    setGardens(newGardens);
+  const fetchPlantsByCommonName = async (
+    input: string
+  ): Promise<CatalogPlant[]> => {
+    try {
+      const plantsCollection = collection(db, "plant-catalog");
+      const q = query(
+        plantsCollection,
+        orderBy("name.commonName"),
+        startAt(input),
+        endAt(input + "\uf8ff")
+      );
+      const querySnapshot = await getDocs(q);
+      const plants: CatalogPlant[] = querySnapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+      })) as CatalogPlant[];
+      setDatabasePlants(plants);
+      return plants;
+    } catch (err) {
+      console.error("Error fetching plants by common name:", err);
+      throw err;
+    }
   };
 
+  // Fetch all plants in the catalog
+  const fetchAllPlants = async () => {
+    try {
+      const plantsCollection = collection(db, "plants");
+      const querySnapshot = await getDocs(plantsCollection);
+      const allPlants = querySnapshot.docs.map(
+        (doc) => ({ id: doc.id, ...doc.data() } as CatalogPlant)
+      );
+      setDatabasePlants(allPlants);
+    } catch (err) {
+      console.error("Error fetching plants:", err);
+    }
+  };
+
+  // Fetch plant details by ID
   const fetchPlantDetail = (plantId: string): UserPlant | undefined => {
     const plant = plants.find((plant) => plant.id === plantId);
     return plant;
