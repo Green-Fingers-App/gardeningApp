@@ -34,7 +34,7 @@ const AccordionItem: React.FC<AccordionItemProps> = ({
 
   useEffect(() => {
     Animated.timing(animation, {
-      toValue: isOpen ? 300 : 0, // Open if isOpen is true, close otherwise
+      toValue: isOpen ? 227 : 0, // Open if isOpen is true, close otherwise
       duration: 200,
       useNativeDriver: false,
     }).start();

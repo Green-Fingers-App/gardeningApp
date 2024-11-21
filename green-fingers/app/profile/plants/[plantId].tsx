@@ -95,11 +95,11 @@ const PlantDetailPage = () => {
         <SafeAreaView>
           <Image
             source={{
-              uri: "https://www.istockphoto.com/de/foto/orange-gerbera-flower-head-macro-top-view-gm2111424340-566975557",
+              uri: plant.imageUrl,
             }}
-            style={{ width: "100%", height: 100 }}
+            style={{ width: "100%", height: "50%" }}
           />
-          <Accordion>
+          <Accordion style={{ height: "50%" }}>
             <AccordionItem title="Status">
               <Text>Last watered: {plant.wateredDate}</Text>
               <Text>Last fed: {plant.feededDate}</Text>
@@ -133,7 +133,7 @@ const PlantDetailPage = () => {
       ) : (
         <Text>Loading...</Text>
       )}
-       <EntityEditModal
+      <EntityEditModal
         visible={editing}
         entityName="Plant"
         fields={[

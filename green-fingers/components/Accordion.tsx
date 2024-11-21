@@ -2,11 +2,11 @@ import React, { useState } from "react";
 import { View } from "react-native";
 import AccordionItem, { AccordionItemProps } from "@/components/AccordionItem";
 
-interface AccordionProps {
+interface AccordionProps extends React.ComponentProps<typeof View> {
   children: React.ReactElement<AccordionItemProps>[];
 }
 
-const Accordion: React.FC<AccordionProps> = ({ children }) => {
+const Accordion: React.FC<AccordionProps> = ({ children, ...props }) => {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
 
   const handleToggle = (index: number) => {
@@ -14,7 +14,7 @@ const Accordion: React.FC<AccordionProps> = ({ children }) => {
   };
 
   return (
-    <View>
+    <View {...props}>
       {React.Children.map(children, (child, index) => {
         if (React.isValidElement(child)) {
           return React.cloneElement(child, {
