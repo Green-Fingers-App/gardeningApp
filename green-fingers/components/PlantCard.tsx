@@ -7,11 +7,10 @@ import {
   Pressable,
   ActivityIndicator,
 } from "react-native";
-import React from "react";
+import React, { useEffect } from "react";
 import { CatalogPlant, UserPlant } from "../types/models";
 import colors from "@/constants/colors";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-import { router } from "expo-router";
 import { useDeletePlant } from "@/hooks/useDeletePlant";
 
 interface PlantCardProps extends React.ComponentProps<typeof TouchableOpacity> {
@@ -20,6 +19,8 @@ interface PlantCardProps extends React.ComponentProps<typeof TouchableOpacity> {
 
 const PlantCard: React.FC<PlantCardProps> = ({ plant, ...props }) => {
   const { deleting, handleDeletePlant } = useDeletePlant();
+
+  useEffect(() => console.log("plant img: ", plant.imageUrl), []);
 
   return (
     <TouchableOpacity {...props} style={styles.cardContainer}>
@@ -59,7 +60,12 @@ const PlantCard: React.FC<PlantCardProps> = ({ plant, ...props }) => {
               ? plant.name.commonName
               : plant.name.scientificName}
           </Text>
-          <Image source={{uri:plant.imageUrl}} width={80} height={80} style={styles.picture} />
+          <Image
+            source={{ uri: plant.imageUrl }}
+            width={80}
+            height={80}
+            style={styles.picture}
+          />
           {"nickName" in plant && plant.moistureLevel === "Too Low" ? (
             <View
               style={{ flexDirection: "row", alignItems: "center", gap: 4 }}

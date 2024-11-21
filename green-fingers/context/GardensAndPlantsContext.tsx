@@ -98,6 +98,7 @@ export const PlantsProvider: React.FC<{ children: ReactNode }> = ({
         (doc) => ({ id: doc.id, ...doc.data() } as UserPlant)
       );
       setPlants(userPlants);
+      console.log("Fetched plants:", userPlants);
     } catch (error) {
       console.error("Error fetching plants:", error);
     }
