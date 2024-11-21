@@ -18,9 +18,9 @@ const ExplorerSearch: React.FC<ExplorerSearchProps> = ({
   const [error, setError] = useState<string | undefined>(undefined);
 
   const handleSearch = (text: string) => {
-    setError(undefined); // Reset error on new input
+    setError(undefined);
     if (searchTimeout.current) {
-      clearTimeout(searchTimeout.current); // Clear existing timeout
+      clearTimeout(searchTimeout.current);
     }
 
     searchTimeout.current = setTimeout(() => {

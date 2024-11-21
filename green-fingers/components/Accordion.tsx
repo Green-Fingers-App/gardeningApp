@@ -10,7 +10,7 @@ const Accordion: React.FC<AccordionProps> = ({ children }) => {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
 
   const handleToggle = (index: number) => {
-    setOpenIndex(index); // Toggle open/close
+    setOpenIndex(index);
   };
 
   return (

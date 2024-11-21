@@ -14,7 +14,7 @@ const CatalogPlantDetail = () => {
   useEffect(() => {
     const plant = databasePlants?.find((plant) => plant.id === catalogPlantId);
     setPlant(plant);
-  }, []);
+  }, [databasePlants, catalogPlantId]);
 
   return (
     <>
@@ -47,13 +47,13 @@ const CatalogPlantDetail = () => {
                 Water Frequency: {plant.waterFrequency}
               </Text>
               <Text style={styles.paragraphText}>
-                Blooming:
+                Blooming:{" "}
                 {plant.blooming
                   ? `${plant.blooming.start} till ${plant.blooming.end}`
                   : "This plant doesn't bloom"}
               </Text>
               <Text style={styles.paragraphText}>
-                Flower Color: {plant.blooming.flowerColor}
+                Flower Color: {plant.blooming?.flowerColor || "N/A"}
               </Text>
               <Text style={styles.paragraphText}>
                 Harvest:{" "}
@@ -61,11 +61,15 @@ const CatalogPlantDetail = () => {
                   ? `${plant.harvest.start} till ${plant.harvest.end}`
                   : "This plant cannot be harvested"}
               </Text>
+              <Text style={styles.paragraphText}>
+                Temperature Range: {plant.temperature.min}°C -{" "}
+                {plant.temperature.max}°C
+              </Text>
             </View>
           </View>
         </View>
       ) : (
-        <Text>Plant not found</Text>
+        <Text style={textStyles.h2}>Plant not found</Text>
       )}
     </>
   );
@@ -88,7 +92,7 @@ const styles = StyleSheet.create({
   },
   textContainer: {
     padding: 8,
-    gap: 5,
+    gap: 3,
     justifyContent: "center",
     flex: 1,
   },

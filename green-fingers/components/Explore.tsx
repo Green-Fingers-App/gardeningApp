@@ -1,11 +1,15 @@
 import React, { useEffect } from "react";
 import { View, Text, StyleSheet, FlatList } from "react-native";
+import FastImage from "react-native-fast-image";
 import { useGardensAndPlants } from "@/context/GardensAndPlantsContext";
+
 const Explore = () => {
   const { databasePlants, fetchAllPlants } = useGardensAndPlants();
+
   useEffect(() => {
     fetchAllPlants();
   }, []);
+
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Explore Plant Catalog</Text>
@@ -13,7 +17,14 @@ const Explore = () => {
         data={databasePlants}
         keyExtractor={(item) => item.id}
         renderItem={({ item }) => (
-          <View style={styles.card}>
+          <View>
+            <FastImage
+              source={{
+                uri: item.imageUrl,
+                priority: FastImage.priority.normal,
+              }}
+              resizeMode={FastImage.resizeMode.cover}
+            />
             <Text style={styles.plantName}>{item.name.commonName}</Text>
             <Text style={styles.plantDetails}>
               Scientific Name: {item.name.scientificName}
@@ -24,6 +35,7 @@ const Explore = () => {
     </View>
   );
 };
+
 export default Explore;
 const styles = StyleSheet.create({
   container: {
