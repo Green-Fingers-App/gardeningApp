@@ -63,11 +63,11 @@ Allow users to search for plants based on various parameters like water needs, s
 
 | Title                                                              | Date       | Publishing organization   |
 | -------------------------------------------------------------------|:----------:| ------------------------- |
-| [Green Fingers Blog](https://dhbw-malte.github.io/gardeningApp/)   | 01.10.2024 | Green Fingers Team        |
-| [GitHub](https://github.com/DHBW-Malte/gardeningApp/)              | 01.10.2024 | Green Fingers Team        |
-
+| [Green Fingers Blog](https://dhbw-malte.github.io/gardeningApp/)   | 20.11.2024 | Green Fingers Team        |
+| [GitHub](https://github.com/DHBW-Malte/gardeningApp/)              | 20.11.2024 | Green Fingers Team        |
+| [YouTrack](https://dhbw-malte.youtrack.cloud/)                     | 20.11.2024 | Green Fingers Team        |
 ### 1.5 Overview
-The following chapter provides an overview of this project with vision and Overall Use Case Diagram. The third chapter (Requirements Specification) delivers more details about the specific requirements in terms of functionality, usability and design parameters. Finally there is a chapter with supporting information. 
+The following chapter provides an overview of this project, including a vision and Overall Use Case Diagram. The third chapter (Requirements Specification) delivers more details about the specific requirements in terms of functionality, usability, and design parameters. Finally, there is a chapter with supporting information. 
     
 ## 2. Overall Description
 
@@ -79,34 +79,21 @@ We aim to guide users with tailored advice on watering, nutrition, sunlight, and
 
 By offering efficient garden management tools—including pumps, tubing, and nozzles—and software that suggests plants based on location, provides plant calendars, and sends notifications, our goal is to simplify and streamline gardening. We empower users to feel confident and in command of their gardens, making the process smarter, more efficient, and more enjoyable through real-time insights and automation.
 
+Check out our blog and read our first blog post to get to know more about our vison and our team roles.
+[Our Vision](https://dhbw-malte.github.io/gardeningApp/2024/09/13/our-vision.html)
+
 ### 2.2 Use Case Diagram
 
 ![OUCD](../../docs/assets/svg/GreenFingersUsecases.drawio.svg)
 
-### [Usecase: Show Gardens](../../docs/usecases/showGardens.md)
 
-This usecase is part of the **CURD-usecases** of the graden objects.
 
-Our first activity diagram showcases the flow of events for the “Show Gardens” use case. This use case allows users to view an overview of all gardens they have created. By navigating to the garden overview, users can see a list of all their gardens, each with essential information such as the garden name, image, and status.
+### 2.3 used Tools
 
-### [Usecase: Delete plant](../../docs/usecases/deletePlant.md)
+*Technology Stack: 
+The technology we are planning to use is:
 
-This usecase is part of the **CURD-usecases** of the plant objects.
-
-Our second activity diagram outlines the flow of events for the “Delete Plant” use case. This use case enables users to remove a plant from their gardens. After selecting the garden of the plant they wish to delete, the use can select via the UI the option to delete the plant. The system will then prompt the user for confirmation before permanently removing the plant and its associated data.
-
-### 2.3 Technology Stack
-The technology we use is:
-
-Backend:
-- Flask
-- Flask-CORS
-- Flask-RESTful
-- Flask-PyMongo
-- Flask-Login
-- Python
-
-Frontend:
+ Frontend:
 - React Native
 - Expo
 - TypeScript
@@ -115,10 +102,10 @@ Database:
 - Firebase (NoSQL)
 
 IDE:
-- TBD
+- Visual Studio 
 
 Project Management:
-- Clockify
+- Youtrack
 - GitHub
 - Discord
 
@@ -132,14 +119,6 @@ Testing:
 
 ### 3.1 Functionality
 This section will explain the different use cases, you could see in the Use Case Diagram, and their functionality.  
-Until December we plan to implement:
-- 3.1.1 Sign Up
-- 3.1.2 Login / Logout
-- 3.1.3 Add plant
-- 3.1.4 Delete plant
-- 3.1.5 Recieve Notification
-- 3.1.6 Send notification about plant needs
-
 #### 3.1.1 Sign Up
 
 Users will be able to create a new account using an email address and password, or by signing up through third-party authentication providers (e.g., Google, Facebook).
@@ -148,18 +127,48 @@ Users will be able to create a new account using an email address and password, 
 
 Users will log into their accounts using an email and password or third-party credentials. They can also log out when needed.
 
-#### 3.1.3 Add plant
+#### 3.1.3 Add plant 
 
 Users can add new plants to their personal garden by entering plant details such as name, watering frequency, sunlight requirements, and more.
+### [Usecase: add plant]() 
+This usecase is part of the **CURD-usecases** of the plant objects.
 
 #### 3.1.4 Delete plant
-The user can delete a plant from their app. This will remove the plant from the user's garden and all associated data in the database.
 
-#### 3.1.5 Recieve Notification
+The user can delete a plant from their app. This will remove the plant from the user's garden and all associated data in the database.
+### [Usecase: delete plant]()
+This usecase is part of the **CURD-usecases** of the plant objects.
+
+#### 3.1.5 View plant
+
+The user can search and view a plant from our data base.
+### [Usecase: view plant]()
+This usecase is part of the **CURD-usecases** of the plant objects.
+
+#### 3.1.6 Add Garden
+
+The user can add diffrent gardens.
+### [Usecase: add garden]()
+This usecase is part of the **CURD-usecases** of the plant objects.
+
+#### 3.1.7 Delete Garden
+
+The user can delete a garden from their app. This will remove the plant from the user's garden and all associated data in the database.
+### [Usecase: delete garden]()
+This usecase is part of the **CURD-usecases** of the plant objects.
+
+#### 3.1.8 View garden
+
+Our first activity diagram showcases the flow of events for the “Show Gardens” use case. This use case allows users to view an overview of all gardens they have created. By navigating to the garden overview, users can see a list of all their gardens, each with essential information such as the garden name, image, and status.
+### [Usecase: view garden]()
+This usecase is part of the **CURD-usecases** of the plant objects.
+
+#### 3.1.9 Recieve Notification
 The user can receive notifications about their plants' health status or needs. These notifications will be sent based on the plant's requirements and the user's settings.
 
-#### 3.1.6 Send notification about plant needs
+#### 3.1.10 Send notification about plant needs
 Each plant can send notifications to the user about its needs and health status. These notifications will be triggered based on the plant's data and the user's preferences.
+
 
 ### 3.2 Usability
 TBD
