@@ -63,11 +63,11 @@ Allow users to search for plants based on various parameters like water needs, s
 
 | Title                                                              | Date       | Publishing organization   |
 | -------------------------------------------------------------------|:----------:| ------------------------- |
-| [Green Fingers Blog](https://dhbw-malte.github.io/gardeningApp/)   | 01.10.2024 | Green Fingers Team        |
-| [GitHub](https://github.com/DHBW-Malte/gardeningApp/)              | 01.10.2024 | Green Fingers Team        |
+| [Green Fingers Blog](https://dhbw-malte.github.io/gardeningApp/)   | 20.11.2024 | Green Fingers Team        |
+| [GitHub](https://github.com/DHBW-Malte/gardeningApp/)              | 20.11.2024 | Green Fingers Team        |
 
 ### 1.5 Overview
-The following chapter provides an overview of this project with vision and Overall Use Case Diagram. The third chapter (Requirements Specification) delivers more details about the specific requirements in terms of functionality, usability and design parameters. Finally there is a chapter with supporting information. 
+The following chapter provides an overview of this project, including a vision and Overall Use Case Diagram. The third chapter (Requirements Specification) delivers more details about the specific requirements in terms of functionality, usability, and design parameters. Finally, there is a chapter with supporting information. 
     
 ## 2. Overall Description
 
