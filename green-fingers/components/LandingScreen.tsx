@@ -1,5 +1,5 @@
 import React from "react";
-import { View, StyleSheet } from "react-native";
+import { View, StyleSheet, Text } from "react-native";
 import LandingSVG from "@/components/LandingSVG";
 import Button from "./Button";
 import { useRouter } from "expo-router";

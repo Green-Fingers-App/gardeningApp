@@ -1,6 +1,9 @@
 import { Svg, G, ClipPath, Path, Defs } from "react-native-svg";
+import { Text, StyleSheet, View } from "react-native";
 import React from "react";
 import { Dimensions } from "react-native";
+import textStyles from "@/constants/textStyles";
+import colors from "@/constants/colors";
 
 const { width: screenWidth, height: screenHeight } = Dimensions.get("window");
 
@@ -10,7 +13,8 @@ const LandingSVG: React.FC = () => (
     height={screenHeight}
     preserveAspectRatio="xMidYMid meet"
     viewBox="0 0 720 800"
-  >
+  > 
+    <Text style={[textStyles.h1, styles.text]}>HAPPY PLANTS</Text>
     <Defs>
       <G />
       <ClipPath id="8a0b35dc72">
@@ -26,6 +30,7 @@ const LandingSVG: React.FC = () => (
         />
       </ClipPath>
     </Defs>
+    
     <Path
       fill="#1f5014"
       d="M 467.007812 44.613281 C 467.007812 44.613281 430.09375 43.523438 397.910156 60.863281 C 387.496094 25.605469 360.398438 0.0742188 360.398438 0.0742188 C 360.398438 0.0742188 333.304688 25.605469 322.890625 60.863281 C 290.707031 43.53125 253.792969 44.613281 253.792969 44.613281 C 253.792969 44.613281 252.09375 101.628906 286.214844 135.75 C 311.136719 160.667969 339.609375 175.113281 359.476562 174.78125 C 359.785156 174.796875 360.089844 174.804688 360.398438 174.804688 C 360.707031 174.804688 361.011719 174.804688 361.320312 174.78125 C 381.1875 175.113281 409.664062 160.667969 434.582031 135.75 C 468.703125 101.628906 467.007812 44.613281 467.007812 44.613281 Z M 467.007812 44.613281 "
@@ -169,3 +174,11 @@ const LandingSVG: React.FC = () => (
 );
 
 export default LandingSVG;
+
+const styles = StyleSheet.create({
+  text: {
+    marginTop: 150,
+    marginLeft: 70,
+    color: colors.textPrimary,
+  }
+});
