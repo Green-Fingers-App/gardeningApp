@@ -26,12 +26,34 @@
 ## 1. Introduction
 ### 1.1 Purpose
 The purpose of this document is to provide a comprehensive overview of the software architecture for the "Green Fingers" gardening application. It outlines the architectural representation, goals, constraints, and views of the system to guide through the development process.
+
 ### 1.2 Scope
 This document describes the technical architecture of the "Green Fingers" application, including the logical, process, deployment, and implementation views. It aims to provide a detailed understanding of the system's structure and components to facilitate the development and maintenance of the application.
+
 ### 1.3 Definitions, Acronyms, and Abbreviations
 TBD
 ### 1.4 References
-TBD
+
+| Title                                                              | Last Updated       | Publishing organization   |
+| -------------------------------------------------------------------|:----------:| ------------------------- |
+| [GreenFingers Blog](https://dhbw-malte.github.io/gardeningApp/)| 21.11.2024 |GreenFingers  |
+| [GitHub Repository](https://github.com/DHBW-Malte/gardeningApp/tree/main)| 21.11.2024 |GreenFingers  |
+| [Overall Use Case Diagram](https://github.com/DHBW-Malte/gardeningApp/blob/main/docs/assets/svg/GreenFingersUsecases.drawio.svg)| 21.11.2024 |GreenFingers  |
+| [SRS](https://github.com/DHBW-Malte/gardeningApp/blob/main/green-fingers/docs/SoftwareRequirementsSpecification.md)| 21.11.2024 |GreenFingers  |
+| [UC: Create Account]()| 21.11.2024 |GreenFingers  |
+| [UC: Edit Account]()| 21.11.2024 |GreenFingers  |
+| [UC: Login/Logout]()| 21.11.2024 |GreenFingers  |
+| [UC: Create Gardens]()| 21.11.2024 |GreenFingers  |
+| [UC: Read Gardens]()| 21.11.2024 |GreenFingers  |
+| [UC: Update Gardens]()| 21.11.2024 |GreenFingers  |
+| [UC: Delete Gardens]()| 21.11.2024 |GreenFingers  |
+| [UC: Create Plants]()| 21.11.2024 |GreenFingers  |
+| [UC: Read Plants]()| 21.11.2024 |GreenFingers  |
+| [UC: Update Plants]()| 21.11.2024 |GreenFingers  |
+| [UC: Delete Plants]()| 21.11.2024 |GreenFingers  |
+| [UC: Search Plants Database]()| 21.11.2024 |GreenFingers  |
+
+
 ### 1.5 Overview
 
 ## 2. Architectural Representation
@@ -44,7 +66,7 @@ Because the "Green Fingers" appliactions is a mobile application, we have chosen
 - **ViewModel**: Acts as an intermediary between the Model and the View, handling the data and business logic to be displayed in the View. React Native takes care of the ViewModel part by using the React hooks and context API.
 
 ### 2.2 MVVM High-Level Overview
-The following diagrams are manual created, thats why they are not up to date. The diagrams are created with draw.io and exported as svg files. The diagrams are stored in the docs/assets/svg/architecturalDiagrams folder. The following diagram illustrates the high-level overview of the MVVM architectural pattern in the "Green Fingers" application:
+The following diagrams are manual created, thats why they are **not up to date**. The diagrams are created with draw.io and exported as svg files. The diagrams are stored in the docs/assets/svg/architecturalDiagrams folder. The following diagram illustrates the high-level overview of the MVVM architectural pattern in the "Green Fingers" application:
 
 ![MVVM High-Level Overview](../../docs/assets/svg/architecturalDiagrams/mvvmDiagram.drawio.svg)
 
@@ -67,7 +89,7 @@ As mentioned earlier, the "Green Fingers" application follows the MVVM architect
 
 ### 5.2 Class Diagram
 
-The following class diagram provides a high-level overview of the classes and their relationships in the "Green Fingers" application. The diagram includes the main classes such as User, Plant, Garden, and UserPlant.
+The following class diagram provides a high-level overview of the classes and their relationships in the "Green Fingers" application. The diagram includes the main classes such as User, CatalogPlant, Garden, and UserPlant.
 
 ![Class Diagram](../../docs/assets/svg/architecturalDiagrams/classDiagram.drawio.svg)
 
