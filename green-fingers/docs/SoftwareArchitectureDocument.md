@@ -33,6 +33,7 @@ This document describes the technical architecture of the "Green Fingers" applic
 ### 1.3 Definitions, Acronyms, and Abbreviations
 | Abbrevation | Description                            |
 | ----------- | -------------------------------------- |
+| API         | Application Programming Interface      |
 | MVVM        | Model View ViewModel                   |
 | SRS         | Software Requirements Specification    |
 | UC          | Use Case                               |
@@ -109,9 +110,35 @@ The following class diagram provides a high-level overview of the classes and th
 ## 6. Process View
 n/a
 ## 7. Deployment View
+The “Green Fingers” application is designed as a mobile-first platform using cloud services for backend functionalities. The deployment consists of the following key components:
+
+#### Mobile Client:
+- Platform: Built with React Native, supporting iOS and Android platforms. Currently we work only on a Android version.
+- User Interface: Provides the user-facing functionalities, including managing gardens, plants, and user profiles.
+
+#### Backend Services:
+- Cloud Provider: Firebase serves as the backend infrastructure.
+- Database: Firestore is used as a real-time database to store user data, plant catalogs, and garden and plant information.
+- Authentication: Firebase Authentication manages user accounts securely.
+
+#### Deployment Architecture:
+- The mobile application interacts with Firebase APIs for data access and authentication.
+- All critical data, including user profiles, garden details, and plant records, are stored and retrieved via Firestore
 
 ## 8. Implementation View
-TBD
+The “Green Fingers” application uses the MVVM design pattern to organize the codebase efficiently. Key implementation details include:
+
+#### Programming Frameworks and Languages:
+- **Frontend**: React Native, with extensive use of React Hooks and Context API for state management.
+- **Backend**: Firebase’s serverless infrastructure, providing scalable real-time services.
+
+#### Source Control and Development Workflow:
+- **Repository**: Code is hosted on GitHub, with a structured folder hierarchy for models, views, and viewmodels.
+- **Development Tools**: Developers utilize VS Code with various extension like draw.io to create diagrams.
+
+#### Testing and Debugging:
+Until now there now test implemented but for the next semester, we plan to make use of Jest for extensive End-to-end testing of our application.
+
 ## 9. Data View
 ```mermaid
 erDiagram
@@ -161,7 +188,7 @@ erDiagram
     USERS ||--|{ PLANT_CATALOG : "read access"
 ```
 ## 10. Size and Performance
-TBD
+n/a
 ## 11. Quality
-TBD
+n/a
 
