@@ -31,7 +31,13 @@ The purpose of this document is to provide a comprehensive overview of the softw
 This document describes the technical architecture of the "Green Fingers" application, including the logical, process, deployment, and implementation views. It aims to provide a detailed understanding of the system's structure and components to facilitate the development and maintenance of the application.
 
 ### 1.3 Definitions, Acronyms, and Abbreviations
-TBD
+| Abbrevation | Description                            |
+| ----------- | -------------------------------------- |
+| MVVM        | Model View ViewModel                   |
+| SRS         | Software Requirements Specification    |
+| UC          | Use Case                               |
+| n/a         | not applicable                         |
+
 ### 1.4 References
 
 | Title                                                              | Last Updated       | Publishing organization   |
@@ -40,21 +46,22 @@ TBD
 | [GitHub Repository](https://github.com/DHBW-Malte/gardeningApp/tree/main)| 21.11.2024 |GreenFingers  |
 | [Overall Use Case Diagram](https://github.com/DHBW-Malte/gardeningApp/blob/main/docs/assets/svg/GreenFingersUsecases.drawio.svg)| 21.11.2024 |GreenFingers  |
 | [SRS](https://github.com/DHBW-Malte/gardeningApp/blob/main/green-fingers/docs/SoftwareRequirementsSpecification.md)| 21.11.2024 |GreenFingers  |
-| [UC: Create Account]()| 21.11.2024 |GreenFingers  |
+| [UC: Create Account](https://github.com/DHBW-Malte/gardeningApp/blob/main/docs/usecases/CRUD-User/createUser.md)| 21.11.2024 |GreenFingers  |
 | [UC: Edit Account]()| 21.11.2024 |GreenFingers  |
 | [UC: Login/Logout]()| 21.11.2024 |GreenFingers  |
 | [UC: Create Gardens]()| 21.11.2024 |GreenFingers  |
-| [UC: Read Gardens]()| 21.11.2024 |GreenFingers  |
+| [UC: Read Gardens](https://github.com/DHBW-Malte/gardeningApp/blob/main/docs/usecases/CRUD-Garden/showGardens.md)| 21.11.2024 |GreenFingers  |
 | [UC: Update Gardens]()| 21.11.2024 |GreenFingers  |
-| [UC: Delete Gardens]()| 21.11.2024 |GreenFingers  |
-| [UC: Create Plants]()| 21.11.2024 |GreenFingers  |
-| [UC: Read Plants]()| 21.11.2024 |GreenFingers  |
-| [UC: Update Plants]()| 21.11.2024 |GreenFingers  |
-| [UC: Delete Plants]()| 21.11.2024 |GreenFingers  |
+| [UC: Delete Gardens](https://github.com/DHBW-Malte/gardeningApp/blob/main/docs/usecases/CRUD-Garden/deleteGarden.md)| 21.11.2024 |GreenFingers  |
+| [UC: Create Plants](https://github.com/DHBW-Malte/gardeningApp/blob/main/docs/usecases/CRUD-Plant/addPlant.md)| 21.11.2024 |GreenFingers  |
+| [UC: Read Plants](https://github.com/DHBW-Malte/gardeningApp/blob/main/docs/usecases/CRUD-Plant/viewPlant.md)| 21.11.2024 |GreenFingers  |
+| [UC: Update Plants](https://github.com/DHBW-Malte/gardeningApp/blob/main/docs/usecases/CRUD-Plant/updatePlant.md)| 21.11.2024 |GreenFingers  |
+| [UC: Delete Plants](https://github.com/DHBW-Malte/gardeningApp/blob/main/docs/usecases/CRUD-Plant/deletePlant.md)| 21.11.2024 |GreenFingers  |
 | [UC: Search Plants Database]()| 21.11.2024 |GreenFingers  |
 
 
 ### 1.5 Overview
+This document contains the Architectural Representation, Goals and Constraints as well as the Logical, Deployment, Implementation and Data Views.
 
 ## 2. Architectural Representation
 ### 2.1 Model-View-ViewModel (MVVM)
@@ -66,11 +73,12 @@ Because the "Green Fingers" appliactions is a mobile application, we have chosen
 - **ViewModel**: Acts as an intermediary between the Model and the View, handling the data and business logic to be displayed in the View. React Native takes care of the ViewModel part by using the React hooks and context API.
 
 ### 2.2 MVVM High-Level Overview
-The following diagrams are manual created, thats why they are **not up to date**. The diagrams are created with draw.io and exported as svg files. The diagrams are stored in the docs/assets/svg/architecturalDiagrams folder. The following diagram illustrates the high-level overview of the MVVM architectural pattern in the "Green Fingers" application:
+The following diagram illustrates the high-level overview of the MVVM architectural pattern in the "Green Fingers" application:
 
 ![MVVM High-Level Overview](../../docs/assets/svg/architecturalDiagrams/mvvmDiagram.drawio.svg)
 
 ## 3. Architectural Goals and Constraints
+
 ## 4. Use-Case View
 This is a high-level overview of the use-case view of the "Green Fingers" application. It outlines the main use cases and actors involved in the system.
 
@@ -79,12 +87,17 @@ This is a high-level overview of the use-case view of the "Green Fingers" applic
 ### 5.1 High-Level Overview
 As mentioned earlier, the "Green Fingers" application follows the MVVM architectural pattern. Therefore the logical view of the system is divided into three main components: Model, View, and ViewModel.
 
-**Model**: For the model part of our application, we are using the Firebase services like Firestore to store data and Authentication for user management. The data is stored in collections and documents in Firestore, which can be accessed and manipulated by the application.
-
 **View**: The view part of the application is built using React Native components. These components are used to create the user interface and visual elements of the application. The interface will present the data from the ViewModel to the user and allow them to interact with the application.
+
+**Model**: For the model part of our application, we are using the Firebase services like Firestore to store data and Authentication for user management. The data is stored in collections and documents in Firestore, which can be accessed and manipulated by the application.
 
 **ViewModel**: With React native we manage the data ans state of the application using React hooks and context API. The ViewModel is responsible for handling the data and business logic of the application. It acts as an intermediary between the Model and the View, providing the data to be displayed in the View.
 
+---
+
+The following diagrams are manual created, thats why they are **not up to date**. The diagrams are created with draw.io and exported as svg files. The diagrams are stored in the docs/assets/svg/architecturalDiagrams folder.
+
+---
 ![Use-Case Diagram](../../docs/assets/svg/architecturalDiagrams/logicalViewDiagram.drawio.svg)
 
 ### 5.2 Class Diagram
@@ -94,8 +107,9 @@ The following class diagram provides a high-level overview of the classes and th
 ![Class Diagram](../../docs/assets/svg/architecturalDiagrams/classDiagram.drawio.svg)
 
 ## 6. Process View
-TBD
+n/a
 ## 7. Deployment View
+
 ## 8. Implementation View
 TBD
 ## 9. Data View
