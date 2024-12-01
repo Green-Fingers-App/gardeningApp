@@ -120,60 +120,45 @@ Testing:
 
 ### 3.1 Functionality
 This section will explain the different use cases, you could see in the Use Case Diagram, and their functionality.  
-#### 3.1.1 Sign Up
 
-Users will be able to create a new account using an email address and password, or by signing up through third-party authentication providers (e.g., Google, Facebook).
+### CRUD-User
+#### [3.1.1 Use Case: Create User](https://github.com/DHBW-Malte/gardeningApp/blob/main/docs/usecases/CRUD-User/createUser.md)
+Users will be able to create a new account using an email address, username and password.
 
-#### 3.1.2 Login / Logout
+#### [3.1.2 Use Case: Login / Logout](https://github.com/DHBW-Malte/gardeningApp/blob/main/docs/usecases/CRUD-User/loginLogoutUser.md)
+Users will log into their accounts using an email and password. They can also log out when needed.
 
-Users will log into their accounts using an email and password or third-party credentials. They can also log out when needed.
+#### [3.1.3 Use Case: Update user](https://github.com/DHBW-Malte/gardeningApp/blob/main/docs/usecases/CRUD-User/updateUser.md)
+Users will be able to change their email address and username.
 
-#### 3.1.3 Add plant 
+### CRUD-Plant
+#### [3.1.4 User Case: Add plant](https://github.com/DHBW-Malte/gardeningApp/blob/main/docs/usecases/CRUD-Plant/addPlant.md)
+Users can add new plants to their personal garden by entering a plant type, nickname and the corresponding garden.
 
-Users can add new plants to their personal garden by entering plant details such as name, watering frequency, sunlight requirements, and more.
-### [Usecase: add plant](docs/usecases/CRUD-Plant/addPlant.md)
-This usecase is part of the **CURD-usecases** of the plant objects.
+#### [3.1.5 Use Case: View plant](https://github.com/DHBW-Malte/gardeningApp/blob/main/docs/usecases/CRUD-Plant/viewPlant.md)
+The user can select a specific plant and view the details of it.
 
-#### 3.1.4 Delete plant
+#### [3.1.6 Use Case: Update plant](https://github.com/DHBW-Malte/gardeningApp/blob/main/docs/usecases/CRUD-Plant/updatePlant.md)
+The user can edit the nickname and garden of a plant.
 
+#### [3.1.7 Use Case: Delete plant](https://github.com/DHBW-Malte/gardeningApp/blob/main/docs/usecases/CRUD-Plant/deletePlant.md)
 The user can delete a plant from their app. This will remove the plant from the user's garden and all associated data in the database.
-### [Usecase: delete plant](docs/usecases/CRUD-Plant/deletePlant.md)
-This usecase is part of the **CURD-usecases** of the plant objects.
 
-#### 3.1.5 View plant
+### CRUD-Garden
+#### [3.1.8 Use Case: Add garden](https://github.com/DHBW-Malte/gardeningApp/blob/main/docs/usecases/CRUD-Garden/addGarden.md)
+The user can create a new garden, with a name and a location.
 
-The user can search and view a plant from our data base.
-### [Usecase: view plant](docs/usecases/CRUD-Plant/viewPlant.md)
-This usecase is part of the **CURD-usecases** of the plant objects.
+#### [3.1.9 Use Case: Show garden](https://github.com/DHBW-Malte/gardeningApp/blob/main/docs/usecases/CRUD-Garden/showGardens.md)
+The user can view a list of all gardens.
 
-#### 3.1.6 Add Garden
+#### [3.1.10 Use Case: Edit garden](https://github.com/DHBW-Malte/gardeningApp/blob/main/docs/usecases/CRUD-Garden/updateGarden.md)
+The user can update the name and location of his gardens.
 
-The user can add diffrent gardens.
-### [Usecase: add garden](docs/usecases/CRUD-Garden/addGarden.md)
-This usecase is part of the **CURD-usecases** of the plant objects.
-
-#### 3.1.7 Delete Garden
-
+#### [3.1.11 Use Case: Delete garden](https://github.com/DHBW-Malte/gardeningApp/blob/main/docs/usecases/CRUD-Garden/deleteGarden.md)
 The user can delete a garden from their app. This will remove the plant from the user's garden and all associated data in the database.
-### [Usecase: delete garden](docs/usecases/CRUD-Garden/deleteGarden.md)
-This usecase is part of the **CURD-usecases** of the plant objects.
-
-#### 3.1.8 show garden
-
-Our first activity diagram showcases the flow of events for the “Show Gardens” use case. This use case allows users to view an overview of all gardens they have created. By navigating to the garden overview, users can see a list of all their gardens, each with essential information such as the garden name, image, and status.
-### [Usecase: show garden](docs/usecases/CRUD-Garden/showGardens.md)
-This usecase is part of the **CURD-usecases** of the plant objects.
-
-#### 3.1.9 Recieve Notification
-The user can receive notifications about their plants' health status or needs. These notifications will be sent based on the plant's requirements and the user's settings.
-
-#### 3.1.10 Send notification about plant needs
-Each plant can send notifications to the user about its needs and health status. These notifications will be triggered based on the plant's data and the user's preferences.
-
 
 ### 3.2 Usability
 We plan to design the user interface as intuitive and self-explanatory as possible, so users will feel comfortable organizing their plants as they wish.
-
 
 #### 3.2.1 No training time needed
 The app's user interface will be intuitive and require no formal training. Users should be able to navigate and use its features effortlessly upon first interaction. This will be achieved by incorporating simple navigation menus, clear labels, and recognizable icons.
