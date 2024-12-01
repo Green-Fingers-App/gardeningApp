@@ -45,7 +45,7 @@ You can follow our journey through our blog posts and other documentation.
 ## Presentation
 
 - [Midterm Presentation](https://www.canva.com/design/DAGXC7qQKaw/PY_NnTJKMmW0Z6hXiRpfRw/edit?utm_content=DAGXC7qQKaw&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton)
-- [Midterm Handout]([https://docs.google.com/document/d/1P_ZIfxEwuRJDXhU9gFZyYvwJqsknqCPHqz93BMla2Z0/edit?usp=sharing](https://docs.google.com/document/d/1P_ZIfxEwuRJDXhU9gFZyYvwJqsknqCPHqz93BMla2Z0/edit?tab=t.0))
+- [Midterm Handout](https://docs.google.com/document/d/1P_ZIfxEwuRJDXhU9gFZyYvwJqsknqCPHqz93BMla2Z0/edit?tab=t.0)
 ## Documentation and Project Management
 
 - [SRS](https://github.com/DHBW-Malte/gardeningApp/blob/main/green-fingers/docs/SoftwareRequirementsSpecification.md)
