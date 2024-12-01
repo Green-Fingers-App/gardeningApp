@@ -13,8 +13,7 @@ This blog post is a summary of this semester and half of the journey we started 
 
 So, if you are ready, let's take a look at our tools and architecture that helped us achieve what we have so far:
 
-![MVVM Diagram on Visual Studio Code](docs/assets/svg/architecturalDiagrams/mvvmDiagram.drawio.svg)
-
+[](https://github.com/DHBW-Malte/gardeningApp/blob/main/docs/assets/svg/architecturalDiagrams/mvvmDiagram.drawio.svg)
 ## Vision
 
 Our vision remains the same, and you can read about it [here](https://github.com/DHBW-Malte/gardeningApp/blob/main/docs/_posts/2024-09-13-our-vision.md).
@@ -24,7 +23,7 @@ Our vision remains the same, and you can read about it [here](https://github.com
 And now, a last demo for this semester:
 <video width="100%" height="auto" controls>
 
-  <source src="docs/assets/screencasts/MyMovie.mp4" type="video/mp4">
+  <source src="(https://github.com/DHBW-Malte/gardeningApp/blob/main/docs/assets/screencasts/MyMovie.mp4)" type="video/mp4">
   Your browser doesn't support video tags.
 </video>
 
@@ -57,7 +56,7 @@ You can follow our journey through our blog posts and other documentation.
 - [Miro Board](https://miro.com/app/board/uXjVLfrnVdc=/)
 - [Figma](https://www.figma.com/design/UNUTu2ARSJv1fCut4Pll3I/Wireframes?node-id=109-77&t=B3XivaWS8aiyTT8K-1)
 
-![Burndown Chart](docs/assets/screenshots/burndown.png)
+[Burndown Chart](https://github.com/DHBW-Malte/gardeningApp/blob/main/docs/assets/screenshots/burndown.png)
 
 ## Code
 
