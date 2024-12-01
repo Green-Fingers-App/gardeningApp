@@ -56,7 +56,7 @@ You can follow our journey through our blog posts and other documentation.
 - [Miro Board](https://miro.com/app/board/uXjVLfrnVdc=/)
 - [Figma](https://www.figma.com/design/UNUTu2ARSJv1fCut4Pll3I/Wireframes?node-id=109-77&t=B3XivaWS8aiyTT8K-1)
 
-![Burndown Chart](https://github.com/DHBW-Malte/gardeningApp/blob/main/docs/assets/screenshots/burndown.png)
+![Burndown Chart](/gardeningApp/assets/screenshots/burndown.png)
 
 ## Code
 
