@@ -7,57 +7,57 @@ author: "Sima, Casimir, Ruan & Malte"
 
 ## Half-Final Blog Post
 
-Welcome to the Half_Final blog post from Green Fingers!
+Welcome to the Half-Final blog post from Green Fingers!
 
-This Blog Post is a summary of this semester and half of the journey we started together, with the help of you and your instructive feedback we reached here and now we are about to share all the information about our application here with you.
+This blog post is a summary of this semester and half of the journey we started together. With your help and instructive feedback, we have reached this point, and now we are ready to share all the information about our application with you.
 
-So if you are ready let's take a look at our tools and architecture which help us to achive what we already have :
+So, if you are ready, let's take a look at our tools and architecture that helped us achieve what we have so far:
 
-![svg mvvm diagram on Visual Studio Code](docs/assets/svg/architecturalDiagrams/mvvmDiagram.drawio.svg)
+![MVVM Diagram on Visual Studio Code](docs/assets/svg/architecturalDiagrams/mvvmDiagram.drawio.svg)
 
 ## Vision
 
-Our Vision remain the same which you can read about it [here](https://github.com/DHBW-Malte/gardeningApp/blob/main/docs/_posts/2024-09-13-our-vision.md)
+Our vision remains the same, and you can read about it [here](https://github.com/DHBW-Malte/gardeningApp/blob/main/docs/_posts/2024-09-13-our-vision.md).
 
 ## Screencast of Demo
 
-and now a last demo for this semester:
+And now, a last demo for this semester:
 <video width="100%" height="auto" controls>
 
-  <source src="docs/assets/screencasts/My Movie.mp4" type="video/mp4">
-  Your browser doesn't support video tags
+  <source src="docs/assets/screencasts/MyMovie.mp4" type="video/mp4">
+  Your browser doesn't support video tags.
 </video>
 
-you can follow our journey through our blog posts and other documentation.
+You can follow our journey through our blog posts and other documentation.
 
 ## Blog Posts
 
-[Week 1: Vision](https://github.com/DHBW-Malte/gardeningApp/blob/main/docs/_posts/2024-09-13-our-vision.md)
-[Week 2: Technology Stack](https://github.com/DHBW-Malte/gardeningApp/blob/main/docs/_posts/2024-09-18-tech-stack.md)
-[Week 2: MVP](https://github.com/DHBW-Malte/gardeningApp/blob/main/docs/_posts/2024-09-18-the-mvp.md)
-[Week 3: Use Case diagram](https://github.com/DHBW-Malte/gardeningApp/blob/main/docs/_posts/2024-10-01-srs-and-ucd.md)
-[Week 4: Use Case activity diagram](https://github.com/DHBW-Malte/gardeningApp/blob/main/docs/_posts/2024-10-13-uc-activity-diagrams.md)
-[Week 5: Feature Files](https://github.com/DHBW-Malte/gardeningApp/blob/main/docs/_posts/2024-10-17-our-first-narratives.md)
-[Week 6: Project Management](https://github.com/DHBW-Malte/gardeningApp/blob/main/docs/_posts/2024-10-23-project-management.md)
-[Week 7: Retro Perspective](https://github.com/DHBW-Malte/gardeningApp/blob/main/docs/_posts/2024-10-24-retrospective.md)
-[Week 8: Framework](https://github.com/DHBW-Malte/gardeningApp/blob/main/docs/_posts/2024-10-31-Our-Framework.md)
-[Week 9: Data Base Design](https://github.com/DHBW-Malte/gardeningApp/blob/main/docs/_posts/2024-11-14-database.md)
+- [Week 1: Vision](https://github.com/DHBW-Malte/gardeningApp/blob/main/docs/_posts/2024-09-13-our-vision.md)
+- [Week 2: Technology Stack](https://github.com/DHBW-Malte/gardeningApp/blob/main/docs/_posts/2024-09-18-tech-stack.md)
+- [Week 2: MVP](https://github.com/DHBW-Malte/gardeningApp/blob/main/docs/_posts/2024-09-18-the-mvp.md)
+- [Week 3: Use Case Diagram](https://github.com/DHBW-Malte/gardeningApp/blob/main/docs/_posts/2024-10-01-srs-and-ucd.md)
+- [Week 4: Use Case Activity Diagram](https://github.com/DHBW-Malte/gardeningApp/blob/main/docs/_posts/2024-10-13-uc-activity-diagrams.md)
+- [Week 5: Feature Files](https://github.com/DHBW-Malte/gardeningApp/blob/main/docs/_posts/2024-10-17-our-first-narratives.md)
+- [Week 6: Project Management](https://github.com/DHBW-Malte/gardeningApp/blob/main/docs/_posts/2024-10-23-project-management.md)
+- [Week 7: Retrospective](https://github.com/DHBW-Malte/gardeningApp/blob/main/docs/_posts/2024-10-24-retrospective.md)
+- [Week 8: Framework](https://github.com/DHBW-Malte/gardeningApp/blob/main/docs/_posts/2024-10-31-Our-Framework.md)
+- [Week 9: Database Design](https://github.com/DHBW-Malte/gardeningApp/blob/main/docs/_posts/2024-11-14-database.md)
 
 ## Presentation
 
-![Midterm Peresentation](docs/Midterm/Peresentation.pptx)
-![Midterm Handout](docs/Midterm/GreenFingers_Handouts.pdf)
+- [Midterm Presentation](docs/Midterm/Peresentation.pptx)
+- [Midterm Handout](docs/Midterm/GreenFingers_Handouts.pdf)
 
-## Documentation and Project Managment
+## Documentation and Project Management
 
 - [SRS](https://github.com/DHBW-Malte/gardeningApp/blob/main/green-fingers/docs/SoftwareRequirementsSpecification.md)
 - [SAD](https://github.com/DHBW-Malte/gardeningApp/blob/main/green-fingers/docs/SoftwareArchitectureDocument.md)
 - ![Use-Case Diagram](../../docs/assets/svg/GreenFingersUsecases.drawio.svg)
 - [YouTrack](https://dhbw-malte.youtrack.cloud/projects/0-4)
 - [Miro Board](https://miro.com/app/board/uXjVLfrnVdc=/)
-- [figma](https://www.figma.com/design/UNUTu2ARSJv1fCut4Pll3I/Wireframes?node-id=109-77&t=B3XivaWS8aiyTT8K-1)
+- [Figma](https://www.figma.com/design/UNUTu2ARSJv1fCut4Pll3I/Wireframes?node-id=109-77&t=B3XivaWS8aiyTT8K-1)
 
-![Burndown Chart:](docs/assets/screenshots/burndown.png)
+![Burndown Chart](docs/assets/screenshots/burndown.png)
 
 ## Code
 
@@ -65,15 +65,15 @@ you can follow our journey through our blog posts and other documentation.
 
 ## Use Cases
 
-[UC-1: Create Account](https://github.com/DHBW-Malte/gardeningApp/blob/main/docs/usecases/CRUD-User/createUser.md)
-[UC-2: Edit Account](https://github.com/DHBW-Malte/gardeningApp/blob/main/docs/usecases/CRUD-User/updateUser.md)
-[UC-3: Login/Logout](https://github.com/DHBW-Malte/gardeningApp/blob/main/docs/usecases/CRUD-User/loginLogoutUser.md)
-[UC-4: Create Gardens](https://github.com/DHBW-Malte/gardeningApp/blob/main/docs/usecases/CRUD-Garden/addGarden.md)
-[UC-5: Read Gardens](https://github.com/DHBW-Malte/gardeningApp/blob/main/docs/usecases/CRUD-Garden/showGardens.md)
-[UC-6: Update Gardens](https://github.com/DHBW-Malte/gardeningApp/blob/main/docs/usecases/CRUD-Garden/updateGarden.md)
-[UC-7: Delete Gardens](https://github.com/DHBW-Malte/gardeningApp/blob/main/docs/usecases/CRUD-Garden/deleteGarden.md)
-[UC-8: Create Plants](https://github.com/DHBW-Malte/gardeningApp/blob/main/docs/usecases/CRUD-Plant/addPlant.md)
-[UC-9: Read Plants](https://github.com/DHBW-Malte/gardeningApp/blob/main/docs/usecases/CRUD-Plant/viewPlant.md)
-[UC-10: Update Plants](https://github.com/DHBW-Malte/gardeningApp/blob/main/docs/usecases/CRUD-Plant/updatePlant.md)
-[UC-11: Delete Plants](https://github.com/DHBW-Malte/gardeningApp/blob/main/docs/usecases/CRUD-Plant/deletePlant.md)
-[UC-12: Search Plants Database](https://github.com/DHBW-Malte/gardeningApp/blob/main/docs/usecases/CatalogPlants/explorePlants.md)
+- [UC-1: Create Account](https://github.com/DHBW-Malte/gardeningApp/blob/main/docs/usecases/CRUD-User/createUser.md)
+- [UC-2: Edit Account](https://github.com/DHBW-Malte/gardeningApp/blob/main/docs/usecases/CRUD-User/updateUser.md)
+- [UC-3: Login/Logout](https://github.com/DHBW-Malte/gardeningApp/blob/main/docs/usecases/CRUD-User/loginLogoutUser.md)
+- [UC-4: Create Gardens](https://github.com/DHBW-Malte/gardeningApp/blob/main/docs/usecases/CRUD-Garden/addGarden.md)
+- [UC-5: Read Gardens](https://github.com/DHBW-Malte/gardeningApp/blob/main/docs/usecases/CRUD-Garden/showGardens.md)
+- [UC-6: Update Gardens](https://github.com/DHBW-Malte/gardeningApp/blob/main/docs/usecases/CRUD-Garden/updateGarden.md)
+- [UC-7: Delete Gardens](https://github.com/DHBW-Malte/gardeningApp/blob/main/docs/usecases/CRUD-Garden/deleteGarden.md)
+- [UC-8: Create Plants](https://github.com/DHBW-Malte/gardeningApp/blob/main/docs/usecases/CRUD-Plant/addPlant.md)
+- [UC-9: Read Plants](https://github.com/DHBW-Malte/gardeningApp/blob/main/docs/usecases/CRUD-Plant/viewPlant.md)
+- [UC-10: Update Plants](https://github.com/DHBW-Malte/gardeningApp/blob/main/docs/usecases/CRUD-Plant/updatePlant.md)
+- [UC-11: Delete Plants](https://github.com/DHBW-Malte/gardeningApp/blob/main/docs/usecases/CRUD-Plant/deletePlant.md)
+- [UC-12: Search Plants Database](https://github.com/DHBW-Malte/gardeningApp/blob/main/docs/usecases/CatalogPlants/explorePlants.md)
