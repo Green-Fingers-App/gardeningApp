@@ -23,7 +23,7 @@ Our vision remains the same, and you can read about it [here](https://github.com
 And now, a last demo for this semester:
 <video width="100%" height="auto" controls>
 
-  <source src="(https://github.com/DHBW-Malte/gardeningApp/blob/main/docs/assets/screencasts/MyMovie.mp4)" type="video/mp4">
+  <source src="/gardeningApp/assets/screencasts/MyMovie.mp4" type="video/mp4">
   Your browser doesn't support video tags.
 </video>
 
