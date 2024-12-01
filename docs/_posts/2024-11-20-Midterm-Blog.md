@@ -13,7 +13,7 @@ This blog post is a summary of this semester and half of the journey we started 
 
 So, if you are ready, let's take a look at our tools and architecture that helped us achieve what we have so far:
 
-[](https://github.com/DHBW-Malte/gardeningApp/blob/main/docs/assets/svg/architecturalDiagrams/mvvmDiagram.drawio.svg)
+[architecturalDiagrams](docs/assets/svg/architecturalDiagrams/mvvmDiagram.drawio.svg)
 ## Vision
 
 Our vision remains the same, and you can read about it [here](https://github.com/DHBW-Malte/gardeningApp/blob/main/docs/_posts/2024-09-13-our-vision.md).
