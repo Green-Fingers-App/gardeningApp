@@ -20,8 +20,6 @@ interface PlantCardProps extends React.ComponentProps<typeof TouchableOpacity> {
 const PlantCard: React.FC<PlantCardProps> = ({ plant, ...props }) => {
   const { deleting, handleDeletePlant } = useDeletePlant();
 
-  useEffect(() => console.log("plant img: ", plant.imageUrl), []);
-
   return (
     <TouchableOpacity {...props} style={styles.cardContainer}>
       {!deleting ? (

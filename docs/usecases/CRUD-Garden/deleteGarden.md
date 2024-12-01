@@ -1,7 +1,4 @@
-
-# 1 Use Case Name
-
-**Delete Garden**
+# Delete Garden
 
 ## 1.1 Brief Description
 
@@ -43,10 +40,6 @@ The basic flow for deleting a garden follows these steps:
 ### 2.1.1 Activity Diagram
 
 ![UML flowchart](https://github.com/DHBW-Malte/gardeningApp/blob/main/docs/assets/svg/useCaseDiagrams/deleteGarden.drawio.svg)
-
-### 2.1.2 Mock-Up
-
-Mock-up pending, awaiting access to the Figma file.
 
 ### 2.1.3 Narrative
 

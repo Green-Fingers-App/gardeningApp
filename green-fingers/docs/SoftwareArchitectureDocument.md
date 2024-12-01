@@ -26,13 +26,43 @@
 ## 1. Introduction
 ### 1.1 Purpose
 The purpose of this document is to provide a comprehensive overview of the software architecture for the "Green Fingers" gardening application. It outlines the architectural representation, goals, constraints, and views of the system to guide through the development process.
+
 ### 1.2 Scope
 This document describes the technical architecture of the "Green Fingers" application, including the logical, process, deployment, and implementation views. It aims to provide a detailed understanding of the system's structure and components to facilitate the development and maintenance of the application.
+
 ### 1.3 Definitions, Acronyms, and Abbreviations
-TBD
+| Abbrevation | Description                            |
+| ----------- | -------------------------------------- |
+| API         | Application Programming Interface      |
+| MVVM        | Model View ViewModel                   |
+| SRS         | Software Requirements Specification    |
+| UC          | Use Case                               |
+| n/a         | not applicable                         |
+
 ### 1.4 References
-TBD
+
+| Title                                                              | Last Updated       | Publishing organization   |
+| -------------------------------------------------------------------|:----------:| ------------------------- |
+| [GreenFingers Blog](https://dhbw-malte.github.io/gardeningApp/)| 21.11.2024 |GreenFingers  |
+| [GitHub Repository](https://github.com/DHBW-Malte/gardeningApp/tree/main)| 21.11.2024 |GreenFingers  |
+| [Overall Use Case Diagram](https://github.com/DHBW-Malte/gardeningApp/blob/main/docs/assets/svg/GreenFingersUsecases.drawio.svg)| 21.11.2024 |GreenFingers  |
+| [SRS](https://github.com/DHBW-Malte/gardeningApp/blob/main/green-fingers/docs/SoftwareRequirementsSpecification.md)| 21.11.2024 |GreenFingers  |
+| [UC: Create Account](https://github.com/DHBW-Malte/gardeningApp/blob/main/docs/usecases/CRUD-User/createUser.md)| 21.11.2024 |GreenFingers  |
+| [UC: Edit Account]()| 21.11.2024 |GreenFingers  |
+| [UC: Login/Logout]()| 21.11.2024 |GreenFingers  |
+| [UC: Create Gardens]()| 21.11.2024 |GreenFingers  |
+| [UC: Read Gardens](https://github.com/DHBW-Malte/gardeningApp/blob/main/docs/usecases/CRUD-Garden/showGardens.md)| 21.11.2024 |GreenFingers  |
+| [UC: Update Gardens]()| 21.11.2024 |GreenFingers  |
+| [UC: Delete Gardens](https://github.com/DHBW-Malte/gardeningApp/blob/main/docs/usecases/CRUD-Garden/deleteGarden.md)| 21.11.2024 |GreenFingers  |
+| [UC: Create Plants](https://github.com/DHBW-Malte/gardeningApp/blob/main/docs/usecases/CRUD-Plant/addPlant.md)| 21.11.2024 |GreenFingers  |
+| [UC: Read Plants](https://github.com/DHBW-Malte/gardeningApp/blob/main/docs/usecases/CRUD-Plant/viewPlant.md)| 21.11.2024 |GreenFingers  |
+| [UC: Update Plants](https://github.com/DHBW-Malte/gardeningApp/blob/main/docs/usecases/CRUD-Plant/updatePlant.md)| 21.11.2024 |GreenFingers  |
+| [UC: Delete Plants](https://github.com/DHBW-Malte/gardeningApp/blob/main/docs/usecases/CRUD-Plant/deletePlant.md)| 21.11.2024 |GreenFingers  |
+| [UC: Search Plants Database]()| 21.11.2024 |GreenFingers  |
+
+
 ### 1.5 Overview
+This document contains the Architectural Representation, Goals and Constraints as well as the Logical, Deployment, Implementation and Data Views.
 
 ## 2. Architectural Representation
 ### 2.1 Model-View-ViewModel (MVVM)
@@ -44,11 +74,12 @@ Because the "Green Fingers" appliactions is a mobile application, we have chosen
 - **ViewModel**: Acts as an intermediary between the Model and the View, handling the data and business logic to be displayed in the View. React Native takes care of the ViewModel part by using the React hooks and context API.
 
 ### 2.2 MVVM High-Level Overview
-The following diagrams are manual created, thats why they are not up to date. The diagrams are created with draw.io and exported as svg files. The diagrams are stored in the docs/assets/svg/architecturalDiagrams folder. The following diagram illustrates the high-level overview of the MVVM architectural pattern in the "Green Fingers" application:
+The following diagram illustrates the high-level overview of the MVVM architectural pattern in the "Green Fingers" application:
 
 ![MVVM High-Level Overview](../../docs/assets/svg/architecturalDiagrams/mvvmDiagram.drawio.svg)
 
 ## 3. Architectural Goals and Constraints
+
 ## 4. Use-Case View
 This is a high-level overview of the use-case view of the "Green Fingers" application. It outlines the main use cases and actors involved in the system.
 
@@ -57,25 +88,57 @@ This is a high-level overview of the use-case view of the "Green Fingers" applic
 ### 5.1 High-Level Overview
 As mentioned earlier, the "Green Fingers" application follows the MVVM architectural pattern. Therefore the logical view of the system is divided into three main components: Model, View, and ViewModel.
 
-**Model**: For the model part of our application, we are using the Firebase services like Firestore to store data and Authentication for user management. The data is stored in collections and documents in Firestore, which can be accessed and manipulated by the application.
-
 **View**: The view part of the application is built using React Native components. These components are used to create the user interface and visual elements of the application. The interface will present the data from the ViewModel to the user and allow them to interact with the application.
+
+**Model**: For the model part of our application, we are using the Firebase services like Firestore to store data and Authentication for user management. The data is stored in collections and documents in Firestore, which can be accessed and manipulated by the application.
 
 **ViewModel**: With React native we manage the data ans state of the application using React hooks and context API. The ViewModel is responsible for handling the data and business logic of the application. It acts as an intermediary between the Model and the View, providing the data to be displayed in the View.
 
+---
+
+The following diagrams are manual created, thats why they are **not up to date**. The diagrams are created with draw.io and exported as svg files. The diagrams are stored in the docs/assets/svg/architecturalDiagrams folder.
+
+---
 ![Use-Case Diagram](../../docs/assets/svg/architecturalDiagrams/logicalViewDiagram.drawio.svg)
 
 ### 5.2 Class Diagram
 
-The following class diagram provides a high-level overview of the classes and their relationships in the "Green Fingers" application. The diagram includes the main classes such as User, Plant, Garden, and UserPlant.
+The following class diagram provides a high-level overview of the classes and their relationships in the "Green Fingers" application. The diagram includes the main classes such as User, CatalogPlant, Garden, and UserPlant.
 
 ![Class Diagram](../../docs/assets/svg/architecturalDiagrams/classDiagram.drawio.svg)
 
 ## 6. Process View
-TBD
+n/a
 ## 7. Deployment View
+The “Green Fingers” application is designed as a mobile-first platform using cloud services for backend functionalities. The deployment consists of the following key components:
+
+#### Mobile Client:
+- Platform: Built with React Native, supporting iOS and Android platforms. Currently we work only on a Android version.
+- User Interface: Provides the user-facing functionalities, including managing gardens, plants, and user profiles.
+
+#### Backend Services:
+- Cloud Provider: Firebase serves as the backend infrastructure.
+- Database: Firestore is used as a real-time database to store user data, plant catalogs, and garden and plant information.
+- Authentication: Firebase Authentication manages user accounts securely.
+
+#### Deployment Architecture:
+- The mobile application interacts with Firebase APIs for data access and authentication.
+- All critical data, including user profiles, garden details, and plant records, are stored and retrieved via Firestore
+
 ## 8. Implementation View
-TBD
+The “Green Fingers” application uses the MVVM design pattern to organize the codebase efficiently. Key implementation details include:
+
+#### Programming Frameworks and Languages:
+- **Frontend**: React Native, with extensive use of React Hooks and Context API for state management.
+- **Backend**: Firebase’s serverless infrastructure, providing scalable real-time services.
+
+#### Source Control and Development Workflow:
+- **Repository**: Code is hosted on GitHub, with a structured folder hierarchy for models, views, and viewmodels.
+- **Development Tools**: Developers utilize VS Code with various extension like draw.io to create diagrams.
+
+#### Testing and Debugging:
+Until now there now test implemented but for the next semester, we plan to make use of Jest for extensive End-to-end testing of our application.
+
 ## 9. Data View
 ```mermaid
 erDiagram
@@ -138,7 +201,7 @@ erDiagram
     GARDENS ||--o{ PLANTS : "contains"
 ```
 ## 10. Size and Performance
-TBD
+n/a
 ## 11. Quality
-TBD
+n/a
 
