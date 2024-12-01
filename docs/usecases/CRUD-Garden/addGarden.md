@@ -25,7 +25,7 @@ The basic flow for deleting a garden follows these steps:
 
 ## 2.3 Exception Flows
 
-### 2.3.1 Database Error during Deletion
+### 2.3.1 Database Error during Garden Creation
 1.	The user provides the garden name and location and confirms.
 2.	The system attempts to create the garden but encounters a database connection error.
 3.	The system logs the error and displays an error message: “Unable to create garden due to a system error. Please try again later.”
