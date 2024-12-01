@@ -93,12 +93,14 @@ export interface Soil {
 }
 
 // Harvest period and details
-export interface Harvest {
-  start: Month;
-  end: Month;
-  yield: number;
-  edibleParts: string;
-}
+export type Harvest =
+  | false
+  | {
+      start: Month;
+      end: Month;
+      yield: number;
+      edibleParts: string;
+  };
 
 // Temperature details
 export interface Temperature {
@@ -120,60 +122,55 @@ export interface Planting {
 
 // Main Plant interface
 export interface Plant {
-  id: number;
   name: PlantName;
   blooming: Blooming;
   waterFrequency: WaterFrequency;
-  soil: Soil;
   harvest: Harvest;
   sunLight: SunLight;
   temperature: Temperature;
   size: Size;
-  hardinessZone: HardinessZone;
-  growthRate: GrowthRate;
   fertilizerType: string;
-  toxicity: ToxicityLevel;
-  commonPests: Pest[];
   planting: Planting;
-  region: string;
-  pruning: string;
-  companion: Plant[];
+  imageUrl: string;
 }
 
-//Garden interface
-export interface Garden {
-  id: number;
-  location: string;
-  plantIds: number[];  
+// Catalog Plant interface
+export interface CatalogPlant extends Plant {
+  id: string;
 }
 
-//User interface
-export interface User {
-  id: number;
-  username: string;
-  firstName: string;
-  lastName: string;
-  gardenIds: number[];
-  plantIds: number[];
-}
-
-//expected Level interface
-export enum Level {
-  TOO_LOW = "Too Low",
-  OPTIMAL = "Optimal",
-  TOO_HIGH = "Too High"
-}
-
-//User's own plant interface
-export interface UserPlant {
-  id: number;
-  plant: Plant;
+// Add Plant interface
+export interface AddUserPlant extends Plant {
+  nickName: string;
+  garden_id: string;
+  userId: string;
+  catalogPlant_id: string;
   wateredDate: string;
   plantedDate: string;
+  feededDate: string;
   moistureLevel: Level;
   sunlightLevel: Level;
   harvested: boolean;
 }
+
+//User's own plant interface
+export interface UserPlant extends AddUserPlant {
+  id: string;
+}
+
+//Garden interface
+export interface Garden extends AddGarden {
+  id: string;  
+}
+
+export interface AddGarden {
+  name: string;
+  location: string;
+  userId: string;
+}
+
+//expected Level interface
+export type Level = "Optimal" | "Too Low" | "Too High";
 
 export interface MoistureSensor {
   //tba

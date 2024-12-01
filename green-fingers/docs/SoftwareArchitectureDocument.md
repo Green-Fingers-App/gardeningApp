@@ -149,28 +149,17 @@ erDiagram
         string profile_picture
         datetime created_at
     }
-    PLANT_CATALOG {
+    PLANTS {
         int id PK
+        int user_id FK
+        string name
         string scientific_name
-        string common_name
         string type
         string water_frequency
         string temperature_range
         string light_requirement
         string soil_type
-        string fertilizer_type
-    }
-    PLANTS {
-        int id PK
-        int user_id FK
-        int plant_catalog_id FK
-        int garden_id FK
-        string name
         datetime created_at
-        datetime last_watered
-        datetime next_water
-        datetime last_fertilized
-        datetime next_fertilization
     }
     GARDENS {
         int id PK
@@ -179,13 +168,37 @@ erDiagram
         string location
         datetime created_at
     }
+    WATERING_SCHEDULES {
+        int id PK
+        int plant_id FK
+        string water_frequency
+        datetime last_watered
+        datetime next_water
+    }
+    FERTILIZER_SCHEDULES {
+        int id PK
+        int plant_id FK
+        string fertilizer_type
+        string fertilizer_frequency
+        datetime last_fertilized
+        datetime next_fertilization
+    }
+    SOIL_TYPES {
+        int id PK
+        string type_name
+    }
+    PLANT_TYPES {
+        int id PK
+        string name
+    }
 
-    %% Relationships
-    USERS ||--o{ PLANTS : "owns"
-    USERS ||--o{ GARDENS : "owns"
-    PLANTS }o--|| PLANT_CATALOG : "refers to"
+    USERS ||--o{ PLANTS : "has"
+    USERS ||--o{ GARDENS : "has"
+    PLANTS ||--o{ WATERING_SCHEDULES : "has"
+    PLANTS ||--o{ FERTILIZER_SCHEDULES : "has"
+    PLANTS }o--|| SOIL_TYPES : "uses"
+    PLANTS }o--|| PLANT_TYPES : "belongs to"
     GARDENS ||--o{ PLANTS : "contains"
-    USERS ||--|{ PLANT_CATALOG : "read access"
 ```
 ## 10. Size and Performance
 n/a

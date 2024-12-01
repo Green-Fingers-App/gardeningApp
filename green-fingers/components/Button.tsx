@@ -76,7 +76,7 @@ const Button: React.FC<ButtonProps> = ({
             color={textColor}
           />
         )}
-        <Text style={[textStyles.buttonText, { color: textColor }, type === "tertiary" && styles.tertiaryText]}>
+        <Text style={[textStyles.button, { color: textColor }, type === "tertiary" && styles.tertiaryText]}>
           {text}
         </Text>
       </View>
@@ -122,10 +122,10 @@ const styles = StyleSheet.create({
     textDecorationLine: "underline",
   },
   primaryDisabled: {
-    backgroundColor: colors.greyMedium,
+    backgroundColor: colors.greyLight,
   },
   secondaryDisabled: {
-    backgroundColor: colors.greyMedium,
+    backgroundColor: colors.greyLight,
     borderColor: colors.textMuted,
   },
   tertiaryDisabled: {

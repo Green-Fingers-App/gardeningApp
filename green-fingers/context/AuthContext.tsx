@@ -1,7 +1,27 @@
-import React, { createContext, useState, ReactNode, useContext } from "react";
+import React, {
+  createContext,
+  useState,
+  ReactNode,
+  useContext,
+  useEffect,
+} from "react";
 import { router } from "expo-router";
-import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut } from "firebase/auth";
-import { auth } from "@/firebase/firebaseConfig";
+import {
+  getAuth,
+  signInWithEmailAndPassword,
+  createUserWithEmailAndPassword,
+  signOut,
+  onAuthStateChanged,
+  User as FirebaseUser,
+} from "firebase/auth";
+import {
+  doc,
+  setDoc,
+  getDoc,
+  onSnapshot,
+  DocumentData,
+} from "firebase/firestore";
+import { auth, db } from "@/firebase/firebaseConfig";
 import { User, AuthContextProps } from "@/types/authtypes";
 
 const AuthContext = createContext<AuthContextProps | undefined>(undefined);
@@ -14,23 +34,73 @@ export const useAuth = () => {
   return context;
 };
 
-export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
+export const AuthProvider: React.FC<{ children: ReactNode }> = ({
+  children,
+}) => {
   const [user, setUser] = useState<User | null>(null);
   const [authError, setAuthError] = useState<string | null>(null);
 
-  // map Firebase User to custom User type
-  const mapFirebaseUserToAppUser = (firebaseUser: any): User => ({
+  const isLoggedIn = !!user;
+
+  const mapFirebaseUserToAppUser = (
+    firebaseUser: FirebaseUser,
+    userData: DocumentData | null
+  ): User => ({
     id: firebaseUser.uid,
     email: firebaseUser.email || "",
-    username: firebaseUser.displayName || "Anonymous",
+    username: userData?.username || "Anonymous",
+    profile_picture: userData?.profile_picture || "",
   });
+
+  // Listen for authentication state changes and user data updates
+  useEffect(() => {
+    const unsubscribeAuth = onAuthStateChanged(auth, (firebaseUser) => {
+      if (firebaseUser) {
+        const userDocRef = doc(db, "users", firebaseUser.uid);
+        const unsubscribeUser = onSnapshot(userDocRef, (docSnapshot) => {
+          if (docSnapshot.exists()) {
+            const userData = docSnapshot.data();
+            const mappedUser = mapFirebaseUserToAppUser(firebaseUser, userData);
+            setUser(mappedUser);
+          } else {
+            console.warn("User document does not exist in Firestore.");
+            setUser(null);
+          }
+        });
+        return () => {
+          unsubscribeUser();
+        };
+      } else {
+        setUser(null);
+      }
+    });
+    return () => {
+      unsubscribeAuth();
+    };
+  }, []);
 
   // Login function
   const login = async (email: string, password: string) => {
     try {
-      const userCredential = await signInWithEmailAndPassword(auth, email, password);
-      const mappedUser = mapFirebaseUserToAppUser(userCredential.user);
-      setUser(mappedUser);
+      const userCredential = await signInWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+      const firebaseUser = userCredential.user;
+      // Fetch user data from Firestore
+      const userDocRef = doc(db, "users", firebaseUser.uid);
+      const userDoc = await getDoc(userDocRef);
+      if (userDoc.exists()) {
+        const userData = userDoc.data();
+        const mappedUser = mapFirebaseUserToAppUser(firebaseUser, userData);
+        setUser(mappedUser);
+      } else {
+        console.warn("User document does not exist in Firestore.");
+        const mappedUser = mapFirebaseUserToAppUser(firebaseUser, null);
+        setUser(mappedUser);
+      }
+      setAuthError(null);
       router.replace("/profile/home");
     } catch (error) {
       setAuthError("Invalid email or password");
@@ -39,11 +109,27 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
   };
 
   // Signup function
-  const signup = async (email: string, password: string) => {
+  const signup = async (email: string, password: string, username: string) => {
     try {
-      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-      const mappedUser = mapFirebaseUserToAppUser(userCredential.user);
+      const userCredential = await createUserWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+      const firebaseUser = userCredential.user;
+
+      const userData = {
+        email: firebaseUser.email,
+        username: username || "Flower Lover",
+        profile_picture: firebaseUser.photoURL || "",
+        created_at: new Date().toISOString(),
+      };
+
+      // Save user data to Firestore
+      await setDoc(doc(db, "users", firebaseUser.uid), userData);
+      const mappedUser = mapFirebaseUserToAppUser(firebaseUser, userData);
       setUser(mappedUser);
+      setAuthError(null);
       router.replace("/profile/home");
     } catch (error) {
       setAuthError("Signup failed. Please try again.");
@@ -62,8 +148,23 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     }
   };
 
+  // Update user in state
+  const updateUser = (newUserData: Partial<User>) => {
+    setUser((prevUser) => (prevUser ? { ...prevUser, ...newUserData } : null));
+  };
+
   return (
-    <AuthContext.Provider value={{ user, login, signup, logout, authError }}>
+    <AuthContext.Provider
+      value={{
+        user,
+        isLoggedIn,
+        login,
+        signup,
+        logout,
+        authError,
+        updateUser,
+      }}
+    >
       {children}
     </AuthContext.Provider>
   );

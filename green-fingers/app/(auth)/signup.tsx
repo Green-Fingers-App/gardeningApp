@@ -11,14 +11,14 @@ const Signup = () => {
   const { signup, authError } = useAuth();
   const [inputValues, setInputValues] = useState<{
     email: string;
-    confirmEmail: string;
     password: string;
     confirmPassword: string;
+    username: string;
   }>({
     email: "",
-    confirmEmail: "",
     password: "",
     confirmPassword: "",
+    username: "",
   });
 
   const [error, setError] = useState<string | null>(null);
@@ -33,12 +33,7 @@ const Signup = () => {
   };
 
   const validateAndSignup = async () => {
-    const { email, confirmEmail, password, confirmPassword } = inputValues;
-
-    if (email !== confirmEmail) {
-      setError("Emails do not match!");
-      return;
-    }
+    const { email, password, confirmPassword, username } = inputValues;
 
     if (password !== confirmPassword) {
       setError("Passwords do not match!");
@@ -46,8 +41,7 @@ const Signup = () => {
     }
 
     setError(null);
-
-    await signup(email, password);
+    await signup(email, password, username);
   };
 
   return (
@@ -60,30 +54,34 @@ const Signup = () => {
         <View style={styles.signUpFormContainer}>
           <View style={styles.inputFieldContainer}>
             <Input
+              label="Username"
+              placeholder="Username"
+              iconName="account-outline"
+              onChangeText={(text) => handleChange("username", text)}
+              value={inputValues.username}
+            />
+            <Input
               label="Email"
               placeholder="Email"
               iconName="email-outline"
               onChangeText={(text) => handleChange("email", text)}
-            />
-            <Input
-              label="Confirm Email"
-              placeholder="Confirm Email"
-              iconName="email-outline"
-              onChangeText={(text) => handleChange("confirmEmail", text)}
+              value={inputValues.email}
             />
             <Input
               label="Password"
               placeholder="Password"
               iconName="lock-outline"
-              secureTextEntry
+              password={true}
               onChangeText={(text) => handleChange("password", text)}
+              value={inputValues.password}
             />
             <Input
               label="Confirm Password"
               placeholder="Confirm Password"
               iconName="lock-outline"
-              secureTextEntry
+              password={true}
               onChangeText={(text) => handleChange("confirmPassword", text)}
+              value={inputValues.confirmPassword}
             />
           </View>
           <Button
@@ -147,7 +145,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     gap: 24,
     width: "100%",
-  }
+  },
 });
 
 export default Signup;

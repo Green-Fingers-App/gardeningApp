@@ -1,40 +1,47 @@
 import React, { useEffect, useState } from "react";
-import { View, ActivityIndicator } from "react-native";
+import { View, StyleSheet, ActivityIndicator, ImageBackground } from "react-native";
 import { useRouter } from "expo-router";
 import { useAuth } from "@/context/AuthContext";
+import { useGardensAndPlants } from "@/context/GardensAndPlantsContext";
 
 const Index = () => {
   const [loading, setLoading] = useState(true);
   const router = useRouter();
   const { user } = useAuth();
+  const { fetchPlants } = useGardensAndPlants();
 
   useEffect(() => {
-    // This effect will fire every time 'user' changes
-    console.log("User in useEffect:", user); // Log the user state
-
-    if (!loading) {
+    const handleFetchAndNavigate = async () => {
       if (!user) {
-        router.replace("/login");
+        router.replace("/landingpage");
       } else {
         router.replace("/profile/home");
       }
+    };
+
+    if (!loading) {
+      handleFetchAndNavigate();
     }
-  }, [loading, user]); // Added loading to dependencies
+  }, [loading, user]);
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      setLoading(false);
-    }, 1000);
+      setLoading(false); // Stop loading after a delay
+    }, 1);
 
-    // Cleanup the timer on unmount
     return () => clearTimeout(timer);
   }, []);
 
   if (loading) {
     return (
-      <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+      <ImageBackground
+      source={require("../assets/images/background.png")}
+      style={styles.backgroundImage}
+    >
+      <View style={styles.pageContainer}>
         <ActivityIndicator size="large" />
       </View>
+      </ImageBackground>
     );
   }
 
@@ -42,3 +49,14 @@ const Index = () => {
 };
 
 export default Index;
+
+const styles = StyleSheet.create({
+  backgroundImage: {
+    flex: 1,
+  },
+  pageContainer: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+});

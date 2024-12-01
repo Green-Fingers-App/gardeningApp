@@ -16,7 +16,7 @@ interface InputValues {
 type InputErrors = Partial<Record<keyof InputValues, string>>;
 
 export default function LoginForm() {
-  const { login, authError } = useAuth();
+  const { login } = useAuth();
   const [inputValues, setInputValues] = useState<InputValues>({
     email: "",
     password: "",
@@ -69,25 +69,23 @@ export default function LoginForm() {
               onChangeText={(text) => handleChange("email", text)}
               error={inputErrors.email}
               onFocus={() => handleErrorMessage("email", undefined)}
+              value={inputValues.email}
             />
             <Input
               iconName="lock-outline"
               label="Password"
               placeholder="Enter your password"
-              secureTextEntry
+              password
+              secureTextEntry={true}
               onChangeText={(text) => handleChange("password", text)}
               error={inputErrors.password}
               onFocus={() => handleErrorMessage("password", undefined)}
+              value={inputValues.password}
             />
           </View>
-          {authError && <Text style={{ color: "red" }}>{authError}</Text>}
-          <Button 
-            text="Login"
-            onPress={validateAndLogin} // Triggers validateAndLogin, which calls login from AuthContext
-            iconName="login"
-          />
-          <Button 
-            type="tertiary" 
+          <Button text="Login" onPress={validateAndLogin} iconName="login" />
+          <Button
+            type="tertiary"
             text="Forgot Password?"
             onPress={() => router.push("/forgotpassword")}
           />
@@ -149,5 +147,5 @@ const styles = StyleSheet.create({
     alignItems: "center",
     gap: 24,
     width: "100%",
-  }
+  },
 });

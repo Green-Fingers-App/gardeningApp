@@ -4,7 +4,6 @@ import Input from "../../components/Input";
 import { SafeAreaView } from "react-native-safe-area-context";
 import Button from "@/components/Button";
 import { router } from "expo-router";
-import colors from "@/constants/colors";
 
 const forgotpasswordPage = () => {
   const inputValues = {};
@@ -23,13 +22,12 @@ const forgotpasswordPage = () => {
         placeholder="Enter your email"
       />
       <View style={styles.buttonsContainer}>
-        <Button text="Send" iconName="send" />
+        <Button text="Send" iconName="send" type="primary" />
         <Button
           text="Return to Login"
           onPress={() => router.push("/(auth)/login")}
           iconName="arrow-left"
-          bgColor={colors.secondary}
-          textColor="black"
+          type="secondary"
         />
       </View>
     </SafeAreaView>
