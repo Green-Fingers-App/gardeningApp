@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Midterm Blog"
-date: 2024-11-14
+date: 2024-12-01
 author: "Sima, Casimir, Ruan & Malte"
 ---
 
@@ -75,3 +75,7 @@ You can follow our journey through our blog posts and other documentation.
 - [UC-10: Update Plants](https://github.com/DHBW-Malte/gardeningApp/blob/main/docs/usecases/CRUD-Plant/updatePlant.md)
 - [UC-11: Delete Plants](https://github.com/DHBW-Malte/gardeningApp/blob/main/docs/usecases/CRUD-Plant/deletePlant.md)
 - [UC-12: Search Plants Database](https://github.com/DHBW-Malte/gardeningApp/blob/main/docs/usecases/CatalogPlants/explorePlants.md)
+
+---
+We hope you have found this information useful, we will see you next semester :)
+---
