@@ -131,37 +131,37 @@ Users will log into their accounts using an email and password or third-party cr
 #### 3.1.3 Add plant 
 
 Users can add new plants to their personal garden by entering plant details such as name, watering frequency, sunlight requirements, and more.
-### [Usecase: add plant]() 
+### [Usecase: add plant](docs/usecases/CRUD-Plant/addPlant.md)
 This usecase is part of the **CURD-usecases** of the plant objects.
 
 #### 3.1.4 Delete plant
 
 The user can delete a plant from their app. This will remove the plant from the user's garden and all associated data in the database.
-### [Usecase: delete plant]()
+### [Usecase: delete plant](docs/usecases/CRUD-Plant/deletePlant.md)
 This usecase is part of the **CURD-usecases** of the plant objects.
 
 #### 3.1.5 View plant
 
 The user can search and view a plant from our data base.
-### [Usecase: view plant]()
+### [Usecase: view plant](docs/usecases/CRUD-Plant/viewPlant.md)
 This usecase is part of the **CURD-usecases** of the plant objects.
 
 #### 3.1.6 Add Garden
 
 The user can add diffrent gardens.
-### [Usecase: add garden]()
+### [Usecase: add garden](docs/usecases/CRUD-Garden/addGarden.md)
 This usecase is part of the **CURD-usecases** of the plant objects.
 
 #### 3.1.7 Delete Garden
 
 The user can delete a garden from their app. This will remove the plant from the user's garden and all associated data in the database.
-### [Usecase: delete garden]()
+### [Usecase: delete garden](docs/usecases/CRUD-Garden/deleteGarden.md)
 This usecase is part of the **CURD-usecases** of the plant objects.
 
-#### 3.1.8 View garden
+#### 3.1.8 show garden
 
 Our first activity diagram showcases the flow of events for the “Show Gardens” use case. This use case allows users to view an overview of all gardens they have created. By navigating to the garden overview, users can see a list of all their gardens, each with essential information such as the garden name, image, and status.
-### [Usecase: view garden]()
+### [Usecase: show garden](docs/usecases/CRUD-Garden/showGardens.md)
 This usecase is part of the **CURD-usecases** of the plant objects.
 
 #### 3.1.9 Recieve Notification
@@ -172,71 +172,99 @@ Each plant can send notifications to the user about its needs and health status.
 
 
 ### 3.2 Usability
-TBD
+We plan to design the user interface as intuitive and self-explanatory as possible, so users will feel comfortable organizing their plants as they wish.
+
 
 #### 3.2.1 No training time needed
-TBD
+The app's user interface will be intuitive and require no formal training. Users should be able to navigate and use its features effortlessly upon first interaction. This will be achieved by incorporating simple navigation menus, clear labels, and recognizable icons.
 
 #### 3.2.2 Familiar Feeling
-TBD
+The design will incorporate elements familiar to users from other applications, such as plus sign as an add button, pull-to-refresh actions, and standard app layouts. Leveraging common UI/UX patterns ensures that users feel at home while exploring the app, reducing the cognitive load associated with learning a new tool.
+
+#### 3.2.3 Customization
+Users can customize their dashboard and notifications to suit their preferences. This includes selecting what information is displayed prominently and scheduling reminders at times most convenient for them.
+
+#### 3.2.4 Security and Privacy
+We use Firebase Authentication to handle user logins securely. This supports email/password login options to ensure that users can only access their own data. This includes role-based access controls for admins and users.
 
 ### 3.3 Reliability
 
 #### 3.3.1 Availability
-TBD
+The app will ensure 99.9% uptime, supported by Firebase's reliable hosting and backend services. Regular monitoring and fallback mechanisms will be in place to mitigate downtime and service interruptions.
 
-#### 3.3.2 Defect Rate
-TBD
+#### 3.3.2 Backup and Recovery
+Automatic backups will be implemented for user data on Firebase. In case of data loss, recovery mechanisms will ensure data restoration with minimal impact.
 
 ### 3.4 Perfomance
 
 #### 3.4.1 Capacity
-TBD
-
+The app will support up to 100 concurrent users as per Firebase's free tier limits. If the app scales beyond this, upgrading to a paid Firebase plan or implementing additional backend solutions will be considered.
 #### 3.4.2 Storage 
-TBD
+Data storage is handled by Firebase, which efficiently manages both plant and user data using a NoSQL structure. Firebase's free tier offers up to 50,000 document reads and 50,000 writes per day and 1 GB of storage for the Firestore database. These limits will guide the initial implementation. If the app's user base grows significantly, storage and usage will be monitored, and a transition to a higher-tier plan will be considered to accommodate increased demand.
 
 #### 3.4.3 App perfomance / Response time
-TBD
+The app is designed to achieve a response time of under 2 seconds for all user actions. During the loading time all the user's data from Firebase gets ready to use, this ensures low latency and high performance.
 
 ### 3.5 Supportability
 
 #### 3.5.1 Coding Standards
-TBD
+The project will follow clean coding principles.
 
 #### 3.5.2 Testing Strategy
-TBD
-
+in the future testing will include:
+Unit tests for individual components and functions.
+Integration tests to ensure seamless interaction between features.
+End-to-end tests for real-world usage scenarios.
+User acceptance testing (UAT) to ensure the app meets user expectations.
 ### 3.6 Design Constraints
-TBD
+- Mobile-First Design: The app is designed for mobile devices with React Native, ensuring responsiveness across various screen sizes.
+- Platform Compatibility: The app will run on Android and in the future on iOS platforms.
+- Hardware Integration: Compatibility with IoT devices for automated watering and sensor data is a core constraint.
 
 ### 3.7 On-line User Documentation and Help System Requirements
-TBD
+- Online Documentation: Comprehensive documentation will be available on the Green Fingers website, including step-by-step usage instructions and video guides.
+- Support System: Users can contact support through in-app messaging or email for additional assistance.
 
 ### 3.8 Purchased Components
-TBD
+The following third-party components and services will be used:
+
+- Firebase Authentication and Firestore Database: For secure data management.
+- Expo Modules: for push notifications, camera access, and hardware integration.
+- Third-Party Analytics Tool: TBD, to track app usage and performance.
 
 ### 3.9 Interfaces
 
 #### 3.9.1 User Interfaces
-TBD
+## Screencast of Demo
+The app will feature:
+<video width="100%" height="auto" controls>
+
+  <source src="/gardeningApp/assets/screencasts/MY Movie.mp4" type="video/mp4">
+  Your browser doesn't support video tags
+</video>
+
+
 
 #### 3.9.2 Hardware Interfaces
-TBD
+Integration with IoT devices like soil moisture sensors and automated watering systems via APIs or Bluetooth.
 
 #### 3.9.3 Software Interfaces
-TBD
+- Firebase for backend services.
+- External APIs for weather data integration.
+- Compatibility with mobile OS notification services
+
 
 #### 3.9.4 Communication Interfaces
-TBD
+HTTPS protocol for all communication between the app and Firebase.
+Bluetooth or Wi-Fi for IoT device integration.
 
 ### 3.10 Licensing Requirements
 
 ### 3.11 Legal, Copyright, and Other Notices
-TBD
+n/a
 
 ### 3.12 Applicable Standards
-TBD
+n/a
 
 ## 4. Supporting Information
 For any further information you can contact the Green Fingers Team or check our [Green Fingers Blog](https://dhbw-malte.github.io/gardeningApp/). 
