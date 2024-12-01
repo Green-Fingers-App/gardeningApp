@@ -50,7 +50,7 @@ You can follow our journey through our blog posts and other documentation.
 
 - [SRS](https://github.com/DHBW-Malte/gardeningApp/blob/main/green-fingers/docs/SoftwareRequirementsSpecification.md)
 - [SAD](https://github.com/DHBW-Malte/gardeningApp/blob/main/green-fingers/docs/SoftwareArchitectureDocument.md)
-- [Use-Case Diagram](../../docs/assets/svg/GreenFingersUsecases.drawio.svg)
+- ![Use-Case Diagram](../../docs/assets/svg/GreenFingersUsecases.drawio.svg)
 - [YouTrack](https://dhbw-malte.youtrack.cloud/projects/0-4)
 - [Miro Board](https://miro.com/app/board/uXjVLfrnVdc=/)
 - [Figma](https://www.figma.com/design/UNUTu2ARSJv1fCut4Pll3I/Wireframes?node-id=109-77&t=B3XivaWS8aiyTT8K-1)
