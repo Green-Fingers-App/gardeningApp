@@ -1,6 +1,4 @@
-# 1 Use-Case Name
-
-View Plant
+# 1 View Plant
 
 ## 1.1 Brief Description
 
@@ -24,7 +22,7 @@ These sections contain all information about a plant. The user can switch betwee
 
 ### 2.1.1 Activity Diagram
 
-![UML flowchart](https://github.com/DHBW-Malte/gardeningApp/blob/main/docs/assets/svg/useCaseDiagrams/viewPlant.drawio.svg)
+![UML flowchart](https://github.com/DHBW-Malte/gardeningApp/blob/main/docs/assets/svg/useCaseDiagrams/viewPlantDetail.drawio.svg)
 
 ### 2.1.2 Mock-Up
 
