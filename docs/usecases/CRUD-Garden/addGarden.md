@@ -43,7 +43,7 @@ The basic flow for deleting a garden follows these steps:
 
 ### 2.1.3 Narrative
 
-**Feature:** Delete Garden
+**Feature:** Create Garden
 
 ```gherkin
   Scenario: User adds a new garden
