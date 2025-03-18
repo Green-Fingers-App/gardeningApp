@@ -13,13 +13,13 @@ The first one is the ability to add sensors to a users plants. We want to keep t
 
 The second features is a calendar for the users to schedule watering, fertilizing etc. . With the calendar we want to try also to add a notification feature to the app.
 
-![use-case-diagram](../assets/svg/GreenFingersUsecases.drawio.svg)
+![use-case-diagram](/gardeningApp/assets/svg/GreenFingersUsecases.drawio.svg)
 
 ## What is our tech stack?
 
 For our app we want to stick with React Native, but for our backend and database solution we will switch from Firebase to an SQL Database with a Node.js backend. With these changes we switch from the MVVC architecture to the traditional MVC architecture.
 
-![tech-stack](../assets/svg/architecturalDiagrams/mvcDiagram.drawio.svg)
+![tech-stack](/gardeningApp/assets/svg/svg/architecturalDiagrams/mvcDiagram.drawio.svg)
 
 ## What are our roles in the team?
 
