@@ -19,7 +19,7 @@ The second features is a calendar for the users to schedule watering, fertilizin
 
 For our app we want to stick with React Native, but for our backend and database solution we will switch from Firebase to an SQL Database with a Node.js backend. With these changes we switch from the MVVC architecture to the traditional MVC architecture.
 
-![tech-stack](/gardeningApp/assets/svg/svg/architecturalDiagrams/mvcDiagram.drawio.svg)
+![tech-stack](/gardeningApp/assets/svg/architecturalDiagrams/mvcDiagram.drawio.svg)
 
 ## What are our roles in the team?
 
