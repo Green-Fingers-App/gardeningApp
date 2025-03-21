@@ -93,7 +93,17 @@ const ProfileLayout: React.FC = () => {
             ),
           }}
         />
+        <Tabs.Screen
+          name="calendar"
+          options={{
+            title: "Calendar",
+            tabBarIcon: ({ color, size }) => (
+              <MaterialIcons name="calendar-month" color={color} size={size} />
+            ),
+          }}
+        />
       </Tabs>
+
       {isLoggedIn && (
         <View style={styles.addButtonContainer}>
           <TouchableOpacity style={styles.addButton} onPress={toggleMenu}>
