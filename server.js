@@ -1,7 +1,7 @@
 require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
-const pool = require("green-fingers/rest api/db.js"); // Import the database connection
+const pool = require("./green-fingers/restApi/db.js"); // Import the database connection
 
 const app = express();
 const port = process.env.PORT || 3000;
