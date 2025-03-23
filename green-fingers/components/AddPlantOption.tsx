@@ -32,7 +32,7 @@ const AddPlantOption: React.FC<AddPlantOptionProps> = ({
 
   const isAddPlantDisabled = !nickName || !selectedGarden || !selectedPlant;
 
-  const gardenOptions = gardens.map((garden) => ({
+  const gardenOptions = gardens.map((garden: any) => ({
     value: garden.id,
     label: garden.name,
   }));

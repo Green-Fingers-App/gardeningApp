@@ -14,7 +14,7 @@ const Accordion: React.FC<AccordionProps> = ({ children, ...props }) => {
   };
 
   return (
-    <View {...props}>
+    <View {...props}> 
       {React.Children.map(children, (child, index) => {
         if (React.isValidElement(child)) {
           return React.cloneElement(child, {

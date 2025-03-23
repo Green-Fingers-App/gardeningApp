@@ -9,14 +9,13 @@ import Button from "@/components/Button";
 import Input from "@/components/Input";
 
 import useForm from "@/hooks/useForm";
-import { db } from "@/firebase/firebaseConfig";
-import { doc, getDoc, setDoc, updateDoc } from "firebase/firestore";
+import axios from "axios";
 
-const Profile: React.FC = () => {
+const Profile = () => {
   const { user, updateUser } = useAuth();
   const [editMode, setEditMode] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
+  const [error, setError] = useState(null);
 
   // Initialize the form with existing user values
   const { values, handleChange, resetForm, setValues } = useForm({
@@ -32,30 +31,29 @@ const Profile: React.FC = () => {
 
   const fetchOrCreateUserProfile = async () => {
     if (!user?.id) return;
-
+  
     try {
       setLoading(true);
       setError(null);
-
-      const userDocRef = doc(db, "users", `${user.id}`);
-      const userDoc = await getDoc(userDocRef);
-
-      if (userDoc.exists()) {
-        // If the document exists, set form values
-        const userData = userDoc.data();
+  
+      // Fetch user profile from Node.js backend
+      const response = await axios.get(`/api/users/${user.id}`);
+      const userData = response.data;
+  
+      if (userData) {
         setValues({
-          username: userData?.username || "",
-          email: userData?.email || "",
+          username: userData.username || "",
+          email: userData.email || "",
         });
       } else {
-        // If the document does not exist, create it with default values
+        // If the user doesn't exist, create a new profile
         const initialData = {
           username: user.username || "New User",
           email: user.email || "",
           profile_picture: "",
           created_at: new Date().toISOString(),
         };
-        await setDoc(userDocRef, initialData);
+        await axios.post("/api/users", { id: user.id, ...initialData });
         setValues({
           username: initialData.username,
           email: initialData.email,
@@ -76,10 +74,9 @@ const Profile: React.FC = () => {
 
   const saveChanges = async () => {
     if (!user?.id) return;
-
+  
     try {
-      const userDocRef = doc(db, "users", `${user.id}`);
-      await updateDoc(userDocRef, {
+      await axios.put(`/api/users/${user.id}`, {
         username: values.username,
         email: values.email,
       });
