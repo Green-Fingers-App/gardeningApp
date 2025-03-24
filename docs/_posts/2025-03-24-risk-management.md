@@ -11,4 +11,4 @@ This week we will tackle the concept of risk management in our blog. If you keep
 
 We can sort our risks by different values. We can sort them by priority, category or the person who is responsible for a certain risk. The person who is responsible for a risk makes sure that the mitigation strategies for that risk are followed by the team. This means that the person who is responsible is not necessarily also the person who actively mitigates the risk. To make the risks with the highest priority level immediately recognizable, we colored them with a red color. The spreadsheet is meant as a dynamic document that we can change throughout the development of our project.
 
-![Risk Assessment Document](/gardeningApp/assets/screenshots/risk_assessment_document.png)
+![Risk Assessment Document](/gardeningApp/assets/screenshots/risk_assessment_doc.png)
