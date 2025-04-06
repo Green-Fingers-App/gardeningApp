@@ -22,9 +22,9 @@ Another task was to calculate the time we estimated and the time we spent on eac
 
 Now that we have this data, we can plot a graph. Below is the graph of Function Points vs. effort (in hours). We can now visualize how much time we might need for future use cases using these graphs.
 
-![graph FP per CRUD type](/gardeningApp/assets/screenshots/Function-Points-per-CRUD-Type.png)
+![graph FP per CRUD type](/gardeningApp/assets/screenshots/FunctionPointsPerCRUDType.png)
 
-![Overview Time vs UC](/gardeningApp/assets/screenshots/Estimated-Actual-Hours-per-CRUD-Type.png)
+![Overview Time vs UC](/gardeningApp/assets/screenshots/EstimatedVsActualHoursPerCRUDType.png)
 
 ![RegressionLine vs FP Hrs](/gardeningApp/assets/screenshots/regression-line.png)
 
