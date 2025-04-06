@@ -14,19 +14,19 @@ As we learned in the lecture, Function Points are a unit of measurement used to 
 ## How It's Done
 
 We calculate Function Points for our existing use cases, such as the "CRUD User" use case. For example:  
-![crud-user-FPcalculator](/gardeningAppdocs/assets/screenshots/crud-user.png)
-![FP-counting-weights](/gardeningApp/docs/assets/screenshots/FPtype.png)
+![crud-user-FPcalculator](/gardeningApp/assets/screenshots/crud-user.png)
+![FP-counting-weights](/gardeningApp/assets/screenshots/FPtype.png)
 
 Another task was to calculate the time we estimated and the time we spent on each use case using our project management tool—YouTrack, in our case. If you take a look at the table below, you'll see the time per use case:  
-![use-case-time-FP](/gardeningAppdocs/assets/screenshots/UC:time.png)
+![use-case-time-FP](/gardeningApp/assets/screenshots/UC:time.png)
 
 Now that we have this data, we can plot a graph. Below is the graph of Function Points vs. effort (in hours). We can now visualize how much time we might need for future use cases using these graphs.
 
-![graph-FP-per-CRUD-type](/gardeningAppdocs/assets/screenshots/Function-Points-per-CRUD-Type.png)
+![graph-FP-per-CRUD-type](/gardeningApp/assets/screenshots/Function-Points-per-CRUD-Type.png)
 
-![Overview-Time-UC](/gardeningAppdocs/assets/screenshots/Estimated-Actual-Hours-per-CRUD-Type.png)
+![Overview-Time-UC](/gardeningApp/assets/screenshots/Estimated-Actual-Hours-per-CRUD-Type.png)
 
-![Regression-Line-FP:Hrs](/gardeningAppdocs/assets/screenshots/regression-line.png)
+![Regression-Line-FP:Hrs](/gardeningApp/assets/screenshots/regression-line.png)
 
 Of course, not every use case will require the same amount of effort or time, but this gives us a solid estimation tool.
 
