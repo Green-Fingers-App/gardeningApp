@@ -13,19 +13,23 @@ As we learned in the lecture, Function Points are a unit of measurement used to 
 
 ## How It's Done
 
-We calculate Function Points for our existing use cases—such as the "CRUD User" use case. For example:  
+We calculate Function Points for our existing use cases, such as the "CRUD User" use case. For example:  
 ![crud-user-FPcalculator](/gardeningAppdocs/assets/screenshots/crud-user.png)
-![FP-counting-weights](/gardeningApp/docs/assets/screenshots/FP type.png)
+![FP-counting-weights](/gardeningApp/docs/assets/screenshots/FPtype.png)
 
 Another task was to calculate the time we estimated and the time we spent on each use case using our project management tool—YouTrack, in our case. If you take a look at the table below, you'll see the time per use case:  
 ![use-case-time-FP](/gardeningAppdocs/assets/screenshots/UC:time.png)
 
-Now that we have this data, we can plot a graph. Below you’ll see the graph of Function Points vs. effort (in hours). Using this, we can now visualize how much time we might need for future use cases.
-![graph-FP-per-CRUD-type](/gardeningAppdocs/assets/screenshots/Function Points per CRUD Type.png)
-![Overview-Time-UC](/gardeningAppdocs/assets/screenshots/Estimated vs. Actual Hours per CRUD Type.png)
-![Regression-Line-FP:Hrs](/gardeningAppdocs/assets/screenshots/regression line.png)
-Of course, not every use case will require the same amount of effort or time—but this gives us a solid estimation tool.
+Now that we have this data, we can plot a graph. Below is the graph of Function Points vs. effort (in hours). We can now visualize how much time we might need for future use cases using these graphs.
 
-for more information about all of our use cases you are welcome to take a look [here](https://docs.google.com/spreadsheets/d/1zhDBTgnGTWBvLu5q1kFAv1N_qjQokxEkWYAxWJZ2RKE/edit?usp=sharing)
+![graph-FP-per-CRUD-type](/gardeningAppdocs/assets/screenshots/Function-Points-per-CRUD-Type.png)
 
-Thank you for reading our blog post we'll stay tuned about your feedback!
+![Overview-Time-UC](/gardeningAppdocs/assets/screenshots/Estimated-Actual-Hours-per-CRUD-Type.png)
+
+![Regression-Line-FP:Hrs](/gardeningAppdocs/assets/screenshots/regression-line.png)
+
+Of course, not every use case will require the same amount of effort or time, but this gives us a solid estimation tool.
+
+For more information about all of our use cases, you are welcome to take a look [here](https://docs.google.com/spreadsheets/d/1zhDBTgnGTWBvLu5q1kFAv1N_qjQokxEkWYAxWJZ2RKE/edit?usp=sharing)
+
+Thank you for reading our blog post. We'll stay tuned for your feedback!
