@@ -17,8 +17,10 @@ We calculate Function Points for our existing use cases, such as the "CRUD User"
 ![CRUD user FP calculator](/gardeningApp/assets/screenshots/image.png)
 ![FP counting weights](/gardeningApp/assets/screenshots/FPtype.png)
 
-Another task was to calculate the time we estimated and the time we spent on each use case using our project management tool—YouTrack, in our case. If you take a look at the table below, you'll see the time per use case:  
+Another task was to calculate the time we estimated and the time we spent on each use case using our project management tool—YouTrack, in our case. If you take a look at the table below, you'll see total amount of Function Points and estimated & spent hours per use case:  
 ![use case time FP](/gardeningApp/assets/screenshots/FP_and_Hours.png)
+We also calculated the General System Characteristic (GSC) to make the total amount of FPs and hours more accurate.
+![use case time FP](/gardeningApp/assets/screenshots/GSC.png)
 
 Now that we have this data, we can plot a graph. Below is the graph of Function Points vs. effort (in hours). We can now visualize how much time we might need for future use cases using these graphs.
 
