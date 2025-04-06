@@ -14,7 +14,7 @@ As we learned in the lecture, Function Points are a unit of measurement used to 
 ## How It's Done
 
 We calculate Function Points for our existing use cases, such as the "CRUD User" use case. For example:  
-![CRUD user FP calculator](/gardeningApp/assets/screenshots/crud-user.png)
+![CRUD user FP calculator](/gardeningApp/assets/screenshots/image.png)
 ![FP counting weights](/gardeningApp/assets/screenshots/FPtype.png)
 
 Another task was to calculate the time we estimated and the time we spent on each use case using our project management tool—YouTrack, in our case. If you take a look at the table below, you'll see the time per use case:  
