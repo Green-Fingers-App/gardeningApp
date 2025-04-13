@@ -38,7 +38,7 @@ To test our login form, we focused on:
 - Validating input (email and password)
 - Verifying that the login function is called with correct values
 
-Here you can checkout our [**LoginForm.test.tsx**](/gardeningApp/green-fingers/_tests_/LoginForm.test.tsx).
+Here you can checkout our [**LoginForm.test.tsx**](/gardeningApp/blob/main/green-fingers/_tests_/LoginForm.test.tsx).
 
 And yes, that test is now green!
 
@@ -51,7 +51,7 @@ We also used the implemented **test coverage** function from **Jest** to check o
 
 ## What's Next?
 
-We're currently working on our [**RUP-based Test Plan**](/gardeningApp/green-fingers/docs/RUPTestPlan.md), which defines:
+We're currently working on our [**RUP-based Test Plan**](/gardeningApp/blob/main/green-fingers/docs/RUPTestPlan.md), which defines:
 
 - Test motivation and strategy
 - Targeted components and workflows
