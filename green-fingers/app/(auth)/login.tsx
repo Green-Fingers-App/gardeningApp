@@ -83,7 +83,7 @@ export default function LoginForm() {
               value={inputValues.password}
             />
           </View>
-          <Button text="Login" onPress={validateAndLogin} iconName="login" />
+          <Button text="Login" onPress={validateAndLogin} iconName="login" testID="login-button"/>
           <Button
             type="tertiary"
             text="Forgot Password?"
@@ -92,10 +92,11 @@ export default function LoginForm() {
         </View>
         <View style={styles.signUpContainer}>
           <Text>Don't have an account?</Text>
-          <Button
+          <Button           
             type="secondary"
             text="Sign Up"
             onPress={() => router.push("/signup")}
+            testID="signup-button"
           />
         </View>
       </View>
