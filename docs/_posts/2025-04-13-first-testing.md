@@ -34,7 +34,8 @@ We also implementing **unit tests for our authentication logic** in our backend 
 
 The tests use Jest to mock dependencies (authModel, bcrypt, jsonwebtoken, pg), isolating controller logic and simulating database, password hashing, and token operations to validate correct responses and error handling.
 
-Here you can check our [**auth.test.js**](https://github.com/DHBW-Malte/gardeningApp-backend/blob/main/__tests__/auth.test.js).
+You can check our [**auth.test.js**](https://github.com/DHBW-Malte/gardeningApp-backend/blob/main/__tests__/auth.test.js).
+
 ---
 
 ## First Tests in Action
