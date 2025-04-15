@@ -17,16 +17,22 @@ Our app is growing – from user management and garden creation to future featur
 
 We’ve identified several test levels, based on both our tech stack and testing goals:
 
-| Layer        | Tool(s)                      | Purpose                                                      |
-|--------------|------------------------------|--------------------------------------------------------------|
-| **Frontend** | Jest + React Testing Library | Test UI components and form behavior from a user’s view      |
-| **Backend**  | Jest                         | Unit testing business logic and route handlers               |
-| **API**      | Postman                      | Manual and automated testing of REST endpoints               |
-| **E2E**      | Detox (planned)   | Behavior-driven full-app flows for login, signup, etc.       |
+| Layer        | Tool(s)                      | Purpose                                                 |
+| ------------ | ---------------------------- | ------------------------------------------------------- |
+| **Frontend** | Jest + React Testing Library | Test UI components and form behavior from a user’s view |
+| **Backend**  | Jest                         | Unit testing business logic and route handlers          |
+| **API**      | Postman                      | Manual and automated testing of REST endpoints          |
+| **E2E**      | Detox (planned)              | Behavior-driven full-app flows for login, signup, etc.  |
 
 We started implementing **unit tests for our login flow** using Jest and React Testing Library. Here's a sneak peek at our passing test suite for `login.tsx`:
 
 ![Login Test Screenshot](/gardeningApp/assets/screenshots/testUnitTestLoginForm.png)
+
+We also implementing **unit tests for our authentication logic** in our backend side. The unit tests in auth.test.js focus on verifying the behavior of the auth controller functions (login, signup, and jsonrefresh) in controllers/auth.js.
+
+![auth test screenshot](/gardeningApp/assets/screenshots/unittestAuthController.png)
+
+The tests use Jest to mock dependencies (authModel, bcrypt, jsonwebtoken, pg), isolating controller logic and simulating database, password hashing, and token operations to validate correct responses and error handling.
 
 ---
 
@@ -45,7 +51,6 @@ And yes, that test is now green!
 We also used the implemented **test coverage** function from **Jest** to check our first unit test:
 
 ![Login Test Coverage Screenshot](/gardeningApp/assets/screenshots/loginFormTestCoverage.png)
-
 
 ---
 
