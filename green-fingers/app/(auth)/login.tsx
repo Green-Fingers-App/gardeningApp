@@ -40,7 +40,6 @@ export default function LoginForm() {
 
   const validateAndLogin = async (): Promise<void> => {
     const { email, password } = inputValues;
-
     if (!email) {
       handleErrorMessage("email", "Please enter your email");
       return;
@@ -51,7 +50,7 @@ export default function LoginForm() {
       return;
     }
 
-    await login(email, password);
+    await login(inputValues);
   };
 
   return (

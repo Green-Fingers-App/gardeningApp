@@ -41,7 +41,7 @@ const PlantDetailPage = () => {
   ];
 
   const gardenOptions = gardens.map((garden) => ({
-    value: garden.id,
+    value: garden.id.toString(),
     label: garden.name,
   }));
 
@@ -62,6 +62,7 @@ const PlantDetailPage = () => {
 
   useEffect(() => {
     const newPlant = fetchPlantDetail(plantId.toString());
+    console.log(newPlant);
     if (newPlant) {
       setPlant(newPlant);
     }

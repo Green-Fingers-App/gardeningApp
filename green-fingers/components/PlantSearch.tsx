@@ -13,71 +13,71 @@ import colors from "@/constants/colors";
 import textStyles from "@/constants/textStyles";
 
 interface PlantSearchProps {
-    onSelectPlant: (plant: CatalogPlant) => void;
-  }
-  
-  const PlantSearch: React.FC<PlantSearchProps> = ({ onSelectPlant }) => {
-    const { fetchPlantsByCommonName } = useGardensAndPlants();
-    const [input, setInput] = useState<string>("");
-    const [suggestions, setSuggestions] = useState<CatalogPlant[]>([]);
-    const [showDropdown, setShowDropdown] = useState<boolean>(false);
-  
-    const handleSearch = async (text: string) => {
-      setInput(text);
-  
-      if (text.trim().length > 0) {
-        setShowDropdown(true);
-        const results = await fetchPlantsByCommonName(text);
-        setSuggestions(results);
-      } else {
-        setShowDropdown(false);
-        setSuggestions([]);
-      }
-    };
-  
-    const handleSelectPlant = (plant: CatalogPlant) => {
-      onSelectPlant(plant);
-      setInput(plant.name.commonName);
+  onSelectPlant: (plant: CatalogPlant) => void;
+}
+
+const PlantSearch: React.FC<PlantSearchProps> = ({ onSelectPlant }) => {
+  const { searchPlantsByCommonName } = useGardensAndPlants();
+  const [input, setInput] = useState<string>("");
+  const [suggestions, setSuggestions] = useState<CatalogPlant[]>([]);
+  const [showDropdown, setShowDropdown] = useState<boolean>(false);
+
+  const handleSearch = async (text: string) => {
+    setInput(text);
+
+    if (text.trim().length > 0) {
+      setShowDropdown(true);
+      const results = await searchPlantsByCommonName(text);
+      setSuggestions(results);
+    } else {
       setShowDropdown(false);
-    };
-  
-    return (
-      <View style={styles.container}>
-        <Input
-          label="Search for a plant species"
-          value={input}
-          onChangeText={handleSearch}
-          iconName="magnify"
-          iconSize={20}
-          placeholder="Enter plant name"
-        />
-        {showDropdown && suggestions.length > 0 && (
-          <FlatList
-            data={suggestions}
-            renderItem={({ item }) => (
-              <TouchableOpacity
-                onPress={() => handleSelectPlant(item)}
-                style={styles.suggestionContainer}
-              >
-                <Text style={styles.suggestionText}>{item.name.commonName}</Text>
-                {item.name.scientificName && (
-                  <Text style={styles.scientificNameText}>
-                    {item.name.scientificName}
-                  </Text>
-                )}
-              </TouchableOpacity>
-            )}
-            style={styles.suggestionList}
-          />
-        )}
-        {showDropdown && suggestions.length === 0 && input.trim().length > 0 && (
-          <Text style={styles.noResultsText}>No plants found.</Text>
-        )}
-      </View>
-    );
+      setSuggestions([]);
+    }
   };
-  
-  export default PlantSearch;
+
+  const handleSelectPlant = (plant: CatalogPlant) => {
+    onSelectPlant(plant);
+    setInput(plant.name.commonName);
+    setShowDropdown(false);
+  };
+
+  return (
+    <View style={styles.container}>
+      <Input
+        label="Search for a plant species"
+        value={input}
+        onChangeText={handleSearch}
+        iconName="magnify"
+        iconSize={20}
+        placeholder="Enter plant name"
+      />
+      {showDropdown && suggestions.length > 0 && (
+        <FlatList
+          data={suggestions}
+          renderItem={({ item }) => (
+            <TouchableOpacity
+              onPress={() => handleSelectPlant(item)}
+              style={styles.suggestionContainer}
+            >
+              <Text style={styles.suggestionText}>{item.name.commonName}</Text>
+              {item.name.scientificName && (
+                <Text style={styles.scientificNameText}>
+                  {item.name.scientificName}
+                </Text>
+              )}
+            </TouchableOpacity>
+          )}
+          style={styles.suggestionList}
+        />
+      )}
+      {showDropdown && suggestions.length === 0 && input.trim().length > 0 && (
+        <Text style={styles.noResultsText}>No plants found.</Text>
+      )}
+    </View>
+  );
+};
+
+export default PlantSearch;
 
 const styles = StyleSheet.create({
   container: {

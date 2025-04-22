@@ -1,4 +1,10 @@
-import { Text, View, StyleSheet, ActivityIndicator, ImageBackground } from "react-native";
+import {
+  Text,
+  View,
+  StyleSheet,
+  ActivityIndicator,
+  ImageBackground,
+} from "react-native";
 import React, { useEffect, useState } from "react";
 import { Stack, useLocalSearchParams, useRouter } from "expo-router";
 import { useGardensAndPlants } from "@/context/GardensAndPlantsContext";
@@ -26,8 +32,10 @@ const GardenDetailPage = () => {
     { label: "Edit", onPress: () => setEditing(true) },
     {
       label: "Delete",
-      onPress: () =>
-        garden && handleDeleteEntity({ id: garden.id, name: garden.name }),
+      onPress: () => {
+        console.log("Button Pressed, garden: ", garden);
+        garden && handleDeleteEntity({ id: garden.id, name: garden.name });
+      },
     },
   ];
 
@@ -41,7 +49,7 @@ const GardenDetailPage = () => {
   };
 
   const handleSave = () => {
-    updateUserGarden(gardenId.toString(), editValues);
+    updateUserGarden(parseInt(gardenId.toString(), 10), editValues);
     setEditing(false);
     router.replace(`/profile/gardens/${gardenId}`);
   };

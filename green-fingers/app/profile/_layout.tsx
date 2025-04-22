@@ -11,15 +11,13 @@ const ProfileLayout: React.FC = () => {
   const router = useRouter();
   const { user, isLoggedIn } = useAuth();
   const [menuOpen, setMenuOpen] = useState(false);
-  const { fetchPlants, fetchGardens, fetchAllPlants } = useGardensAndPlants();
+  const { fetchUserGardens, fetchCatalogPlants } = useGardensAndPlants();
 
   const toggleMenu = () => setMenuOpen(!menuOpen);
 
   useEffect(() => {
     if (isLoggedIn && user?.id) {
-      fetchPlants();
-      fetchGardens();
-      fetchAllPlants();
+      fetchUserGardens();
       console.log("Fetching plants and gardens");
     }
   }, [isLoggedIn, user?.id]);

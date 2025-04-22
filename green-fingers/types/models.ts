@@ -93,14 +93,12 @@ export interface Soil {
 }
 
 // Harvest period and details
-export type Harvest =
-  | false
-  | {
-      start: Month;
-      end: Month;
-      yield: number;
-      edibleParts: string;
-  };
+export interface Harvest {
+    start: Month;
+    end: Month;
+    yield: number;
+    edibleParts: string;
+};
 
 // Temperature details
 export interface Temperature {
@@ -125,7 +123,7 @@ export interface Plant {
   name: PlantName;
   blooming: Blooming;
   waterFrequency: WaterFrequency;
-  harvest: Harvest;
+  harvest?: Harvest;
   sunLight: SunLight;
   temperature: Temperature;
   size: Size;
@@ -136,15 +134,15 @@ export interface Plant {
 
 // Catalog Plant interface
 export interface CatalogPlant extends Plant {
-  id: string;
+  id: number;
 }
 
 // Add Plant interface
 export interface AddUserPlant extends Plant {
   nickName: string;
-  garden_id: string;
-  userId: string;
-  catalogPlant_id: string;
+  garden_id: number;
+  userId: number;
+  catalogPlant_id: number;
   wateredDate: string;
   plantedDate: string;
   feededDate: string;
@@ -155,18 +153,18 @@ export interface AddUserPlant extends Plant {
 
 //User's own plant interface
 export interface UserPlant extends AddUserPlant {
-  id: string;
+  id: number;
 }
 
 //Garden interface
 export interface Garden extends AddGarden {
-  id: string;  
+  id: number;  
 }
 
 export interface AddGarden {
   name: string;
   location: string;
-  userId: string;
+  userId: number;
 }
 
 //expected Level interface
@@ -178,4 +176,10 @@ export interface MoistureSensor {
 
 export interface SunlightSensor {
   //tba
+}
+
+export interface ErrorData {
+  title: string;
+  message: string;
+  stackTrace: string;
 }
