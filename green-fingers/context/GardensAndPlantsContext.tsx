@@ -29,6 +29,7 @@ import {
 } from "@/api/gardenService";
 import { User } from "@/types/authtypes";
 import { G } from "react-native-svg";
+import { setWateringAppointments } from "@/utils/calendar";
 
 interface PlantContextProps {
   plants: UserPlant[];
@@ -79,6 +80,13 @@ export const PlantsProvider: React.FC<{ children: ReactNode }> = ({
     try {
       const plantsData = await apiGetUserPlants();
       setPlants(plantsData);
+      const wateringData = plantsData.map((plant) => ({
+        nickName: plant.nickName,
+        waterFrequency: plant.waterFrequency,
+        id: plant.id,
+      }));
+      console.log("Watering data: ", wateringData);
+      await setWateringAppointments(wateringData);
     } catch (error) {
       console.error("Error fetching user plants: ", error);
     }

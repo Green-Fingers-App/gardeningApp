@@ -1,28 +1,30 @@
-import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  Dimensions,
+  ImageBackground,
+} from "react-native";
 import React, { useState, useEffect } from "react";
-import colors from "@/constants/colors";
+import DayCard from "@/components/calendar/DayCard";
+import Button from "@/components/Button";
+import SelectedDay from "@/components/calendar/SelectedDay";
+import { useCalendar } from "@/context/CalendarContext";
 
-type WeekDay = {
+export type WeekDay = {
   date: number;
   day: string;
 };
 
 const Index: React.FC = () => {
-  const days: string[] = [
-    "Monday",
-    "Tuesday",
-    "Wednesday",
-    "Thursday",
-    "Friday",
-    "Saturday",
-    "Sunday",
-  ];
   const dt: Date = new Date();
   const year: number = dt.getFullYear();
   const month: string = dt.toLocaleDateString("en-us", { month: "long" });
 
   const [nav, setNav] = useState<number>(0);
   const [currentWeek, setCurrentWeek] = useState<WeekDay[]>([]);
+  const [selectedDay, setSelectedDay] = useState<WeekDay | null>(null);
+  const { days } = useCalendar();
 
   useEffect(() => {
     const today: Date = new Date();
@@ -38,28 +40,55 @@ const Index: React.FC = () => {
     setCurrentWeek(week);
   }, [nav]);
 
+  const isCurrentDay = (day: WeekDay): boolean => {
+    const today: Date = new Date();
+    if (
+      day.date === today.getDate() &&
+      day.day === days[today.getDay() - 1 < 0 ? 6 : today.getDay() - 1]
+    ) {
+      return true;
+    }
+    return false;
+  };
+
+  const selectDay = (day: WeekDay) => {
+    setSelectedDay(day);
+  };
+
   return (
-    <View style={styles.container}>
-      <View style={styles.monthContainer}>
-        <Text style={styles.monthText}>{`${month} ${year}`}</Text>
+    <ImageBackground
+      source={require("../../../assets/images/background.png")}
+      style={{ flex: 1 }}
+    >
+      <View style={styles.container}>
+        <View style={styles.monthContainer}>
+          <Text style={styles.monthText}>{`${month} ${year}`}</Text>
+        </View>
+        <View style={styles.daysHeaderContainer}>
+          {currentWeek.map((day, index) => (
+            <DayCard
+              key={index}
+              day={day}
+              currentDay={isCurrentDay(day)}
+              onClick={() => selectDay(day)}
+            />
+          ))}
+        </View>
+        <View style={styles.buttonContainer}>
+          <Button
+            onPress={() => setNav(nav - 1)}
+            text="Previous"
+            style={{ width: "30%" }}
+          />
+          <Button
+            onPress={() => setNav(nav + 1)}
+            text="next"
+            style={{ width: "30%" }}
+          />
+        </View>
+        <View>{selectedDay && <SelectedDay day={selectedDay} />}</View>
       </View>
-      <View style={styles.daysHeaderContainer}>
-        {currentWeek.map((day, index) => (
-          <View key={index} style={styles.dayContainer}>
-            <Text style={styles.dayText}>{day.day.substring(0, 3)}</Text>
-            <Text style={styles.dateText}>{day.date}</Text>
-          </View>
-        ))}
-      </View>
-      <View style={styles.buttonContainer}>
-        <TouchableOpacity onPress={() => setNav(nav - 1)} style={styles.button}>
-          <Text style={styles.buttonText}>Previous</Text>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={() => setNav(nav + 1)} style={styles.button}>
-          <Text style={styles.buttonText}>Next</Text>
-        </TouchableOpacity>
-      </View>
-    </View>
+    </ImageBackground>
   );
 };
 
@@ -68,7 +97,8 @@ export default Index;
 const styles = StyleSheet.create({
   container: {
     alignItems: "center",
-    padding: 20,
+    padding: 10,
+    width: Dimensions.get("window").width,
   },
   monthContainer: {
     alignItems: "center",
@@ -83,23 +113,13 @@ const styles = StyleSheet.create({
     justifyContent: "space-evenly",
     width: "100%",
   },
-  dayContainer: {
-    borderColor: colors.detail,
-    borderWidth: 1,
-    padding: 2,
-    alignItems: "center",
-    marginHorizontal: 5,
-  },
-  dayText: {
-    fontSize: 16,
-    fontWeight: "bold",
-  },
   dateText: {
     fontSize: 14,
   },
   buttonContainer: {
     flexDirection: "row",
     marginTop: 20,
+    gap: 4,
   },
   button: {
     padding: 10,

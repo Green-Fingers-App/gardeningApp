@@ -5,6 +5,7 @@ import { Stack } from "expo-router";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import * as Font from "expo-font";
 import LoadingScreen from "@/components/LoadingScreen";
+import { CalendarProvider } from "@/context/CalendarContext";
 
 const loadFonts = () =>
   Font.loadAsync({
@@ -31,7 +32,9 @@ const RootLayout = () => {
     <GestureHandlerRootView style={{ flex: 1 }}>
       <AuthProvider>
         <PlantsProvider>
-          <Stack screenOptions={{ headerShown: false }} />
+          <CalendarProvider>
+            <Stack screenOptions={{ headerShown: false }} />
+          </CalendarProvider>
         </PlantsProvider>
       </AuthProvider>
     </GestureHandlerRootView>
