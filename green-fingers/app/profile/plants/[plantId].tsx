@@ -21,13 +21,16 @@ import EntityEditModal from "@/components/EntityEditModal";
 
 const PlantDetailPage = () => {
   const { plantId } = useLocalSearchParams();
-  const { fetchPlantDetail, gardens, updatePlant } = useGardensAndPlants();
+  const { fetchPlantDetail, gardens, updateUserPlant } = useGardensAndPlants();
   const [plant, setPlant] = useState<UserPlant | null>(null);
   const { deleting, handleDeleteEntity } = useDeleteEntity("Plant");
   const [editing, setEditing] = useState(false);
-  const [editValues, setEditValues] = useState({
-    nickName: "",
-    gardenId: "",
+  const [editValues, setEditValues] = useState<{
+    nickname: string;
+    garden_id: string;
+  }>({
+    nickname: "",
+    garden_id: "",
   });
   const router = useRouter();
 
@@ -41,7 +44,7 @@ const PlantDetailPage = () => {
   ];
 
   const gardenOptions = gardens.map((garden) => ({
-    value: garden.id,
+    value: garden.id.toString(),
     label: garden.name,
   }));
 
@@ -51,11 +54,18 @@ const PlantDetailPage = () => {
 
   const handleCancelEdit = () => {
     setEditing(false);
-    setEditValues({ nickName: "", gardenId: "" });
+    setEditValues({ nickname: "", garden_id: "" });
   };
 
-  const handleSave = () => {
-    updatePlant(plantId.toString(), editValues);
+  const handleSave = async () => {
+    const updatedPlant = await updateUserPlant(Number(plantId), {
+      ...editValues,
+      garden_id: Number(editValues.garden_id),
+    });
+    if (updatedPlant) {
+      setPlant(updatedPlant);
+    }
+    setEditValues({ nickname: "", garden_id: "" });
     setEditing(false);
     router.push(`/profile/plants/${plantId}`);
   };
@@ -137,9 +147,9 @@ const PlantDetailPage = () => {
         visible={editing}
         entityName="Plant"
         fields={[
-          { key: "nickName", label: "Nickname", type: "text" },
+          { key: "nickname", label: "Nickname", type: "text" },
           {
-            key: "gardenId",
+            key: "garden_id",
             label: "Garden",
             type: "dropdown",
             placeholder: "Select a garden...",

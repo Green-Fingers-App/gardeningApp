@@ -1,5 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { View, StyleSheet, ActivityIndicator, ImageBackground } from "react-native";
+import {
+  View,
+  StyleSheet,
+  ActivityIndicator,
+  ImageBackground,
+} from "react-native";
 import { useRouter } from "expo-router";
 import { useAuth } from "@/context/AuthContext";
 import { useGardensAndPlants } from "@/context/GardensAndPlantsContext";
@@ -8,7 +13,6 @@ const Index = () => {
   const [loading, setLoading] = useState(true);
   const router = useRouter();
   const { user } = useAuth();
-  const { fetchPlants } = useGardensAndPlants();
 
   useEffect(() => {
     const handleFetchAndNavigate = async () => {
@@ -35,12 +39,12 @@ const Index = () => {
   if (loading) {
     return (
       <ImageBackground
-      source={require("../assets/images/background.png")}
-      style={styles.backgroundImage}
-    >
-      <View style={styles.pageContainer}>
-        <ActivityIndicator size="large" />
-      </View>
+        source={require("../assets/images/background.png")}
+        style={styles.backgroundImage}
+      >
+        <View style={styles.pageContainer}>
+          <ActivityIndicator size="large" />
+        </View>
       </ImageBackground>
     );
   }

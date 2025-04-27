@@ -52,8 +52,11 @@ const EntityEditModal: React.FC<EntityEditModalProps> = ({
                 key={field.key}
                 label={field.label}
                 placeholder={field.placeholder || ""}
-                options={field.options}
-                onSelect={(value) => onChange(field.key, value)}
+                options={field.options.map((option) => ({
+                  ...option,
+                  value: parseFloat(option.value),
+                }))}
+                onSelect={(value) => onChange(field.key, value.toString())}
               />
             );
           }

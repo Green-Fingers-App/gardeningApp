@@ -8,7 +8,7 @@ import colors from "@/constants/colors";
 import ExplorerSearch from "@/components/ExplorerSearch";
 
 const PlantExplorerPage = () => {
-  const { fetchAllPlants, databasePlants } = useGardensAndPlants();
+  const { fetchCatalogPlants, databasePlants } = useGardensAndPlants();
   const [plants, setPlants] = useState<CatalogPlant[]>([]);
   const [filteredPlants, setFilteredPlants] = useState<CatalogPlant[]>([]);
   const router = useRouter();
@@ -17,7 +17,7 @@ const PlantExplorerPage = () => {
     console.log("im fetching:", plants);
     const fetchPlantsData = async () => {
       try {
-        fetchAllPlants();
+        fetchCatalogPlants();
         setPlants(databasePlants);
       } catch (error) {
         console.error("Error fetching plant catalog:", error);
@@ -28,40 +28,40 @@ const PlantExplorerPage = () => {
 
   return (
     <>
-    <ImageBackground
-      source={require("../../../assets/images/background.png")}
-      style={styles.backgroundImage}
-    >
-      <Stack.Screen
-        options={{
-          title: "Plant Explorer",
-          headerStyle: { backgroundColor: colors.primaryDefault },
-        }}
-      />
-      <ExplorerSearch
-        plants={plants}
-        filteredPlants={filteredPlants}
-        setFilteredPlants={setFilteredPlants}
-      />
-      <ScrollView>
-        <View style={styles.pageContainer}>
-          {filteredPlants.length === 0
-            ? plants.map((plant, index) => (
-                <PlantCard
-                  key={index}
-                  plant={plant}
-                  onPress={() => router.push(`/profile/home/${plant.id}`)}
-                />
-              ))
-            : filteredPlants.map((plant, index) => (
-                <PlantCard
-                  key={index}
-                  plant={plant}
-                  onPress={() => router.push(`/profile/home/${plant.id}`)}
-                />
-              ))}
-        </View>
-      </ScrollView>
+      <ImageBackground
+        source={require("../../../assets/images/background.png")}
+        style={styles.backgroundImage}
+      >
+        <Stack.Screen
+          options={{
+            title: "Plant Explorer",
+            headerStyle: { backgroundColor: colors.primaryDefault },
+          }}
+        />
+        <ExplorerSearch
+          plants={plants}
+          filteredPlants={filteredPlants}
+          setFilteredPlants={setFilteredPlants}
+        />
+        <ScrollView>
+          <View style={styles.pageContainer}>
+            {filteredPlants.length === 0
+              ? plants.map((plant, index) => (
+                  <PlantCard
+                    key={index}
+                    plant={plant}
+                    onPress={() => router.push(`/profile/home/${plant.id}`)}
+                  />
+                ))
+              : filteredPlants.map((plant, index) => (
+                  <PlantCard
+                    key={index}
+                    plant={plant}
+                    onPress={() => router.push(`/profile/home/${plant.id}`)}
+                  />
+                ))}
+          </View>
+        </ScrollView>
       </ImageBackground>
     </>
   );

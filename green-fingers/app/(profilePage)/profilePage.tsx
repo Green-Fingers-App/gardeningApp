@@ -9,8 +9,6 @@ import Button from "@/components/Button";
 import Input from "@/components/Input";
 
 import useForm from "@/hooks/useForm";
-import { db } from "@/firebase/firebaseConfig";
-import { doc, getDoc, setDoc, updateDoc } from "firebase/firestore";
 
 const Profile: React.FC = () => {
   const { user, updateUser } = useAuth();
@@ -34,33 +32,6 @@ const Profile: React.FC = () => {
     if (!user?.id) return;
 
     try {
-      setLoading(true);
-      setError(null);
-
-      const userDocRef = doc(db, "users", `${user.id}`);
-      const userDoc = await getDoc(userDocRef);
-
-      if (userDoc.exists()) {
-        // If the document exists, set form values
-        const userData = userDoc.data();
-        setValues({
-          username: userData?.username || "",
-          email: userData?.email || "",
-        });
-      } else {
-        // If the document does not exist, create it with default values
-        const initialData = {
-          username: user.username || "New User",
-          email: user.email || "",
-          profile_picture: "",
-          created_at: new Date().toISOString(),
-        };
-        await setDoc(userDocRef, initialData);
-        setValues({
-          username: initialData.username,
-          email: initialData.email,
-        });
-      }
     } catch (error) {
       console.error("Error fetching or creating user profile:", error);
       setError("Failed to load user profile. Please try again.");
@@ -78,13 +49,6 @@ const Profile: React.FC = () => {
     if (!user?.id) return;
 
     try {
-      const userDocRef = doc(db, "users", `${user.id}`);
-      await updateDoc(userDocRef, {
-        username: values.username,
-        email: values.email,
-      });
-      updateUser(values); // Update user in Auth context
-      setEditMode(false);
     } catch (error) {
       console.error("Error updating user profile:", error);
       setError("Failed to save changes. Please try again.");
@@ -102,7 +66,7 @@ const Profile: React.FC = () => {
   return (
     <View style={styles.container}>
       {error && <Text style={styles.errorText}>{error}</Text>}
-      <Text style={textStyles.h1}>Hello, {values.username}</Text>
+      <Text style={textStyles.h1}>Hello, {user?.username}</Text>
       {editMode ? (
         <View style={styles.editForm}>
           <Input
@@ -134,7 +98,11 @@ const Profile: React.FC = () => {
           <Text style={textStyles.body}>{values.username}</Text>
           <Text style={textStyles.label}>Email:</Text>
           <Text style={textStyles.body}>{values.email}</Text>
-          <Button type="secondary" text="Edit Profile" onPress={enableEditMode} />
+          <Button
+            type="secondary"
+            text="Edit Profile"
+            onPress={enableEditMode}
+          />
         </View>
       )}
     </View>

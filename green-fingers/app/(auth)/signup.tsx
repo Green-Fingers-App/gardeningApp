@@ -6,6 +6,7 @@ import Input from "@/components/Input";
 import Button from "@/components/Button";
 import colors from "@/constants/colors";
 import textStyles from "@/constants/textStyles";
+import { SignUpData } from "@/api/auth";
 
 const Signup = () => {
   const { signup, authError } = useAuth();
@@ -41,7 +42,7 @@ const Signup = () => {
     }
 
     setError(null);
-    await signup(email, password, username);
+    await signup({ email, password, username } as SignUpData);
   };
 
   return (

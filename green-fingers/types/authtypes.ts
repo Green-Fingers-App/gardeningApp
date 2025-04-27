@@ -1,3 +1,5 @@
+import { LoginData, SignUpData, UserData } from "@/api/auth";
+
 export interface User {
   id: string;
   email: string;
@@ -6,10 +8,10 @@ export interface User {
 }
 
 export interface AuthContextProps {
-  user: User | null;
+  user: UserData | null;
   isLoggedIn: boolean;
-  login: (email: string, password: string) => Promise<void>;
-  signup: (email: string, password: string, username: string) => Promise<void>;
+  login: (loginData: LoginData) => Promise<void>;
+  signup: (signUpData: SignUpData) => Promise<void>;
   logout: () => void;
   updateUser: (newUserData: Partial<User>) => void;
   authError: string | null;
