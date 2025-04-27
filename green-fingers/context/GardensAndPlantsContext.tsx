@@ -16,15 +16,19 @@ import { useAuth } from "@/context/AuthContext";
 import {
   apiCreateUserPlant,
   apiGetCatalogPlants,
-  updateUserPlant,
+  apiUpdateUserPlant,
   apiDeleteUserPlant,
   apiGetUserPlants,
+  apiSearchCatalogPlantsByCommonName,
 } from "@/api/plantService";
 import {
   apiAddGarden,
   apiDeleteGarden,
   apiGetUserGardens,
+  apiUpdateGarden,
 } from "@/api/gardenService";
+import { User } from "@/types/authtypes";
+import { G } from "react-native-svg";
 
 interface PlantContextProps {
   plants: UserPlant[];
@@ -34,14 +38,20 @@ interface PlantContextProps {
   fetchCatalogPlants: () => void;
   searchPlantsByCommonName: (input: string) => Promise<CatalogPlant[]>;
   createUserPlant: (plantData: AddUserPlant) => void;
-  updatePlant: (plantId: string, plantData: Partial<AddUserPlant>) => void;
-  deleteUserPlant: (plantId: string) => void;
+  updateUserPlant: (
+    plantId: number,
+    plantData: Partial<AddUserPlant>
+  ) => Promise<UserPlant | undefined>;
+  deleteUserPlant: (plantId: number) => Promise<void>;
   fetchUserGardens: () => void;
   fetchPlantDetail: (plantId: string) => UserPlant | undefined;
   fetchGardenDetail: (gardenId: string) => Garden | undefined;
   fetchGardenPlants: (gardenId: string) => UserPlant[] | undefined;
   createGarden: (gardenData: AddGarden) => void;
-  updateUserGarden: (gardenId: number, gardenData: Partial<AddGarden>) => void;
+  updateUserGarden: (
+    gardenId: number,
+    gardenData: Partial<AddGarden>
+  ) => Promise<Garden | undefined>;
   deleteUserGarden: (gardenId: number) => void;
 }
 
@@ -74,7 +84,29 @@ export const PlantsProvider: React.FC<{ children: ReactNode }> = ({
     }
   };
 
-  const searchPlantsByCommonName = async (input: string) => {};
+  const searchPlantsByCommonName = async (
+    input: string
+  ): Promise<CatalogPlant[]> => {
+    if (input.trim().length === 0) {
+      return [];
+    }
+
+    const localFilteredPlants = databasePlants.filter((plant) =>
+      plant.name.commonName.toLowerCase().includes(input.toLowerCase())
+    );
+
+    if (localFilteredPlants.length > 0) {
+      return localFilteredPlants;
+    }
+
+    try {
+      const response = await apiSearchCatalogPlantsByCommonName(input);
+      return response ? response : [];
+    } catch (error) {
+      console.error("Error searching plants: ", error);
+      return [];
+    }
+  };
 
   const fetchCatalogPlants = async () => {
     try {
@@ -116,19 +148,27 @@ export const PlantsProvider: React.FC<{ children: ReactNode }> = ({
   };
 
   // Update plant
-  const updatePlant = async (
+  const updateUserPlant = async (
     plantId: number,
-    plantData: Partial<AddUserPlant>
-  ) => {
+    plantData: Partial<{ nickname: string; garden_id: number }>
+  ): Promise<UserPlant | undefined> => {
     try {
-      await updateUserPlant(plantId, plantData);
-      setPlants((prevPlants) =>
-        prevPlants.map((plant) =>
-          plant.id === plantId ? { ...plant, ...plantData } : plant
-        )
-      );
+      await apiUpdateUserPlant(plantId, plantData);
+      const updatedPlants = plants.map((plant) => {
+        if (plant.id === plantId) {
+          return {
+            ...plant,
+            nickName: plantData.nickname || plant.nickName,
+            garden_id: plantData.garden_id || plant.garden_id,
+          };
+        }
+        return plant;
+      });
+      setPlants(updatedPlants);
+      return updatedPlants.find((plant) => plant.id === plantId);
     } catch (error) {
       console.error("Error updating plant:", error);
+      return undefined;
     }
   };
 
@@ -136,9 +176,15 @@ export const PlantsProvider: React.FC<{ children: ReactNode }> = ({
   const deleteUserPlant = async (plantId: number) => {
     try {
       await apiDeleteUserPlant(plantId);
-      setPlants((prevPlants) =>
-        prevPlants.filter((plant) => plant.id !== plantId)
-      );
+      const updatedPlants = plants.filter((plant) => plant.id !== plantId);
+      setPlants(updatedPlants);
+      const updatedGardens = gardens.map((garden) => {
+        const gardenPlants = updatedPlants.filter(
+          (plant) => plant.garden_id === garden.id
+        );
+        return { ...garden, plants: gardenPlants };
+      });
+      setGardens(updatedGardens);
     } catch (error) {
       console.error("Error deleting plant:", error);
     }
@@ -160,16 +206,18 @@ export const PlantsProvider: React.FC<{ children: ReactNode }> = ({
   const updateUserGarden = async (
     gardenId: number,
     gardenData: Partial<AddGarden>
-  ) => {
+  ): Promise<Garden | undefined> => {
     try {
-      await updateGarden(gardenId, gardenData);
+      await apiUpdateGarden(gardenId, gardenData);
       setGardens((prevGardens) =>
         prevGardens.map((garden) =>
           garden.id === gardenId ? { ...garden, ...gardenData } : garden
         )
       );
+      return gardens.find((garden) => garden.id === gardenId);
     } catch (error) {
       console.error("Error updating garden:", error);
+      return undefined;
     }
   };
 
@@ -204,7 +252,7 @@ export const PlantsProvider: React.FC<{ children: ReactNode }> = ({
         fetchCatalogPlants,
         searchPlantsByCommonName,
         createUserPlant,
-        updatePlant,
+        updateUserPlant,
         deleteUserPlant,
         gardens,
         fetchUserGardens,

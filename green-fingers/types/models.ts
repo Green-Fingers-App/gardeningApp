@@ -94,11 +94,11 @@ export interface Soil {
 
 // Harvest period and details
 export interface Harvest {
-    start: Month;
-    end: Month;
-    yield: number;
-    edibleParts: string;
-};
+  start: Month;
+  end: Month;
+  yield: number;
+  edibleParts: string;
+}
 
 // Temperature details
 export interface Temperature {
@@ -158,7 +158,7 @@ export interface UserPlant extends AddUserPlant {
 
 //Garden interface
 export interface Garden extends AddGarden {
-  id: number;  
+  id: number;
 }
 
 export interface AddGarden {

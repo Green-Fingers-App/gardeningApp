@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import {
   View,
   FlatList,
@@ -22,17 +22,25 @@ const PlantSearch: React.FC<PlantSearchProps> = ({ onSelectPlant }) => {
   const [suggestions, setSuggestions] = useState<CatalogPlant[]>([]);
   const [showDropdown, setShowDropdown] = useState<boolean>(false);
 
-  const handleSearch = async (text: string) => {
+  const searchTimeoutId = useRef<ReturnType<typeof setTimeout>>();
+
+  const handleSearch = (text: string) => {
     setInput(text);
 
-    if (text.trim().length > 0) {
-      setShowDropdown(true);
-      const results = await searchPlantsByCommonName(text);
-      setSuggestions(results);
-    } else {
-      setShowDropdown(false);
-      setSuggestions([]);
+    if (searchTimeoutId) {
+      clearTimeout(searchTimeoutId.current);
     }
+
+    searchTimeoutId.current = setTimeout(async () => {
+      if (text.trim().length > 0) {
+        setShowDropdown(true);
+        const results = await searchPlantsByCommonName(text);
+        setSuggestions(results);
+      } else {
+        setShowDropdown(false);
+        setSuggestions([]);
+      }
+    }, 500);
   };
 
   const handleSelectPlant = (plant: CatalogPlant) => {

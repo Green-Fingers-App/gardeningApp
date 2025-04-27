@@ -48,8 +48,13 @@ const GardenDetailPage = () => {
     setEditValues({ name: "" });
   };
 
-  const handleSave = () => {
-    updateUserGarden(parseInt(gardenId.toString(), 10), editValues);
+  const handleSave = async () => {
+    const updatedGarden = await updateUserGarden(
+      parseInt(gardenId.toString(), 10),
+      editValues
+    );
+    setGarden(updatedGarden);
+    setEditValues({ name: "" });
     setEditing(false);
     router.replace(`/profile/gardens/${gardenId}`);
   };
