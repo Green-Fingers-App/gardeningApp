@@ -4,7 +4,7 @@ import { useGardensAndPlants } from "@/context/GardensAndPlantsContext";
 import { useRouter } from "expo-router";
 
 type DeleteEntityHook = {
-  handleDeleteEntity: (entity: { id: string; name: string }) => void;
+  handleDeleteEntity: (entity: { id: number; name: string }) => void;
   deleting: boolean;
 };
 
@@ -18,7 +18,8 @@ export const useDeleteEntity = (entityType: "Plant" | "Garden" ): DeleteEntityHo
     Garden: deleteUserGarden,
   };
 
-  const handleDeleteEntity = (entity: { id: string; name: string }) => {
+  const handleDeleteEntity = (entity: { id: number; name: string }) => {
+    console.log("About to delete: ", entity)
     Alert.alert(
       `Delete ${entityType}`,
       `Do you want to delete the ${entityType.toLowerCase()}: ${entity.name}, and everything it contains?`,

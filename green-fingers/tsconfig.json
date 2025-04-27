@@ -11,7 +11,7 @@
   "include": [
     "**/*.ts",
     "**/*.tsx",
-    "firebase/firebaseConfig.ts",
+    "api/firebaseConfig.ts",
     "assets/fonts/*.ttf",
     ".expo/types/**/*.ts",
     "expo-env.d.ts"
