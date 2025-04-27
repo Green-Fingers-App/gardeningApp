@@ -91,7 +91,17 @@ const ProfileLayout: React.FC = () => {
             ),
           }}
         />
+        <Tabs.Screen
+          name="calendar"
+          options={{
+            title: "Calendar",
+            tabBarIcon: ({ color, size }) => (
+              <MaterialIcons name="calendar-month" color={color} size={size} />
+            ),
+          }}
+        />
       </Tabs>
+
       {isLoggedIn && (
         <View style={styles.addButtonContainer}>
           <TouchableOpacity style={styles.addButton} onPress={toggleMenu}>
@@ -124,7 +134,10 @@ const styles = StyleSheet.create({
     position: "absolute",
     bottom: 20,
     left: "50%",
-    transform: [{ translateX: -30 }],
+    transform: [{ translateX: -40 }, { translateY: -25 }],
+    backgroundColor: colors.primaryDefault,
+    padding: 10,
+    borderRadius: 100,
   },
   addButton: {
     height: 60,
