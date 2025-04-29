@@ -15,6 +15,7 @@
 - [5. Logical View](#5-logical-view)
     - [5.1 High-Level Overview](#51-high-level-overview)
     - [5.2 Class Diagram](#52-class-diagram)
+    - [5.3 Refactoring with Design Patterns](#53-refactoring-with-design-patterns)
 - [6. Process View](#6-process-view)
 - [7. Deployment View](#7-deployment-view)
 - [8. Implementation View](#8-implementation-view)
@@ -106,6 +107,74 @@ The following diagrams are manual created, thats why they are **not up to date**
 The following class diagram provides a high-level overview of the classes and their relationships in the "Green Fingers" application. The diagram includes the main classes such as User, CatalogPlant, Garden, and UserPlant.
 
 ![Class Diagram](../../docs/assets/svg/architecturalDiagrams/classDiagram.drawio.svg)
+
+### 5.3 Refactoring with Design Patterns
+
+We refactored parts of our frontend by introducing the Mediator Pattern through a centralized ToastContext.
+
+Previously, error and success messages were handled manually inside the `AuthContext` and components like `login.tsx`, leading to tight coupling and inconsistent feedback. After refactoring, we now manage all user feedback uniformly through the ToastContext, improving modularity and maintainability.
+
+### 5.3.1 Refactoring Summary
+
+| Before | After (Mediator Pattern) |
+|:------|:--------------------------|
+| Feedback handled manually inside components | Centralized ToastContext handles feedback |
+| Tight coupling between authentication logic and UI | Loose coupling through Mediator |
+| No consistent user feedback | Consistent and reusable toast system |
+
+### 5.3.2 Implementation Details
+
+- Created `ToastContext.tsx` for centralized feedback management.
+- Created `toastConfig.tsx` for standardized toast styles.
+- Updated `AuthContext.tsx` to only handle authentication logic.
+- Updated `login.tsx` to use `showToast()` from ToastContext.
+
+### 5.3.3 Diagrams
+
+**Before Refactoring**
+
+```mermaid
+classDiagram
+    class LoginForm {
+        +validateAndLogin()
+        +handleInputErrors()
+    }
+
+    class AuthContext {
+        +login()
+        +signup()
+        +logout()
+        +updateUser()
+        -- Error handling included
+    }
+
+    LoginForm --> AuthContext : calls login()
+```
+
+**After Refactoring**
+
+```mermaid
+classDiagram
+    class LoginForm {
+        +validateAndLogin()
+        +handleInputErrors()
+        +useToast()
+    }
+
+    class AuthContext {
+        +login()
+        +signup()
+        +logout()
+        +updateUser()
+    }
+
+    class ToastContext {
+        +showToast(type, message, title)
+    }
+
+    LoginForm --> AuthContext : calls login()
+    LoginForm --> ToastContext : calls showToast()
+```
 
 ## 6. Process View
 n/a
