@@ -23,7 +23,7 @@ export const useAuth = () => {
 export const AuthProvider: React.FC<{ children: ReactNode }> = ({
   children,
 }) => {
-  const [user, setUser] = useState<UserData | null>(null);
+  const [user, setUser] = useState<UserData | undefined>(undefined);
   const [authError, setAuthError] = useState<string | null>(null);
 
   const router = useRouter();
@@ -93,7 +93,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
     try {
       await SecureStore.deleteItemAsync("accessToken");
       await SecureStore.deleteItemAsync("refreshToken");
-      setUser(null);
+      setUser(undefined);
       setAuthError(null);
       router.replace("/login");
     } catch (error) {
@@ -103,7 +103,18 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
 
   // Update user in state
   const updateUser = (newUserData: Partial<User>) => {
-    setUser((prevUser) => (prevUser ? { ...prevUser, ...newUserData } : null));
+    setUser((prevUser) =>
+      prevUser
+        ? {
+            ...prevUser,
+            ...newUserData,
+            id:
+              newUserData.id !== undefined
+                ? Number(newUserData.id)
+                : prevUser.id,
+          }
+        : undefined
+    );
   };
 
   return (

@@ -16,9 +16,9 @@ interface AddPlantOptionProps {
 }
 
 const AddPlantOption: React.FC<AddPlantOptionProps> = ({
-  plantChosen,
-  togglePlantMenu,
   setPlantChosen,
+  togglePlantMenu,
+  plantChosen,
 }) => {
   const { gardens, createUserPlant } = useGardensAndPlants();
 
@@ -56,8 +56,8 @@ const AddPlantOption: React.FC<AddPlantOptionProps> = ({
       size: selectedPlant.size,
       fertilizerType: selectedPlant.fertilizerType,
       planting: selectedPlant.planting,
-      wateredDate: "",
-      plantedDate: "",
+      wateredDate: new Date().toISOString().split("T")[0],
+      plantedDate: new Date().toISOString().split("T")[0],
       feededDate: "",
       moistureLevel: "Optimal",
       sunlightLevel: "Optimal",

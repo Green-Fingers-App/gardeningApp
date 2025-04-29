@@ -165,3 +165,30 @@ export const apiSearchCatalogPlantsByCommonName = async (
     console.error(err);
   }
 };
+
+export const apiBatchUpdateWateredDate = async (
+  plantIds: number[]
+): Promise<void> => {
+  const token = await SecureStore.getItemAsync("accessToken");
+  try {
+    const response = await fetch(`${base_api_ip}/plants/plants/batch`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({
+        plantIds,
+      }),
+    });
+
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(`Failed to update watered date: ${errorData}`);
+    }
+
+    const data = await response.json();
+  } catch (error) {
+    console.error("Error updating watered date:", error);
+  }
+};

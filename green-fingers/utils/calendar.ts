@@ -8,7 +8,7 @@ export const setWateringAppointments = async (
     return null;
   }
 
-  //if (await AsyncStorage.getItem("wateringAppointments")) return;
+  if (await AsyncStorage.getItem("wateringAppointments")) return;
 
   let appointments: { [key: string]: Partial<UserPlant>[] } = {
     DAILY: [],
@@ -32,7 +32,6 @@ export const setWateringAppointments = async (
     JSON.stringify(appointments)
   );
 
-  console.log("Watering appointments set:", appointments);
   return appointments;
 };
 
@@ -49,7 +48,10 @@ export const updateWateringAppointments = async (
   if (!appointments) return null;
 
   if (plantData.waterFrequency) {
-    appointments[plantData.waterFrequency].push(plantData.nickName);
+    appointments[plantData.waterFrequency].push({
+      nickName: plantData.nickName,
+      id: plantData.id,
+    });
   }
 
   await AsyncStorage.setItem(
@@ -57,4 +59,17 @@ export const updateWateringAppointments = async (
     JSON.stringify(appointments)
   );
   return appointments;
+};
+
+export const removeWateringAppointment = async (plantId: number) => {
+  const appointments = await getWateringAppointments();
+  if (!appointments) return null;
+  const updatedAppointments = appointments.filter(
+    (plant: Partial<UserPlant>) => plant.id !== plantId
+  );
+  await AsyncStorage.setItem(
+    "wateringAppointments",
+    JSON.stringify(updatedAppointments)
+  );
+  return updatedAppointments;
 };
