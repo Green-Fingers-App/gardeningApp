@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Design Pattern – Trying to Apply a Design Pattern to a Non-Object-Oriented Language"
+title: "Design Pattern"
 date: 2025-04-29
 author: "Sima, Casimir & Malte"
 ---
@@ -49,12 +49,12 @@ At this point, our Mediator — or rather, the **Frankenstein monster of a Media
 Our "Mediator" is a **Toast** — no, not the bread kind 🍞, but a small UI element that pops up and disappears after a short time.  
 A perfect fit for showing short messages!
 
-![Toast Structure](/gardeningApp/assets/screenshots/designPattern-before-error-handling-refactor05.png)
+![Toast Structure](/gardeningApp/assets/screenshots/designPattern-before-error-handling-refactored05.png)
 
 This screenshot shows the basic structure of our Toast system:  
 We have different types of Toasts that change their appearance depending on the message type — so there's something for every taste!
 
-![Toast Context Setup](/gardeningApp/assets/screenshots/designPattern-before-error-handling-refactor04.png)
+![Toast Context Setup](/gardeningApp/assets/screenshots/designPattern-before-error-handling-refactored04.png)
 
 Now if we put this in context — and I mean real context — we make the Toast system available to every component and page in our app without passing it through dozens of parent components.  
 Honestly, **nobody likes toast that's been through a dozen hands**. 🥴
@@ -67,7 +67,7 @@ Our last step was to actually use the new, fresh Toast wherever we need to show 
 
 Here's the updated `login.tsx`:
 
-![Login Toast Usage](/gardeningApp/assets/screenshots/designPattern-before-error-handling-refactor01.png)
+![Login Toast Usage](/gardeningApp/assets/screenshots/designPattern-before-error-handling-refactored01.png)
 
 As you can see, we now simply call `showToast` with the appropriate type and message.  
 The really tasty part about our **ToastContext** is that we can now use it **anytime** our user interacts with the backend —  
@@ -82,12 +82,12 @@ But we are very happy with our little **Mediator-Toast** solution!
 
 We now use only **one single component** to handle all feedback messages for any API response from the backend.
 
-We also updated our [Software Architecture Document (SAD)](https://github.com/DHBW-Malte/gardeningApp/blob/main/green-fingers/docs/SoftwareArchitectureDocument.md) and added a new chapter about this design pattern and the refactoring we did.
+We also updated our [Software Architecture Document (SAD)](https://github.com/DHBW-Malte/gardeningApp/blob/main/green-fingers/docs/SoftwareArchitectureDocument.md#53-refactoring-with-design-patterns) and added a new chapter about this design pattern and the refactoring we did.
 
 We also tried to create a “class diagram” before and after the refactoring to better visualize the restructuring.
 
 ### Before the Refactoring
-```mermaid
+<div class="mermaid">
 classDiagram
     class LoginForm {
         +validateAndLogin()
@@ -105,10 +105,10 @@ classDiagram
     }
 
     LoginForm --> AuthContext : calls login()
-```
+</div>
 
 ### After the Refactoring
-```mermaid
+<div class="mermaid">
 classDiagram
     class LoginForm {
         +validateAndLogin()
@@ -132,7 +132,9 @@ classDiagram
 
     LoginForm --> AuthContext : calls login()
     LoginForm --> ToastContext : calls showToast()
-```
+</div>
+
+For the after diagram, we can now add further classes such as createPlant, updatePlant, deleteGarden ... which all use the showToast() function and will communicate directly with the toast.
 
 ---
 
