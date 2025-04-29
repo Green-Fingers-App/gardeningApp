@@ -1,3 +1,5 @@
+import { WeekDay } from "@/app/profile/calendar";
+import { DayOfWeek } from "@/context/CalendarContext";
 import { UserPlant } from "@/types/models";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
@@ -80,4 +82,57 @@ export const removeWateringAppointment = async (
     JSON.stringify(updatedAppointments)
   );
   return updatedAppointments;
+};
+
+export const isFirstWeekOfMonth = (dateString: string) => {
+  const date = new Date(dateString);
+  return date.getDate() <= 7;
+};
+
+export const isThreeDaysLater = (wateringDay: string, currentDay: string) => {
+  const daysOfWeek = [
+    "Sunday",
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday",
+  ];
+  const wateringIndex = daysOfWeek.indexOf(wateringDay);
+  const currentIndex = daysOfWeek.indexOf(currentDay);
+  return currentIndex === (wateringIndex + 3) % 7;
+};
+
+export const plantsToBeWateredToday = (
+  wateringDay: DayOfWeek,
+  wateringAppointments: { [key: string]: Partial<UserPlant>[] },
+  currentDay: WeekDay
+): Partial<UserPlant>[] => {
+  let plantsToWater: Partial<UserPlant>[] = [];
+
+  // WEEKLY
+  if (wateringDay === currentDay.day) {
+    plantsToWater.push(...(wateringAppointments["WEEKLY"] || []));
+  }
+
+  // BIWEEKLY
+  if (
+    wateringDay === currentDay.day ||
+    isThreeDaysLater(wateringDay, currentDay.day)
+  ) {
+    plantsToWater.push(...(wateringAppointments["BIWEEKLY"] || []));
+  }
+
+  // DAILY (always show)
+  plantsToWater.push(...(wateringAppointments["DAILY"] || []));
+
+  // MONTHLY (only if first watering day of month)
+  if (
+    wateringDay === currentDay.day &&
+    isFirstWeekOfMonth(currentDay.date.toString())
+  ) {
+    plantsToWater.push(...(wateringAppointments["MONTHLY"] || []));
+  }
+  return plantsToWater;
 };

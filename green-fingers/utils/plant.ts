@@ -4,24 +4,25 @@ export const shouldBeWatered = (plant: UserPlant): boolean => {
   const currentDate = new Date();
   const lastWateredDate = new Date(plant.wateredDate);
   const waterFrequency = plant.waterFrequency;
+  console.log(waterFrequency);
 
   switch (waterFrequency) {
-    case "Daily":
+    case "DAILY":
       if (currentDate.getDate() - lastWateredDate.getDate() >= 1) {
         return true;
       }
       return false;
-    case "Weekly":
+    case "WEEKLY":
       if (currentDate.getDate() - lastWateredDate.getDate() >= 7) {
         return true;
       }
       return false;
-    case "Biweekly":
+    case "BIWEEKLY":
       if (currentDate.getDate() - lastWateredDate.getDate() >= 4) {
         return true;
       }
       return false;
-    case "Monthly":
+    case "MONTHLY":
       if (currentDate.getDate() - lastWateredDate.getDate() >= 30) {
         return true;
       }
