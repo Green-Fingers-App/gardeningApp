@@ -7,11 +7,7 @@ import { UserPlant } from "@/types/models";
 import { useCalendar } from "@/context/CalendarContext";
 import Button from "../Button";
 import { useGardensAndPlants } from "@/context/GardensAndPlantsContext";
-import {
-  isFirstWeekOfMonth,
-  isThreeDaysLater,
-  plantsToBeWateredToday,
-} from "@/utils/calendar";
+import { plantsToBeWateredToday } from "@/utils/calendar";
 
 interface SelectedDayProps {
   day: WeekDay;
