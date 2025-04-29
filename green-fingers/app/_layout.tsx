@@ -6,6 +6,7 @@ import { GestureHandlerRootView } from "react-native-gesture-handler";
 import * as Font from "expo-font";
 import LoadingScreen from "@/components/LoadingScreen";
 import { CalendarProvider } from "@/context/CalendarContext";
+import { ToastProvider } from "@/context/ToastContext";
 
 const loadFonts = () =>
   Font.loadAsync({
@@ -30,13 +31,15 @@ const RootLayout = () => {
 
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
-      <AuthProvider>
-        <PlantsProvider>
-          <CalendarProvider>
-            <Stack screenOptions={{ headerShown: false }} />
-          </CalendarProvider>
-        </PlantsProvider>
-      </AuthProvider>
+      <ToastProvider>
+        <AuthProvider>
+          <PlantsProvider>
+            <CalendarProvider>
+              <Stack screenOptions={{ headerShown: false }} />
+            </CalendarProvider>
+          </PlantsProvider>
+        </AuthProvider>
+      </ ToastProvider>
     </GestureHandlerRootView>
   );
 };
