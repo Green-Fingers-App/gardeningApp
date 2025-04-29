@@ -82,7 +82,7 @@ But we are very happy with our little **Mediator-Toast** solution!
 
 We now use only **one single component** to handle all feedback messages for any API response from the backend.
 
-We also updated our [Software Architecture Document (SAD)](https://github.com/DHBW-Malte/gardeningApp/blob/main/green-fingers/docs/SoftwareArchitectureDocument.md) and added a new chapter about this design pattern and the refactoring we did.
+We also updated our [Software Architecture Document (SAD)](https://github.com/DHBW-Malte/gardeningApp/blob/main/green-fingers/docs/SoftwareArchitectureDocument.md#53-refactoring-with-design-patterns) and added a new chapter about this design pattern and the refactoring we did.
 
 We also tried to create a “class diagram” before and after the refactoring to better visualize the restructuring.
 
