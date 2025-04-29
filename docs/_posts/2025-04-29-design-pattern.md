@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Design Pattern – Trying to Apply a Design Pattern to a Non-Object-Oriented Language"
+title: "Design Pattern"
 date: 2025-04-29
 author: "Sima, Casimir & Malte"
 ---
@@ -49,12 +49,12 @@ At this point, our Mediator — or rather, the **Frankenstein monster of a Media
 Our "Mediator" is a **Toast** — no, not the bread kind 🍞, but a small UI element that pops up and disappears after a short time.  
 A perfect fit for showing short messages!
 
-![Toast Structure](/gardeningApp/assets/screenshots/designPattern-before-error-handling-refactor05.png)
+![Toast Structure](/gardeningApp/assets/screenshots/designPattern-before-error-handling-refactored05.png)
 
 This screenshot shows the basic structure of our Toast system:  
 We have different types of Toasts that change their appearance depending on the message type — so there's something for every taste!
 
-![Toast Context Setup](/gardeningApp/assets/screenshots/designPattern-before-error-handling-refactor04.png)
+![Toast Context Setup](/gardeningApp/assets/screenshots/designPattern-before-error-handling-refactored04.png)
 
 Now if we put this in context — and I mean real context — we make the Toast system available to every component and page in our app without passing it through dozens of parent components.  
 Honestly, **nobody likes toast that's been through a dozen hands**. 🥴
