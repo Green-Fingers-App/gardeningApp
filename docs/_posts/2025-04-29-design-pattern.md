@@ -67,7 +67,7 @@ Our last step was to actually use the new, fresh Toast wherever we need to show 
 
 Here's the updated `login.tsx`:
 
-![Login Toast Usage](/gardeningApp/assets/screenshots/designPattern-before-error-handling-refactor01.png)
+![Login Toast Usage](/gardeningApp/assets/screenshots/designPattern-before-error-handling-refactored01.png)
 
 As you can see, we now simply call `showToast` with the appropriate type and message.  
 The really tasty part about our **ToastContext** is that we can now use it **anytime** our user interacts with the backend —  
