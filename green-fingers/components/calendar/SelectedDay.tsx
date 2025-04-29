@@ -1,17 +1,21 @@
-import { View, Text, StyleSheet, Dimensions, Button } from "react-native";
+import { View, Text, StyleSheet, Dimensions } from "react-native";
 import React, { useEffect, useState } from "react";
 import { WeekDay } from "@/app/profile/calendar";
 import colors from "@/constants/colors";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { UserPlant } from "@/types/models";
 import { useCalendar } from "@/context/CalendarContext";
+import Button from "../Button";
+import { useGardensAndPlants } from "@/context/GardensAndPlantsContext";
 
 interface SelectedDayProps {
   day: WeekDay;
 }
 
 const SelectedDay: React.FC<SelectedDayProps> = ({ day }) => {
+  const { batchUpdateWateredDate } = useGardensAndPlants();
   const { wateringDay } = useCalendar();
+  const { plants } = useGardensAndPlants();
   const [listOfPlantsToBeWatered, setListOfPlantsToBeWatered] = useState<
     Partial<UserPlant>[]
   >([]);
@@ -27,13 +31,26 @@ const SelectedDay: React.FC<SelectedDayProps> = ({ day }) => {
     return JSON.parse(appointments);
   };
 
+  const waterPlants = async () => {
+    console.log("waterPlants", listOfPlantsToBeWatered);
+    const plantIds = listOfPlantsToBeWatered
+      .map((plant) => plant.id)
+      .filter((id): id is number => id !== undefined);
+
+    console.log("plantIds", plantIds);
+
+    if (plantIds.length > 0) {
+      await batchUpdateWateredDate(plantIds);
+    }
+  };
+
   useEffect(() => {
     const fetchAppointments = async () => {
       const appointments = await getWateringAppointments();
       setWateringAppointments(appointments);
     };
     fetchAppointments();
-  }, []);
+  }, [plants]);
 
   useEffect(() => {
     if (!wateringAppointments) return;
@@ -93,6 +110,14 @@ const SelectedDay: React.FC<SelectedDayProps> = ({ day }) => {
       ) : (
         <Text>No plants need water today</Text>
       )}
+      {listOfPlantsToBeWatered.length > 0 ? (
+        <Button
+          text="I've watered the plants"
+          iconName="watering-can-outline"
+          style={{ width: "80%", alignSelf: "center", marginTop: 10 }}
+          onPress={waterPlants}
+        />
+      ) : null}
     </View>
   );
 };
