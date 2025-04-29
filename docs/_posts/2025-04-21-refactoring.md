@@ -12,7 +12,7 @@ Martin Fowler
 
 **Refactoring, improving the Design of Existing Code** first chapter walks us through a practical example, refactoring a tangled piece of code for calculating movie rental charges. Inspired by Fowler’s approach, we applied his techniques to refactor a small code for a movie store , and the results were eye-opening. Here’s a quick dive into the process and lessons learned.
 [Malte](https://github.com/DHBW-Malte/fwoler-refact)
-[Casimir]()
+[Casimir](https://github.com/CasimirG12/fowler-refactoring)
 [Sima](https://github.com/SimaGolrokh/Refactoring)
 As we worked through a small movie rental project, we noticed a lot of duplication and unclear logic. It "worked" — but making any changes felt risky and confusing. Inspired by Fowler’s approach, We decided to refactor the code before adding new features.
 
