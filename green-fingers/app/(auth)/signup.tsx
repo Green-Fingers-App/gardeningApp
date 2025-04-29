@@ -7,42 +7,66 @@ import Button from "@/components/Button";
 import colors from "@/constants/colors";
 import textStyles from "@/constants/textStyles";
 import { SignUpData } from "@/api/auth";
+import { useToast } from "@/context/ToastContext";
 
-const Signup = () => {
+interface InputValues {
+  username: string;
+  email: string;
+  password: string;
+  confirmPassword: string;
+}
+
+type InputErrors = Partial<Record<keyof InputValues, string>>;
+
+export default function Signup() {
   const { signup, authError } = useAuth();
-  const [inputValues, setInputValues] = useState<{
-    email: string;
-    password: string;
-    confirmPassword: string;
-    username: string;
-  }>({
+  const [inputValues, setInputValues] = useState<InputValues>({
+    username: "",
     email: "",
     password: "",
     confirmPassword: "",
-    username: "",
   });
+  const { showToast } = useToast();
 
-  const [error, setError] = useState<string | null>(null);
+  const [inputErrors, setInputErrors] = useState<InputErrors>({});
 
-  type InputFieldName = keyof typeof inputValues;
-
-  const handleChange = (name: InputFieldName, value: string): void => {
+  const handleChange = (name: keyof InputValues, value: string): void => {
     setInputValues((prevState) => ({
       ...prevState,
       [name]: value,
     }));
   };
 
-  const validateAndSignup = async () => {
-    const { email, password, confirmPassword, username } = inputValues;
+  const handleErrorMessage = (name: keyof InputValues, text?: string): void => {
+    setInputErrors((prevState) => ({
+      ...prevState,
+      [name]: text,
+    }))
+  }
 
-    if (password !== confirmPassword) {
-      setError("Passwords do not match!");
+  const validateAndSignup = async () => {
+    const { username, email, password, confirmPassword } = inputValues;
+    if (!username) {
+      handleErrorMessage("username", "Please enter a username");
       return;
     }
 
-    setError(null);
-    await signup({ email, password, username } as SignUpData);
+    if (!email) {
+      handleErrorMessage("email", "Please enter a email");
+      return;
+    }
+
+    if (password !== confirmPassword) {
+      handleErrorMessage("password", "Passwords do not match!");
+      handleErrorMessage("confirmPassword", "Passwords do not match!");
+      return;
+    }
+
+    try {
+      await signup(inputValues);
+    } catch (error) {
+      showToast('error', (error as Error).message);
+    }
   };
 
   return (
@@ -50,15 +74,16 @@ const Signup = () => {
       <Text style={textStyles.h1}>TAKE CARE OF YOUR PLANTS WITH EASE</Text>
       <Text style={textStyles.h3}>Sign Up Now</Text>
       <View style={styles.content}>
-        {error && <Text style={{ color: "red" }}>{error}</Text>}
-        {authError && <Text style={{ color: "red" }}>{authError}</Text>}
         <View style={styles.signUpFormContainer}>
           <View style={styles.inputFieldContainer}>
             <Input
               label="Username"
               placeholder="Username"
               iconName="account-outline"
+              autoFocus
               onChangeText={(text) => handleChange("username", text)}
+              error={inputErrors.username}
+              onFocus={() => handleErrorMessage("username", undefined)}
               value={inputValues.username}
             />
             <Input
@@ -66,6 +91,8 @@ const Signup = () => {
               placeholder="Email"
               iconName="email-outline"
               onChangeText={(text) => handleChange("email", text)}
+              error={inputErrors.email}
+              onFocus={() => handleErrorMessage("email", undefined)}
               value={inputValues.email}
             />
             <Input
@@ -74,6 +101,8 @@ const Signup = () => {
               iconName="lock-outline"
               password={true}
               onChangeText={(text) => handleChange("password", text)}
+              error={inputErrors.password}
+              onFocus={() => handleErrorMessage("password", undefined)}
               value={inputValues.password}
             />
             <Input
@@ -82,6 +111,8 @@ const Signup = () => {
               iconName="lock-outline"
               password={true}
               onChangeText={(text) => handleChange("confirmPassword", text)}
+              error={inputErrors.confirmPassword}
+              onFocus={() => handleErrorMessage("confirmPassword", undefined)}
               value={inputValues.confirmPassword}
             />
           </View>
@@ -148,5 +179,3 @@ const styles = StyleSheet.create({
     width: "100%",
   },
 });
-
-export default Signup;
