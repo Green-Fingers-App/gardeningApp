@@ -33,7 +33,7 @@ import { G } from "react-native-svg";
 import {
   removeWateringAppointment,
   setWateringAppointments,
-  updateWateringAppointments,
+  addWateringAppointments,
 } from "@/utils/calendar";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
@@ -174,7 +174,7 @@ export const PlantsProvider: React.FC<{ children: ReactNode }> = ({
       if (id) {
         setPlants((prevPlants) => [...prevPlants, { ...plantData, id }]);
       }
-      await updateWateringAppointments({ ...plantData, id: id });
+      await addWateringAppointments({ ...plantData, id: id });
     } catch (error) {
       console.error("Error creating plant:", error);
     }
@@ -217,7 +217,7 @@ export const PlantsProvider: React.FC<{ children: ReactNode }> = ({
         );
         return { ...garden, plants: gardenPlants };
       });
-      await removeWateringAppointment(plantId);
+      await removeWateringAppointment({ id: plantId });
       setGardens(updatedGardens);
     } catch (error) {
       console.error("Error deleting plant:", error);

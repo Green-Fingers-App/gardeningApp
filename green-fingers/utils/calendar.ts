@@ -21,7 +21,6 @@ export const setWateringAppointments = async (
     if (!plant.nickName) return;
     if (plant.waterFrequency) {
       appointments[plant.waterFrequency].push({
-        nickName: plant.nickName,
         id: plant.id,
       });
     }
@@ -35,21 +34,23 @@ export const setWateringAppointments = async (
   return appointments;
 };
 
-export const getWateringAppointments = async () => {
-  const appointments = await AsyncStorage.getItem("wateringAppointments");
-  if (!appointments) return null;
-  return JSON.parse(appointments);
-};
+type WateringAppointments = { [key: string]: Partial<UserPlant>[] } | null;
 
-export const updateWateringAppointments = async (
+export const getWateringAppointments =
+  async (): Promise<WateringAppointments> => {
+    const appointments = await AsyncStorage.getItem("wateringAppointments");
+    if (!appointments) return null;
+    return JSON.parse(appointments);
+  };
+
+export const addWateringAppointments = async (
   plantData: Partial<UserPlant>
 ) => {
   const appointments = await getWateringAppointments();
   if (!appointments) return null;
 
-  if (plantData.waterFrequency) {
+  if (plantData.waterFrequency && plantData.id) {
     appointments[plantData.waterFrequency].push({
-      nickName: plantData.nickName,
       id: plantData.id,
     });
   }
@@ -61,12 +62,19 @@ export const updateWateringAppointments = async (
   return appointments;
 };
 
-export const removeWateringAppointment = async (plantId: number) => {
+export const removeWateringAppointment = async (
+  plantData: Partial<UserPlant>
+) => {
   const appointments = await getWateringAppointments();
-  if (!appointments) return null;
-  const updatedAppointments = appointments.filter(
-    (plant: Partial<UserPlant>) => plant.id !== plantId
-  );
+  const waterFrequency = plantData.waterFrequency;
+  if (!appointments || !waterFrequency) return null;
+
+  const updatedAppointments = {
+    ...appointments,
+    [waterFrequency]: appointments[waterFrequency].filter(
+      (plant: Partial<UserPlant> | undefined) => plant?.id !== plantData.id
+    ),
+  };
   await AsyncStorage.setItem(
     "wateringAppointments",
     JSON.stringify(updatedAppointments)

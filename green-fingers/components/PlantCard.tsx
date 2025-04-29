@@ -12,6 +12,7 @@ import { CatalogPlant, UserPlant } from "../types/models";
 import colors from "@/constants/colors";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { useDeletePlant } from "@/hooks/useDeletePlant";
+import { shouldBeWatered } from "@/utils/plant";
 
 interface PlantCardProps extends React.ComponentProps<typeof TouchableOpacity> {
   plant: UserPlant | CatalogPlant;
@@ -19,7 +20,7 @@ interface PlantCardProps extends React.ComponentProps<typeof TouchableOpacity> {
 
 const PlantCard: React.FC<PlantCardProps> = ({ plant, ...props }) => {
   const { deleting, handleDeletePlant } = useDeletePlant();
-  const aWeekAgo = new Date(new Date().setDate(new Date().getDate() - 7));
+  const thirsty = shouldBeWatered(plant as UserPlant);
 
   return (
     <TouchableOpacity {...props} style={styles.cardContainer}>
@@ -65,7 +66,7 @@ const PlantCard: React.FC<PlantCardProps> = ({ plant, ...props }) => {
             height={80}
             style={styles.picture}
           />
-          {"nickName" in plant && new Date(plant.wateredDate) < aWeekAgo ? (
+          {"nickName" in plant && thirsty ? (
             <View
               style={{ flexDirection: "row", alignItems: "center", gap: 4 }}
             >

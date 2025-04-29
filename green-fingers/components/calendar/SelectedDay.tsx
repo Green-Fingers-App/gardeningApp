@@ -23,21 +23,20 @@ const SelectedDay: React.FC<SelectedDayProps> = ({ day }) => {
     { [key: string]: Partial<UserPlant>[] } | undefined
   >(undefined);
 
-  const getWateringAppointments = async (): Promise<
+  const getWateringIds = async (): Promise<
     undefined | { [key: string]: Partial<UserPlant>[] }
   > => {
-    const appointments = await AsyncStorage.getItem("wateringAppointments");
-    if (!appointments) return undefined;
-    return JSON.parse(appointments);
+    const ids: { [key: string]: Partial<UserPlant>[] } = JSON.parse(
+      (await AsyncStorage.getItem("wateringAppointments")) || "null"
+    );
+    if (!ids) return undefined;
+    return ids;
   };
 
   const waterPlants = async () => {
-    console.log("waterPlants", listOfPlantsToBeWatered);
     const plantIds = listOfPlantsToBeWatered
       .map((plant) => plant.id)
       .filter((id): id is number => id !== undefined);
-
-    console.log("plantIds", plantIds);
 
     if (plantIds.length > 0) {
       await batchUpdateWateredDate(plantIds);
@@ -46,7 +45,18 @@ const SelectedDay: React.FC<SelectedDayProps> = ({ day }) => {
 
   useEffect(() => {
     const fetchAppointments = async () => {
-      const appointments = await getWateringAppointments();
+      const ids = await getWateringIds();
+      let appointments: { [key: string]: Partial<UserPlant>[] } = {
+        DAILY: [],
+        WEEKLY: [],
+        BIWEEKLY: [],
+        MONTHLY: [],
+      };
+      for (const frequency in ids) {
+        appointments[frequency] = ids[frequency]
+          .map((id) => plants.find((plant) => plant.id === id.id))
+          .filter((plant): plant is UserPlant => plant !== undefined);
+      }
       setWateringAppointments(appointments);
     };
     fetchAppointments();
@@ -104,7 +114,10 @@ const SelectedDay: React.FC<SelectedDayProps> = ({ day }) => {
       {listOfPlantsToBeWatered.length > 0 ? (
         listOfPlantsToBeWatered.map((plant, index) => (
           <View style={{ marginHorizontal: 5, marginVertical: 2 }} key={index}>
-            <Text key={index}>{plant.nickName}</Text>
+            <Text key={index}>{`${plant.nickName} - Last Watered: ${
+              plant.wateredDate &&
+              new Date(plant.wateredDate).toLocaleDateString()
+            }`}</Text>
           </View>
         ))
       ) : (
