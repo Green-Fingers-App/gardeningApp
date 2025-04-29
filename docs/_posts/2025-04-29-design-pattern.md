@@ -134,6 +134,8 @@ classDiagram
     LoginForm --> ToastContext : calls showToast()
 ```
 
+For the after diagram, we can now add further classes such as createPlant, updatePlant, deleteGarden ... which all use the showToast() function and will communicate directly with the toast.
+
 ---
 
 Thanks for reading — and remember: **don't burn the toast!** Cheers 🥂!
