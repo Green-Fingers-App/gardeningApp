@@ -87,7 +87,7 @@ We also updated our [Software Architecture Document (SAD)](https://github.com/DH
 We also tried to create a “class diagram” before and after the refactoring to better visualize the restructuring.
 
 ### Before the Refactoring
-```mermaid
+<div class="mermaid">
 classDiagram
     class LoginForm {
         +validateAndLogin()
@@ -105,10 +105,10 @@ classDiagram
     }
 
     LoginForm --> AuthContext : calls login()
-```
+</div>
 
 ### After the Refactoring
-```mermaid
+<div class="mermaid">
 classDiagram
     class LoginForm {
         +validateAndLogin()
@@ -132,7 +132,7 @@ classDiagram
 
     LoginForm --> AuthContext : calls login()
     LoginForm --> ToastContext : calls showToast()
-```
+</div>
 
 For the after diagram, we can now add further classes such as createPlant, updatePlant, deleteGarden ... which all use the showToast() function and will communicate directly with the toast.
 
