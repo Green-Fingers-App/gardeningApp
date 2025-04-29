@@ -1,10 +1,5 @@
 // Enum for frequency of water
-export enum WaterFrequency {
-  DAILY = "Daily",
-  WEEKLY = "Weekly",
-  BIWEEKLY = "Biweekly",
-  MONTHLY = "Monthly",
-}
+export type WaterFrequency = "DAILY" | "WEEKLY" | "BIWEEKLY" | "MONTHLY";
 
 // Enum for months to restrict blooming, harvesting, and planting periods
 export enum Month {

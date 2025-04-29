@@ -111,14 +111,25 @@ const PlantDetailPage = () => {
           />
           <Accordion style={{ height: "50%" }}>
             <AccordionItem title="Status">
-              <Text>Last watered: {plant.wateredDate}</Text>
+              <Text>
+                Last watered:{" "}
+                {new Date(plant.wateredDate).toLocaleDateString("en-GB", {
+                  year: "numeric",
+                  month: "short",
+                  day: "2-digit",
+                  dateStyle: "full",
+                })}
+              </Text>
               <Text>Last fed: {plant.feededDate}</Text>
             </AccordionItem>
             <AccordionItem title="Overview">
               <Text>Common name: {plant.name.commonName}</Text>
               <Text>Scientific name: {plant.name.scientificName}</Text>
               <Text>
-                Blooming: {plant.blooming.start} till {plant.blooming.end}
+                Blooming:{" "}
+                {plant.blooming.start
+                  ? `${plant.blooming.start} till ${plant.blooming.end}`
+                  : "No blooming"}
               </Text>
               <Text>
                 Harvest:

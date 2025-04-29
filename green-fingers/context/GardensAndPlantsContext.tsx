@@ -20,6 +20,7 @@ import {
   apiDeleteUserPlant,
   apiGetUserPlants,
   apiSearchCatalogPlantsByCommonName,
+  apiBatchUpdateWateredDate,
 } from "@/api/plantService";
 import {
   apiAddGarden,
@@ -29,16 +30,22 @@ import {
 } from "@/api/gardenService";
 import { User } from "@/types/authtypes";
 import { G } from "react-native-svg";
-import { setWateringAppointments } from "@/utils/calendar";
+import {
+  removeWateringAppointment,
+  setWateringAppointments,
+  addWateringAppointments,
+} from "@/utils/calendar";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 interface PlantContextProps {
   plants: UserPlant[];
   gardens: Garden[];
   databasePlants: CatalogPlant[];
   fetchUserPlants: () => void;
+  batchUpdateWateredDate: (plantIds: number[]) => Promise<void>;
   fetchCatalogPlants: () => void;
   searchPlantsByCommonName: (input: string) => Promise<CatalogPlant[]>;
-  createUserPlant: (plantData: AddUserPlant) => void;
+  createUserPlant: (plantData: AddUserPlant) => Promise<void>;
   updateUserPlant: (
     plantId: number,
     plantData: Partial<AddUserPlant>
@@ -85,10 +92,27 @@ export const PlantsProvider: React.FC<{ children: ReactNode }> = ({
         waterFrequency: plant.waterFrequency,
         id: plant.id,
       }));
-      console.log("Watering data: ", wateringData);
       await setWateringAppointments(wateringData);
     } catch (error) {
       console.error("Error fetching user plants: ", error);
+    }
+  };
+
+  const batchUpdateWateredDate = async (plantIds: number[]) => {
+    try {
+      await apiBatchUpdateWateredDate(plantIds);
+      const updatedPlants = plants.map((plant) => {
+        if (plantIds.includes(plant.id)) {
+          return {
+            ...plant,
+            wateredDate: new Date().toISOString().split("T")[0],
+          };
+        }
+        return plant;
+      });
+      setPlants(updatedPlants);
+    } catch (error) {
+      console.error("Error updating watering date: ", error);
     }
   };
 
@@ -150,6 +174,7 @@ export const PlantsProvider: React.FC<{ children: ReactNode }> = ({
       if (id) {
         setPlants((prevPlants) => [...prevPlants, { ...plantData, id }]);
       }
+      await addWateringAppointments({ ...plantData, id: id });
     } catch (error) {
       console.error("Error creating plant:", error);
     }
@@ -192,6 +217,7 @@ export const PlantsProvider: React.FC<{ children: ReactNode }> = ({
         );
         return { ...garden, plants: gardenPlants };
       });
+      await removeWateringAppointment({ id: plantId });
       setGardens(updatedGardens);
     } catch (error) {
       console.error("Error deleting plant:", error);
@@ -262,6 +288,7 @@ export const PlantsProvider: React.FC<{ children: ReactNode }> = ({
         createUserPlant,
         updateUserPlant,
         deleteUserPlant,
+        batchUpdateWateredDate,
         gardens,
         fetchUserGardens,
         fetchPlantDetail,

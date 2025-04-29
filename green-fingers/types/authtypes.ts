@@ -8,7 +8,7 @@ export interface User {
 }
 
 export interface AuthContextProps {
-  user: UserData | null;
+  user: UserData | undefined;
   isLoggedIn: boolean;
   login: (loginData: LoginData) => Promise<void>;
   signup: (signUpData: SignUpData) => Promise<void>;

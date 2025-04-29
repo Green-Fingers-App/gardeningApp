@@ -1,17 +1,26 @@
-import { View, Text, StyleSheet, Dimensions, Button } from "react-native";
+import { View, Text, StyleSheet, Dimensions } from "react-native";
 import React, { useEffect, useState } from "react";
 import { WeekDay } from "@/app/profile/calendar";
 import colors from "@/constants/colors";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { UserPlant } from "@/types/models";
 import { useCalendar } from "@/context/CalendarContext";
+import Button from "../Button";
+import { useGardensAndPlants } from "@/context/GardensAndPlantsContext";
+import {
+  isFirstWeekOfMonth,
+  isThreeDaysLater,
+  plantsToBeWateredToday,
+} from "@/utils/calendar";
 
 interface SelectedDayProps {
   day: WeekDay;
 }
 
 const SelectedDay: React.FC<SelectedDayProps> = ({ day }) => {
+  const { batchUpdateWateredDate } = useGardensAndPlants();
   const { wateringDay } = useCalendar();
+  const { plants } = useGardensAndPlants();
   const [listOfPlantsToBeWatered, setListOfPlantsToBeWatered] = useState<
     Partial<UserPlant>[]
   >([]);
@@ -19,67 +28,54 @@ const SelectedDay: React.FC<SelectedDayProps> = ({ day }) => {
     { [key: string]: Partial<UserPlant>[] } | undefined
   >(undefined);
 
-  const getWateringAppointments = async (): Promise<
+  const getWateringIds = async (): Promise<
     undefined | { [key: string]: Partial<UserPlant>[] }
   > => {
-    const appointments = await AsyncStorage.getItem("wateringAppointments");
-    if (!appointments) return undefined;
-    return JSON.parse(appointments);
+    const ids: { [key: string]: Partial<UserPlant>[] } = JSON.parse(
+      (await AsyncStorage.getItem("wateringAppointments")) || "null"
+    );
+    if (!ids) return undefined;
+    return ids;
+  };
+
+  const waterPlants = async () => {
+    const plantIds = listOfPlantsToBeWatered
+      .map((plant) => plant.id)
+      .filter((id): id is number => id !== undefined);
+
+    if (plantIds.length > 0) {
+      await batchUpdateWateredDate(plantIds);
+    }
   };
 
   useEffect(() => {
     const fetchAppointments = async () => {
-      const appointments = await getWateringAppointments();
+      const ids = await getWateringIds();
+      let appointments: { [key: string]: Partial<UserPlant>[] } = {
+        DAILY: [],
+        WEEKLY: [],
+        BIWEEKLY: [],
+        MONTHLY: [],
+      };
+      for (const frequency in ids) {
+        appointments[frequency] = ids[frequency]
+          .map((id) => plants.find((plant) => plant.id === id.id))
+          .filter((plant): plant is UserPlant => plant !== undefined);
+      }
       setWateringAppointments(appointments);
     };
     fetchAppointments();
-  }, []);
+  }, [plants]);
 
   useEffect(() => {
     if (!wateringAppointments) return;
-
-    let plantsToWater: Partial<UserPlant>[] = [];
-
-    // WEEKLY
-    if (wateringDay === day.day) {
-      plantsToWater.push(...(wateringAppointments["WEEKLY"] || []));
-    }
-
-    // BIWEEKLY
-    if (wateringDay === day.day || isThreeDaysLater(wateringDay, day.day)) {
-      plantsToWater.push(...(wateringAppointments["BIWEEKLY"] || []));
-    }
-
-    // DAILY (always show)
-    plantsToWater.push(...(wateringAppointments["DAILY"] || []));
-
-    // MONTHLY (only if first watering day of month)
-    if (wateringDay === day.day && isFirstWeekOfMonth(day.date.toString())) {
-      plantsToWater.push(...(wateringAppointments["MONTHLY"] || []));
-    }
-
+    const plantsToWater = plantsToBeWateredToday(
+      wateringDay,
+      wateringAppointments,
+      day
+    );
     setListOfPlantsToBeWatered(plantsToWater);
   }, [wateringAppointments, wateringDay, day.day, day.date]);
-
-  const isFirstWeekOfMonth = (dateString: string) => {
-    const date = new Date(dateString);
-    return date.getDate() <= 7;
-  };
-
-  const isThreeDaysLater = (wateringDay: string, currentDay: string) => {
-    const daysOfWeek = [
-      "Sunday",
-      "Monday",
-      "Tuesday",
-      "Wednesday",
-      "Thursday",
-      "Friday",
-      "Saturday",
-    ];
-    const wateringIndex = daysOfWeek.indexOf(wateringDay);
-    const currentIndex = daysOfWeek.indexOf(currentDay);
-    return currentIndex === (wateringIndex + 3) % 7;
-  };
 
   return (
     <View style={styles.container}>
@@ -87,12 +83,23 @@ const SelectedDay: React.FC<SelectedDayProps> = ({ day }) => {
       {listOfPlantsToBeWatered.length > 0 ? (
         listOfPlantsToBeWatered.map((plant, index) => (
           <View style={{ marginHorizontal: 5, marginVertical: 2 }} key={index}>
-            <Text key={index}>{plant.nickName}</Text>
+            <Text key={index}>{`${plant.nickName} - Last Watered: ${
+              plant.wateredDate &&
+              new Date(plant.wateredDate).toLocaleDateString()
+            }`}</Text>
           </View>
         ))
       ) : (
         <Text>No plants need water today</Text>
       )}
+      {listOfPlantsToBeWatered.length > 0 ? (
+        <Button
+          text="I've watered the plants"
+          iconName="watering-can-outline"
+          style={{ width: "80%", alignSelf: "center", marginTop: 10 }}
+          onPress={waterPlants}
+        />
+      ) : null}
     </View>
   );
 };

@@ -1,6 +1,6 @@
-import React, { createContext, ReactNode, useContext, useEffect } from "react";
+import React, { createContext, ReactNode, useContext } from "react";
 
-type DayOfWeek =
+export type DayOfWeek =
   | "Monday"
   | "Tuesday"
   | "Wednesday"

@@ -18,7 +18,6 @@ const ProfileLayout: React.FC = () => {
   useEffect(() => {
     if (isLoggedIn && user?.id) {
       fetchUserGardens();
-      console.log("Fetching plants and gardens");
     }
   }, [isLoggedIn, user?.id]);
 
