@@ -34,6 +34,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
   const login = async (loginData: LoginData): Promise<void> => {
     try {
       const authResponse = await apiLogin(loginData);
+
       if (authResponse) {
         const { id, username, email } = authResponse.user;
         setUser({
@@ -50,11 +51,9 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
       }
     } catch (error) {
       if (error instanceof Error) {
-        console.error("Signup failed:", error.message);
-        setAuthError(error.message); // if you're displaying it
+        throw error;
       } else {
-        console.error("Signup failed: unknown error", error);
-        setAuthError("An unknown error occurred.");
+        throw new Error("An unknown error during login occured.");
       }
     }
   };
@@ -77,13 +76,11 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
           authResponse.refreshToken
         );
       }
-    } catch (error: unknown) {
+    } catch (error) {
       if (error instanceof Error) {
-        console.error("Signup failed:", error.message);
-        setAuthError(error.message); // if you're displaying it
+        throw error;
       } else {
-        console.error("Signup failed: unknown error", error);
-        setAuthError("An unknown error occurred.");
+        throw new Error("An unknown error during sign up occurred.");
       }
     }
   };
@@ -94,10 +91,13 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
       await SecureStore.deleteItemAsync("accessToken");
       await SecureStore.deleteItemAsync("refreshToken");
       setUser(null);
-      setAuthError(null);
       router.replace("/login");
     } catch (error) {
-      console.error("Logout failed:", error);
+      if (error instanceof Error) {
+        throw error;
+      } else {
+        throw new Error("An unknown error during login occured.");
+      }
     }
   };
 
