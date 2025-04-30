@@ -23,7 +23,7 @@ export interface AuthResponse {
 
 const base_api_ip = "https://greenfingers.truenas.work/api";
 
-export const apiSignUp = async (userData: SignUpData): Promise<undefined | AuthResponse> => {
+export const apiSignUp = async (userData: SignUpData): Promise<AuthResponse> => {
   const { username, password, email } = userData;
 
   const response = await fetch(`${base_api_ip}/auth/signup`, {
@@ -47,7 +47,7 @@ export const apiSignUp = async (userData: SignUpData): Promise<undefined | AuthR
   return responseData;
 }
 
-export const apiLogin = async (loginData: LoginData): Promise<AuthResponse | undefined> => {
+export const apiLogin = async (loginData: LoginData): Promise<AuthResponse> => {
   const { email, password } = loginData;
 
   const response = await fetch(`${base_api_ip}/auth/login`, {

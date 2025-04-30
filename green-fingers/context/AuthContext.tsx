@@ -24,7 +24,6 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
   children,
 }) => {
   const [user, setUser] = useState<UserData | undefined>(undefined);
-  const [authError, setAuthError] = useState<string | null>(null);
 
   const router = useRouter();
 
@@ -91,14 +90,14 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
       await SecureStore.deleteItemAsync("accessToken");
       await SecureStore.deleteItemAsync("refreshToken");
 
-      setUser(null);
-      
+      setUser(undefined);
+
       router.replace("/login");
     } catch (error) {
       if (error instanceof Error) {
         throw error;
       } else {
-        throw new Error("An unknown error during login occured.");
+        throw new Error("An unknown error during logout occured.");
       }
     }
   };
@@ -108,13 +107,13 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
     setUser((prevUser) =>
       prevUser
         ? {
-            ...prevUser,
-            ...newUserData,
-            id:
-              newUserData.id !== undefined
-                ? Number(newUserData.id)
-                : prevUser.id,
-          }
+          ...prevUser,
+          ...newUserData,
+          id:
+            newUserData.id !== undefined
+              ? Number(newUserData.id)
+              : prevUser.id,
+        }
         : undefined
     );
   };
@@ -127,7 +126,6 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
         login,
         signup,
         logout,
-        authError,
         updateUser,
       }}
     >

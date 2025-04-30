@@ -19,7 +19,7 @@ interface InputValues {
 type InputErrors = Partial<Record<keyof InputValues, string>>;
 
 export default function Signup() {
-  const { signup, authError } = useAuth();
+  const { signup } = useAuth();
   const [inputValues, setInputValues] = useState<InputValues>({
     username: "",
     email: "",
