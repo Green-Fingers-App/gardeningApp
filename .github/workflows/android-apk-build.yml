@@ -13,10 +13,6 @@ jobs:
     name: Build Android APK
     runs-on: ubuntu-latest
 
-    defaults:
-      run:
-        working-directory: green-fingers/android
-
     steps:
       - name: Checkout repo
         uses: actions/checkout@v4
@@ -29,9 +25,11 @@ jobs:
 
       - name: Grant execute permission to gradlew
         run: chmod +x ./gradlew
+        working-directory: green-fingers/android
 
       - name: Build APK
         run: ./gradlew assembleRelease
+        working-directory: green-fingers/android
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
