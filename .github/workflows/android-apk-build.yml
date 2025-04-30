@@ -1,3 +1,13 @@
+name: Build APK
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
 jobs:
   build-apk:
     name: Build Android APK
