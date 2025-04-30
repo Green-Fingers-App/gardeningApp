@@ -14,8 +14,13 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repo
+      - name: Checkout repo (flat structure)
         uses: actions/checkout@v4
+        with:
+          path: .
+
+      - name: Show structure (debug)
+        run: ls -laR
 
       - name: Set up JDK 17
         uses: actions/setup-java@v4
@@ -23,15 +28,14 @@ jobs:
           distribution: "temurin"
           java-version: 17
 
-      - name: Grant execute permission to gradlew
-        run: chmod +x ./gradlew
-        working-directory: green-fingers/android
+      - name: Make gradlew executable
+        run: chmod +x green-fingers/android/gradlew
 
-      - name: Build APK
+      - name: Build release APK
         run: ./gradlew assembleRelease
         working-directory: green-fingers/android
 
-      - name: Upload APK
+      - name: Upload APK artifact
         uses: actions/upload-artifact@v4
         with:
           name: green-fingers-apk
