@@ -20,17 +20,17 @@ jobs:
         with:
           node-version: '20'
           cache: 'npm'
-          cache-dependency-path: gardeningApp/green-fingers/package-lock.json
+          cache-dependency-path: green-fingers/package-lock.json
 
       - name: Install dependencies
         run: npm ci
-        working-directory: gardeningApp/green-fingers
+        working-directory: green-fingers
 
       - name: Run tests with coverage
         run: npm run test
-        working-directory: gardeningApp/green-fingers
+        working-directory: green-fingers
 
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v3
         with:
-          working-directory: gardeningApp/green-fingers
+          working-directory: green-fingers
