@@ -1,26 +1,11 @@
-name: Build APK
-
-on:
-  push:
-    branches:
-      - main
-  pull_request:
-    branches:
-      - main
-
 jobs:
   build-apk:
     name: Build Android APK
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repo (flat structure)
+      - name: Checkout repo
         uses: actions/checkout@v4
-        with:
-          path: .
-
-      - name: Show structure (debug)
-        run: ls -laR
 
       - name: Set up JDK 17
         uses: actions/setup-java@v4
@@ -28,14 +13,19 @@ jobs:
           distribution: "temurin"
           java-version: 17
 
-      - name: Make gradlew executable
-        run: chmod +x green-fingers/android/gradlew
+      - name: Install Node dependencies
+        working-directory: green-fingers
+        run: npm ci
 
-      - name: Build release APK
+      - name: Grant execute permission to gradlew
+        run: chmod +x android/gradlew
+        working-directory: green-fingers
+
+      - name: Build APK
         run: ./gradlew assembleRelease
         working-directory: green-fingers/android
 
-      - name: Upload APK artifact
+      - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
           name: green-fingers-apk
