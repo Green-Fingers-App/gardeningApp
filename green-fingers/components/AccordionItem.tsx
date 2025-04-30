@@ -66,7 +66,12 @@ const styles = StyleSheet.create({
   },
   title: { fontSize: 16 },
   contentContainer: { overflow: "hidden" },
-  content: { padding: 10, backgroundColor: colors.bgLight, height: "100%" },
+  content: {
+    padding: 10,
+    backgroundColor: colors.bgLight,
+    height: "100%",
+    justifyContent: "space-evenly",
+  },
 });
 
 export default AccordionItem;

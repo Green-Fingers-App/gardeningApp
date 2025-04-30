@@ -16,19 +16,19 @@ interface AddPlantOptionProps {
 }
 
 const AddPlantOption: React.FC<AddPlantOptionProps> = ({
-  plantChosen,
-  togglePlantMenu,
   setPlantChosen,
+  togglePlantMenu,
+  plantChosen,
 }) => {
-  const { gardens, createPlant } = useGardensAndPlants();
+  const { gardens, createUserPlant } = useGardensAndPlants();
 
   const [nickName, setNickName] = useState<string>("");
-  const [selectedGarden, setSelectedGarden] = useState<string>("");
+  const [selectedGarden, setSelectedGarden] = useState<number | null>(null);
   const [selectedPlant, setSelectedPlant] = useState<CatalogPlant | null>(null);
 
   const handlePlantSelection = (plant: CatalogPlant) => setSelectedPlant(plant);
   const handleNickNameChange = (text: string) => setNickName(text);
-  const handleGardenSelect = (gardenId: string) => setSelectedGarden(gardenId);
+  const handleGardenSelect = (gardenId: number) => setSelectedGarden(gardenId);
 
   const isAddPlantDisabled = !nickName || !selectedGarden || !selectedPlant;
 
@@ -39,14 +39,14 @@ const AddPlantOption: React.FC<AddPlantOptionProps> = ({
 
   const { user } = useAuth();
 
-  const handleAddPlant = () => {
-    if (!selectedPlant || !selectedGarden || !nickName) return;
+  const handleAddPlant = async () => {
+    if (!selectedPlant || !selectedGarden || !nickName || !user) return;
 
     const addPlant: AddUserPlant = {
       nickName,
       garden_id: selectedGarden,
-      catalogPlant_id: selectedPlant.id || "",
-      userId: user?.id || "",
+      catalogPlant_id: selectedPlant.id,
+      userId: user.id,
       name: selectedPlant.name,
       blooming: selectedPlant.blooming,
       waterFrequency: selectedPlant.waterFrequency,
@@ -56,22 +56,22 @@ const AddPlantOption: React.FC<AddPlantOptionProps> = ({
       size: selectedPlant.size,
       fertilizerType: selectedPlant.fertilizerType,
       planting: selectedPlant.planting,
-      wateredDate: "",
-      plantedDate: "",
+      wateredDate: new Date().toISOString().split("T")[0],
+      plantedDate: new Date().toISOString().split("T")[0],
       feededDate: "",
       moistureLevel: "Optimal",
       sunlightLevel: "Optimal",
       harvested: false,
-      imageUrl: selectedPlant.imageUrl
+      imageUrl: selectedPlant.imageUrl,
     };
 
     // Call the createPlant function to save to the database
-    createPlant(addPlant);
+    await createUserPlant(addPlant);
 
     // Reset state after adding
     setPlantChosen(false);
     setNickName("");
-    setSelectedGarden("");
+    setSelectedGarden(null);
     setSelectedPlant(null);
   };
 

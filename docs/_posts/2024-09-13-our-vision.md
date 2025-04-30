@@ -10,10 +10,12 @@ author: "Sima, Casimir, Ruan & Malte"
 We are Sima, Casimir, Ruan & Malte, we love our plants and want to keep them healthy and happy 🍀. That's why we decided to develop an app that supports users in caring for their green friends.
 
 Our roles:
-- **Sima**: Use Case Writer & Product Manager
+
+- **Sima**: Use Case Writer & Frontend Designer
 - **Casimir**: Architect & DevOps Engineer
 - **Ruan**: Database Schema Writer & Backend Developer
-- **Malte**: Frontend Designer & UI/UX Specialist
+- **Malte**: Frontend Designer & UI/UX Specialist & Product Manager
+- **Malte**: Frontend Designer & UI/UX Specialist & Product Manager
 
 ---
 

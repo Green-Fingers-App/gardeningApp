@@ -12,7 +12,7 @@ import colors from "@/constants/colors";
 import textStyles from "@/constants/textStyles";
 
 interface DropDownOption {
-  value: string;
+  value: number;
   label: string;
 }
 
@@ -20,7 +20,7 @@ interface DropDownProps {
   label: string;
   placeholder: string;
   options: DropDownOption[];
-  onSelect: (value: string) => void;
+  onSelect: (value: number) => void;
 }
 
 const DropDown: React.FC<DropDownProps> = ({
@@ -49,7 +49,7 @@ const DropDown: React.FC<DropDownProps> = ({
     outputRange: [0, options.length * 40],
   });
 
-  const handleSelect = (value: string) => {
+  const handleSelect = (value: number) => {
     const selected = options.find((option) => option.value === value);
     if (selected) {
       setSelectedOption(selected);
@@ -82,7 +82,7 @@ const DropDown: React.FC<DropDownProps> = ({
         {menuOpen && (
           <FlatList
             data={options}
-            keyExtractor={(item) => item.value}
+            keyExtractor={(item) => item.value.toString()}
             renderItem={({ item }) => (
               <Pressable
                 onPress={() => handleSelect(item.value)}

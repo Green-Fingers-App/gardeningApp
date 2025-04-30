@@ -7,6 +7,7 @@ import Input from "@/components/Input";
 import Button from "@/components/Button";
 import colors from "@/constants/colors";
 import textStyles from "@/constants/textStyles";
+import { useToast } from "@/context/ToastContext";
 
 interface InputValues {
   email: string;
@@ -21,6 +22,7 @@ export default function LoginForm() {
     email: "",
     password: "",
   });
+  const { showToast } = useToast();
 
   const [inputErrors, setInputErrors] = useState<InputErrors>({});
 
@@ -40,7 +42,6 @@ export default function LoginForm() {
 
   const validateAndLogin = async (): Promise<void> => {
     const { email, password } = inputValues;
-
     if (!email) {
       handleErrorMessage("email", "Please enter your email");
       return;
@@ -51,7 +52,11 @@ export default function LoginForm() {
       return;
     }
 
-    await login(email, password);
+    try {
+      await login(inputValues);
+    } catch (error) {
+      showToast('error', (error as Error).message || 'Login failed.')
+    }
   };
 
   return (
@@ -83,7 +88,7 @@ export default function LoginForm() {
               value={inputValues.password}
             />
           </View>
-          <Button text="Login" onPress={validateAndLogin} iconName="login" />
+          <Button text="Login" onPress={validateAndLogin} iconName="login" testID="login-button" />
           <Button
             type="tertiary"
             text="Forgot Password?"
@@ -96,6 +101,7 @@ export default function LoginForm() {
             type="secondary"
             text="Sign Up"
             onPress={() => router.push("/signup")}
+            testID="signup-button"
           />
         </View>
       </View>
