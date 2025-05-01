@@ -13,6 +13,7 @@ import {
   AddGarden,
 } from "../types/models";
 import { useAuth } from "@/context/AuthContext";
+import { useToast } from "./ToastContext";
 import {
   apiCreateUserPlant,
   apiGetCatalogPlants,
@@ -73,6 +74,7 @@ export const PlantsProvider: React.FC<{ children: ReactNode }> = ({
   const [databasePlants, setDatabasePlants] = useState<CatalogPlant[]>([]);
 
   const { user } = useAuth();
+  const { showToast } = useToast();
 
   // Fetch user's gardens from Firestore
   const fetchUserGardens = async () => {
@@ -94,7 +96,7 @@ export const PlantsProvider: React.FC<{ children: ReactNode }> = ({
       }));
       await setWateringAppointments(wateringData);
     } catch (error) {
-      console.error("Error fetching user plants: ", error);
+      showToast("error", (error as Error).message);
     }
   };
 
@@ -135,7 +137,7 @@ export const PlantsProvider: React.FC<{ children: ReactNode }> = ({
       const response = await apiSearchCatalogPlantsByCommonName(input);
       return response ? response : [];
     } catch (error) {
-      console.error("Error searching plants: ", error);
+      showToast("error", (error as Error).message);
       return [];
     }
   };
@@ -145,7 +147,7 @@ export const PlantsProvider: React.FC<{ children: ReactNode }> = ({
       const plantsData = await apiGetCatalogPlants();
       setDatabasePlants(plantsData);
     } catch (error) {
-      console.error("Error fetching catalog plants: ", error);
+      showToast("error", (error as Error).message);
     }
   };
 
@@ -175,8 +177,9 @@ export const PlantsProvider: React.FC<{ children: ReactNode }> = ({
         setPlants((prevPlants) => [...prevPlants, { ...plantData, id }]);
       }
       await addWateringAppointments({ ...plantData, id: id });
+      showToast("success", "Plant created")
     } catch (error) {
-      console.error("Error creating plant:", error);
+      showToast("error", (error as Error).message);
     }
   };
 
@@ -198,9 +201,10 @@ export const PlantsProvider: React.FC<{ children: ReactNode }> = ({
         return plant;
       });
       setPlants(updatedPlants);
+      showToast("success", "Plant updated")
       return updatedPlants.find((plant) => plant.id === plantId);
     } catch (error) {
-      console.error("Error updating plant:", error);
+      showToast("error", (error as Error).message);
       return undefined;
     }
   };
@@ -219,8 +223,9 @@ export const PlantsProvider: React.FC<{ children: ReactNode }> = ({
       });
       await removeWateringAppointment({ id: plantId });
       setGardens(updatedGardens);
+      showToast("success", "Plant deleted");
     } catch (error) {
-      console.error("Error deleting plant:", error);
+      showToast("error", (error as Error).message);
     }
   };
 
@@ -231,8 +236,9 @@ export const PlantsProvider: React.FC<{ children: ReactNode }> = ({
         const { id } = garden;
         setGardens((prevGardens) => [...prevGardens, { ...gardenData, id }]);
       }
+      showToast("success", "Garden created");
     } catch (error) {
-      console.error("Error creating garden: ", error);
+      showToast("error", (error as Error).message);
     }
   };
 
@@ -248,9 +254,10 @@ export const PlantsProvider: React.FC<{ children: ReactNode }> = ({
           garden.id === gardenId ? { ...garden, ...gardenData } : garden
         )
       );
+      showToast("success", "Garden updated");
       return gardens.find((garden) => garden.id === gardenId);
     } catch (error) {
-      console.error("Error updating garden:", error);
+      showToast("error", (error as Error).message);
       return undefined;
     }
   };
@@ -265,8 +272,9 @@ export const PlantsProvider: React.FC<{ children: ReactNode }> = ({
       setGardens((prevGardens) =>
         prevGardens.filter((garden) => garden.id !== gardenId)
       );
+      showToast("success", "Garden deleted");
     } catch (error) {
-      console.error("Error deleting garden:", error);
+      showToast("error", (error as Error).message);
     }
   };
 
