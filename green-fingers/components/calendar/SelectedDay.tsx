@@ -7,7 +7,7 @@ import { UserPlant } from "@/types/models";
 import { useCalendar } from "@/context/CalendarContext";
 import Button from "../Button";
 import { useGardensAndPlants } from "@/context/GardensAndPlantsContext";
-import { plantsToBeWateredToday } from "@/utils/calendar";
+import { inTheFuture, plantsToBeWateredToday } from "@/utils/calendar";
 
 interface SelectedDayProps {
   day: WeekDay;
@@ -88,7 +88,7 @@ const SelectedDay: React.FC<SelectedDayProps> = ({ day }) => {
       ) : (
         <Text>No plants need water today</Text>
       )}
-      {listOfPlantsToBeWatered.length > 0 ? (
+      {listOfPlantsToBeWatered.length > 0 && !inTheFuture(day) ? (
         <Button
           text="I've watered the plants"
           iconName="watering-can-outline"

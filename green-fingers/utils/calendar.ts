@@ -2,6 +2,7 @@ import { WeekDay } from "@/app/profile/calendar";
 import { DayOfWeek } from "@/context/CalendarContext";
 import { UserPlant } from "@/types/models";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { copyStackTrace } from "@testing-library/react-native/build/helpers/errors";
 
 export const setWateringAppointments = async (
   plantData: Partial<UserPlant>[]
@@ -135,4 +136,14 @@ export const plantsToBeWateredToday = (
     plantsToWater.push(...(wateringAppointments["MONTHLY"] || []));
   }
   return plantsToWater;
+};
+
+export const inTheFuture = (selectedDay: WeekDay): boolean => {
+  const selectedDayString = `${selectedDay.year}-${selectedDay.month + 1}-${
+    selectedDay.date
+  }`;
+  if (new Date() < new Date(selectedDayString)) {
+    return true;
+  }
+  return false;
 };

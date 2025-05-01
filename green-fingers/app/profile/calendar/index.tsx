@@ -14,6 +14,8 @@ import { useCalendar } from "@/context/CalendarContext";
 export type WeekDay = {
   date: number;
   day: string;
+  month: number;
+  year: number;
 };
 
 const Index: React.FC = () => {
@@ -35,7 +37,12 @@ const Index: React.FC = () => {
     const week: WeekDay[] = Array.from({ length: 7 }, (_, i) => {
       const day: Date = new Date(startOfWeek);
       day.setDate(startOfWeek.getDate() + i);
-      return { date: day.getDate(), day: days[i] };
+      return {
+        date: day.getDate(),
+        day: days[i],
+        year: day.getFullYear(),
+        month: day.getMonth(),
+      };
     });
     setCurrentWeek(week);
   }, [nav]);
