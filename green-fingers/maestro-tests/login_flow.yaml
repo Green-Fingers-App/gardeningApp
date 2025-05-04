@@ -1,0 +1,20 @@
+appId: com.anonymous.greenfingers
+---
+- launchApp
+- tapOn: "Log In"
+
+- tapOn: "Enter your email"
+- inputText: "mal.opderbeck.23@lehre.mosbach.dhbw.de"
+
+- tapOn: "Enter your password"
+- inputText: "password123"
+
+- tapOn: "Login"
+
+- assertVisible: "Hello, malte"
+- assertVisible: "Plant Explorer"
+
+- tapOn: "Logout"
+
+- assertVisible: "WELCOME BACK"
+

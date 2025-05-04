@@ -70,7 +70,6 @@ export default function LoginForm() {
               iconName="account"
               label="Email"
               placeholder="Enter your email"
-              autoFocus
               onChangeText={(text) => handleChange("email", text)}
               error={inputErrors.email}
               onFocus={() => handleErrorMessage("email", undefined)}
