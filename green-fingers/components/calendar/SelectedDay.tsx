@@ -8,9 +8,9 @@ import { useCalendar } from "@/context/CalendarContext";
 import Button from "../Button";
 import { useGardensAndPlants } from "@/context/GardensAndPlantsContext";
 import {
-  isFirstWeekOfMonth,
-  isThreeDaysLater,
+  inTheFuture,
   plantsToBeWateredToday,
+  WateringAppointment,
 } from "@/utils/calendar";
 
 interface SelectedDayProps {
@@ -22,10 +22,10 @@ const SelectedDay: React.FC<SelectedDayProps> = ({ day }) => {
   const { wateringDay } = useCalendar();
   const { plants } = useGardensAndPlants();
   const [listOfPlantsToBeWatered, setListOfPlantsToBeWatered] = useState<
-    Partial<UserPlant>[]
+    WateringAppointment[]
   >([]);
   const [wateringAppointments, setWateringAppointments] = useState<
-    { [key: string]: Partial<UserPlant>[] } | undefined
+    { [key: string]: UserPlant[] } | undefined
   >(undefined);
 
   const getWateringIds = async (): Promise<
@@ -40,7 +40,7 @@ const SelectedDay: React.FC<SelectedDayProps> = ({ day }) => {
 
   const waterPlants = async () => {
     const plantIds = listOfPlantsToBeWatered
-      .map((plant) => plant.id)
+      .map((appointment) => appointment.plant.id)
       .filter((id): id is number => id !== undefined);
 
     if (plantIds.length > 0) {
@@ -51,7 +51,7 @@ const SelectedDay: React.FC<SelectedDayProps> = ({ day }) => {
   useEffect(() => {
     const fetchAppointments = async () => {
       const ids = await getWateringIds();
-      let appointments: { [key: string]: Partial<UserPlant>[] } = {
+      let appointments: { [key: string]: UserPlant[] } = {
         DAILY: [],
         WEEKLY: [],
         BIWEEKLY: [],
@@ -72,7 +72,8 @@ const SelectedDay: React.FC<SelectedDayProps> = ({ day }) => {
     const plantsToWater = plantsToBeWateredToday(
       wateringDay,
       wateringAppointments,
-      day
+      day,
+      plants
     );
     setListOfPlantsToBeWatered(plantsToWater);
   }, [wateringAppointments, wateringDay, day.day, day.date]);
@@ -81,9 +82,12 @@ const SelectedDay: React.FC<SelectedDayProps> = ({ day }) => {
     <View style={styles.container}>
       <Text style={styles.title}>{`${day.day} - ${day.date}`}</Text>
       {listOfPlantsToBeWatered.length > 0 ? (
-        listOfPlantsToBeWatered.map((plant, index) => (
+        listOfPlantsToBeWatered.map(({ overdue, plant }, index) => (
           <View style={{ marginHorizontal: 5, marginVertical: 2 }} key={index}>
-            <Text key={index}>{`${plant.nickName} - Last Watered: ${
+            <Text
+              style={overdue ? { color: colors.textWarning } : null}
+              key={index}
+            >{`${plant.nickName} - Last Watered: ${
               plant.wateredDate &&
               new Date(plant.wateredDate).toLocaleDateString()
             }`}</Text>
@@ -92,7 +96,7 @@ const SelectedDay: React.FC<SelectedDayProps> = ({ day }) => {
       ) : (
         <Text>No plants need water today</Text>
       )}
-      {listOfPlantsToBeWatered.length > 0 ? (
+      {listOfPlantsToBeWatered.length > 0 && !inTheFuture(day) ? (
         <Button
           text="I've watered the plants"
           iconName="watering-can-outline"

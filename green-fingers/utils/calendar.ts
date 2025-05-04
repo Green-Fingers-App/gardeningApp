@@ -2,6 +2,7 @@ import { WeekDay } from "@/app/profile/calendar";
 import { DayOfWeek } from "@/context/CalendarContext";
 import { UserPlant } from "@/types/models";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { shouldBeWatered } from "./plant";
 
 export const setWateringAppointments = async (
   plantData: Partial<UserPlant>[]
@@ -36,14 +37,18 @@ export const setWateringAppointments = async (
   return appointments;
 };
 
-type WateringAppointments = { [key: string]: Partial<UserPlant>[] } | null;
+export type WateringAppointment = {
+  plant: UserPlant;
+  overdue: boolean;
+};
 
-export const getWateringAppointments =
-  async (): Promise<WateringAppointments> => {
-    const appointments = await AsyncStorage.getItem("wateringAppointments");
-    if (!appointments) return null;
-    return JSON.parse(appointments);
-  };
+export const getWateringAppointments = async (): Promise<{
+  [key: string]: Partial<UserPlant>[];
+} | null> => {
+  const appointments = await AsyncStorage.getItem("wateringAppointments");
+  if (!appointments) return null;
+  return JSON.parse(appointments);
+};
 
 export const addWateringAppointments = async (
   plantData: Partial<UserPlant>
@@ -74,7 +79,7 @@ export const removeWateringAppointment = async (
   const updatedAppointments = {
     ...appointments,
     [waterFrequency]: appointments[waterFrequency].filter(
-      (plant: Partial<UserPlant> | undefined) => plant?.id !== plantData.id
+      (plant) => plant?.id !== plantData.id
     ),
   };
   await AsyncStorage.setItem(
@@ -106,14 +111,31 @@ export const isThreeDaysLater = (wateringDay: string, currentDay: string) => {
 
 export const plantsToBeWateredToday = (
   wateringDay: DayOfWeek,
-  wateringAppointments: { [key: string]: Partial<UserPlant>[] },
-  currentDay: WeekDay
-): Partial<UserPlant>[] => {
-  let plantsToWater: Partial<UserPlant>[] = [];
+  plantsToWater: { [key: string]: UserPlant[] },
+  currentDay: WeekDay,
+  plants: UserPlant[]
+): WateringAppointment[] => {
+  const currentDateString = `${currentDay.year}-${currentDay.month + 1}-${
+    currentDay.date
+  }`;
+  let result: WateringAppointment[] = [];
+
+  const wateringAppointments: { [key: string]: WateringAppointment[] } =
+    Object.fromEntries(
+      Object.entries(plantsToWater).map(
+        ([frequency, plants]: [string, UserPlant[]]) => [
+          frequency,
+          plants.map((plant) => ({
+            plant,
+            overdue: false,
+          })),
+        ]
+      )
+    );
 
   // WEEKLY
   if (wateringDay === currentDay.day) {
-    plantsToWater.push(...(wateringAppointments["WEEKLY"] || []));
+    result.push(...(wateringAppointments["WEEKLY"] || []));
   }
 
   // BIWEEKLY
@@ -121,18 +143,43 @@ export const plantsToBeWateredToday = (
     wateringDay === currentDay.day ||
     isThreeDaysLater(wateringDay, currentDay.day)
   ) {
-    plantsToWater.push(...(wateringAppointments["BIWEEKLY"] || []));
+    result.push(...(wateringAppointments["BIWEEKLY"] || []));
   }
 
   // DAILY (always show)
-  plantsToWater.push(...(wateringAppointments["DAILY"] || []));
+  result.push(...(wateringAppointments["DAILY"] || []));
 
   // MONTHLY (only if first watering day of month)
   if (
     wateringDay === currentDay.day &&
     isFirstWeekOfMonth(currentDay.date.toString())
   ) {
-    plantsToWater.push(...(wateringAppointments["MONTHLY"] || []));
+    result.push(...(wateringAppointments["MONTHLY"] || []));
   }
-  return plantsToWater;
+  plants.forEach((plant) => {
+    if (shouldBeWatered(plant) && new Date() >= new Date(currentDateString))
+      result.push({ plant, overdue: true });
+  });
+  const map = new Map<string, WateringAppointment>();
+
+  for (const appointment of result) {
+    const id = appointment.plant.id; // Assumes plant has a unique `id`
+    const existing = map.get(id.toString());
+
+    if (!existing || appointment.overdue) {
+      map.set(id.toString(), appointment);
+    }
+  }
+
+  return Array.from(map.values());
+};
+
+export const inTheFuture = (selectedDay: WeekDay): boolean => {
+  const selectedDayString = `${selectedDay.year}-${selectedDay.month + 1}-${
+    selectedDay.date
+  }`;
+  if (new Date() < new Date(selectedDayString)) {
+    return true;
+  }
+  return false;
 };
