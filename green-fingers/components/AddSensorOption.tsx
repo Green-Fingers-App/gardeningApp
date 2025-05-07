@@ -3,6 +3,7 @@ import { View, StyleSheet, Text, Alert, Button as RNButton, Platform, Permission
 import { CameraView, useCameraPermissions } from "expo-camera";
 import WifiManager from "react-native-wifi-reborn";
 import SendWifiCredentialsForm from "./SendWifiCredentialsForm";
+import { useToast } from "@/context/ToastContext";
 import colors from "@/constants/colors";
 
 interface AddSensorOptionProps {
@@ -20,6 +21,7 @@ const AddSensorOption: React.FC<AddSensorOptionProps> = ({
   const [connectedToSensor, setConnectedToSensor] = useState(false);
   const [sensorIP, setSensorIP] = useState<string | null>(null);
 
+  const { showToast } = useToast();
 
   useEffect(() => {
     if (permission?.status !== "granted") {
@@ -78,8 +80,7 @@ const AddSensorOption: React.FC<AddSensorOptionProps> = ({
       setSensorIP(ip);
       setConnectedToSensor(true);
     } catch (error) {
-      console.error("WiFi connect error:", error);
-      Alert.alert("Connection Failed", "Could not connect to sensor.");
+      showToast("error", "Failed to connect to sensor");
       setScanned(false);
     }
   };
