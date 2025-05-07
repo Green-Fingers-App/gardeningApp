@@ -5,35 +5,58 @@ import textStyles from "@/constants/textStyles";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import AddPlantOption from "@/components/AddPlantOption";
 import AddGardenOption from "@/components/AddGardenOption";
+import AddSensorOption from "@/components/AddSensorOption";
 import Button from "@/components/Button";
 
 const AddMenu = () => {
   const [plantChosen, setPlantChosen] = useState(false);
   const [gardenChosen, setGardenChosen] = useState(false);
+  const [sensorChosen, setSensorChosen] = useState(false);
+
   const togglePlantMenu = () => setPlantChosen(!plantChosen);
+
+  const renderHeader = () => {
+    if (plantChosen) {
+      return (
+        <Pressable onPress={() => setPlantChosen(false)}>
+          <Text style={textStyles.h3}>
+            <MaterialCommunityIcons name="arrow-left" size={20} /> Add Plant
+          </Text>
+        </Pressable>
+      );
+    }
+    if (gardenChosen) {
+      return (
+        <Pressable onPress={() => setGardenChosen(false)}>
+          <Text style={textStyles.h3}>
+            <MaterialCommunityIcons name="arrow-left" size={20} /> Add Garden
+          </Text>
+        </Pressable>
+      );
+    }
+    if (sensorChosen) {
+      return (
+        <Pressable onPress={() => setSensorChosen(false)}>
+          <Text style={textStyles.h3}>
+            <MaterialCommunityIcons name="arrow-left" size={20} /> Add Sensor
+          </Text>
+        </Pressable>
+      );
+    }
+    return <Text style={textStyles.h3}>Add</Text>;
+  };
 
   return (
     <View style={styles.menuContainer}>
-      <View style={styles.menuHeaderContainer}>
-        <Text style={textStyles.h3}>
-          {plantChosen ? (
-            <Pressable onPress={() => setPlantChosen(false)}>
-              <Text style={textStyles.h3}>
-                <MaterialCommunityIcons name="arrow-left" size={20} /> Add Plant
-              </Text>
-            </Pressable>
-          ) : (
-            "Add"
-          )}
-        </Text>
-      </View>
-      {!plantChosen && !gardenChosen && (
+      <View style={styles.menuHeaderContainer}>{renderHeader()}</View>
+
+      {!plantChosen && !gardenChosen && !sensorChosen && (
         <View style={styles.optionContainer}>
           <Button
             text="Plant"
             iconName="flower"
             type="tertiary"
-            onPress={togglePlantMenu}
+            onPress={() => setPlantChosen(true)}
           />
           <Button
             text="Garden"
@@ -41,8 +64,15 @@ const AddMenu = () => {
             type="tertiary"
             onPress={() => setGardenChosen(true)}
           />
+          <Button
+            text="Sensor"
+            iconName="qrcode"
+            type="tertiary"
+            onPress={() => setSensorChosen(true)}
+          />
         </View>
       )}
+
       {plantChosen && (
         <AddPlantOption
           plantChosen={plantChosen}
@@ -50,11 +80,20 @@ const AddMenu = () => {
           setPlantChosen={setPlantChosen}
         />
       )}
+
       {gardenChosen && (
         <AddGardenOption
           gardenChosen={gardenChosen}
           toggleGardenMenu={() => setGardenChosen(false)}
           setGardenChosen={setGardenChosen}
+        />
+      )}
+
+      {sensorChosen && (
+        <AddSensorOption
+          sensorChosen={sensorChosen}
+          toggleSensorMenu={() => setSensorChosen(false)}
+          setSensorChosen={setSensorChosen}
         />
       )}
     </View>
@@ -82,19 +121,9 @@ const styles = StyleSheet.create({
     borderTopLeftRadius: 8,
     borderTopRightRadius: 8,
   },
-  titleText: {
-    fontSize: 20,
-    fontWeight: "bold",
-    color: colors.bgLight,
-  },
   optionContainer: {
     flexDirection: "column",
     gap: 8,
     padding: 8,
-  },
-  menuOption: {
-    padding: 8,
-    fontSize: 18,
-    color: colors.textPrimary,
   },
 });

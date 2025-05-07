@@ -21,7 +21,7 @@ extensions.configure(com.facebook.react.ReactSettingsExtension) { ex ->
   }
 }
 
-rootProject.name = 'green-fingers'
+rootProject.name = 'GreenFingers'
 
 dependencyResolutionManagement {
   versionCatalogs {
