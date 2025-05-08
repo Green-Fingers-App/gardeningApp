@@ -29,14 +29,11 @@ import {
   apiGetUserGardens,
   apiUpdateGarden,
 } from "@/api/gardenService";
-import { User } from "@/types/authtypes";
-import { G } from "react-native-svg";
 import {
   removeWateringAppointment,
   setWateringAppointments,
   addWateringAppointments,
 } from "@/utils/calendar";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 
 interface PlantContextProps {
   plants: UserPlant[];
@@ -177,7 +174,7 @@ export const PlantsProvider: React.FC<{ children: ReactNode }> = ({
         setPlants((prevPlants) => [...prevPlants, { ...plantData, id }]);
       }
       await addWateringAppointments({ ...plantData, id: id });
-      showToast("success", "Plant created")
+      showToast("success", "Plant created");
     } catch (error) {
       showToast("error", (error as Error).message);
     }
@@ -201,7 +198,7 @@ export const PlantsProvider: React.FC<{ children: ReactNode }> = ({
         return plant;
       });
       setPlants(updatedPlants);
-      showToast("success", "Plant updated")
+      showToast("success", "Plant updated");
       return updatedPlants.find((plant) => plant.id === plantId);
     } catch (error) {
       showToast("error", (error as Error).message);

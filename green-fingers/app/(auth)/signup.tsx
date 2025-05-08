@@ -6,7 +6,6 @@ import Input from "@/components/Input";
 import Button from "@/components/Button";
 import colors from "@/constants/colors";
 import textStyles from "@/constants/textStyles";
-import { SignUpData } from "@/api/auth";
 import { useToast } from "@/context/ToastContext";
 
 interface InputValues {
@@ -41,8 +40,8 @@ export default function Signup() {
     setInputErrors((prevState) => ({
       ...prevState,
       [name]: text,
-    }))
-  }
+    }));
+  };
 
   const validateAndSignup = async () => {
     const { username, email, password, confirmPassword } = inputValues;
@@ -65,7 +64,7 @@ export default function Signup() {
     try {
       await signup(inputValues);
     } catch (error) {
-      showToast('error', (error as Error).message);
+      showToast("error", (error as Error).message);
     }
   };
 
@@ -81,18 +80,26 @@ export default function Signup() {
               placeholder="Username"
               iconName="account-outline"
               autoFocus
-              onChangeText={(text) => handleChange("username", text)}
+              onChangeText={(text) => {
+                handleChange("username", text);
+              }}
               error={inputErrors.username}
-              onFocus={() => handleErrorMessage("username", undefined)}
+              onFocus={() => {
+                handleErrorMessage("username", undefined);
+              }}
               value={inputValues.username}
             />
             <Input
               label="Email"
               placeholder="Email"
               iconName="email-outline"
-              onChangeText={(text) => handleChange("email", text)}
+              onChangeText={(text) => {
+                handleChange("email", text);
+              }}
               error={inputErrors.email}
-              onFocus={() => handleErrorMessage("email", undefined)}
+              onFocus={() => {
+                handleErrorMessage("email", undefined);
+              }}
               value={inputValues.email}
             />
             <Input
@@ -100,9 +107,13 @@ export default function Signup() {
               placeholder="Password"
               iconName="lock-outline"
               password={true}
-              onChangeText={(text) => handleChange("password", text)}
+              onChangeText={(text) => {
+                handleChange("password", text);
+              }}
               error={inputErrors.password}
-              onFocus={() => handleErrorMessage("password", undefined)}
+              onFocus={() => {
+                handleErrorMessage("password", undefined);
+              }}
               value={inputValues.password}
             />
             <Input
@@ -110,9 +121,13 @@ export default function Signup() {
               placeholder="Confirm Password"
               iconName="lock-outline"
               password={true}
-              onChangeText={(text) => handleChange("confirmPassword", text)}
+              onChangeText={(text) => {
+                handleChange("confirmPassword", text);
+              }}
               error={inputErrors.confirmPassword}
-              onFocus={() => handleErrorMessage("confirmPassword", undefined)}
+              onFocus={() => {
+                handleErrorMessage("confirmPassword", undefined);
+              }}
               value={inputValues.confirmPassword}
             />
           </View>
@@ -133,7 +148,7 @@ export default function Signup() {
       </View>
     </SafeAreaView>
   );
-};
+}
 
 const styles = StyleSheet.create({
   container: {

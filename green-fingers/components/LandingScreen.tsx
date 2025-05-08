@@ -1,5 +1,5 @@
 import React from "react";
-import { View, StyleSheet, Text } from "react-native";
+import { View, StyleSheet } from "react-native";
 import LandingSVG from "@/components/LandingSVG";
 import Button from "./Button";
 import { useRouter } from "expo-router";
@@ -13,12 +13,16 @@ const LandingScreen = () => {
         <Button
           text="Log In"
           type="primary"
-          onPress={() => router.push("/login")}
+          onPress={() => {
+            router.push("/login");
+          }}
         />
         <Button
           text="Sign Up"
           type="secondary"
-          onPress={() => router.push("/signup")}
+          onPress={() => {
+            router.push("/signup");
+          }}
         />
       </View>
     </View>

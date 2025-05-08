@@ -37,7 +37,9 @@ const PlantCard: React.FC<PlantCardProps> = ({ plant, ...props }) => {
             </Text>
             {"nickName" in plant && (
               <Pressable
-                onPress={() => handleDeletePlant(plant)}
+                onPress={() => {
+                  handleDeletePlant(plant);
+                }}
                 style={({ pressed }) => [
                   styles.deleteButton,
                   pressed && styles.activeDelete,

@@ -11,7 +11,7 @@ const ProfileLayout: React.FC = () => {
   const router = useRouter();
   const { user, isLoggedIn } = useAuth();
   const [menuOpen, setMenuOpen] = useState(false);
-  const { fetchUserGardens, fetchCatalogPlants } = useGardensAndPlants();
+  const { fetchUserGardens } = useGardensAndPlants();
 
   const toggleMenu = () => setMenuOpen(!menuOpen);
 

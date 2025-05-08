@@ -55,7 +55,7 @@ export default function LoginForm() {
     try {
       await login(inputValues);
     } catch (error) {
-      showToast('error', (error as Error).message || 'Login failed.')
+      showToast("error", (error as Error).message || "Login failed.");
     }
   };
 
@@ -70,9 +70,13 @@ export default function LoginForm() {
               iconName="account"
               label="Email"
               placeholder="Enter your email"
-              onChangeText={(text) => handleChange("email", text)}
+              onChangeText={(text) => {
+                handleChange("email", text);
+              }}
               error={inputErrors.email}
-              onFocus={() => handleErrorMessage("email", undefined)}
+              onFocus={() => {
+                handleErrorMessage("email", undefined);
+              }}
               value={inputValues.email}
             />
             <Input
@@ -81,17 +85,28 @@ export default function LoginForm() {
               placeholder="Enter your password"
               password
               secureTextEntry={true}
-              onChangeText={(text) => handleChange("password", text)}
+              onChangeText={(text) => {
+                handleChange("password", text);
+              }}
               error={inputErrors.password}
-              onFocus={() => handleErrorMessage("password", undefined)}
+              onFocus={() => {
+                handleErrorMessage("password", undefined);
+              }}
               value={inputValues.password}
             />
           </View>
-          <Button text="Login" onPress={validateAndLogin} iconName="login" testID="login-button" />
+          <Button
+            text="Login"
+            onPress={validateAndLogin}
+            iconName="login"
+            testID="login-button"
+          />
           <Button
             type="tertiary"
             text="Forgot Password?"
-            onPress={() => router.push("/forgotpassword")}
+            onPress={() => {
+              router.push("/forgotpassword");
+            }}
           />
         </View>
         <View style={styles.signUpContainer}>
@@ -99,7 +114,9 @@ export default function LoginForm() {
           <Button
             type="secondary"
             text="Sign Up"
-            onPress={() => router.push("/signup")}
+            onPress={() => {
+              router.push("/signup");
+            }}
             testID="signup-button"
           />
         </View>

@@ -17,7 +17,11 @@ const AddMenu = () => {
       <View style={styles.menuHeaderContainer}>
         <Text style={textStyles.h3}>
           {plantChosen ? (
-            <Pressable onPress={() => setPlantChosen(false)}>
+            <Pressable
+              onPress={() => {
+                setPlantChosen(false);
+              }}
+            >
               <Text style={textStyles.h3}>
                 <MaterialCommunityIcons name="arrow-left" size={20} /> Add Plant
               </Text>
@@ -39,7 +43,9 @@ const AddMenu = () => {
             text="Garden"
             iconName="nature"
             type="tertiary"
-            onPress={() => setGardenChosen(true)}
+            onPress={() => {
+              setGardenChosen(true);
+            }}
           />
         </View>
       )}
@@ -53,7 +59,9 @@ const AddMenu = () => {
       {gardenChosen && (
         <AddGardenOption
           gardenChosen={gardenChosen}
-          toggleGardenMenu={() => setGardenChosen(false)}
+          toggleGardenMenu={() => {
+            setGardenChosen(false);
+          }}
           setGardenChosen={setGardenChosen}
         />
       )}
