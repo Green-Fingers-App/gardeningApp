@@ -71,13 +71,17 @@ const Profile: React.FC = () => {
         <View style={styles.editForm}>
           <Input
             value={values.username}
-            onChangeText={(text) => handleChange("username", text)}
+            onChangeText={(text) => {
+              handleChange("username", text);
+            }}
             placeholder="Enter new Username"
             label="Username"
           />
           <Input
             value={values.email}
-            onChangeText={(text) => handleChange("email", text)}
+            onChangeText={(text) => {
+              handleChange("email", text);
+            }}
             placeholder="Enter new Email"
             label="Email"
           />

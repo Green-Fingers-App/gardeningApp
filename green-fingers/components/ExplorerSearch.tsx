@@ -40,7 +40,9 @@ const ExplorerSearch: React.FC<ExplorerSearchProps> = ({
     <View style={styles.componentContainer}>
       <Input
         label="Search a plant"
-        onChangeText={(text) => handleSearch(text)}
+        onChangeText={(text) => {
+          handleSearch(text);
+        }}
         iconName="magnify"
         style={{ margin: 10 }}
         error={error}

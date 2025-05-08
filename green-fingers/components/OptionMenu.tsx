@@ -20,7 +20,9 @@ const OptionsMenu: React.FC<OptionsMenuProps> = ({ options }) => {
   return (
     <View style={styles.container}>
       <TouchableOpacity
-        onPress={() => setVisible(!visible)}
+        onPress={() => {
+          setVisible(!visible);
+        }}
         style={styles.iconButton}
       >
         <MaterialCommunityIcons
@@ -33,11 +35,15 @@ const OptionsMenu: React.FC<OptionsMenuProps> = ({ options }) => {
         transparent
         visible={visible}
         animationType="fade"
-        onRequestClose={() => setVisible(false)}
+        onRequestClose={() => {
+          setVisible(false);
+        }}
       >
         <Pressable
           style={styles.modalBackdrop}
-          onPress={() => setVisible(false)}
+          onPress={() => {
+            setVisible(false);
+          }}
         >
           <View style={styles.menu}>
             {options.map((option, index) => (
@@ -72,7 +78,6 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "flex-start",
     alignItems: "flex-end",
-
   },
   menu: {
     position: "absolute",

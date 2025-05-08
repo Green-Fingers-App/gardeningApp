@@ -12,18 +12,12 @@ interface GardenCardProps {
 }
 
 const GardenCard: React.FC<GardenCardProps> = ({ garden }) => {
-  const handleUpdate = () => {
-    console.log(`Update garden: ${garden.id}`);
-  };
-
-  const handleDelete = () => {
-    console.log(`Delete garden: ${garden.id}`);
-  };
-
   return (
     <TouchableOpacity
       style={styles.cardContainer}
-      onPress={() => router.push(`/profile/gardens/${garden.id}`)}
+      onPress={() => {
+        router.push(`/profile/gardens/${garden.id}`);
+      }}
     >
       <View style={{ flexDirection: "row", alignItems: "center", gap: 8 }}>
         <MaterialCommunityIcons

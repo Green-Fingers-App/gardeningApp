@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Modal, View, Text, StyleSheet } from "react-native";
 import Input from "@/components/Input";
 import DropDown from "@/components/DropDown";
@@ -42,7 +42,9 @@ const EntityEditModal: React.FC<EntityEditModalProps> = ({
                 key={field.key}
                 label={field.label}
                 value={values[field.key] || ""}
-                onChangeText={(text) => onChange(field.key, text)}
+                onChangeText={(text) => {
+                  onChange(field.key, text);
+                }}
               />
             );
           }
@@ -56,7 +58,9 @@ const EntityEditModal: React.FC<EntityEditModalProps> = ({
                   ...option,
                   value: parseFloat(option.value),
                 }))}
-                onSelect={(value) => onChange(field.key, value.toString())}
+                onSelect={(value) => {
+                  onChange(field.key, value.toString());
+                }}
               />
             );
           }
