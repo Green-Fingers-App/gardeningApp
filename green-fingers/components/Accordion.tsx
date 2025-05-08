@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { View } from "react-native";
-import AccordionItem, { AccordionItemProps } from "@/components/AccordionItem";
+import { AccordionItemProps } from "@/components/AccordionItem";
 
 interface AccordionProps extends React.ComponentProps<typeof View> {
   children: React.ReactElement<AccordionItemProps>[];

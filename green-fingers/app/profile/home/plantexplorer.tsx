@@ -14,7 +14,6 @@ const PlantExplorerPage = () => {
   const router = useRouter();
 
   useEffect(() => {
-    console.log("im fetching:", plants);
     const fetchPlantsData = async () => {
       try {
         fetchCatalogPlants();
