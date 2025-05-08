@@ -35,11 +35,17 @@ const PlantDetailPage = () => {
   const router = useRouter();
 
   const options = [
-    { label: "Edit", onPress: () => setEditing(true) },
+    {
+      label: "Edit",
+      onPress: () => {
+        setEditing(true);
+      },
+    },
     {
       label: "Delete",
-      onPress: () =>
-        plant && handleDeleteEntity({ id: plant.id, name: plant.nickName }),
+      onPress: () => {
+        plant && handleDeleteEntity({ id: plant.id, name: plant.nickName });
+      },
     },
   ];
 
@@ -177,15 +183,3 @@ const PlantDetailPage = () => {
 };
 
 export default PlantDetailPage;
-
-const styles = StyleSheet.create({
-  modalContainer: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    gap: 8,
-    width: "95%",
-    marginHorizontal: "2.5%",
-    backgroundColor: colors.bgLight,
-  },
-});

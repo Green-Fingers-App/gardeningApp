@@ -12,7 +12,13 @@ import textStyles from "@/constants/textStyles";
 
 type MaterialCommunityIconName = keyof typeof MaterialCommunityIcons.glyphMap;
 
-type InputState = "default" | "focused" | "disabled" | "success" | "warning" | "error";
+type InputState =
+  | "default"
+  | "focused"
+  | "disabled"
+  | "success"
+  | "warning"
+  | "error";
 
 interface InputProps extends TextInputProps {
   label: string;
@@ -24,7 +30,6 @@ interface InputProps extends TextInputProps {
   password?: boolean;
   onFocus?: () => void;
 }
-
 
 const Input: React.FC<InputProps> = ({
   label,
@@ -91,8 +96,8 @@ const Input: React.FC<InputProps> = ({
     }
   };
 
-  const {inputStyle, textColor} = getInputStyles();
-  
+  const { inputStyle, textColor } = getInputStyles();
+
   return (
     <View style={styles.inputContainer}>
       <View style={styles.inputFieldContainer}>
@@ -107,12 +112,14 @@ const Input: React.FC<InputProps> = ({
           )}
           <TextInput
             {...props}
-            style={[textStyles.body,{ flex: 1, color: textColor }]}
+            style={[textStyles.body, { flex: 1, color: textColor }]}
             onFocus={() => {
               onFocus?.();
               setIsFocused(true);
             }}
-            onBlur={() => setIsFocused(false)}
+            onBlur={() => {
+              setIsFocused(false);
+            }}
             secureTextEntry={password && hidePassword}
             autoCorrect={false}
           />
@@ -121,14 +128,28 @@ const Input: React.FC<InputProps> = ({
               name={hidePassword ? "eye-outline" : "eye-off-outline"}
               size={20}
               color={colors.textSecondary}
-              onPress={() => setHidePassword(!hidePassword)}
+              onPress={() => {
+                setHidePassword(!hidePassword);
+              }}
             />
           )}
         </View>
       </View>
-      {success && <Text style={[textStyles.caption, { color: colors.textSuccess }]}>{success}</Text>}
-      {warning && <Text style={[textStyles.caption, { color: colors.textWarning }]}>{warning}</Text>}
-      {error && <Text style={[textStyles.caption, { color: colors.textError }]}>{error}</Text>}
+      {success && (
+        <Text style={[textStyles.caption, { color: colors.textSuccess }]}>
+          {success}
+        </Text>
+      )}
+      {warning && (
+        <Text style={[textStyles.caption, { color: colors.textWarning }]}>
+          {warning}
+        </Text>
+      )}
+      {error && (
+        <Text style={[textStyles.caption, { color: colors.textError }]}>
+          {error}
+        </Text>
+      )}
     </View>
   );
 };

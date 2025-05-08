@@ -77,18 +77,24 @@ const Index: React.FC = () => {
               key={index}
               day={day}
               currentDay={isCurrentDay(day)}
-              onClick={() => selectDay(day)}
+              onClick={() => {
+                selectDay(day);
+              }}
             />
           ))}
         </View>
         <View style={styles.buttonContainer}>
           <Button
-            onPress={() => setNav(nav - 1)}
+            onPress={() => {
+              setNav(nav - 1);
+            }}
             text="Previous"
             style={{ width: "30%" }}
           />
           <Button
-            onPress={() => setNav(nav + 1)}
+            onPress={() => {
+              setNav(nav + 1);
+            }}
             text="next"
             style={{ width: "30%" }}
           />

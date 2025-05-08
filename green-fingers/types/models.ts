@@ -1,22 +1,6 @@
 // Enum for frequency of water
 export type WaterFrequency = "DAILY" | "WEEKLY" | "BIWEEKLY" | "MONTHLY";
 
-// Enum for months to restrict blooming, harvesting, and planting periods
-export enum Month {
-  JANUARY = 1,
-  FEBRUARY,
-  MARCH,
-  APRIL,
-  MAY,
-  JUNE,
-  JULY,
-  AUGUST,
-  SEPTEMBER,
-  OCTOBER,
-  NOVEMBER,
-  DECEMBER,
-}
-
 // Enum for sunlight exposure
 export enum SunLight {
   FULL_SUN = "Full Sun",
@@ -31,14 +15,14 @@ export interface PlantName {
 
 // Blooming period and details
 export interface Blooming {
-  start: Month;
-  end: Month;
+  start: string;
+  end: string;
   flowerColor: string;
 }
 
 export interface Harvest {
-  start: Month;
-  end: Month;
+  start: string;
+  end: string;
   yield: number;
   edibleParts: string;
 }
@@ -57,8 +41,8 @@ export interface Size {
 
 // Planting period
 export interface Planting {
-  start: Month;
-  end: Month;
+  start: string;
+  end: string;
 }
 
 // Main Plant interface

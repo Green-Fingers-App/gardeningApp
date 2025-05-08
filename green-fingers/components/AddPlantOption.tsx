@@ -15,20 +15,22 @@ interface AddPlantOptionProps {
   setPlantChosen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const AddPlantOption: React.FC<AddPlantOptionProps> = ({
-  setPlantChosen,
-  togglePlantMenu,
-  plantChosen,
-}) => {
+const AddPlantOption: React.FC<AddPlantOptionProps> = ({ setPlantChosen }) => {
   const { gardens, createUserPlant } = useGardensAndPlants();
 
   const [nickName, setNickName] = useState<string>("");
   const [selectedGarden, setSelectedGarden] = useState<number | null>(null);
   const [selectedPlant, setSelectedPlant] = useState<CatalogPlant | null>(null);
 
-  const handlePlantSelection = (plant: CatalogPlant) => setSelectedPlant(plant);
-  const handleNickNameChange = (text: string) => setNickName(text);
-  const handleGardenSelect = (gardenId: number) => setSelectedGarden(gardenId);
+  const handlePlantSelection = (plant: CatalogPlant) => {
+    setSelectedPlant(plant);
+  };
+  const handleNickNameChange = (text: string) => {
+    setNickName(text);
+  };
+  const handleGardenSelect = (gardenId: number) => {
+    setSelectedGarden(gardenId);
+  };
 
   const isAddPlantDisabled = !nickName || !selectedGarden || !selectedPlant;
 

@@ -10,8 +10,9 @@ import Button from "@/components/Button";
 const AddMenu = () => {
   const [plantChosen, setPlantChosen] = useState(false);
   const [gardenChosen, setGardenChosen] = useState(false);
-  const togglePlantMenu = () => setPlantChosen(!plantChosen);
-
+  const togglePlantMenu = () => {
+    setPlantChosen(!plantChosen);
+  };
   return (
     <View style={styles.menuContainer}>
       <View style={styles.menuHeaderContainer}>
