@@ -21,7 +21,9 @@ const RootLayout = () => {
 
   useEffect(() => {
     loadFonts()
-      .then(() => setFontsLoaded(true))
+      .then(() => {
+        setFontsLoaded(true);
+      })
       .catch(console.warn);
   }, []);
 
@@ -39,7 +41,7 @@ const RootLayout = () => {
             </CalendarProvider>
           </PlantsProvider>
         </AuthProvider>
-      </ ToastProvider>
+      </ToastProvider>
     </GestureHandlerRootView>
   );
 };

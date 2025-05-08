@@ -22,7 +22,7 @@ const PlantExplorerPage = () => {
         console.error("Error fetching plant catalog:", error);
       }
     };
-    fetchPlantsData();
+    void fetchPlantsData();
   }, []);
 
   return (

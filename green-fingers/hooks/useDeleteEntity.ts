@@ -8,7 +8,9 @@ type DeleteEntityHook = {
   deleting: boolean;
 };
 
-export const useDeleteEntity = (entityType: "Plant" | "Garden" ): DeleteEntityHook => {
+export const useDeleteEntity = (
+  entityType: "Plant" | "Garden"
+): DeleteEntityHook => {
   const [deleting, setDeleting] = useState(false);
   const { deleteUserPlant, deleteUserGarden } = useGardensAndPlants();
   const router = useRouter();
@@ -19,23 +21,28 @@ export const useDeleteEntity = (entityType: "Plant" | "Garden" ): DeleteEntityHo
   };
 
   const handleDeleteEntity = (entity: { id: number; name: string }) => {
-    console.log("About to delete: ", entity)
+    console.log("About to delete: ", entity);
     Alert.alert(
       `Delete ${entityType}`,
-      `Do you want to delete the ${entityType.toLowerCase()}: ${entity.name}, and everything it contains?`,
+      `Do you want to delete the ${entityType.toLowerCase()}: ${
+        entity.name
+      }, and everything it contains?`,
       [
         {
           text: "Yes",
-          onPress: async () => {
+          onPress: () => {
             try {
               console.log(`${entityType} ${entity.name} deleted`);
               setDeleting(true);
               deleteFunctions[entityType](entity.id);
             } catch (error) {
-              Alert.alert("Error", `Something went wrong while deleting the ${entityType.toLowerCase()}.`);
+              Alert.alert(
+                "Error",
+                `Something went wrong while deleting the ${entityType.toLowerCase()}.`
+              );
             } finally {
               setDeleting(false);
-              let path= "";
+              let path = "";
               if (entityType === "Plant") {
                 path = "/profile/plants";
               } else {

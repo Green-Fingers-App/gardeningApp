@@ -49,7 +49,7 @@ interface PlantContextProps {
     plantData: Partial<AddUserPlant>
   ) => Promise<UserPlant | undefined>;
   deleteUserPlant: (plantId: number) => Promise<void>;
-  fetchUserGardens: () => void;
+  fetchUserGardens: () => Promise<void>;
   fetchPlantDetail: (plantId: string) => UserPlant | undefined;
   fetchGardenDetail: (gardenId: string) => Garden | undefined;
   fetchGardenPlants: (gardenId: string) => UserPlant[] | undefined;
@@ -277,9 +277,9 @@ export const PlantsProvider: React.FC<{ children: ReactNode }> = ({
 
   useEffect(() => {
     if (user?.id) {
-      fetchUserGardens();
-      fetchUserPlants();
-      fetchCatalogPlants();
+      void fetchUserGardens();
+      void fetchUserPlants();
+      void fetchCatalogPlants();
     }
   }, [user?.id]);
 
