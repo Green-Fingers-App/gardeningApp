@@ -85,7 +85,9 @@ const DropDown: React.FC<DropDownProps> = ({
             keyExtractor={(item) => item.value.toString()}
             renderItem={({ item }) => (
               <Pressable
-                onPress={() => handleSelect(item.value)}
+                onPress={() => {
+                  handleSelect(item.value);
+                }}
                 style={styles.optionContainer}
               >
                 <Text style={[textStyles.body, styles.optionText]}>

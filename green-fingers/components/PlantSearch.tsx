@@ -64,7 +64,9 @@ const PlantSearch: React.FC<PlantSearchProps> = ({ onSelectPlant }) => {
           data={suggestions}
           renderItem={({ item }) => (
             <TouchableOpacity
-              onPress={() => handleSelectPlant(item)}
+              onPress={() => {
+                handleSelectPlant(item);
+              }}
               style={styles.suggestionContainer}
             >
               <Text style={styles.suggestionText}>{item.name.commonName}</Text>

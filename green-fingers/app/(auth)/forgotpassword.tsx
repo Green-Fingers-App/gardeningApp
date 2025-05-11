@@ -6,10 +6,6 @@ import Button from "@/components/Button";
 import { router } from "expo-router";
 
 const forgotpasswordPage = () => {
-  const inputValues = {};
-
-  type InputFieldNames = keyof typeof inputValues;
-
   return (
     <SafeAreaView style={styles.content}>
       <Text>

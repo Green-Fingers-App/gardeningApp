@@ -7,7 +7,7 @@ import {
   StyleSheet,
   TouchableOpacity,
 } from "react-native";
-import { router, Stack, useLocalSearchParams, useRouter } from "expo-router";
+import { Stack, useLocalSearchParams, useRouter } from "expo-router";
 import React, { useEffect, useState } from "react";
 import { useGardensAndPlants } from "@/context/GardensAndPlantsContext";
 import { UserPlant } from "@/types/models";
@@ -35,11 +35,17 @@ const PlantDetailPage = () => {
   const router = useRouter();
 
   const options = [
-    { label: "Edit", onPress: () => setEditing(true) },
+    {
+      label: "Edit",
+      onPress: () => {
+        setEditing(true);
+      },
+    },
     {
       label: "Delete",
-      onPress: () =>
-        plant && handleDeleteEntity({ id: plant.id, name: plant.nickName }),
+      onPress: () => {
+        plant && handleDeleteEntity({ id: plant.id, name: plant.nickName });
+      },
     },
   ];
 
@@ -177,15 +183,3 @@ const PlantDetailPage = () => {
 };
 
 export default PlantDetailPage;
-
-const styles = StyleSheet.create({
-  modalContainer: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    gap: 8,
-    width: "95%",
-    marginHorizontal: "2.5%",
-    backgroundColor: colors.bgLight,
-  },
-});

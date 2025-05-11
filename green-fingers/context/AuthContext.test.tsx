@@ -4,7 +4,6 @@ import { render, waitFor } from "@testing-library/react-native";
 import { AuthProvider, useAuth } from "./AuthContext";
 import * as authApi from "@/api/auth";
 import * as SecureStore from "expo-secure-store";
-import { useRouter } from "expo-router";
 
 jest.mock("expo-secure-store", () => ({
   setItemAsync: jest.fn(),
@@ -60,10 +59,15 @@ describe("AuthContext", () => {
       expect(getByTestId("loggedIn").props.children).toBe("true");
     });
 
-    expect(SecureStore.setItemAsync).toHaveBeenCalledWith("accessToken", "access123");
-    expect(SecureStore.setItemAsync).toHaveBeenCalledWith("refreshToken", "refresh123");
+    expect(SecureStore.setItemAsync).toHaveBeenCalledWith(
+      "accessToken",
+      "access123"
+    );
+    expect(SecureStore.setItemAsync).toHaveBeenCalledWith(
+      "refreshToken",
+      "refresh123"
+    );
 
     expect(mockReplace).toHaveBeenCalledWith("/profile/home");
   });
 });
-

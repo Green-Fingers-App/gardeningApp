@@ -11,20 +11,20 @@ import Input from "@/components/Input";
 import useForm from "@/hooks/useForm";
 
 const Profile: React.FC = () => {
-  const { user, updateUser } = useAuth();
+  const { user } = useAuth();
   const [editMode, setEditMode] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
   // Initialize the form with existing user values
-  const { values, handleChange, resetForm, setValues } = useForm({
+  const { values, handleChange, resetForm } = useForm({
     username: user?.username || "",
     email: user?.email || "",
   });
 
   useEffect(() => {
     if (user?.id) {
-      fetchOrCreateUserProfile();
+      void fetchOrCreateUserProfile();
     }
   }, [user?.id]);
 
@@ -71,13 +71,17 @@ const Profile: React.FC = () => {
         <View style={styles.editForm}>
           <Input
             value={values.username}
-            onChangeText={(text) => handleChange("username", text)}
+            onChangeText={(text) => {
+              handleChange("username", text);
+            }}
             placeholder="Enter new Username"
             label="Username"
           />
           <Input
             value={values.email}
-            onChangeText={(text) => handleChange("email", text)}
+            onChangeText={(text) => {
+              handleChange("email", text);
+            }}
             placeholder="Enter new Email"
             label="Email"
           />
