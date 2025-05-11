@@ -1,82 +1,102 @@
+import { ActivityIndicator, Pressable, StyleSheet, Text, View, ViewStyle } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-import {
-  StyleSheet,
-  Text,
-  View,
-  TouchableOpacityProps,
-  Pressable,
-} from "react-native";
+import React from "react";
 import colors from "@/constants/colors";
 import textStyles from "@/constants/textStyles";
-import React from "react";
 
 type MaterialCommunityIconName = keyof typeof MaterialCommunityIcons.glyphMap;
-
 type ButtonType = "primary" | "secondary" | "tertiary";
-type ButtonState = "default" | "disabled";
+type ButtonState = "default" | "disabled" | "loading";
 
-interface ButtonProps extends TouchableOpacityProps {
+interface ButtonProps {
   iconName?: MaterialCommunityIconName;
-  text: string;
   iconSize?: number;
+  text: string;
   type?: ButtonType;
   buttonState?: ButtonState;
+  onPress?: () => void;
+  style?: ViewStyle;
 }
 
 const Button: React.FC<ButtonProps> = ({
   iconName,
-  text,
   iconSize = 16,
+  text,
   type = "primary",
   buttonState = "default",
+  onPress,
   style,
-  ...props
 }) => {
-  const getButtonStyles = () => {
+  const isDisabled = buttonState === "disabled" || buttonState === "loading";
+
+  const getButtonStyle = (): ViewStyle => {
     switch (type) {
       case "secondary":
         return {
-          buttonStyle: [styles.secondaryButton, buttonState === "disabled" && styles.secondaryDisabled],
-          pressedStyle: styles.secondaryPressed,
-          textColor: buttonState === "disabled" ? colors.textMuted : colors.primaryDefault,
+          ...styles.buttonBase,
+          backgroundColor: colors.secondaryDefault,
+          borderColor: colors.primaryDefault,
+          borderWidth: 1,
         };
       case "tertiary":
         return {
-          buttonStyle: [styles.tertiaryButton, buttonState === "disabled" && styles.tertiaryDisabled],
-          pressedStyle: { textColor: colors.primaryDark },
-          textColor: buttonState === "disabled" ? colors.textMuted : colors.primaryDefault,
+          ...styles.buttonBase,
+          backgroundColor: "transparent",
         };
       case "primary":
       default:
         return {
-          buttonStyle: [styles.primaryButton, buttonState === "disabled" && styles.primaryDisabled],
-          pressedStyle: styles.primaryPressed,
-          textColor: buttonState === "disabled" ? colors.textMuted : colors.bgLight,
+          ...styles.buttonBase,
+          backgroundColor: colors.primaryDefault,
         };
     }
   };
 
-  const { buttonStyle, pressedStyle, textColor } = getButtonStyles();
+  const getPressedStyle = (): ViewStyle => {
+    if (type === "primary") return { backgroundColor: colors.primaryDark };
+    if (type === "secondary") return { backgroundColor: colors.secondaryDark };
+    return {}; // Tertiary has no background
+  };
+
+  const getTextColor = (): string => {
+    if (buttonState === "disabled" || buttonState === "loading") return colors.textMuted;
+    if (type === "primary") return colors.bgLight;
+    return colors.primaryDefault;
+  };
 
   return (
     <Pressable
       style={({ pressed }) => [
-        buttonStyle,
-        pressed && pressedStyle,
+        getButtonStyle(),
+        pressed && getPressedStyle(),
+        isDisabled && styles.disabled,
         style,
       ]}
-      disabled={buttonState === "disabled"}
-      {...props}
+      disabled={isDisabled}
+      onPress={onPress}
     >
       <View style={styles.content}>
-        {iconName && (
+        {buttonState === "loading" && (
+          <ActivityIndicator
+            size="small"
+            color={getTextColor()}
+            style={{ marginRight: 8 }}
+          />
+        )}
+        {iconName && buttonState !== "loading" && (
           <MaterialCommunityIcons
             name={iconName}
             size={iconSize}
-            color={textColor}
+            color={getTextColor()}
           />
         )}
-        <Text style={[textStyles.button, { color: textColor }, type === "tertiary" && styles.tertiaryText]}>
+        <Text
+          style={[
+            textStyles.button,
+            { color: getTextColor() },
+            type === "tertiary" && styles.tertiaryText,
+          ]}
+        >
           {text}
         </Text>
       </View>
@@ -90,51 +110,19 @@ const styles = StyleSheet.create({
   content: {
     flexDirection: "row",
     alignItems: "center",
+    justifyContent: "center",
     gap: 8,
   },
-  primaryButton: {
+  buttonBase: {
     paddingVertical: 12,
     paddingHorizontal: 16,
-    justifyContent: "center",
-    alignItems: "center",
     borderRadius: 8,
-    backgroundColor: colors.primaryDefault,
     width: "100%",
   },
-  secondaryButton: {
-    paddingVertical: 12,
-    paddingHorizontal: 16,
-    justifyContent: "center",
-    alignItems: "center",
-    borderRadius: 8,
-    backgroundColor: colors.secondaryDefault,
-    borderColor: colors.primaryDefault,
-    borderWidth: 1,
-    width: "100%",
-  },
-  tertiaryButton: {
-    padding: 4,
-    justifyContent: "center",
-    alignItems: "center",
-    borderRadius: 8,
+  disabled: {
+    backgroundColor: colors.greyLight,
   },
   tertiaryText: {
     textDecorationLine: "underline",
-  },
-  primaryDisabled: {
-    backgroundColor: colors.greyLight,
-  },
-  secondaryDisabled: {
-    backgroundColor: colors.greyLight,
-    borderColor: colors.textMuted,
-  },
-  tertiaryDisabled: {
-    color: colors.textMuted,
-  },
-  primaryPressed: {
-    backgroundColor: colors.primaryDark,
-  },
-  secondaryPressed: {
-    backgroundColor: colors.secondaryDark,
   },
 });

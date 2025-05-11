@@ -13,41 +13,52 @@ import Input from "@/components/Input";
 import colors from "@/constants/colors";
 import textStyles from "@/constants/textStyles";
 
+interface WifiNetwork {
+  SSID: string;
+  frequency: number;
+}
+
 interface SSIDSearchProps {
   onSelectSSID: (ssid: string) => void;
 }
 
 const SSIDSearch: React.FC<SSIDSearchProps> = ({ onSelectSSID }) => {
   const [input, setInput] = useState("");
-  const [availableSSIDs, setAvailableSSIDs] = useState<string[]>([]);
+  const [availableSSIDs, setAvailableSSIDs] = useState<WifiNetwork[]>([]);
   const [showDropdown, setShowDropdown] = useState(false);
 
-  const scanNetworks = async () => {
-    try {
+  useEffect(() => {
+    const scanNetworks = async () => {
       if (Platform.OS === "android" && Platform.Version >= 29) {
         const granted = await PermissionsAndroid.request(
           PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION
         );
-        if (granted !== PermissionsAndroid.RESULTS.GRANTED) {
-          return;
-        }
+        if (granted !== PermissionsAndroid.RESULTS.GRANTED) return;
       }
 
-      const results = await WifiManager.loadWifiList();
-      const ssids = results.map((entry) => entry.SSID).filter(Boolean);
-      setAvailableSSIDs(ssids);
-    } catch (err) {
-      console.error("WiFi list scan failed", err);
-    }
-  };
+      try {
+        const results = await WifiManager.loadWifiList();
+        const unique = new Map<string, WifiNetwork>();
+        results.forEach((net: any) => {
+          if (net.SSID) {
+            unique.set(net.SSID, {
+              SSID: net.SSID,
+              frequency: net.frequency,
+            });
+          }
+        });
+        setAvailableSSIDs(Array.from(unique.values()));
+      } catch (err) {
+        console.error("WiFi scan failed:", err);
+      }
+    };
 
-  useEffect(() => {
     scanNetworks();
   }, []);
 
   const filtered = input.trim().length > 0
-    ? availableSSIDs.filter((ssid) =>
-      ssid.toLowerCase().includes(input.toLowerCase())
+    ? availableSSIDs.filter((net) =>
+      net.SSID.toLowerCase().includes(input.toLowerCase())
     )
     : availableSSIDs;
 
@@ -73,13 +84,15 @@ const SSIDSearch: React.FC<SSIDSearchProps> = ({ onSelectSSID }) => {
       {showDropdown && filtered.length > 0 && (
         <FlatList
           data={filtered}
-          keyExtractor={(item) => item}
+          keyExtractor={(item) => item.SSID}
           renderItem={({ item }) => (
             <TouchableOpacity
-              onPress={() => handleSelectSSID(item)}
+              onPress={() => handleSelectSSID(item.SSID)}
               style={styles.suggestionContainer}
             >
-              <Text style={styles.suggestionText}>{item}</Text>
+              <Text style={styles.suggestionText}>
+                {item.SSID} ({item.frequency < 3000 ? "2.4GHz" : "5GHz"})
+              </Text>
             </TouchableOpacity>
           )}
           style={styles.suggestionList}

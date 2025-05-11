@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { View, StyleSheet, Text, Alert, Button as RNButton, Platform, PermissionsAndroid } from "react-native";
+import { View, StyleSheet, Text, Platform, PermissionsAndroid } from "react-native";
 import { CameraView, useCameraPermissions } from "expo-camera";
 import WifiManager from "react-native-wifi-reborn";
+import Button from "./Button";
 import SendWifiCredentialsForm from "./SendWifiCredentialsForm";
+import AssignSensorForm from "./AssignSensorForm";
 import { useToast } from "@/context/ToastContext";
+import { useAuth } from "@/context/AuthContext";
 import colors from "@/constants/colors";
 
 interface AddSensorOptionProps {
@@ -17,11 +20,18 @@ const AddSensorOption: React.FC<AddSensorOptionProps> = ({
 }) => {
   const [permission, requestPermission] = useCameraPermissions();
   const [scanned, setScanned] = useState(false);
+  const [foundSensor, setFoundSensor] = useState<{ ssid: string; password: string; ip: string } | null>(null);
+  const [connecting, setConnecting] = useState(false);
 
   const [connectedToSensor, setConnectedToSensor] = useState(false);
   const [sensorIP, setSensorIP] = useState<string | null>(null);
 
+  const [wifiConfigured, setWifiConfigured] = useState(false);
+  const [assigning, setAssigning] = useState(false);
+
   const { showToast } = useToast();
+  const { user } = useAuth();
+
 
   useEffect(() => {
     if (permission?.status !== "granted") {
@@ -35,30 +45,20 @@ const AddSensorOption: React.FC<AddSensorOptionProps> = ({
     try {
       const parsed = JSON.parse(data);
       if (parsed?.ssid && parsed?.password && parsed?.ip) {
-
-        Alert.alert("Sensor Found", `SSID: ${parsed.ssid}`, [
-          {
-            text: "Connect",
-            onPress: () => {
-              connectToSensor(parsed.ssid, parsed.password, parsed.ip);
-            },
-          },
-          { text: "Cancel", onPress: () => setScanned(false), style: "cancel" },
-        ]);
-
+        setFoundSensor({ ssid: parsed.ssid, password: parsed.password, ip: parsed.ip });
       } else {
-        Alert.alert("Invalid QR", "Missing ssid or ip.");
+        showToast("error", "Invalid QR code");
         setScanned(false);
       }
     } catch (error) {
-      console.error("QR parse error:", error, data);
-      Alert.alert("Scan Error", `Failed to parse QR code:\n${data}`);
+      showToast("error", "Failed to parse QR code infos");
       setScanned(false);
     }
   };
 
 
   const connectToSensor = async (ssid: string, password: string, ip: string) => {
+    setConnecting(true);
     try {
       if (Platform.OS === "android" && Platform.Version >= 29) {
         const granted = await PermissionsAndroid.request(
@@ -70,34 +70,104 @@ const AddSensorOption: React.FC<AddSensorOptionProps> = ({
           }
         );
         if (granted !== PermissionsAndroid.RESULTS.GRANTED) {
-          Alert.alert("Permission Denied", "Location permission is required.");
+          showToast("warning", "Location permission is required.");
+          setConnecting(false);
           return;
         }
       }
 
       await WifiManager.connectToProtectedSSID(ssid, password, true, false);
-      await new Promise(resolve => setTimeout(resolve, 2000)); // wait 2 seconds for handshake
+      // await new Promise(resolve => setTimeout(resolve, 2000)); // wait 2 seconds for handshake
       setSensorIP(ip);
       setConnectedToSensor(true);
     } catch (error) {
       showToast("error", "Failed to connect to sensor");
       setScanned(false);
+    } finally {
+      setConnecting(false);
     }
   };
+
+  if (foundSensor && !connectedToSensor) {
+    return (
+      <View style={styles.container}>
+        <Text style={styles.label}>Sensor Found</Text>
+        <Text>SSID: {foundSensor.ssid}</Text>
+        <Text>IP: {foundSensor.ip}</Text>
+        <View style={{ flexDirection: "column", gap: 8, marginTop: 16 }}>
+          <Button
+            text={connecting ? "Connecting..." : "Connect"}
+            onPress={() => {
+              if (!connecting) {
+                connectToSensor(foundSensor.ssid, foundSensor.password, foundSensor.ip);
+              }
+            }}
+            buttonState={connecting ? "loading" : "default"}
+          />
+          <Button
+            text="Cancel"
+            type="secondary"
+            onPress={() => {
+              setFoundSensor(null);
+              setScanned(false);
+            }}
+            buttonState={connecting ? "disabled" : "default"}
+          />
+        </View>
+      </View>
+    );
+  }
 
   if (!permission?.granted) {
     return <Text style={{ padding: 16 }}>Camera permission is required</Text>;
   }
 
-
-  if (connectedToSensor && sensorIP) {
+  if (connectedToSensor && sensorIP && !wifiConfigured) {
     return (
       <SendWifiCredentialsForm
         sensorIP={sensorIP}
         onFinish={() => {
-          setSensorIP(null);
-          setConnectedToSensor(false);
-          setSensorChosen(false);
+          setWifiConfigured(true);
+        }}
+      />
+    );
+  }
+
+  if (connectedToSensor && sensorIP && wifiConfigured) {
+    return (
+      <AssignSensorForm
+        loading={assigning}
+        onSubmit={async (sensorName, plantId) => {
+          if (!user?.id) return;
+          setAssigning(true);
+          try {
+            const res = await fetch(`http://${sensorIP}/assign`, {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({
+                userId: user.id,
+                name: sensorName,
+                plantId: plantId,
+              }),
+            });
+
+            if (res.ok) {
+              showToast("success", "Sensor assigned successfully!");
+              setSensorChosen(false);
+              setSensorIP(null);
+              setConnectedToSensor(false);
+              setWifiConfigured(false);
+            } else {
+              showToast("error", `Sensor responded with ${res.status}`);
+            }
+          } catch (err) {
+            showToast("error", "Failed to assign sensor");
+          } finally {
+            setAssigning(false);
+          }
+        }}
+        onCancel={() => {
+          setWifiConfigured(false);
         }}
       />
     );
@@ -115,7 +185,7 @@ const AddSensorOption: React.FC<AddSensorOptionProps> = ({
       </View>
       {scanned && (
         <View style={{ marginTop: 12 }}>
-          <RNButton title="Scan Again" onPress={() => setScanned(false)} />
+          <Button text="Scan Again" type="secondary" onPress={() => setScanned(false)} />
         </View>
       )}
     </View>
