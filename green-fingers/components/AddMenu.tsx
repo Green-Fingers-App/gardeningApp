@@ -13,7 +13,7 @@ const AddMenu = () => {
   const [gardenChosen, setGardenChosen] = useState(false);
   const [sensorChosen, setSensorChosen] = useState(false);
 
-  const togglePlantMenu = () => setPlantChosen(!plantChosen);
+  const togglePlantMenu = () => { setPlantChosen(!plantChosen); };
 
   const renderHeader = () => {
     if (plantChosen) {
