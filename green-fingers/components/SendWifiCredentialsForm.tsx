@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, StyleSheet, Text } from "react-native";
+import { View, StyleSheet } from "react-native";
 import SSIDSearch from "./SSIDSearch";
 import Input from "@/components/Input";
 import Button from "@/components/Button";
@@ -55,12 +55,13 @@ const SendWifiCredentialsForm: React.FC<Props> = ({ sensorIP, onFinish }) => {
         if (res.ok) {
           const data = await res.json();
           if (data.connected && data.ip) {
-            showToast("success", `Sensor connected. IP: ${data.ip}`);
             onFinish();
             return;
           }
         }
-      } catch { }
+      } catch {
+        showToast("error", "Failed to connect to sensor")
+      }
       await new Promise(resolve => setTimeout(resolve, 1000));
     }
     showToast("error", "Sensor did not confirm WiFi connection in time.");

@@ -12,10 +12,12 @@ import WifiManager from "react-native-wifi-reborn";
 import Input from "@/components/Input";
 import colors from "@/constants/colors";
 import textStyles from "@/constants/textStyles";
+import { useToast } from "@/context/ToastContext";
 
 interface WifiNetwork {
   SSID: string;
   frequency: number;
+  [key: string]: any;
 }
 
 interface SSIDSearchProps {
@@ -26,6 +28,7 @@ const SSIDSearch: React.FC<SSIDSearchProps> = ({ onSelectSSID }) => {
   const [input, setInput] = useState("");
   const [availableSSIDs, setAvailableSSIDs] = useState<WifiNetwork[]>([]);
   const [showDropdown, setShowDropdown] = useState(false);
+  const { showToast } = useToast();
 
   useEffect(() => {
     const scanNetworks = async () => {
@@ -37,9 +40,10 @@ const SSIDSearch: React.FC<SSIDSearchProps> = ({ onSelectSSID }) => {
       }
 
       try {
-        const results = await WifiManager.loadWifiList();
+        const results: WifiNetwork[] = await WifiManager.loadWifiList();
         const unique = new Map<string, WifiNetwork>();
-        results.forEach((net: any) => {
+
+        results.forEach((net) => {
           if (net.SSID) {
             unique.set(net.SSID, {
               SSID: net.SSID,
@@ -47,13 +51,14 @@ const SSIDSearch: React.FC<SSIDSearchProps> = ({ onSelectSSID }) => {
             });
           }
         });
+
         setAvailableSSIDs(Array.from(unique.values()));
       } catch (err) {
-        console.error("WiFi scan failed:", err);
+        showToast("error", "Scan for local WiFis failed");
       }
     };
 
-    scanNetworks();
+    void scanNetworks();
   }, []);
 
   const filtered = input.trim().length > 0
@@ -87,7 +92,7 @@ const SSIDSearch: React.FC<SSIDSearchProps> = ({ onSelectSSID }) => {
           keyExtractor={(item) => item.SSID}
           renderItem={({ item }) => (
             <TouchableOpacity
-              onPress={() => handleSelectSSID(item.SSID)}
+              onPress={() => { handleSelectSSID(item.SSID); }}
               style={styles.suggestionContainer}
             >
               <Text style={styles.suggestionText}>

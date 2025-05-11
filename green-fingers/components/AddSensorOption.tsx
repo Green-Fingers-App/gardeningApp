@@ -99,7 +99,7 @@ const AddSensorOption: React.FC<AddSensorOptionProps> = ({
             text={connecting ? "Connecting..." : "Connect"}
             onPress={() => {
               if (!connecting) {
-                connectToSensor(foundSensor.ssid, foundSensor.password, foundSensor.ip);
+                void connectToSensor(foundSensor.ssid, foundSensor.password, foundSensor.ip);
               }
             }}
             buttonState={connecting ? "loading" : "default"}
@@ -185,7 +185,7 @@ const AddSensorOption: React.FC<AddSensorOptionProps> = ({
       </View>
       {scanned && (
         <View style={{ marginTop: 12 }}>
-          <Button text="Scan Again" type="secondary" onPress={() => setScanned(false)} />
+          <Button text="Scan Again" type="secondary" onPress={() => { setScanned(false) }} />
         </View>
       )}
     </View>

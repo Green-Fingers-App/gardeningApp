@@ -18,7 +18,7 @@ const AddMenu = () => {
   const renderHeader = () => {
     if (plantChosen) {
       return (
-        <Pressable onPress={() => setPlantChosen(false)}>
+        <Pressable onPress={() => { setPlantChosen(false); }}>
           <Text style={textStyles.h3}>
             <MaterialCommunityIcons name="arrow-left" size={20} /> Add Plant
           </Text>
@@ -27,7 +27,7 @@ const AddMenu = () => {
     }
     if (gardenChosen) {
       return (
-        <Pressable onPress={() => setGardenChosen(false)}>
+        <Pressable onPress={() => { setGardenChosen(false); }}>
           <Text style={textStyles.h3}>
             <MaterialCommunityIcons name="arrow-left" size={20} /> Add Garden
           </Text>
@@ -36,7 +36,7 @@ const AddMenu = () => {
     }
     if (sensorChosen) {
       return (
-        <Pressable onPress={() => setSensorChosen(false)}>
+        <Pressable onPress={() => { setSensorChosen(false); }}>
           <Text style={textStyles.h3}>
             <MaterialCommunityIcons name="arrow-left" size={20} /> Add Sensor
           </Text>
@@ -56,19 +56,19 @@ const AddMenu = () => {
             text="Plant"
             iconName="flower"
             type="tertiary"
-            onPress={() => setPlantChosen(true)}
+            onPress={() => { setPlantChosen(true); }}
           />
           <Button
             text="Garden"
             iconName="nature"
             type="tertiary"
-            onPress={() => setGardenChosen(true)}
+            onPress={() => { setGardenChosen(true); }}
           />
           <Button
             text="Sensor"
             iconName="qrcode"
             type="tertiary"
-            onPress={() => setSensorChosen(true)}
+            onPress={() => { setSensorChosen(true); }}
           />
         </View>
       )}
@@ -84,7 +84,7 @@ const AddMenu = () => {
       {gardenChosen && (
         <AddGardenOption
           gardenChosen={gardenChosen}
-          toggleGardenMenu={() => setGardenChosen(false)}
+          toggleGardenMenu={() => { setGardenChosen(false); }}
           setGardenChosen={setGardenChosen}
         />
       )}
@@ -92,7 +92,7 @@ const AddMenu = () => {
       {sensorChosen && (
         <AddSensorOption
           sensorChosen={sensorChosen}
-          toggleSensorMenu={() => setSensorChosen(false)}
+          toggleSensorMenu={() => { setSensorChosen(false); }}
           setSensorChosen={setSensorChosen}
         />
       )}

@@ -23,8 +23,9 @@ const AssignSensorForm: React.FC<AssignSensorProps> = ({ onSubmit, onCancel, loa
   }, [contextPlants]);
 
   const handleSubmit = () => {
-    if (sensorName.trim() && selectedPlantId !== null) {
-      onSubmit(sensorName.trim(), selectedPlantId);
+    const trimmed = sensorName.trim();
+    if (trimmed && selectedPlantId !== null) {
+      onSubmit(trimmed, selectedPlantId);
     }
   };
 
