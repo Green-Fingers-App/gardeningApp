@@ -3,4 +3,4 @@
 # gardeningApp
 Project for Software Engineering
 
-https://dhbw-malte.github.io/gardeningApp/
+[Green Fingers Blog](https://green-fingers-app.github.io/gardeningApp/)
