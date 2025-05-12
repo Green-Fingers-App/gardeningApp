@@ -16,7 +16,7 @@ interface InputValues {
 
 type InputErrors = Partial<Record<keyof InputValues, string>>;
 
-export default function LoginForm() {
+const LoginForm: React.FC = () => {
   const { login } = useAuth();
   const [inputValues, setInputValues] = useState<InputValues>({
     email: "",
@@ -124,7 +124,9 @@ export default function LoginForm() {
       <StatusBar style="auto" />
     </SafeAreaView>
   );
-}
+};
+
+export default LoginForm;
 
 // Styles
 const styles = StyleSheet.create({
