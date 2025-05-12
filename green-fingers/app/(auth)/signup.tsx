@@ -85,7 +85,7 @@ export default function Signup() {
               }}
               error={inputErrors.username}
               onFocus={() => {
-                handleErrorMessage("username", undefined);
+                handleErrorMessage("username");
               }}
               value={inputValues.username}
             />
@@ -98,7 +98,7 @@ export default function Signup() {
               }}
               error={inputErrors.email}
               onFocus={() => {
-                handleErrorMessage("email", undefined);
+                handleErrorMessage("email");
               }}
               value={inputValues.email}
             />
@@ -112,7 +112,7 @@ export default function Signup() {
               }}
               error={inputErrors.password}
               onFocus={() => {
-                handleErrorMessage("password", undefined);
+                handleErrorMessage("password");
               }}
               value={inputValues.password}
             />
@@ -126,7 +126,7 @@ export default function Signup() {
               }}
               error={inputErrors.confirmPassword}
               onFocus={() => {
-                handleErrorMessage("confirmPassword", undefined);
+                handleErrorMessage("confirmPassword");
               }}
               value={inputValues.confirmPassword}
             />

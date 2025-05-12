@@ -9,7 +9,7 @@ import React, { useState, useEffect } from "react";
 import DayCard from "@/components/calendar/DayCard";
 import Button from "@/components/Button";
 import SelectedDay from "@/components/calendar/SelectedDay";
-import { useCalendar } from "@/context/CalendarContext";
+import { days } from "@/constants/days";
 
 export type WeekDay = {
   date: number;
@@ -26,7 +26,6 @@ const Index: React.FC = () => {
   const [nav, setNav] = useState<number>(0);
   const [currentWeek, setCurrentWeek] = useState<WeekDay[]>([]);
   const [selectedDay, setSelectedDay] = useState<WeekDay | null>(null);
-  const { days } = useCalendar();
 
   useEffect(() => {
     const today: Date = new Date();
