@@ -1,4 +1,4 @@
-import { LoginData, SignUpData, UserData } from "@/api/auth";
+import { UserData } from "@/api/auth";
 
 export interface User {
   id: string;
@@ -14,4 +14,21 @@ export interface AuthContextProps {
   signup: (signUpData: SignUpData) => Promise<void>;
   logout: () => void;
   updateUser: (newUserData: Partial<User>) => void;
+}
+
+export type Validator<T> = {
+  validateAll: (values: T) => Partial<Record<keyof T, string>>;
+  validateField?: (name: keyof T, value: string, values?: T) => string | null;
+};
+
+export interface LoginData {
+  email: string;
+  password: string;
+}
+
+export interface SignUpData {
+  username: string;
+  email: string;
+  password: string;
+  confirmPassword: string;
 }

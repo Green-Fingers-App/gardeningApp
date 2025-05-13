@@ -1,70 +1,38 @@
-import React, { useState } from "react";
+import React from "react";
 import { View, Text, SafeAreaView, StyleSheet } from "react-native";
 import { router } from "expo-router";
-import { useAuth } from "@/context/AuthContext"; // Import useAuth
+import { useAuth } from "@/context/AuthContext";
 import Input from "@/components/Input";
 import Button from "@/components/Button";
 import colors from "@/constants/colors";
 import textStyles from "@/constants/textStyles";
 import { useToast } from "@/context/ToastContext";
-
-interface InputValues {
-  username: string;
-  email: string;
-  password: string;
-  confirmPassword: string;
-}
-
-type InputErrors = Partial<Record<keyof InputValues, string>>;
+import useForm from "@/hooks/useForm";
+import { signUpValidator } from "@/utils/validators";
 
 export default function Signup() {
   const { signup } = useAuth();
-  const [inputValues, setInputValues] = useState<InputValues>({
-    username: "",
-    email: "",
-    password: "",
-    confirmPassword: "",
-  });
   const { showToast } = useToast();
+  const { values, errors, handleChange, setErrors } = useForm(
+    {
+      username: "",
+      email: "",
+      password: "",
+      confirmPassword: "",
+    },
+    signUpValidator
+  );
 
-  const [inputErrors, setInputErrors] = useState<InputErrors>({});
-
-  const handleChange = (name: keyof InputValues, value: string): void => {
-    setInputValues((prevState) => ({
-      ...prevState,
-      [name]: value,
-    }));
-  };
-
-  const handleErrorMessage = (name: keyof InputValues, text?: string): void => {
-    setInputErrors((prevState) => ({
-      ...prevState,
-      [name]: text,
-    }));
-  };
-
-  const validateAndSignup = async () => {
-    const { username, email, password, confirmPassword } = inputValues;
-    if (!username) {
-      handleErrorMessage("username", "Please enter a username");
+  const handleSignUp = async () => {
+    const updatedErrors = signUpValidator.validateAll(values);
+    if (Object.keys(updatedErrors).length > 0) {
+      setErrors(updatedErrors);
       return;
     }
-
-    if (!email) {
-      handleErrorMessage("email", "Please enter a email");
-      return;
-    }
-
-    if (password !== confirmPassword) {
-      handleErrorMessage("password", "Passwords do not match!");
-      handleErrorMessage("confirmPassword", "Passwords do not match!");
-      return;
-    }
-
     try {
-      await signup(inputValues);
+      await signup(values);
     } catch (error) {
-      showToast("error", (error as Error).message);
+      showToast("error", (error as Error).message || "Sign up failed.");
     }
   };
 
@@ -83,11 +51,11 @@ export default function Signup() {
               onChangeText={(text) => {
                 handleChange("username", text);
               }}
-              error={inputErrors.username}
+              error={errors.username}
               onFocus={() => {
-                handleErrorMessage("username");
+                setErrors({ ...errors, username: undefined });
               }}
-              value={inputValues.username}
+              value={values.username}
             />
             <Input
               label="Email"
@@ -96,11 +64,11 @@ export default function Signup() {
               onChangeText={(text) => {
                 handleChange("email", text);
               }}
-              error={inputErrors.email}
+              error={errors.email}
               onFocus={() => {
-                handleErrorMessage("email");
+                setErrors({ ...errors, email: undefined });
               }}
-              value={inputValues.email}
+              value={values.email}
             />
             <Input
               label="Password"
@@ -110,11 +78,11 @@ export default function Signup() {
               onChangeText={(text) => {
                 handleChange("password", text);
               }}
-              error={inputErrors.password}
+              error={errors.password}
               onFocus={() => {
-                handleErrorMessage("password");
+                setErrors({ ...errors, password: undefined });
               }}
-              value={inputValues.password}
+              value={values.password}
             />
             <Input
               label="Confirm Password"
@@ -124,16 +92,16 @@ export default function Signup() {
               onChangeText={(text) => {
                 handleChange("confirmPassword", text);
               }}
-              error={inputErrors.confirmPassword}
+              error={errors.confirmPassword}
               onFocus={() => {
-                handleErrorMessage("confirmPassword");
+                setErrors({ ...errors, confirmPassword: undefined });
               }}
-              value={inputValues.confirmPassword}
+              value={values.confirmPassword}
             />
           </View>
           <Button
             text="Sign Up"
-            onPress={validateAndSignup}
+            onPress={handleSignUp}
             style={{ width: "100%" }}
           />
         </View>

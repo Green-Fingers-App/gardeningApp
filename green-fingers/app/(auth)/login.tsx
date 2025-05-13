@@ -1,6 +1,6 @@
 import { router } from "expo-router";
 import { StatusBar } from "expo-status-bar";
-import React, { useState } from "react";
+import React from "react";
 import { SafeAreaView, Text, View, StyleSheet } from "react-native";
 import { useAuth } from "@/context/AuthContext";
 import Input from "@/components/Input";
@@ -8,56 +8,33 @@ import Button from "@/components/Button";
 import colors from "@/constants/colors";
 import textStyles from "@/constants/textStyles";
 import { useToast } from "@/context/ToastContext";
+import useForm from "@/hooks/useForm";
+import { loginValidator } from "@/utils/validators";
 
-interface InputValues {
-  email: string;
-  password: string;
-}
-
-type InputErrors = Partial<Record<keyof InputValues, string>>;
-
-export default function LoginForm() {
+const LoginForm: React.FC = () => {
   const { login } = useAuth();
-  const [inputValues, setInputValues] = useState<InputValues>({
-    email: "",
-    password: "",
-  });
-  const { showToast } = useToast();
+  const { handleChange, errors, values, setErrors } = useForm(
+    {
+      email: "",
+      password: "",
+    },
+    loginValidator
+  );
 
-  const [inputErrors, setInputErrors] = useState<InputErrors>({});
-
-  const handleChange = (name: keyof InputValues, value: string): void => {
-    setInputValues((prevState) => ({
-      ...prevState,
-      [name]: value,
-    }));
-  };
-
-  const handleErrorMessage = (name: keyof InputValues, text?: string): void => {
-    setInputErrors((prevState) => ({
-      ...prevState,
-      [name]: text,
-    }));
-  };
-
-  const validateAndLogin = async (): Promise<void> => {
-    const { email, password } = inputValues;
-    if (!email) {
-      handleErrorMessage("email", "Please enter your email");
+  const handleLogin = async () => {
+    const updatedErrors = loginValidator.validateAll(values);
+    if (Object.keys(updatedErrors).length > 0) {
+      setErrors(updatedErrors);
       return;
     }
-
-    if (!password) {
-      handleErrorMessage("password", "Please enter your password");
-      return;
-    }
-
     try {
-      await login(inputValues);
+      await login(values);
     } catch (error) {
       showToast("error", (error as Error).message || "Login failed.");
     }
   };
+
+  const { showToast } = useToast();
 
   return (
     <SafeAreaView style={styles.container}>
@@ -73,11 +50,11 @@ export default function LoginForm() {
               onChangeText={(text) => {
                 handleChange("email", text);
               }}
-              error={inputErrors.email}
+              error={errors.email}
+              value={values.email}
               onFocus={() => {
-                handleErrorMessage("email", undefined);
+                setErrors({ ...errors, email: undefined });
               }}
-              value={inputValues.email}
             />
             <Input
               iconName="lock-outline"
@@ -88,16 +65,16 @@ export default function LoginForm() {
               onChangeText={(text) => {
                 handleChange("password", text);
               }}
-              error={inputErrors.password}
+              error={errors.password}
+              value={values.password}
               onFocus={() => {
-                handleErrorMessage("password", undefined);
+                setErrors({ ...errors, password: undefined });
               }}
-              value={inputValues.password}
             />
           </View>
           <Button
             text="Login"
-            onPress={validateAndLogin}
+            onPress={() => handleLogin()}
             iconName="login"
             testID="login-button"
           />
@@ -124,7 +101,9 @@ export default function LoginForm() {
       <StatusBar style="auto" />
     </SafeAreaView>
   );
-}
+};
+
+export default LoginForm;
 
 // Styles
 const styles = StyleSheet.create({
