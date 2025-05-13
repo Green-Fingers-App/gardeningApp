@@ -1,19 +1,10 @@
-export type SignUpData = {
-  username: string,
-  password: string,
-  email: string,
-}
-
-export type LoginData = {
-  email: string,
-  password: string,
-}
+import { LoginData, SignUpData } from "@/types/authtypes";
 
 export type UserData = {
-  username: string,
-  email: string
-  id: number,
-}
+  username: string;
+  email: string;
+  id: number;
+};
 
 export interface AuthResponse {
   accessToken: string;
@@ -23,7 +14,9 @@ export interface AuthResponse {
 
 const base_api_ip = "https://greenfingers.truenas.work/api";
 
-export const apiSignUp = async (userData: SignUpData): Promise<AuthResponse> => {
+export const apiSignUp = async (
+  userData: SignUpData
+): Promise<AuthResponse> => {
   const { username, password, email } = userData;
 
   const response = await fetch(`${base_api_ip}/auth/signup`, {
@@ -45,7 +38,7 @@ export const apiSignUp = async (userData: SignUpData): Promise<AuthResponse> => 
   }
 
   return responseData;
-}
+};
 
 export const apiLogin = async (loginData: LoginData): Promise<AuthResponse> => {
   const { email, password } = loginData;
@@ -68,4 +61,4 @@ export const apiLogin = async (loginData: LoginData): Promise<AuthResponse> => {
   }
 
   return responseData;
-}
+};
