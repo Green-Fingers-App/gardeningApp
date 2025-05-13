@@ -23,11 +23,15 @@ const LoginForm: React.FC = () => {
 
   const handleLogin = async () => {
     const updatedErrors = loginValidator.validateAll(values);
-    if (updatedErrors) {
+    if (Object.keys(updatedErrors).length > 0) {
       setErrors(updatedErrors);
       return;
     }
-    await login(values);
+    try {
+      await login(values);
+    } catch (error) {
+      showToast("error", (error as Error).message || "Login failed.");
+    }
   };
 
   const { showToast } = useToast();
@@ -70,7 +74,7 @@ const LoginForm: React.FC = () => {
           </View>
           <Button
             text="Login"
-            onPress={handleLogin}
+            onPress={() => handleLogin()}
             iconName="login"
             testID="login-button"
           />

@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 import { View, Text, SafeAreaView, StyleSheet } from "react-native";
 import { router } from "expo-router";
-import { useAuth } from "@/context/AuthContext"; // Import useAuth
+import { useAuth } from "@/context/AuthContext";
 import Input from "@/components/Input";
 import Button from "@/components/Button";
 import colors from "@/constants/colors";
@@ -25,14 +25,14 @@ export default function Signup() {
 
   const handleSignUp = async () => {
     const updatedErrors = signUpValidator.validateAll(values);
-    if (updatedErrors) {
+    if (Object.keys(updatedErrors).length > 0) {
       setErrors(updatedErrors);
       return;
     }
     try {
       await signup(values);
     } catch (error) {
-      showToast("error", `${error}`);
+      showToast("error", (error as Error).message || "Sign up failed.");
     }
   };
 
