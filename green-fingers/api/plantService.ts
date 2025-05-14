@@ -1,5 +1,12 @@
 import { CatalogPlant, UserPlant } from "../types/models";
-import { CreateUserPlantResponse, DeleteUserPlantResponse, GetCatalogPlantsResponse, GetUserPlantsResponse, SearchCatalogPlantsByCommonNameResponse, UpdateUserPlantResponse } from "@/types/api";
+import {
+  CreateUserPlantResponse,
+  DeleteUserPlantResponse,
+  GetCatalogPlantsResponse,
+  GetUserPlantsResponse,
+  SearchCatalogPlantsByCommonNameResponse,
+  UpdateUserPlantResponse,
+} from "@/types/api";
 import { AddUserPlant } from "../types/models";
 import * as SecureStore from "expo-secure-store";
 
@@ -26,10 +33,12 @@ export const apiCreateUserPlant = async (
     }),
   });
 
-  const responseData = await (response.json()) as CreateUserPlantResponse;
+  const responseData = (await response.json()) as CreateUserPlantResponse;
 
   if (!response.ok || typeof responseData.id !== "number") {
-    throw new Error(responseData.error ?? "Unknown error during plant creation");
+    throw new Error(
+      responseData.error ?? "Unknown error during plant creation"
+    );
   }
 
   return responseData.id;
@@ -44,9 +53,13 @@ export const apiGetUserPlants = async (): Promise<UserPlant[]> => {
       Authorization: `Bearer ${token}`,
     },
   });
-  const responseData = await (response.json()) as GetUserPlantsResponse;
+  
+  const responseData = (await response.json()) as GetUserPlantsResponse;
+  
   if (!response.ok) {
-    throw new Error(responseData.error ?? "Unknown error during plant fetching");
+    throw new Error(
+      responseData.error ?? "Unknown error during plant fetching"
+    );
   }
 
   return responseData;
@@ -61,9 +74,11 @@ export const apiDeleteUserPlant = async (plantId: number): Promise<void> => {
       Authorization: `Bearer ${token}`,
     },
   });
-  const responseData = await (response.json()) as DeleteUserPlantResponse;
+  const responseData = (await response.json()) as DeleteUserPlantResponse;
   if (!response.ok) {
-    throw new Error(responseData.error ?? "Unknown error during plant deletion");
+    throw new Error(
+      responseData.error ?? "Unknown error during plant deletion"
+    );
   }
 };
 
@@ -84,7 +99,7 @@ export const apiUpdateUserPlant = async (
       updateData: updatedData,
     }),
   });
-  const responseData = await (response.json()) as UpdateUserPlantResponse;
+  const responseData = (await response.json()) as UpdateUserPlantResponse;
 
   if (!response.ok) {
     throw new Error(responseData.error ?? "Unknown error during plant update");
@@ -100,10 +115,12 @@ export const apiGetCatalogPlants = async (): Promise<CatalogPlant[]> => {
       Authorization: `Bearer: ${token}`,
     },
   });
-  const responseData = await (response.json()) as GetCatalogPlantsResponse;
+  const responseData = (await response.json()) as GetCatalogPlantsResponse;
 
   if (!response.ok) {
-    throw new Error(responseData.error ?? "Unknown error during catalog plant fetching");
+    throw new Error(
+      responseData.error ?? "Unknown error during catalog plant fetching"
+    );
   }
 
   return responseData;
@@ -124,10 +141,13 @@ export const apiSearchCatalogPlantsByCommonName = async (
       },
     }
   );
-  const responseData = await (response.json()) as SearchCatalogPlantsByCommonNameResponse;
+  const responseData =
+    (await response.json()) as SearchCatalogPlantsByCommonNameResponse;
 
   if (!response.ok) {
-    throw new Error(responseData.error ?? "Unknown error during catalog plant search");
+    throw new Error(
+      responseData.error ?? "Unknown error during catalog plant search"
+    );
   }
 
   return responseData;
@@ -157,5 +177,34 @@ export const apiBatchUpdateWateredDate = async (
     const data = await response.json();
   } catch (error) {
     console.error("Error updating watered date:", error);
+  }
+};
+
+export const apiEditWateredDate = async (
+  plantId: number,
+  dateWatered: string
+): Promise<void> => {
+  const token = await SecureStore.getItemAsync("accessToken");
+  try {
+    const response = await fetch(
+      `${base_api_ip}/plants/plants/water/${plantId}`,
+      {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({
+          date_watered: dateWatered,
+        }),
+      }
+    );
+
+    if (!response.ok) {
+      const responseError = await response.json();
+      throw new Error(`Error updating watered date: ${responseError.error}`);
+    }
+  } catch (error) {
+    console.error("Error watering single plant:", error);
   }
 };

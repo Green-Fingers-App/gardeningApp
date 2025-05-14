@@ -1,14 +1,9 @@
 import React, { createContext, useState, ReactNode, useContext } from "react";
 import { User, AuthContextProps } from "@/types/authtypes";
-import {
-  apiLogin,
-  apiSignUp,
-  LoginData,
-  SignUpData,
-  UserData,
-} from "@/api/auth";
+import { apiLogin, apiSignUp, UserData } from "@/api/auth";
 import * as SecureStore from "expo-secure-store";
 import { useRouter } from "expo-router";
+import type { LoginData, SignUpData } from "@/types/authtypes";
 
 const AuthContext = createContext<AuthContextProps | undefined>(undefined);
 
@@ -107,13 +102,13 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
     setUser((prevUser) =>
       prevUser
         ? {
-          ...prevUser,
-          ...newUserData,
-          id:
-            newUserData.id !== undefined
-              ? Number(newUserData.id)
-              : prevUser.id,
-        }
+            ...prevUser,
+            ...newUserData,
+            id:
+              newUserData.id !== undefined
+                ? Number(newUserData.id)
+                : prevUser.id,
+          }
         : undefined
     );
   };

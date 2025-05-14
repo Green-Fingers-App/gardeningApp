@@ -18,6 +18,8 @@ import OptionsMenu from "@/components/OptionMenu";
 import { useDeleteEntity } from "@/hooks/useDeleteEntity";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import EntityEditModal from "@/components/EntityEditModal";
+import { shouldBeWatered } from "@/utils/plant";
+import UpdateWateredDate from "@/components/UpdateWateredDate";
 
 const PlantDetailPage = () => {
   const { plantId } = useLocalSearchParams();
@@ -83,6 +85,14 @@ const PlantDetailPage = () => {
     }
   }, [plantId]);
 
+  const [thirsty, setThirsty] = useState(false);
+
+  useEffect(() => {
+    if (!plant) return;
+    const updatedStatus = shouldBeWatered(plant);
+    setThirsty(updatedStatus);
+  }, [plant]);
+
   return (
     <>
       <Stack.Screen
@@ -117,15 +127,18 @@ const PlantDetailPage = () => {
           />
           <Accordion style={{ height: "50%" }}>
             <AccordionItem title="Status">
-              <Text>
-                Last watered:{" "}
-                {new Date(plant.wateredDate).toLocaleDateString("en-GB", {
-                  year: "numeric",
-                  month: "short",
-                  day: "2-digit",
-                  dateStyle: "full",
-                })}
-              </Text>
+              <View style={{ flexDirection: "row", gap: "2" }}>
+                <Text>
+                  Last watered:{" "}
+                  {new Date(plant.wateredDate).toLocaleDateString("en-GB", {
+                    year: "numeric",
+                    month: "short",
+                    day: "2-digit",
+                    dateStyle: "full",
+                  })}
+                </Text>
+                {thirsty && <UpdateWateredDate />}
+              </View>
               <Text>Last fed: {plant.feededDate}</Text>
             </AccordionItem>
             <AccordionItem title="Overview">

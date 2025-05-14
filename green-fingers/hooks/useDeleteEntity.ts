@@ -30,7 +30,7 @@ export const useDeleteEntity = (
       [
         {
           text: "Yes",
-          onPress: () => {
+          onPress: async () => {
             try {
               console.log(`${entityType} ${entity.name} deleted`);
               setDeleting(true);
