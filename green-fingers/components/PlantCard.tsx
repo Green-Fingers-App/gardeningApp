@@ -118,7 +118,7 @@ const styles = StyleSheet.create({
     color: "gray",
   },
   picture: {
-    backgroundColor: "white",
+    backgroundColor: colors.bgImage,
     width: 80,
     height: 80,
     position: "absolute",

@@ -9,10 +9,6 @@ export const shouldBeWatered = (plant: UserPlant): boolean => {
     (currentDate.getTime() - lastWateredDate.getTime()) / msInDay
   );
 
-  console.log(`Determining if plant ${plant.nickName} is thristy... `);
-  console.log("Water frequency: ", plant.waterFrequency);
-  console.log("Last watered day: ", lastWateredDate);
-  console.log("Today: ", currentDate);
   switch (waterFrequency) {
     case "DAILY":
       if (daysSinceWatered >= 1) {
@@ -35,7 +31,6 @@ export const shouldBeWatered = (plant: UserPlant): boolean => {
       }
       return false;
     default:
-      console.log("Returning Default");
       return false;
   }
 };
