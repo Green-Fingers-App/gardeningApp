@@ -22,6 +22,7 @@ import {
   apiGetUserPlants,
   apiSearchCatalogPlantsByCommonName,
   apiBatchUpdateWateredDate,
+  apiEditWateredDate,
 } from "@/api/plantService";
 import {
   apiAddGarden,
@@ -34,6 +35,7 @@ import {
   setWateringAppointments,
   addWateringAppointments,
 } from "@/utils/calendar";
+import PlantsLayout from "@/app/profile/plants/_layout";
 
 interface PlantContextProps {
   plants: UserPlant[];
@@ -41,6 +43,10 @@ interface PlantContextProps {
   databasePlants: CatalogPlant[];
   fetchUserPlants: () => void;
   batchUpdateWateredDate: (plantIds: number[]) => Promise<void>;
+  singleUpdateWateredDate: (
+    plantId: number,
+    wateredDate: string
+  ) => Promise<void>;
   fetchCatalogPlants: () => void;
   searchPlantsByCommonName: (input: string) => Promise<CatalogPlant[]>;
   createUserPlant: (plantData: AddUserPlant) => Promise<void>;
@@ -112,6 +118,24 @@ export const PlantsProvider: React.FC<{ children: ReactNode }> = ({
       setPlants(updatedPlants);
     } catch (error) {
       console.error("Error updating watering date: ", error);
+    }
+  };
+
+  const singleUpdateWateredDate = async (
+    plantId: number,
+    wateredDate: string
+  ) => {
+    try {
+      await apiEditWateredDate(plantId, wateredDate);
+      const updatedPlants = plants.map((plant) => {
+        if (plantId === plant.id) {
+          return { ...plant, wateredDate: wateredDate };
+        }
+        return plant;
+      });
+      setPlants(updatedPlants);
+    } catch (error) {
+      console.error("Error watering plant: ", error);
     }
   };
 
@@ -294,6 +318,7 @@ export const PlantsProvider: React.FC<{ children: ReactNode }> = ({
         updateUserPlant,
         deleteUserPlant,
         batchUpdateWateredDate,
+        singleUpdateWateredDate,
         gardens,
         fetchUserGardens,
         fetchPlantDetail,

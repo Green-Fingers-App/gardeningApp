@@ -1,4 +1,3 @@
-
 const colors = {
   primaryDefault: "#457D58",
   primaryDark: "#376346",
@@ -11,7 +10,7 @@ const colors = {
   textWarning: "#FF9900",
   textError: "#F44336",
   bgLight: "#F8F7EF",
-  bgDark: "#6B6B67",
+  bgImage: "#78AE8B",
   bgSuccess: "#EBFFEB",
   bgWarning: "#FFF9E8",
   bgError: "#FFE0DE",
@@ -21,7 +20,7 @@ const colors = {
   white: "#FFFFFF",
   black: "#000000",
   bgCard: "#89BF9C",
-  detail: ""
-}
+  detail: "",
+};
 
 export default colors;

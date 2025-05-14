@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { WeekDay } from "@/app/profile/calendar";
 import colors from "@/constants/colors";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { UserPlant } from "@/types/models";
+import { UserPlant, WaterFrequency } from "@/types/models";
 import { useCalendar } from "@/context/CalendarContext";
 import Button from "../Button";
 import { useGardensAndPlants } from "@/context/GardensAndPlantsContext";
@@ -29,9 +29,9 @@ const SelectedDay: React.FC<SelectedDayProps> = ({ day }) => {
   >(undefined);
 
   const getWateringIds = async (): Promise<
-    undefined | { [key: string]: Partial<UserPlant>[] }
+    undefined | Record<WaterFrequency, Partial<UserPlant[]>>
   > => {
-    const ids: { [key: string]: Partial<UserPlant>[] } = JSON.parse(
+    const ids: Record<WaterFrequency, Partial<UserPlant[]>> = JSON.parse(
       (await AsyncStorage.getItem("wateringAppointments")) || "null"
     );
     if (!ids) return undefined;
@@ -48,22 +48,26 @@ const SelectedDay: React.FC<SelectedDayProps> = ({ day }) => {
     }
   };
 
-  useEffect(() => {
-    const fetchAppointments = async () => {
-      const ids = await getWateringIds();
-      let appointments: { [key: string]: UserPlant[] } = {
-        DAILY: [],
-        WEEKLY: [],
-        BIWEEKLY: [],
-        MONTHLY: [],
-      };
-      for (const frequency in ids) {
-        appointments[frequency] = ids[frequency]
-          .map((id) => plants.find((plant) => plant.id === id.id))
-          .filter((plant): plant is UserPlant => plant !== undefined);
-      }
-      setWateringAppointments(appointments);
+  const fetchAppointments = async () => {
+    const ids = await getWateringIds();
+    if (!ids) return;
+    let appointments: Record<WaterFrequency, UserPlant[]> = {
+      DAILY: [],
+      WEEKLY: [],
+      BIWEEKLY: [],
+      MONTHLY: [],
     };
+    for (const frequency of Object.keys(ids) as WaterFrequency[]) {
+      appointments[frequency] = ids[frequency]
+        .map((id) =>
+          id ? plants.find((plant) => plant.id === id.id) : undefined
+        )
+        .filter((plant): plant is UserPlant => plant !== undefined);
+    }
+    setWateringAppointments(appointments);
+  };
+
+  useEffect(() => {
     fetchAppointments();
   }, [plants]);
 
