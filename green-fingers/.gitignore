@@ -1,6 +1,8 @@
 node_modules/
 .expo/
 .idea/
+android/
+ios/
 dist/
 npm-debug.*
 *.jks

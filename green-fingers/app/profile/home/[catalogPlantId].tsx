@@ -12,7 +12,9 @@ const CatalogPlantDetail = () => {
   const { catalogPlantId } = useLocalSearchParams();
 
   useEffect(() => {
-    const plant = databasePlants?.find((plant) => plant.id === catalogPlantId);
+    const plant = databasePlants?.find(
+      (plant) => plant.id === Number(catalogPlantId)
+    );
     setPlant(plant);
   }, [databasePlants, catalogPlantId]);
 
@@ -44,7 +46,7 @@ const CatalogPlantDetail = () => {
                 Sunlight: {plant.sunLight}
               </Text>
               <Text style={styles.paragraphText}>
-                Water Frequency: {plant.waterFrequency}
+                Water Frequency: {plant.waterFrequency.toLowerCase()}
               </Text>
               <Text style={styles.paragraphText}>
                 Blooming:{" "}
