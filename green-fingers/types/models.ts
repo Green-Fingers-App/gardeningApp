@@ -50,6 +50,7 @@ export interface Plant {
   name: PlantName;
   blooming: Blooming;
   waterFrequency: WaterFrequency;
+  neededMoisture: SoilMoisture;
   harvest?: Harvest;
   sunLight: SunLight;
   temperature: Temperature;
@@ -94,12 +95,22 @@ export interface AddGarden {
   userId: number;
 }
 
-//expected Level interface
-export type Level = "Optimal" | "Too Low" | "Too High";
+export type SoilMoisture = "Very Dry" | "Dry" | "Moist" | "Wet" | "Very Wet";
+
+export type Level = "Optimal" | "Good" | "Too Low" | "Too High" | "No Value";
 
 export interface MoistureSensor {
-  //tba
+  id: number;
+  name: string;
+  current_moisture_level: SoilMoisture;
+  sensorType: string;
+  plant_id: number;
+  nickname: string;
+  user_id: number;
+  percentage: string;
+  interpretedMoisture: SoilMoisture;
 }
+
 export interface ErrorData {
   title: string;
   message: string;

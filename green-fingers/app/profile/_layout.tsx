@@ -4,6 +4,7 @@ import { Tabs, useRouter } from "expo-router";
 import { MaterialIcons } from "@expo/vector-icons";
 import { useAuth } from "@/context/AuthContext";
 import { useGardensAndPlants } from "@/context/GardensAndPlantsContext";
+import { useMoistureSensors } from "@/context/MoistureSensorContext";
 import AddMenu from "@/components/AddMenu";
 import colors from "@/constants/colors";
 
@@ -12,12 +13,14 @@ const ProfileLayout: React.FC = () => {
   const { user, isLoggedIn } = useAuth();
   const [menuOpen, setMenuOpen] = useState(false);
   const { fetchUserGardens } = useGardensAndPlants();
+  const { fetchAllSensors } = useMoistureSensors();
 
   const toggleMenu = () => setMenuOpen(!menuOpen);
 
   useEffect(() => {
     if (isLoggedIn && user?.id) {
       fetchUserGardens();
+      fetchAllSensors();
     }
   }, [isLoggedIn, user?.id]);
 
@@ -28,6 +31,7 @@ const ProfileLayout: React.FC = () => {
           headerStyle: {
             backgroundColor: colors.primaryDefault,
           },
+          headerTintColor: colors.bgLight,
           tabBarActiveTintColor: colors.bgLight,
           tabBarInactiveTintColor: colors.textPrimary,
           tabBarStyle: {
