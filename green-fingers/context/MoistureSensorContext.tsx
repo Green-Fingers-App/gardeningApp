@@ -8,8 +8,8 @@ import React, {
 import { useAuth } from "@/context/AuthContext";
 import { useToast } from "@/context/ToastContext";
 import { useGardensAndPlants } from "./GardensAndPlantsContext";
-import { MoistureSensor, SoilMoisture, Level, UserPlant, SensorWithHistory } from "@/types/models";
-import { apiGetAllMoistureSensors, apiGetSensorHistoryData } from "@/api/sensorService";
+import { MoistureSensor, SoilMoisture, Level, SensorWithHistory, AddMoistureSensor } from "@/types/models";
+import { apiDeleteSensor, apiGetAllMoistureSensors, apiGetSensorHistoryData, apiUpdateSensor } from "@/api/sensorService";
 
 interface MoistureSensorContextProps {
   sensors: MoistureSensor[];
@@ -17,6 +17,8 @@ interface MoistureSensorContextProps {
   fetchSensor: (sensorId: string) => MoistureSensor | undefined;
   fetchSensorWithHistory: (sensorId: string) => Promise<SensorWithHistory | undefined>;
   getMoistureLevel: (plantId: number, actualLevel: SoilMoisture) => Level;
+  updateMoistureSensor: (sensorId: number, sensorData: Partial<AddMoistureSensor>) => Promise<MoistureSensor | undefined>;
+  deleteMoistureSensor: (sensorId: number) => void;
 }
 
 const MoistureSensorContext = createContext<MoistureSensorContextProps | undefined>(undefined);
@@ -49,6 +51,39 @@ export const MoistureSensorProvider: React.FC<{ children: ReactNode }> = ({ chil
       return data;
     } catch (error) {
       showToast("error", `Fetching sensor with history ${(error as Error).message}`);
+    }
+  };
+
+  const updateMoistureSensor = async (
+    sensorId: number,
+    sensorData: Partial<AddMoistureSensor>
+  ): Promise<MoistureSensor | undefined> => {
+    try {
+      console.log(sensorData)
+      await apiUpdateSensor(sensorId, sensorData);
+      setSensors((prevSensors) =>
+        prevSensors.map((sensor) =>
+          sensor.id === sensorId ? { ...sensor, ...sensorData } : sensor
+        )
+      );
+      showToast("success", "Sensor updated");
+      return sensors.find((sensor) => sensor.id === sensorId);
+    } catch (error) {
+      console.error(error ?? "Unknown error during sensor deletion: ", error)
+      showToast("error", (error as Error).message);
+      return undefined;
+    }
+  };
+
+  const deleteMoistureSensor = async (sensorId: number) => {
+    try {
+      await apiDeleteSensor(sensorId);
+      setSensors((prevSensors) =>
+        prevSensors.filter((sensor) => sensor.id !== sensorId)
+      );
+      showToast("success", "Sensor deleted");
+    } catch (error) {
+      showToast("error", (error as Error).message);
     }
   };
 
@@ -89,7 +124,7 @@ export const MoistureSensorProvider: React.FC<{ children: ReactNode }> = ({ chil
 
   return (
     <MoistureSensorContext.Provider
-      value={{ sensors, fetchAllSensors, fetchSensor, fetchSensorWithHistory, getMoistureLevel }}
+      value={{ sensors, fetchAllSensors, fetchSensor, fetchSensorWithHistory, getMoistureLevel, updateMoistureSensor, deleteMoistureSensor }}
     >
       {children}
     </MoistureSensorContext.Provider>

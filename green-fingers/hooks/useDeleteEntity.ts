@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Alert } from "react-native";
 import { useGardensAndPlants } from "@/context/GardensAndPlantsContext";
+import { useMoistureSensors } from "@/context/MoistureSensorContext";
 import { useRouter } from "expo-router";
 
 type DeleteEntityHook = {
@@ -9,23 +10,24 @@ type DeleteEntityHook = {
 };
 
 export const useDeleteEntity = (
-  entityType: "Plant" | "Garden"
+  entityType: "Plant" | "Garden" | "Sensor"
 ): DeleteEntityHook => {
   const [deleting, setDeleting] = useState(false);
   const { deleteUserPlant, deleteUserGarden } = useGardensAndPlants();
+  const { deleteMoistureSensor } = useMoistureSensors();
   const router = useRouter();
 
   const deleteFunctions = {
     Plant: deleteUserPlant,
     Garden: deleteUserGarden,
+    Sensor: deleteMoistureSensor,
   };
 
   const handleDeleteEntity = (entity: { id: number; name: string }) => {
     console.log("About to delete: ", entity);
     Alert.alert(
       `Delete ${entityType}`,
-      `Do you want to delete the ${entityType.toLowerCase()}: ${
-        entity.name
+      `Do you want to delete the ${entityType.toLowerCase()}: ${entity.name
       }, and everything it contains?`,
       [
         {
@@ -45,8 +47,10 @@ export const useDeleteEntity = (
               let path = "";
               if (entityType === "Plant") {
                 path = "/profile/plants";
-              } else {
+              } else if (entityType === "Garden") {
                 path = "/profile/gardens";
+              } else {
+                path = "/profile/sensors"
               }
               router.push(path);
             }

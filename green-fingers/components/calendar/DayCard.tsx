@@ -1,5 +1,6 @@
 import { WeekDay } from "@/app/profile/calendar";
 import colors from "@/constants/colors";
+import textStyles from "@/constants/textStyles";
 import React from "react";
 import { Text, StyleSheet, TouchableOpacity } from "react-native";
 
@@ -14,14 +15,16 @@ const DayCard: React.FC<DayCardProps> = ({ day, currentDay, onClick }) => {
     <TouchableOpacity
       style={[
         styles.container,
-        currentDay ? { backgroundColor: colors.bgCard } : {},
+        currentDay ? { backgroundColor: colors.secondaryDark } : {},
       ]}
       onPress={onClick}
     >
-      <Text style={currentDay ? { color: "white", fontWeight: "bold" } : null}>
+
+      <Text style={[currentDay ? textStyles.bodyMedium : textStyles.body, { color: currentDay ? colors.white : colors.textPrimary }]}>
         {day.day.substring(0, 3)}
       </Text>
-      <Text style={currentDay ? { color: "white", fontWeight: "bold" } : null}>
+
+      <Text style={[currentDay ? textStyles.bodyMedium : textStyles.body, { color: currentDay ? colors.white : colors.textPrimary }]}>
         {day.date}
       </Text>
     </TouchableOpacity>
@@ -37,16 +40,8 @@ const styles = StyleSheet.create({
     alignItems: "center",
     borderWidth: 1,
     borderColor: colors.primaryDefault,
-    padding: 5,
-    margin: 1,
-    borderRadius: 5,
-  },
-  dayText: {
-    fontSize: 16,
-    fontWeight: "bold",
-  },
-  dateText: {
-    fontSize: 14,
-    color: "#666",
-  },
+    backgroundColor: colors.bgLight,
+    padding: 4,
+    borderRadius: 8,
+  }
 });

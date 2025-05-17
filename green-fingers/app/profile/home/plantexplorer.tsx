@@ -5,6 +5,7 @@ import { useGardensAndPlants } from "@/context/GardensAndPlantsContext";
 import { CatalogPlant } from "@/types/models";
 import PlantCard from "@/components/PlantCard";
 import colors from "@/constants/colors";
+import textStyles from "@/constants/textStyles";
 import ExplorerSearch from "@/components/ExplorerSearch";
 
 const PlantExplorerPage = () => {
@@ -34,32 +35,40 @@ const PlantExplorerPage = () => {
         <Stack.Screen
           options={{
             title: "Plant Explorer",
-            headerStyle: { backgroundColor: colors.primaryDefault },
+            headerStyle: { backgroundColor: colors.bgLight },
+            headerTitleStyle: {
+              fontSize: 20,
+              fontFamily: textStyles.h3.fontFamily,
+              fontWeight: textStyles.h3.fontWeight,
+              color: colors.primaryDefault,
+            },
+            headerTintColor: colors.primaryDefault,
           }}
         />
-        <ExplorerSearch
-          plants={plants}
-          filteredPlants={filteredPlants}
-          setFilteredPlants={setFilteredPlants}
-        />
-        <ScrollView>
-          <View style={styles.pageContainer}>
-            {filteredPlants.length === 0
-              ? plants.map((plant, index) => (
-                  <PlantCard
-                    key={index}
-                    plant={plant}
-                    onPress={() => router.push(`/profile/home/${plant.id}`)}
-                  />
-                ))
-              : filteredPlants.map((plant, index) => (
-                  <PlantCard
-                    key={index}
-                    plant={plant}
-                    onPress={() => router.push(`/profile/home/${plant.id}`)}
-                  />
-                ))}
-          </View>
+        <View style={styles.searchContainer} >
+          <ExplorerSearch
+            plants={plants}
+            filteredPlants={filteredPlants}
+            setFilteredPlants={setFilteredPlants}
+          />
+        </View>
+        <ScrollView contentContainerStyle={styles.scrollContainer}>
+          {filteredPlants.length === 0
+            ? plants.map((plant, index) => (
+              <PlantCard
+                key={index}
+                plant={plant}
+                onPress={() => router.push(`/profile/home/${plant.id}`)}
+              />
+            ))
+            : filteredPlants.map((plant, index) => (
+              <PlantCard
+                key={index}
+                plant={plant}
+                onPress={() => router.push(`/profile/home/${plant.id}`)}
+              />
+            ))}
+
         </ScrollView>
       </ImageBackground>
     </>
@@ -72,10 +81,19 @@ const styles = StyleSheet.create({
   backgroundImage: {
     flex: 1,
   },
-  pageContainer: {
-    flex: 1,
-    padding: 16,
+  searchContainer: {
+    paddingVertical: 16,
+    paddingHorizontal: 8,
+    backgroundColor: colors.backDropLight,
+    borderBottomWidth: 1,
+    borderBottomColor: colors.primaryDefault,
+    borderTopWidth: 1,
+    borderTopColor: colors.primaryDefault,
+  },
+  scrollContainer: {
+    paddingBottom: 104,
+    padding: 8,
+    alignItems: "stretch",
     gap: 8,
-    marginTop: 8,
   },
 });

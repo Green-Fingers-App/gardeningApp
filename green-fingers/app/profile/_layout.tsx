@@ -7,6 +7,7 @@ import { useGardensAndPlants } from "@/context/GardensAndPlantsContext";
 import { useMoistureSensors } from "@/context/MoistureSensorContext";
 import AddMenu from "@/components/AddMenu";
 import colors from "@/constants/colors";
+import textStyles from "@/constants/textStyles";
 
 const ProfileLayout: React.FC = () => {
   const router = useRouter();
@@ -31,6 +32,8 @@ const ProfileLayout: React.FC = () => {
           headerStyle: {
             backgroundColor: colors.primaryDefault,
           },
+          tabBarLabelStyle: textStyles.tabLabel,
+          headerTitleStyle: [textStyles.h3, styles.title],
           headerTintColor: colors.bgLight,
           tabBarActiveTintColor: colors.bgLight,
           tabBarInactiveTintColor: colors.textPrimary,
@@ -39,12 +42,11 @@ const ProfileLayout: React.FC = () => {
           },
           headerRight: () => (
             <View style={styles.headerRight}>
-              <Text style={styles.headerText}>
+              <Text style={[textStyles.bodyMedium, { color: colors.bgLight }]}>
                 {isLoggedIn ? `Hello, ${user?.username}` : "Welcome"}
               </Text>
               {isLoggedIn && (
                 <TouchableOpacity
-                  style={styles.profileButton}
                   onPress={() => router.push("/profilePage")}
                 >
                   <MaterialIcons
@@ -105,14 +107,22 @@ const ProfileLayout: React.FC = () => {
         />
       </Tabs>
 
+
       {isLoggedIn && (
-        <View style={styles.addButtonContainer}>
+        <>
+          {menuOpen && <AddMenu visible={menuOpen} onClose={() => setMenuOpen(false)} />}
+
+          <View style={styles.addButtonContainer} />
+
           <TouchableOpacity style={styles.addButton} onPress={toggleMenu}>
-            <MaterialIcons name={menuOpen ? "close" : "add"} size={45} />
+            <MaterialIcons
+              name={menuOpen ? "close" : "add"}
+              size={45}
+              color={colors.primaryDefault}
+            />
           </TouchableOpacity>
-        </View>
+        </>
       )}
-      {menuOpen && <AddMenu />}
     </>
   );
 };
@@ -120,34 +130,39 @@ const ProfileLayout: React.FC = () => {
 export default ProfileLayout;
 
 const styles = StyleSheet.create({
+  title: {
+    color: colors.bgLight,
+  },
   headerRight: {
     flexDirection: "row",
-    alignItems: "center",
-    marginRight: 15,
-  },
-  headerText: {
-    color: colors.bgLight,
+    alignContent: "center",
     marginRight: 8,
-    fontSize: 14,
-  },
-  profileButton: {
-    marginLeft: 8,
+    gap: 4,
   },
   addButtonContainer: {
     position: "absolute",
+    height: 90,
+    width: 90,
     bottom: 20,
     left: "50%",
-    transform: [{ translateX: -40 }, { translateY: -25 }],
+    transform: [{ translateX: -45 }, { translateY: -28 }],
     backgroundColor: colors.primaryDefault,
-    padding: 10,
     borderRadius: 100,
+    borderBottomStartRadius: 0,
+    borderBottomEndRadius: 0,
   },
   addButton: {
+    position: "absolute",
+    bottom: 60,
+    left: "50%",
+    transform: [{ translateX: -30 }],
+    zIndex: 1000,
     height: 60,
     width: 60,
-    backgroundColor: colors.primaryDark,
+    backgroundColor: colors.bgLight,
     alignItems: "center",
     justifyContent: "center",
     borderRadius: 30,
+    elevation: 10,
   },
 });

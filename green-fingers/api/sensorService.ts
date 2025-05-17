@@ -1,5 +1,5 @@
-import { MoistureSensor, SensorWithHistory } from "@/types/models";
-import { GetAllMoistureSensorsResponse, GetMoistureSensorResponse, GetMoistureSensorWithHistoryResponse } from "@/types/api";
+import { MoistureSensor, SensorWithHistory, AddMoistureSensor } from "@/types/models";
+import { GetAllMoistureSensorsResponse, GetMoistureSensorResponse, GetMoistureSensorWithHistoryResponse, UpdateSensorResponse, DeleteSensorResponse } from "@/types/api";
 import * as SecureStore from "expo-secure-store";
 
 const base_api_ip = "https://greenfingers.truenas.work/api";
@@ -59,6 +59,52 @@ export const apiGetSensorHistoryData = async (
   }
   return responseData;
 
-}
+};
+
+export const apiDeleteSensor = async (sensorId: number) => {
+  const token = await SecureStore.getItemAsync("accessToken");
+
+  const response = await fetch(`${base_api_ip}/sensor/sensor/${sensorId}`, {
+    method: "DELETE",
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
 
 
+  const responseData = (await response.json()) as DeleteSensorResponse;
+
+  if (!response.ok) {
+    throw new Error(
+      responseData.error ?? "Unknown error during sensor deletion"
+    );
+  }
+};
+
+export const apiUpdateSensor = async (
+  sensorId: number,
+  updatedData: Partial<AddMoistureSensor>
+): Promise<void> => {
+  const token = await SecureStore.getItemAsync("accessToken");
+
+  const response = await fetch(`${base_api_ip}/sensor/sensor/${sensorId}`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify({
+      name: updatedData.name,
+      curren_moisture_level: updatedData.current_moisture_level,
+      plant_id: updatedData.plant_id,
+    }),
+  });
+
+  console.log(response)
+
+  const responseData = (await response.json()) as UpdateSensorResponse;
+
+  if (!response.ok) {
+    throw new Error(responseData.error ?? "Unknown error during sensor update");
+  }
+};
