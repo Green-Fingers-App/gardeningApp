@@ -1,6 +1,7 @@
 import {
   Text,
   View,
+  ScrollView,
   StyleSheet,
   ActivityIndicator,
   ImageBackground,
@@ -11,6 +12,7 @@ import { useGardensAndPlants } from "@/context/GardensAndPlantsContext";
 import { Garden, UserPlant } from "@/types/models";
 import PlantCard from "@/components/PlantCard";
 import colors from "@/constants/colors";
+import textStyles from "@/constants/textStyles";
 import OptionMenu from "@/components/OptionMenu";
 import { useDeleteEntity } from "@/hooks/useDeleteEntity";
 import EntityEditModal from "@/components/EntityEditModal";
@@ -90,15 +92,20 @@ const GardenDetailPage = () => {
         }}
       />
       {garden && !deleting ? (
-        <View style={styles.pageContainer}>
-          {plants?.map((plant, index) => (
-            <PlantCard
-              plant={plant}
-              key={index}
-              onPress={() => router.push(`/profile/plants/${plant.id}`)}
-            />
-          ))}
-        </View>
+        <ScrollView contentContainerStyle={styles.scrollContainer}>
+          {plants?.length === 0 ? (
+            <Text style={[textStyles.h4, styles.emptyText]}>
+              You don't have any plants in this garden yet. Click on the plus button to add one to it.
+            </Text>
+          ) : (
+            plants?.map((plant, index) => (
+              <PlantCard
+                plant={plant}
+                key={index}
+                onPress={() => router.push(`/profile/plants/${plant.id}`)}
+              />
+            )))}
+        </ScrollView>
       ) : deleting ? (
         <View style={{ alignItems: "center" }}>
           <ActivityIndicator size="small" color="#457D58" />
@@ -126,13 +133,17 @@ const styles = StyleSheet.create({
   backgroundImage: {
     flex: 1,
   },
-  pageContainer: {
-    alignItems: "center",
-    flex: 1,
-    borderTopWidth: 1,
-    borderTopColor: colors.primaryDefault,
-    backgroundColor: colors.white,
+  scrollContainer: {
+    padding: 8,
+    paddingBottom: 104,
+    alignItems: "stretch",
     gap: 8,
-    paddingTop: 16,
+  },
+  emptyText: {
+    textAlign: "center",
+    marginTop: "75%",
+    backgroundColor: colors.backDropLight,
+    padding: 8,
+    borderRadius: 8,
   },
 });

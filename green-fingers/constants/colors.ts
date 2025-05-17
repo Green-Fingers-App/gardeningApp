@@ -21,7 +21,8 @@ const colors = {
   black: "#000000",
   bgCard: "#89BF9C",
   detail: "",
-  backDrop: "#00000030"
+  backDrop: "#00000030",
+  backDropLight: "#FFFFFF90",
 };
 
 export default colors;

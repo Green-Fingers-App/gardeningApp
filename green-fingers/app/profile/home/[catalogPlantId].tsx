@@ -22,54 +22,88 @@ const CatalogPlantDetail = () => {
     <>
       <Stack.Screen
         options={{
-          headerStyle: { backgroundColor: colors.primaryDefault },
-          title: "Plant Information",
+          title: plant?.name.commonName || "Plant Information",
+          headerStyle: { backgroundColor: colors.bgLight },
+          headerTintColor: colors.primaryDefault,
         }}
       />
       {plant ? (
         <View style={styles.pageContainer}>
           <Image
             source={{ uri: plant.imageUrl }}
-            style={{ width: "100%", height: "50%" }}
+            style={styles.plantImage}
+            resizeMode="contain"
           />
           <View style={styles.contentContainer}>
             <View style={styles.titleContainer}>
-              <Text style={textStyles.h1}>{plant.name.commonName}</Text>
+              <Text style={textStyles.h3}>{plant.name.commonName}</Text>
               <Text
-                style={[textStyles.h3, { fontStyle: "italic", color: "gray" }]}
+                style={[textStyles.bodyMedium, { fontSize: 16, fontStyle: "italic", color: colors.textSecondary }]}
               >
                 {plant.name.scientificName}
               </Text>
             </View>
-            <View style={styles.textContainer}>
-              <Text style={styles.paragraphText}>
-                Sunlight: {plant.sunLight}
-              </Text>
-              <Text style={styles.paragraphText}>
-                Water Frequency: {plant.waterFrequency.toLowerCase()}
-              </Text>
-              <Text style={styles.paragraphText}>
-                Blooming:{" "}
-                {plant.blooming
-                  ? `${plant.blooming.start} till ${plant.blooming.end}`
-                  : "This plant doesn't bloom"}
-              </Text>
-              <Text style={styles.paragraphText}>
-                Flower Color: {plant.blooming?.flowerColor || "N/A"}
-              </Text>
-              <Text style={styles.paragraphText}>
-                Harvest:{" "}
-                {plant.harvest
-                  ? `${plant.harvest.start} till ${plant.harvest.end}`
-                  : "This plant cannot be harvested"}
-              </Text>
-              <Text style={styles.paragraphText}>
-                Temperature Range: {plant.temperature.min}°C -{" "}
-                {plant.temperature.max}°C
-              </Text>
+            <View style={styles.attributeContainer}>
+              <View style={styles.attributeText}>
+                <Text style={[textStyles.body, { color: colors.textSecondary }]} > Sunlight:</Text>
+                {plant.sunLight ? (
+                  <Text style={[textStyles.bodyMedium, { color: colors.textPrimary }]} > {plant.sunLight}</Text>
+                ) : (
+                  <Text style={[textStyles.bodyMedium, { color: colors.textPrimary }]} > -</Text>
+                )}
+              </View>
+              <View style={styles.attributeText}>
+                <Text style={[textStyles.body, { color: colors.textSecondary }]} > Water Frequency:</Text>
+                {plant.waterFrequency ? (
+                  <Text style={[textStyles.bodyMedium, { color: colors.textPrimary }]} >{plant.waterFrequency.charAt(0) + plant.waterFrequency.slice(1).toLowerCase()}</Text>
+                ) : (
+                  <Text style={[textStyles.bodyMedium, { color: colors.textPrimary }]} > -</Text>
+                )}
+              </View>
+              <View style={styles.attributeText}>
+                <Text style={[textStyles.body, { color: colors.textSecondary }]} > Moisture level:</Text>
+                {plant.neededMoisture ? (
+                  <Text style={[textStyles.bodyMedium, { color: colors.textPrimary }]} > {plant.neededMoisture}</Text>
+                ) : (
+                  <Text style={[textStyles.bodyMedium, { color: colors.textPrimary }]} > -</Text>
+                )}
+              </View>
+              <View style={styles.attributeText}>
+                <Text style={[textStyles.body, { color: colors.textSecondary }]} > Blooming:</Text>
+                {plant.blooming ? (
+                  <Text style={[textStyles.bodyMedium, { color: colors.textPrimary }]} > {plant.blooming.start} till {plant.blooming.end}</Text>
+                ) : (
+                  <Text style={[textStyles.bodyMedium, { color: colors.textPrimary }]} > -</Text>
+                )}
+              </View>
+              <View style={styles.attributeText}>
+                <Text style={[textStyles.body, { color: colors.textSecondary }]} > Flower Color:</Text>
+                {plant.blooming ? (
+                  <Text style={[textStyles.bodyMedium, { color: colors.textPrimary }]} > {plant.blooming.flowerColor}</Text>
+                ) : (
+                  <Text style={[textStyles.bodyMedium, { color: colors.textPrimary }]} > -</Text>
+                )}
+              </View>
+              <View style={styles.attributeText}>
+                <Text style={[textStyles.body, { color: colors.textSecondary }]} > Harvest:</Text>
+                {plant.harvest ? (
+                  <Text style={[textStyles.bodyMedium, { color: colors.textPrimary }]} > {plant.harvest.start} till {plant.harvest.end}</Text>
+                ) : (
+                  <Text style={[textStyles.bodyMedium, { color: colors.textPrimary }]} > -</Text>
+                )}
+              </View>
+              <View style={styles.attributeText}>
+                <Text style={[textStyles.body, { color: colors.textSecondary }]} > Temperatur Range:</Text>
+                {plant.temperature ? (
+                  <Text style={[textStyles.bodyMedium, { color: colors.textPrimary }]} > {plant.temperature.min} °C to {plant.temperature.max} °C</Text>
+                ) : (
+                  <Text style={[textStyles.bodyMedium, { color: colors.textPrimary }]} > -</Text>
+                )}
+              </View>
             </View>
           </View>
         </View>
+
       ) : (
         <Text style={textStyles.h2}>Plant not found</Text>
       )}
@@ -80,12 +114,20 @@ const CatalogPlantDetail = () => {
 export default CatalogPlantDetail;
 
 const styles = StyleSheet.create({
+  plantImage: {
+    width: "100%",
+    height: 240,
+    backgroundColor: colors.greyLight,
+  },
   pageContainer: {
     justifyContent: "flex-end",
     flex: 1,
+    borderTopWidth: 1,
+    borderColor: colors.primaryDefault,
+    backgroundColor: colors.white,
   },
   contentContainer: {
-    height: "50%",
+    flex: 1,
   },
   titleContainer: {
     backgroundColor: colors.secondaryDefault,
@@ -100,5 +142,17 @@ const styles = StyleSheet.create({
   },
   paragraphText: {
     fontSize: 20,
+  },
+  attributeContainer: {
+    width: "100%",
+    padding: 16,
+    gap: 8,
+    flexDirection: "column",
+    justifyContent: "flex-start",
+  },
+  attributeText: {
+    flexDirection: "row",
+    alignContent: "center",
+    gap: 4,
   },
 });

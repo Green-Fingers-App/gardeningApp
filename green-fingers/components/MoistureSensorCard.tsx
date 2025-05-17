@@ -37,9 +37,9 @@ const MoistureSensorCard: React.FC<MoistureSensorCardProps> = ({
   return (
     <TouchableOpacity style={styles.cardContainer} {...props}>
       <View style={styles.row}>
-        <MaterialIcons name="sensors" size={24} color={colors.textPrimary} />
+        <MaterialIcons name="sensors" size={24} color={colors.primaryDefault} />
         <View style={styles.textContainer}>
-          <Text style={textStyles.h4}>{sensor.name}</Text>
+          <Text style={[textStyles.h4, { color: colors.primaryDefault }]}>{sensor.name}</Text>
           <Text style={[textStyles.label, { color: colors.textMuted, marginTop: -2 }]}>
             {`${sensor.sensorType} sensor`}
           </Text>

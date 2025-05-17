@@ -152,9 +152,7 @@ const styles = StyleSheet.create({
     height: 240,
     width: "100%",
     backgroundColor: colors.white,
-    paddingHorizontal: 8,
-    marginVertical: 8,
-    marginBottom: 0,
+    paddingHorizontal: 4,
   },
   title: {
     textAlign: "center",

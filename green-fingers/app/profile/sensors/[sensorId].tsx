@@ -66,7 +66,6 @@ const SensorDetailPage = () => {
     {
       label: "Delete",
       onPress: () => {
-        console.log("Button Pressed, sensor: ", sensor);
         sensor && handleDeleteEntity({ id: sensor.id, name: sensor.name });
       },
     },
@@ -95,6 +94,8 @@ const SensorDetailPage = () => {
       }
     );
     setSensor(updatedSensor);
+    const newPlant = fetchPlantDetail(editValues.plant_id.toString());
+    setPlant(newPlant);
     setEditValues({});
     setEditing(false);
     router.replace(`/profile/sensors/${sensorId}`);
@@ -185,11 +186,11 @@ const SensorDetailPage = () => {
             </View>
             <View style={styles.attributeText}>
               <Text style={[textStyles.body, { color: colors.textSecondary }]} > Assigned plant:</Text>
-              {sensor.plant_id ? (
+              {plant ? (
                 <Button
                   style={{ flexShrink: 1 }}
                   type="tertiary"
-                  text={sensor.nickname}
+                  text={plant.nickName}
                   onPress={() => router.push(`profile/plants/${sensor.plant_id}`)}
                 />
               ) : (

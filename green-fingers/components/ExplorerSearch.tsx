@@ -55,7 +55,6 @@ export default ExplorerSearch;
 
 const styles = StyleSheet.create({
   componentContainer: {
-    backgroundColor: colors.secondaryDefault,
     width: "100%",
   },
 });

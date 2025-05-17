@@ -31,6 +31,7 @@ const GardenCard: React.FC<GardenCardProps> = ({ garden }) => {
             {`${garden.location}`}
           </Text>
         </View>
+        <View style={styles.spacer} />
       </View>
     </TouchableOpacity>
   );
@@ -54,5 +55,8 @@ const styles = StyleSheet.create({
   },
   textContainer: {
     marginLeft: 12,
+  },
+  spacer: {
+    flex: 1,
   },
 });

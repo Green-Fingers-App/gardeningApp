@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { View, Text, StyleSheet, ImageBackground } from "react-native";
+import { ScrollView, Text, StyleSheet, ImageBackground } from "react-native";
 import { useMoistureSensors } from "@/context/MoistureSensorContext";
 import MoistureSensorCard from "@/components/MoistureSensorCard";
 import { MoistureSensor } from "@/types/models";
 import { useRouter } from "expo-router";
+import colors from "@/constants/colors";
+import textStyles from "@/constants/textStyles";
 
 const Sensors = () => {
   const [sensors, setSensors] = useState<MoistureSensor[]>([]);
@@ -19,10 +21,10 @@ const Sensors = () => {
       source={require("../../../assets/images/background.png")}
       style={styles.backgroundImage}
     >
-      <View style={styles.pageContainer}>
+      <ScrollView contentContainerStyle={styles.scrollContainer}>
         {sensors.length === 0 ? (
-          <Text style={styles.emptyText}>
-            You don't have any sensors yet.
+          <Text style={[textStyles.h4, styles.emptyText]}>
+            You don't have any sensors yet. Click on the plus button to add one.
           </Text>
         ) : (
           sensors.map((sensor, index) => (
@@ -33,7 +35,7 @@ const Sensors = () => {
             />
           ))
         )}
-      </View>
+      </ScrollView>
     </ImageBackground>
   )
 }
@@ -42,18 +44,18 @@ const styles = StyleSheet.create({
   backgroundImage: {
     flex: 1,
   },
-  pageContainer: {
-    flex: 1,
-    gap: 12,
-    marginTop: 8,
+  scrollContainer: {
     padding: 8,
+    paddingBottom: 104,
+    alignItems: "stretch",
+    gap: 8,
   },
   emptyText: {
-    fontSize: 16,
-    fontWeight: "500",
-    color: "#555",
     textAlign: "center",
-    marginTop: 16,
+    marginTop: "75%",
+    backgroundColor: colors.backDropLight,
+    padding: 8,
+    borderRadius: 8,
   },
 });
 
