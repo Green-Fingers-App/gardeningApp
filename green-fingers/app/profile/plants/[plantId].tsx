@@ -97,7 +97,7 @@ const PlantDetailPage = () => {
     <>
       <Stack.Screen
         options={{
-          title: plant?.nickName || "Plant Details",
+          title: plant?.nickName ?? "Plant Details",
           headerTitleStyle: {
             fontSize: 20,
             fontFamily: textStyles.h3.fontFamily,

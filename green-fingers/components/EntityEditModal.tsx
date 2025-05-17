@@ -86,7 +86,7 @@ const EntityEditModal: React.FC<EntityEditModalProps> = ({
                   <DropDown
                     key={field.key}
                     label={field.label}
-                    placeholder={field.placeholder || "Select a plant"}
+                    placeholder={field.placeholder ?? "Select a plant"}
                     options={plants.map((plant) => ({
                       label: plant.nickName,
                       value: plant.id,
