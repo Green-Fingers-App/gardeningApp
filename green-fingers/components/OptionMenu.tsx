@@ -10,11 +10,11 @@ import {
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import colors from "@/constants/colors";
 
-interface OptionsMenuProps {
+interface OptionMenuProps {
   options: { label: string; onPress: () => void }[];
 }
 
-const OptionsMenu: React.FC<OptionsMenuProps> = ({ options }) => {
+const OptionMenu: React.FC<OptionMenuProps> = ({ options }) => {
   const [visible, setVisible] = useState(false);
 
   return (
@@ -65,7 +65,7 @@ const OptionsMenu: React.FC<OptionsMenuProps> = ({ options }) => {
   );
 };
 
-export default OptionsMenu;
+export default OptionMenu;
 
 const styles = StyleSheet.create({
   container: {
