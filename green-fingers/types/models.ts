@@ -99,8 +99,11 @@ export type SoilMoisture = "Very Dry" | "Dry" | "Moist" | "Wet" | "Very Wet";
 
 export type Level = "Optimal" | "Good" | "Too Low" | "Too High" | "No Value";
 
-export interface MoistureSensor {
+export interface MoistureSensor extends AddMoistureSensor {
   id: number;
+}
+
+export interface AddMoistureSensor {
   name: string;
   current_moisture_level: SoilMoisture;
   sensorType: string;

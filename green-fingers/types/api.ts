@@ -45,3 +45,9 @@ export type GetMoistureSensorResponse = MoistureSensor & {
 export type GetMoistureSensorWithHistoryResponse = SensorWithHistory & {
   error?: string;
 }
+
+export type UpdateSensorResponse = { error?: string };
+
+export type DeleteSensorResponse = { error?: string };
+
+

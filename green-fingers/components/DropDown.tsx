@@ -35,6 +35,10 @@ const DropDown: React.FC<DropDownProps> = ({
   );
   const slideAnim = React.useRef(new Animated.Value(0)).current;
 
+
+  const MAX_VISIBLE_ITEMS = 5;
+  const ITEM_HEIGHT = 32;
+
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
     Animated.timing(slideAnim, {
@@ -46,7 +50,7 @@ const DropDown: React.FC<DropDownProps> = ({
 
   const animatedHeight = slideAnim.interpolate({
     inputRange: [0, 1],
-    outputRange: [0, options.length * 40],
+    outputRange: [0, Math.min(options.length, MAX_VISIBLE_ITEMS) * ITEM_HEIGHT],
   });
 
   const handleSelect = (value: number) => {
@@ -78,11 +82,18 @@ const DropDown: React.FC<DropDownProps> = ({
         />
       </Pressable>
 
-      <Animated.View style={{ maxHeight: animatedHeight, overflow: "hidden" }}>
+      <Animated.View style={{ maxHeight: animatedHeight, overflow: "hidden", borderColor: colors.primaryDefault, borderWidth: 1, borderRadius: 8 }}>
         {menuOpen && (
           <FlatList
             data={options}
             keyExtractor={(item) => item.value.toString()}
+            initialNumToRender={MAX_VISIBLE_ITEMS}
+            getItemLayout={(_, index) => ({
+              length: ITEM_HEIGHT,
+              offset: ITEM_HEIGHT * index,
+              index,
+            })}
+            style={{ maxHeight: MAX_VISIBLE_ITEMS * ITEM_HEIGHT }}
             renderItem={({ item }) => (
               <Pressable
                 onPress={() => {
@@ -137,6 +148,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 12,
     borderBottomWidth: 1,
     borderBottomColor: colors.greyLight,
+    backgroundColor: colors.white,
   },
   optionText: {
     color: colors.textPrimary,

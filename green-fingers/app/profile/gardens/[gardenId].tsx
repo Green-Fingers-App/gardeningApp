@@ -39,7 +39,7 @@ const GardenDetailPage = () => {
     },
   ];
 
-  const handleChange = (key: string, value: string) => {
+  const handleChange = (key: string, value: string | number) => {
     setEditValues((prev) => ({ ...prev, [key]: value }));
   };
 
