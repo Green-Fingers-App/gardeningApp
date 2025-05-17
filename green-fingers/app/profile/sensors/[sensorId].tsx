@@ -4,25 +4,30 @@ import { Text, View, StyleSheet, ActivityIndicator, ImageBackground } from "reac
 import { MaterialIcons } from "@expo/vector-icons";
 import { useMoistureSensors } from "@/context/MoistureSensorContext";
 import { useGardensAndPlants } from "@/context/GardensAndPlantsContext";
-import { MoistureSensor, UserPlant } from "@/types/models";
+import { MoistureSensor, UserPlant, MoistureDataPoint } from "@/types/models";
 import colors from "@/constants/colors";
 import textStyles from "@/constants/textStyles";
 import { useDeleteEntity } from "@/hooks/useDeleteEntity";
 import EntityEditModal from "@/components/EntityEditModal";
 import OptionMenu from "@/components/OptionMenu";
 import Button from "@/components/Button";
+import MoistureChart from "@/components/MoistureChart";
 
 
 const SensorDetailPage = () => {
   const { sensorId } = useLocalSearchParams();
-  const { fetchSensor, getMoistureLevel } = useMoistureSensors();
+  const { fetchSensor, fetchSensorWithHistory, getMoistureLevel } = useMoistureSensors();
+  const { fetchPlantDetail } = useGardensAndPlants();
 
   const [sensor, setSensor] = useState<MoistureSensor | undefined>(undefined);
+  const [plant, setPlant] = useState<UserPlant | undefined>(undefined);
+
   const [iconProps, setIconProps] = useState<{
     name: keyof typeof MaterialIcons.glyphMap;
     color: string;
   }>({ name: "error", color: colors.textError });
   const [status, setStatus] = useState<string>("No value available");
+  const [history, setHistory] = useState<MoistureDataPoint[]>([]);
 
   const getIconProps = (
     status: string
@@ -42,20 +47,30 @@ const SensorDetailPage = () => {
 
   const router = useRouter();
 
-  useEffect(() => {
-    const currentSensor = fetchSensor(sensorId.toString());
 
-    if (currentSensor) {
-      const status = getMoistureLevel(
-        currentSensor.plant_id,
-        currentSensor.interpretedMoisture
-      );
-      const currentIconProps = getIconProps(status);
-      setStatus(status);
-      setSensor(currentSensor);
-      setIconProps(currentIconProps);
-    }
+  useEffect(() => {
+    const loadSensorData = async () => {
+      const currentSensor = fetchSensor(sensorId.toString());
+      const sensorWithHistory = await fetchSensorWithHistory(sensorId.toString());
+      if (currentSensor && sensorWithHistory) {
+        const status = getMoistureLevel(
+          currentSensor.plant_id,
+          currentSensor.interpretedMoisture
+        );
+        const currentIconProps = getIconProps(status);
+        const connectedPlant = fetchPlantDetail(currentSensor.plant_id.toString());
+        console.log(currentSensor.current_moisture_level)
+        setStatus(status);
+        setSensor(currentSensor);
+        setHistory(sensorWithHistory.history);
+        setPlant(connectedPlant);
+        setIconProps(currentIconProps);
+      }
+    };
+
+    loadSensorData();
   }, [sensorId]);
+
 
   return (
     <ImageBackground
@@ -72,7 +87,12 @@ const SensorDetailPage = () => {
       {sensor ? (
         <View style={styles.pageContainer}>
           <View style={styles.chartContainer}>
-            <Text style={[textStyles.h4, { textAlign: "center", }]} > Space for chart </Text>
+
+            <MoistureChart
+              data={history}
+              expectedMoisture={plant?.neededMoisture}
+            />
+
           </View>
           <View style={styles.currentMoistureLevel}>
             <MaterialIcons name={iconProps.name} color={iconProps.color} size={24} />
@@ -153,13 +173,11 @@ const styles = StyleSheet.create({
     backgroundColor: colors.white,
   },
   chartContainer: {
-    alignContent: "center",
-    justifyContent: "center",
     borderBottomWidth: 1,
     borderBottomColor: colors.primaryDefault,
-    backgroundColor: colors.greyLight,
-    height: 240,
-    width: "100%"
+    backgroundColor: colors.white,
+    height: 280,
+    width: "100%",
   },
   currentMoistureLevel: {
     flexDirection: "row",

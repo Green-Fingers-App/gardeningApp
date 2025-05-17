@@ -8,13 +8,14 @@ import React, {
 import { useAuth } from "@/context/AuthContext";
 import { useToast } from "@/context/ToastContext";
 import { useGardensAndPlants } from "./GardensAndPlantsContext";
-import { MoistureSensor, SoilMoisture, Level, UserPlant, CatalogPlant } from "@/types/models";
-import { apiGetAllMoistureSensors } from "@/api/sensorService";
+import { MoistureSensor, SoilMoisture, Level, UserPlant, SensorWithHistory } from "@/types/models";
+import { apiGetAllMoistureSensors, apiGetSensorHistoryData } from "@/api/sensorService";
 
 interface MoistureSensorContextProps {
   sensors: MoistureSensor[];
   fetchAllSensors: () => void;
   fetchSensor: (sensorId: string) => MoistureSensor | undefined;
+  fetchSensorWithHistory: (sensorId: string) => Promise<SensorWithHistory | undefined>;
   getMoistureLevel: (plantId: number, actualLevel: SoilMoisture) => Level;
 }
 
@@ -40,6 +41,15 @@ export const MoistureSensorProvider: React.FC<{ children: ReactNode }> = ({ chil
 
   const fetchSensor = (sensorId: string): MoistureSensor | undefined => {
     return sensors.find((sensor) => sensor.id === parseInt(sensorId, 10));
+  };
+
+  const fetchSensorWithHistory = async (sensorId: string): Promise<SensorWithHistory | undefined> => {
+    try {
+      const data = await apiGetSensorHistoryData(parseInt(sensorId, 10));
+      return data;
+    } catch (error) {
+      showToast("error", `Fetching sensor with history ${(error as Error).message}`);
+    }
   };
 
   const evaluateMoistureLevel = (
@@ -79,7 +89,7 @@ export const MoistureSensorProvider: React.FC<{ children: ReactNode }> = ({ chil
 
   return (
     <MoistureSensorContext.Provider
-      value={{ sensors, fetchAllSensors, fetchSensor, getMoistureLevel }}
+      value={{ sensors, fetchAllSensors, fetchSensor, fetchSensorWithHistory, getMoistureLevel }}
     >
       {children}
     </MoistureSensorContext.Provider>
