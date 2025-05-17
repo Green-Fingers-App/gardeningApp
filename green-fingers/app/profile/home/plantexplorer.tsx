@@ -5,6 +5,7 @@ import { useGardensAndPlants } from "@/context/GardensAndPlantsContext";
 import { CatalogPlant } from "@/types/models";
 import PlantCard from "@/components/PlantCard";
 import colors from "@/constants/colors";
+import textStyles from "@/constants/textStyles";
 import ExplorerSearch from "@/components/ExplorerSearch";
 
 const PlantExplorerPage = () => {
@@ -35,6 +36,12 @@ const PlantExplorerPage = () => {
           options={{
             title: "Plant Explorer",
             headerStyle: { backgroundColor: colors.bgLight },
+            headerTitleStyle: {
+              fontSize: 20,
+              fontFamily: textStyles.h3.fontFamily,
+              fontWeight: textStyles.h3.fontWeight,
+              color: colors.primaryDefault,
+            },
             headerTintColor: colors.primaryDefault,
           }}
         />
@@ -77,7 +84,7 @@ const styles = StyleSheet.create({
   searchContainer: {
     paddingVertical: 16,
     paddingHorizontal: 8,
-    backgroundColor: colors.bgLight,
+    backgroundColor: colors.backDropLight,
     borderBottomWidth: 1,
     borderBottomColor: colors.primaryDefault,
     borderTopWidth: 1,

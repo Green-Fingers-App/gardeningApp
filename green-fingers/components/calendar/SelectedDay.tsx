@@ -7,11 +7,8 @@ import { UserPlant, WaterFrequency } from "@/types/models";
 import { useCalendar } from "@/context/CalendarContext";
 import Button from "../Button";
 import { useGardensAndPlants } from "@/context/GardensAndPlantsContext";
-import {
-  inTheFuture,
-  plantsToBeWateredToday,
-  WateringAppointment,
-} from "@/utils/calendar";
+import { inTheFuture, plantsToBeWateredToday, WateringAppointment } from "@/utils/calendar";
+import textStyles from "@/constants/textStyles";
 
 interface SelectedDayProps {
   day: WeekDay;
@@ -84,30 +81,32 @@ const SelectedDay: React.FC<SelectedDayProps> = ({ day }) => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>{`${day.day} - ${day.date}`}</Text>
-      {listOfPlantsToBeWatered.length > 0 ? (
-        listOfPlantsToBeWatered.map(({ overdue, plant }, index) => (
-          <View style={{ marginHorizontal: 5, marginVertical: 2 }} key={index}>
-            <Text
-              style={overdue ? { color: colors.textWarning } : null}
-              key={index}
-            >{`${plant.nickName} - Last Watered: ${
-              plant.wateredDate &&
-              new Date(plant.wateredDate).toLocaleDateString()
-            }`}</Text>
-          </View>
-        ))
-      ) : (
-        <Text>No plants need water today</Text>
-      )}
-      {listOfPlantsToBeWatered.length > 0 && !inTheFuture(day) ? (
-        <Button
-          text="I've watered the plants"
-          iconName="watering-can-outline"
-          style={{ width: "80%", alignSelf: "center", marginTop: 10 }}
-          onPress={waterPlants}
-        />
-      ) : null}
+      <View style={styles.title}>
+        <Text style={[textStyles.h4, { color: colors.primaryDefault }]}>{`${day.day} - ${day.date}`}</Text>
+      </View>
+      <View style={styles.todoContainer}>
+        {listOfPlantsToBeWatered.length > 0 ? (
+          listOfPlantsToBeWatered.map(({ overdue, plant }, index) => (
+            <View key={index}>
+              <Text
+                style={[overdue ? textStyles.bodyMedium : textStyles.body, { color: overdue ? colors.textWarning : colors.textPrimary }]}
+                key={index}
+              >{`${plant.nickName} - Last Watered: ${plant.wateredDate &&
+                new Date(plant.wateredDate).toLocaleDateString()
+                }`}</Text>
+            </View>
+          ))
+        ) : (
+          <Text>No plants need water today</Text>
+        )}
+        {listOfPlantsToBeWatered.length > 0 && !inTheFuture(day) ? (
+          <Button
+            text="I've watered the plants"
+            iconName="watering-can-outline"
+            onPress={waterPlants}
+          />
+        ) : null}
+      </View>
     </View>
   );
 };
@@ -116,24 +115,25 @@ export default SelectedDay;
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     borderColor: colors.primaryDefault,
     borderWidth: 1,
-    margin: 20,
-    width: Dimensions.get("window").width - 40,
-    height: 10,
+    margin: 8,
+    marginTop: 16,
     overflow: "hidden",
     borderRadius: 8,
-    backgroundColor: colors.bgCard,
+    backgroundColor: colors.white,
   },
   title: {
-    backgroundColor: colors.primaryDefault,
-    paddingLeft: 10,
-    height: 30,
-    textAlign: "center",
-    textAlignVertical: "center",
-    fontSize: 16,
-    fontWeight: "bold",
-    color: colors.white,
+    flexDirection: "row",
+    justifyContent: "center",
+    backgroundColor: colors.bgLight,
+    padding: 16,
+    borderBottomColor: colors.primaryDefault,
+    borderBottomWidth: 1,
   },
+  todoContainer: {
+    flexDirection: "column",
+    gap: 8,
+    padding: 8,
+  }
 });

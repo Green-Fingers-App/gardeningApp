@@ -133,6 +133,12 @@ const SensorDetailPage = () => {
         options={{
           title: sensor?.name || "Sensor Details",
           headerStyle: { backgroundColor: colors.bgLight },
+          headerTitleStyle: {
+            fontSize: 20,
+            fontFamily: textStyles.h3.fontFamily,
+            fontWeight: textStyles.h3.fontWeight,
+            color: colors.primaryDefault,
+          },
           headerTintColor: colors.primaryDefault,
           headerRight: () => <OptionMenu options={options} />,
         }}

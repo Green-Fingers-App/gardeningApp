@@ -2,7 +2,6 @@ import { StyleSheet, View } from "react-native";
 import React, { useRef, useState } from "react";
 import { CatalogPlant } from "@/types/models";
 import Input from "./Input";
-import colors from "@/constants/colors";
 
 interface ExplorerSearchProps {
   filteredPlants: CatalogPlant[];

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { View, StyleSheet, ImageBackground, ScrollView, Text } from "react-native";
+import { StyleSheet, ImageBackground, ScrollView, Text } from "react-native";
 import PlantCard from "@/components/PlantCard";
 import { useGardensAndPlants } from "@/context/GardensAndPlantsContext";
 import { UserPlant } from "@/types/models";

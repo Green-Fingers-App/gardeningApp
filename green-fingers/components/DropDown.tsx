@@ -81,8 +81,19 @@ const DropDown: React.FC<DropDownProps> = ({
           color={colors.textSecondary}
         />
       </Pressable>
-
-      <Animated.View style={{ maxHeight: animatedHeight, overflow: "hidden", borderColor: colors.primaryDefault, borderWidth: 1, borderRadius: 8 }}>
+      <Animated.View
+        style={[
+          {
+            maxHeight: animatedHeight,
+            overflow: "hidden",
+            borderRadius: 8,
+          },
+          menuOpen && {
+            borderColor: colors.primaryDefault,
+            borderWidth: 1,
+          },
+        ]}
+      >
         {menuOpen && (
           <FlatList
             data={options}
@@ -133,11 +144,14 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     backgroundColor: colors.white,
   },
+
   defaultInput: {
     borderColor: colors.textSecondary,
+    borderWidth: 1,
   },
   focusedInput: {
     borderColor: colors.primaryDefault,
+    borderWidth: 2,
   },
   selectedText: {
     flex: 1,

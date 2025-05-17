@@ -4,7 +4,6 @@ import {
   Image,
   ActivityIndicator,
   View,
-  StyleSheet,
   TouchableOpacity,
 } from "react-native";
 import { Stack, useLocalSearchParams, useRouter } from "expo-router";
@@ -12,6 +11,7 @@ import React, { useEffect, useState } from "react";
 import { useGardensAndPlants } from "@/context/GardensAndPlantsContext";
 import { UserPlant } from "@/types/models";
 import colors from "@/constants/colors";
+import textStyles from "@/constants/textStyles";
 import Accordion from "@/components/Accordion";
 import AccordionItem from "@/components/AccordionItem";
 import OptionsMenu from "@/components/OptionMenu";
@@ -98,6 +98,12 @@ const PlantDetailPage = () => {
       <Stack.Screen
         options={{
           title: plant?.nickName || "Plant Details",
+          headerTitleStyle: {
+            fontSize: 20,
+            fontFamily: textStyles.h3.fontFamily,
+            fontWeight: textStyles.h3.fontWeight,
+            color: colors.primaryDefault,
+          },
           headerStyle: {
             backgroundColor: colors.primaryDefault,
           },

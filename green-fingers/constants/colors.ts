@@ -22,7 +22,7 @@ const colors = {
   bgCard: "#89BF9C",
   detail: "",
   backDrop: "#00000030",
-  backDropLight: "#FFFFFF90",
+  backDropLight: "#FFFFFF99",
 };
 
 export default colors;

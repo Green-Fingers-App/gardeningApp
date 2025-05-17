@@ -50,6 +50,11 @@ const textStyles: { [key: string]: TextStyle } = {
         color: colors.textSecondary,
         fontFamily: "Montserrat-Regular",
     },
+    tabLabel: {
+        fontSize: 12,
+        lineHeight: 14,
+        fontFamily: "Montserrat-Medium",
+    },
     button: {
         fontSize: 16,
         lineHeight: 20,

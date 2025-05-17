@@ -88,6 +88,12 @@ const GardenDetailPage = () => {
           title: garden?.name || "Garden Details",
           headerStyle: { backgroundColor: colors.bgLight },
           headerTintColor: colors.primaryDefault,
+          headerTitleStyle: {
+            fontSize: 20,
+            fontFamily: textStyles.h3.fontFamily,
+            fontWeight: textStyles.h3.fontWeight,
+            color: colors.primaryDefault,
+          },
           headerRight: () => <OptionMenu options={options} />,
         }}
       />
