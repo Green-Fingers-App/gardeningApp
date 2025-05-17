@@ -105,14 +105,22 @@ const ProfileLayout: React.FC = () => {
         />
       </Tabs>
 
+
       {isLoggedIn && (
-        <View style={styles.addButtonContainer}>
+        <>
+          {menuOpen && <AddMenu visible={menuOpen} onClose={() => setMenuOpen(false)} />}
+
+          <View style={styles.addButtonContainer} />
+
           <TouchableOpacity style={styles.addButton} onPress={toggleMenu}>
-            <MaterialIcons name={menuOpen ? "close" : "add"} size={45} />
+            <MaterialIcons
+              name={menuOpen ? "close" : "add"}
+              size={45}
+              color={colors.primaryDefault}
+            />
           </TouchableOpacity>
-        </View>
+        </>
       )}
-      {menuOpen && <AddMenu />}
     </>
   );
 };
@@ -133,21 +141,33 @@ const styles = StyleSheet.create({
   profileButton: {
     marginLeft: 8,
   },
+
   addButtonContainer: {
     position: "absolute",
+    height: 90,
+    width: 90,
     bottom: 20,
     left: "50%",
-    transform: [{ translateX: -40 }, { translateY: -25 }],
+    transform: [{ translateX: -45 }, { translateY: -28 }],
     backgroundColor: colors.primaryDefault,
-    padding: 10,
     borderRadius: 100,
+    borderBottomStartRadius: 0,
+    borderBottomEndRadius: 0,
   },
+
   addButton: {
+    position: "absolute",
+    bottom: 60,
+    left: "50%",
+    transform: [{ translateX: -30 }],
+    zIndex: 1000,
     height: 60,
     width: 60,
-    backgroundColor: colors.primaryDark,
+    backgroundColor: colors.bgLight,
     alignItems: "center",
     justifyContent: "center",
     borderRadius: 30,
+    elevation: 10,
   },
+
 });

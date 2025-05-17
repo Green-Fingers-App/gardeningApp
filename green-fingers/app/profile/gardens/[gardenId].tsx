@@ -84,7 +84,8 @@ const GardenDetailPage = () => {
       <Stack.Screen
         options={{
           title: garden?.name || "Garden Details",
-          headerStyle: { backgroundColor: colors.primaryDefault },
+          headerStyle: { backgroundColor: colors.bgLight },
+          headerTintColor: colors.primaryDefault,
           headerRight: () => <OptionMenu options={options} />,
         }}
       />
@@ -128,7 +129,10 @@ const styles = StyleSheet.create({
   pageContainer: {
     alignItems: "center",
     flex: 1,
+    borderTopWidth: 1,
+    borderTopColor: colors.primaryDefault,
+    backgroundColor: colors.white,
     gap: 8,
-    marginTop: 8,
+    paddingTop: 16,
   },
 });
