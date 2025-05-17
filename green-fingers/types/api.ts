@@ -1,4 +1,4 @@
-import { CatalogPlant, UserPlant, Garden, MoistureSensor } from "./models";
+import { CatalogPlant, UserPlant, Garden, MoistureSensor, SensorWithHistory } from "./models";
 
 // API responses for plant endpoints
 export type CreateUserPlantResponse = UserPlant & {
@@ -39,5 +39,9 @@ export type GetAllMoistureSensorsResponse = MoistureSensor[] & {
 }
 
 export type GetMoistureSensorResponse = MoistureSensor & {
+  error?: string;
+}
+
+export type GetMoistureSensorWithHistoryResponse = SensorWithHistory & {
   error?: string;
 }

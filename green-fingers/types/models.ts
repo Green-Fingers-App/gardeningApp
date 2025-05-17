@@ -111,6 +111,21 @@ export interface MoistureSensor {
   interpretedMoisture: SoilMoisture;
 }
 
+
+export interface MoistureDataPoint {
+  id: number;
+  interpreted: SoilMoisture;
+  moisture_level: number;
+  sensor_id: number;
+  time_stamp: string;
+}
+
+
+export interface SensorWithHistory {
+  sensor: MoistureSensor;
+  history: MoistureDataPoint[];
+}
+
 export interface ErrorData {
   title: string;
   message: string;
