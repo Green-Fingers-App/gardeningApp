@@ -59,6 +59,7 @@ export const MoistureSensorProvider: React.FC<{ children: ReactNode }> = ({ chil
     sensorData: Partial<AddMoistureSensor>
   ): Promise<MoistureSensor | undefined> => {
     try {
+      console.log(sensorData)
       await apiUpdateSensor(sensorId, sensorData);
       setSensors((prevSensors) =>
         prevSensors.map((sensor) =>
@@ -68,6 +69,7 @@ export const MoistureSensorProvider: React.FC<{ children: ReactNode }> = ({ chil
       showToast("success", "Sensor updated");
       return sensors.find((sensor) => sensor.id === sensorId);
     } catch (error) {
+      console.error(error ?? "Unknown error during sensor deletion: ", error)
       showToast("error", (error as Error).message);
       return undefined;
     }

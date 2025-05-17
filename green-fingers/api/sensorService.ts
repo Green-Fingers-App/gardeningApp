@@ -71,6 +71,7 @@ export const apiDeleteSensor = async (sensorId: number) => {
     },
   });
 
+
   const responseData = (await response.json()) as DeleteSensorResponse;
 
   if (!response.ok) {
@@ -86,7 +87,7 @@ export const apiUpdateSensor = async (
 ): Promise<void> => {
   const token = await SecureStore.getItemAsync("accessToken");
 
-  const response = await fetch(`${base_api_ip}/sensors/sensors/${sensorId}`, {
+  const response = await fetch(`${base_api_ip}/sensor/sensor/${sensorId}`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
@@ -94,9 +95,12 @@ export const apiUpdateSensor = async (
     },
     body: JSON.stringify({
       name: updatedData.name,
+      curren_moisture_level: updatedData.current_moisture_level,
       plant_id: updatedData.plant_id,
     }),
   });
+
+  console.log(response)
 
   const responseData = (await response.json()) as UpdateSensorResponse;
 
