@@ -94,7 +94,7 @@ const SelectedDay: React.FC<SelectedDayProps> = ({ day }) => {
       <View style={styles.todoContainer}>
         {listOfPlantsToBeWatered.length > 0 ? (
           listOfPlantsToBeWatered.map(({ overdue, plant }, index) => (
-            <View key={index}>
+            <View key={index} style={{ flexDirection: "row" }}>
               <Text
                 style={[
                   overdue ? textStyles.bodyMedium : textStyles.body,

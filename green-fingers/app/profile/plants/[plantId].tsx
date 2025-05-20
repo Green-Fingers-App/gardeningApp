@@ -23,7 +23,8 @@ import UpdateWateredDate from "@/components/UpdateWateredDate";
 
 const PlantDetailPage = () => {
   const { plantId } = useLocalSearchParams();
-  const { fetchPlantDetail, gardens, updateUserPlant } = useGardensAndPlants();
+  const { fetchPlantDetail, gardens, updateUserPlant, plants } =
+    useGardensAndPlants();
   const [plant, setPlant] = useState<UserPlant | null>(null);
   const { deleting, handleDeleteEntity } = useDeleteEntity("Plant");
   const [editing, setEditing] = useState(false);
@@ -83,7 +84,7 @@ const PlantDetailPage = () => {
     if (newPlant) {
       setPlant(newPlant);
     }
-  }, [plantId]);
+  }, [plantId, plants]);
 
   const [thirsty, setThirsty] = useState(false);
 
@@ -143,7 +144,7 @@ const PlantDetailPage = () => {
                     dateStyle: "full",
                   })}
                 </Text>
-                {thirsty && <UpdateWateredDate plantId={plant.id} />}
+                <UpdateWateredDate plantId={plant.id} />
               </View>
               <Text>Last fed: {plant.feededDate}</Text>
             </AccordionItem>
