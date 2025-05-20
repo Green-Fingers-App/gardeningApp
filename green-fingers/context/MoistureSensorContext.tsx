@@ -102,7 +102,6 @@ export const MoistureSensorProvider: React.FC<{ children: ReactNode }> = ({ chil
       showToast("success", "Sensor updated");
       return sensors.find((sensor) => sensor.id === sensorId);
     } catch (error) {
-      console.error(error ?? "Unknown error during sensor deletion: ", error)
       showToast("error", (error as Error).message);
       return undefined;
     }
@@ -150,6 +149,7 @@ export const MoistureSensorProvider: React.FC<{ children: ReactNode }> = ({ chil
   };
 
 
+
   useEffect(() => {
     if (!user?.id) return;
 
@@ -159,10 +159,47 @@ export const MoistureSensorProvider: React.FC<{ children: ReactNode }> = ({ chil
       setSensors(prev =>
         prev.map(sensor =>
           sensor.id === data.sensorId
-            ? { ...sensor, current_moisture_level: data.moisture_level, interpretedMoisture: data.interpreted_level, percentage: data.percentage }
+            ? {
+              ...sensor,
+              current_moisture_level: data.moisture_level,
+              interpretedMoisture: data.interpreted_level,
+              percentage: data.percentage,
+            }
             : sensor
         )
       );
+
+      const updated = await apiGetSensorHistoryData(data.sensorId);
+      if (updated?.history) {
+        setSensorHistories(prev => ({
+          ...prev,
+          [data.sensorId]: updated.history,
+        }));
+      }
+    });
+
+    socket.on("NEW_SENSOR", async (data: MoistureUpdateMessage & {
+      plant_nickname?: string;
+      user_plant_id?: number;
+    }) => {
+      console.log(data)
+      setSensors(prev => {
+        const alreadyExists = prev.some(sensor => sensor.id === data.sensorId);
+        if (alreadyExists) return prev;
+        const newSensor: MoistureSensor = {
+          id: data.sensorId,
+          name: `Sensor ${data.sensorId}`,
+          current_moisture_level: data.moisture_level,
+          interpretedMoisture: data.interpreted_level,
+          percentage: data.percentage,
+          nickname: data.plant_nickname || "Unnamed",
+          plant_id: data.user_plant_id || -1,
+          user_id: user.id,
+          sensorType: "Moisture",
+        };
+
+        return [...prev, newSensor];
+      });
 
       const updated = await apiGetSensorHistoryData(data.sensorId);
       if (updated?.history) {
@@ -177,6 +214,7 @@ export const MoistureSensorProvider: React.FC<{ children: ReactNode }> = ({ chil
       socket.disconnect();
     };
   }, [user?.id]);
+
 
 
   return (
