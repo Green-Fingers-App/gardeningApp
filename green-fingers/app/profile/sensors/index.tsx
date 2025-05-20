@@ -1,20 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { ScrollView, Text, StyleSheet, ImageBackground } from "react-native";
 import { useMoistureSensors } from "@/context/MoistureSensorContext";
 import MoistureSensorCard from "@/components/MoistureSensorCard";
-import { MoistureSensor } from "@/types/models";
 import { useRouter } from "expo-router";
 import colors from "@/constants/colors";
 import textStyles from "@/constants/textStyles";
 
 const Sensors = () => {
-  const [sensors, setSensors] = useState<MoistureSensor[]>([]);
-  const { sensors: contextMoistureSensors } = useMoistureSensors();
+  const { sensors } = useMoistureSensors();
   const router = useRouter();
-
-  useEffect(() => {
-    setSensors(contextMoistureSensors);
-  }, [contextMoistureSensors]);
 
   return (
     <ImageBackground

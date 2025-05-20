@@ -8,7 +8,9 @@ import React, {
 import { useAuth } from "@/context/AuthContext";
 import { useToast } from "@/context/ToastContext";
 import { useGardensAndPlants } from "./GardensAndPlantsContext";
-import { MoistureSensor, SoilMoisture, Level, SensorWithHistory, AddMoistureSensor } from "@/types/models";
+import { MoistureSensor, SoilMoisture, Level, SensorWithHistory, AddMoistureSensor, MoistureDataPoint } from "@/types/models";
+import { MoistureUpdateMessage } from "@/types/socket";
+import { initSocket } from "@/services/socket";
 import { apiDeleteSensor, apiGetAllMoistureSensors, apiGetSensorHistoryData, apiUpdateSensor } from "@/api/sensorService";
 
 interface MoistureSensorContextProps {
@@ -16,6 +18,7 @@ interface MoistureSensorContextProps {
   fetchAllSensors: () => void;
   fetchSensor: (sensorId: string) => MoistureSensor | undefined;
   fetchSensorWithHistory: (sensorId: string) => Promise<SensorWithHistory | undefined>;
+  getSensorWithHistory: (sensorId: number) => SensorWithHistory | undefined;
   getMoistureLevel: (plantId: number, actualLevel: SoilMoisture) => Level;
   updateMoistureSensor: (sensorId: number, sensorData: Partial<AddMoistureSensor>) => Promise<MoistureSensor | undefined>;
   deleteMoistureSensor: (sensorId: number) => void;
@@ -25,6 +28,7 @@ const MoistureSensorContext = createContext<MoistureSensorContextProps | undefin
 
 export const MoistureSensorProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [sensors, setSensors] = useState<MoistureSensor[]>([]);
+  const [sensorHistories, setSensorHistories] = useState<Record<number, MoistureDataPoint[]>>({});
   const { user } = useAuth();
   const { plants } = useGardensAndPlants();
   const { showToast } = useToast();
@@ -45,13 +49,43 @@ export const MoistureSensorProvider: React.FC<{ children: ReactNode }> = ({ chil
     return sensors.find((sensor) => sensor.id === parseInt(sensorId, 10));
   };
 
+
   const fetchSensorWithHistory = async (sensorId: string): Promise<SensorWithHistory | undefined> => {
+    const id = parseInt(sensorId, 10);
     try {
-      const data = await apiGetSensorHistoryData(parseInt(sensorId, 10));
+      if (sensorHistories[id]) {
+        const sensor = fetchSensor(sensorId);
+        if (!sensor) return undefined;
+
+        return {
+          sensor,
+          history: sensorHistories[id],
+        };
+      }
+
+      const data = await apiGetSensorHistoryData(id);
+      if (data?.history) {
+        setSensorHistories(prev => ({
+          ...prev,
+          [id]: data.history,
+        }));
+      }
       return data;
     } catch (error) {
       showToast("error", `Fetching sensor with history ${(error as Error).message}`);
     }
+  };
+
+
+  const getSensorWithHistory = (sensorId: number): SensorWithHistory | undefined => {
+    const sensor = sensors.find(s => s.id === sensorId);
+    const history = sensorHistories[sensorId];
+    if (!sensor || !history) return undefined;
+
+    return {
+      sensor,
+      history,
+    };
   };
 
   const updateMoistureSensor = async (
@@ -59,7 +93,6 @@ export const MoistureSensorProvider: React.FC<{ children: ReactNode }> = ({ chil
     sensorData: Partial<AddMoistureSensor>
   ): Promise<MoistureSensor | undefined> => {
     try {
-      console.log(sensorData)
       await apiUpdateSensor(sensorId, sensorData);
       setSensors((prevSensors) =>
         prevSensors.map((sensor) =>
@@ -116,15 +149,39 @@ export const MoistureSensorProvider: React.FC<{ children: ReactNode }> = ({ chil
     );
   };
 
+
   useEffect(() => {
-    if (user?.id) {
-      void fetchAllSensors();
-    }
+    if (!user?.id) return;
+
+    const socket = initSocket(user.id);
+
+    socket.on("MOISTURE_UPDATE", async (data: MoistureUpdateMessage) => {
+      setSensors(prev =>
+        prev.map(sensor =>
+          sensor.id === data.sensorId
+            ? { ...sensor, current_moisture_level: data.moisture_level, interpretedMoisture: data.interpreted_level, percentage: data.percentage }
+            : sensor
+        )
+      );
+
+      const updated = await apiGetSensorHistoryData(data.sensorId);
+      if (updated?.history) {
+        setSensorHistories(prev => ({
+          ...prev,
+          [data.sensorId]: updated.history,
+        }));
+      }
+    });
+
+    return () => {
+      socket.disconnect();
+    };
   }, [user?.id]);
+
 
   return (
     <MoistureSensorContext.Provider
-      value={{ sensors, fetchAllSensors, fetchSensor, fetchSensorWithHistory, getMoistureLevel, updateMoistureSensor, deleteMoistureSensor }}
+      value={{ sensors, fetchAllSensors, fetchSensor, fetchSensorWithHistory, getMoistureLevel, updateMoistureSensor, deleteMoistureSensor, getSensorWithHistory }}
     >
       {children}
     </MoistureSensorContext.Provider>
