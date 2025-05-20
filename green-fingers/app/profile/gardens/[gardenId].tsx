@@ -1,6 +1,7 @@
 import {
   Text,
   View,
+  ScrollView,
   StyleSheet,
   ActivityIndicator,
   ImageBackground,
@@ -11,6 +12,7 @@ import { useGardensAndPlants } from "@/context/GardensAndPlantsContext";
 import { Garden, UserPlant } from "@/types/models";
 import PlantCard from "@/components/PlantCard";
 import colors from "@/constants/colors";
+import textStyles from "@/constants/textStyles";
 import OptionMenu from "@/components/OptionMenu";
 import { useDeleteEntity } from "@/hooks/useDeleteEntity";
 import EntityEditModal from "@/components/EntityEditModal";
@@ -39,7 +41,7 @@ const GardenDetailPage = () => {
     },
   ];
 
-  const handleChange = (key: string, value: string) => {
+  const handleChange = (key: string, value: string | number) => {
     setEditValues((prev) => ({ ...prev, [key]: value }));
   };
 
@@ -84,20 +86,32 @@ const GardenDetailPage = () => {
       <Stack.Screen
         options={{
           title: garden?.name || "Garden Details",
-          headerStyle: { backgroundColor: colors.primaryDefault },
+          headerStyle: { backgroundColor: colors.bgLight },
+          headerTintColor: colors.primaryDefault,
+          headerTitleStyle: {
+            fontSize: 20,
+            fontFamily: textStyles.h3.fontFamily,
+            fontWeight: textStyles.h3.fontWeight,
+            color: colors.primaryDefault,
+          },
           headerRight: () => <OptionMenu options={options} />,
         }}
       />
       {garden && !deleting ? (
-        <View style={styles.pageContainer}>
-          {plants?.map((plant, index) => (
-            <PlantCard
-              plant={plant}
-              key={index}
-              onPress={() => router.push(`/profile/plants/${plant.id}`)}
-            />
-          ))}
-        </View>
+        <ScrollView contentContainerStyle={styles.scrollContainer}>
+          {plants?.length === 0 ? (
+            <Text style={[textStyles.h4, styles.emptyText]}>
+              You don't have any plants in this garden yet. Click on the plus button to add one to it.
+            </Text>
+          ) : (
+            plants?.map((plant, index) => (
+              <PlantCard
+                plant={plant}
+                key={index}
+                onPress={() => router.push(`/profile/plants/${plant.id}`)}
+              />
+            )))}
+        </ScrollView>
       ) : deleting ? (
         <View style={{ alignItems: "center" }}>
           <ActivityIndicator size="small" color="#457D58" />
@@ -125,10 +139,17 @@ const styles = StyleSheet.create({
   backgroundImage: {
     flex: 1,
   },
-  pageContainer: {
-    alignItems: "center",
-    flex: 1,
+  scrollContainer: {
+    padding: 8,
+    paddingBottom: 104,
+    alignItems: "stretch",
     gap: 8,
-    marginTop: 8,
+  },
+  emptyText: {
+    textAlign: "center",
+    marginTop: "75%",
+    backgroundColor: colors.backDropLight,
+    padding: 8,
+    borderRadius: 8,
   },
 });

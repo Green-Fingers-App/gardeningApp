@@ -33,21 +33,26 @@ const Button: React.FC<ButtonProps> = ({
     switch (type) {
       case "secondary":
         return {
-          ...styles.buttonBase,
           backgroundColor: colors.secondaryDefault,
           borderColor: colors.primaryDefault,
           borderWidth: 1,
+          width: "100%",
+          paddingVertical: 12,
+          paddingHorizontal: 16,
+          borderRadius: 8,
         };
       case "tertiary":
         return {
-          ...styles.buttonBase,
           backgroundColor: "transparent",
         };
       case "primary":
       default:
         return {
-          ...styles.buttonBase,
           backgroundColor: colors.primaryDefault,
+          width: "100%",
+          paddingVertical: 12,
+          paddingHorizontal: 16,
+          borderRadius: 8,
         };
     }
   };
@@ -112,12 +117,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     gap: 8,
-  },
-  buttonBase: {
-    paddingVertical: 12,
-    paddingHorizontal: 16,
-    borderRadius: 8,
-    width: "100%",
   },
   disabled: {
     backgroundColor: colors.greyLight,

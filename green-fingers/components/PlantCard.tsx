@@ -1,17 +1,9 @@
-import {
-  View,
-  Text,
-  StyleSheet,
-  Image,
-  TouchableOpacity,
-  Pressable,
-  ActivityIndicator,
-} from "react-native";
+import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import React from "react";
 import { CatalogPlant, UserPlant } from "../types/models";
 import colors from "@/constants/colors";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
-import { useDeletePlant } from "@/hooks/useDeletePlant";
+import textStyles from "@/constants/textStyles";
+import { MaterialIcons } from "@expo/vector-icons";
 import { shouldBeWatered } from "@/utils/plant";
 
 interface PlantCardProps extends React.ComponentProps<typeof TouchableOpacity> {
@@ -19,117 +11,79 @@ interface PlantCardProps extends React.ComponentProps<typeof TouchableOpacity> {
 }
 
 const PlantCard: React.FC<PlantCardProps> = ({ plant, ...props }) => {
-  const { deleting, handleDeletePlant } = useDeletePlant();
-  const thirsty = shouldBeWatered(plant as UserPlant);
+  const isUserPlant = "nickName" in plant;
+
+  const thirsty = isUserPlant ? shouldBeWatered(plant as UserPlant) : false;
+
+  const getIconProps = (): { name: keyof typeof MaterialIcons.glyphMap; color: string; message: string } => {
+    if (thirsty) {
+      return { name: "warning", color: colors.textWarning, message: "I'm thirsty" };
+    } else {
+      return { name: "check-circle", color: colors.textSuccess, message: "I'm good" };
+    }
+  };
+
+  const iconProps = getIconProps();
+
+  const primaryText = isUserPlant && plant.nickName
+    ? plant.nickName
+    : plant.name.commonName;
+
+  const secondaryText = isUserPlant && plant.nickName
+    ? plant.name.commonName
+    : plant.name.scientificName;
 
   return (
     <TouchableOpacity {...props} style={styles.cardContainer}>
-      {!deleting ? (
-        <>
-          <View
-            style={{
-              flexDirection: "row",
-              alignItems: "center",
-            }}
-          >
-            <Text style={styles.commonName}>
-              {"nickName" in plant ? plant.nickName : plant.name.commonName}
-            </Text>
-            {"nickName" in plant && (
-              <Pressable
-                onPress={() => {
-                  handleDeletePlant(plant);
-                }}
-                style={({ pressed }) => [
-                  styles.deleteButton,
-                  pressed && styles.activeDelete,
-                  {
-                    opacity: pressed ? 0.7 : 1,
-                    transform: [{ scale: pressed ? 0.9 : 1 }],
-                  },
-                ]}
-              >
-                <MaterialCommunityIcons
-                  name="delete-outline"
-                  size={20}
-                  color={"black"}
-                />
-              </Pressable>
-            )}
-          </View>
-          <Text style={styles.scientificName}>
-            {"nickName" in plant
-              ? plant.name.commonName
-              : plant.name.scientificName}
+      <View style={styles.row}>
+        <MaterialIcons name="local-florist" size={24} color={colors.primaryDefault} />
+        <View style={styles.textContainer}>
+          <Text style={[textStyles.h4, { color: colors.primaryDefault }]}>
+            {primaryText}
           </Text>
-          <Image
-            source={{ uri: plant.imageUrl }}
-            width={80}
-            height={80}
-            style={styles.picture}
-          />
-          {"nickName" in plant && thirsty ? (
-            <View
-              style={{ flexDirection: "row", alignItems: "center", gap: 4 }}
-            >
-              <MaterialCommunityIcons name="alert-circle" size={15} />
-              <Text>I'm thirsty</Text>
-            </View>
-          ) : (
-            "nickName" in plant && (
-              <View
-                style={{ flexDirection: "row", alignItems: "center", gap: 4 }}
-              >
-                <MaterialCommunityIcons name="check-circle" size={15} />
-                <Text>I'm okay</Text>
-              </View>
-            )
-          )}
-        </>
-      ) : (
-        <View style={{ alignItems: "center" }}>
-          <ActivityIndicator size="small" color="#457D58" />
-          <Text> Deleting... </Text>
+          <Text style={[textStyles.label, { color: colors.textMuted, marginTop: -2 }]}>
+            {secondaryText}
+          </Text>
         </View>
-      )}
+        <View style={styles.spacer} />
+        {isUserPlant && (
+          <View style={styles.statusContainer}>
+            <MaterialIcons name={iconProps.name} size={24} color={iconProps.color} />
+            <Text style={textStyles.caption}>{iconProps.message}</Text>
+          </View>
+        )}
+      </View>
     </TouchableOpacity>
   );
 };
 
 export default PlantCard;
 
+
 const styles = StyleSheet.create({
   cardContainer: {
-    backgroundColor: colors.bgCard,
-    width: "95%",
-    position: "relative",
-    height: 96,
-    paddingLeft: 8,
+    backgroundColor: colors.bgLight,
+    borderColor: colors.primaryDefault,
+    borderWidth: 2,
+    width: "100%",
     borderRadius: 8,
-    justifyContent: "center",
+    padding: 12,
   },
-  commonName: {
-    fontWeight: "bold",
-    fontSize: 20,
-    marginRight: 8,
+  row: {
+    flexDirection: "row",
+    justifyContent: "flex-start",
+    alignItems: "center",
   },
-  scientificName: {
-    fontStyle: "italic",
-    color: "gray",
+  textContainer: {
+    marginLeft: 12,
   },
-  picture: {
-    backgroundColor: colors.bgImage,
-    width: 80,
-    height: 80,
-    position: "absolute",
-    top: 8,
-    right: 8,
-    borderRadius: 4,
+  spacer: {
+    flex: 1,
   },
-  deleteButton: {
-    padding: 1,
-  },
-  activeDelete: {
-    opacity: 0.7,
+  statusContainer: {
+    flexDirection: "row-reverse",
+    justifyContent: "flex-end",
+    alignItems: "center",
+    gap: 4,
   },
 });

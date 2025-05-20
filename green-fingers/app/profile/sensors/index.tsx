@@ -1,20 +1,20 @@
 import React, { useEffect, useState } from "react";
-import { StyleSheet, ImageBackground, ScrollView, Text } from "react-native";
-import PlantCard from "@/components/PlantCard";
-import { useGardensAndPlants } from "@/context/GardensAndPlantsContext";
-import { UserPlant } from "@/types/models";
+import { ScrollView, Text, StyleSheet, ImageBackground } from "react-native";
+import { useMoistureSensors } from "@/context/MoistureSensorContext";
+import MoistureSensorCard from "@/components/MoistureSensorCard";
+import { MoistureSensor } from "@/types/models";
 import { useRouter } from "expo-router";
 import colors from "@/constants/colors";
 import textStyles from "@/constants/textStyles";
 
-const Plants = () => {
-  const [plants, setPlants] = useState<UserPlant[]>([]);
-  const { plants: contextPlants } = useGardensAndPlants();
+const Sensors = () => {
+  const [sensors, setSensors] = useState<MoistureSensor[]>([]);
+  const { sensors: contextMoistureSensors } = useMoistureSensors();
   const router = useRouter();
 
   useEffect(() => {
-    setPlants(contextPlants);
-  }, [contextPlants]);
+    setSensors(contextMoistureSensors);
+  }, [contextMoistureSensors]);
 
   return (
     <ImageBackground
@@ -22,23 +22,23 @@ const Plants = () => {
       style={styles.backgroundImage}
     >
       <ScrollView contentContainerStyle={styles.scrollContainer}>
-        {plants.length === 0 ? (
+        {sensors.length === 0 ? (
           <Text style={[textStyles.h4, styles.emptyText]}>
-            You don't have any plants yet. Click on the plus button to add one.
+            You don't have any sensors yet. Click on the plus button to add one.
           </Text>
         ) : (
-          plants.map((plant, index) => (
-            <PlantCard
-              plant={plant}
+          sensors.map((sensor, index) => (
+            <MoistureSensorCard
+              sensor={sensor}
               key={index}
-              onPress={() => router.push(`profile/plants/${plant.id}`)}
+              onPress={() => router.push(`profile/sensors/${sensor.id}`)}
             />
           ))
         )}
       </ScrollView>
     </ImageBackground>
-  );
-};
+  )
+}
 
 const styles = StyleSheet.create({
   backgroundImage: {
@@ -59,4 +59,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Plants;
+export default Sensors;
