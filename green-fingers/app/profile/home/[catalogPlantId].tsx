@@ -44,72 +44,225 @@ const CatalogPlantDetail = () => {
             <View style={styles.titleContainer}>
               <Text style={textStyles.h3}>{plant.name.commonName}</Text>
               <Text
-                style={[textStyles.bodyMedium, { fontSize: 16, fontStyle: "italic", color: colors.textSecondary }]}
+                style={[
+                  textStyles.bodyMedium,
+                  {
+                    fontSize: 16,
+                    fontStyle: "italic",
+                    color: colors.textSecondary,
+                  },
+                ]}
               >
                 {plant.name.scientificName}
               </Text>
             </View>
             <View style={styles.attributeContainer}>
               <View style={styles.attributeText}>
-                <Text style={[textStyles.body, { color: colors.textSecondary }]} > Sunlight:</Text>
+                <Text
+                  style={[textStyles.body, { color: colors.textSecondary }]}
+                >
+                  {" "}
+                  Sunlight:
+                </Text>
                 {plant.sunLight ? (
-                  <Text style={[textStyles.bodyMedium, { color: colors.textPrimary }]} > {plant.sunLight}</Text>
+                  <Text
+                    style={[
+                      textStyles.bodyMedium,
+                      { color: colors.textPrimary },
+                    ]}
+                  >
+                    {" "}
+                    {plant.sunLight}
+                  </Text>
                 ) : (
-                  <Text style={[textStyles.bodyMedium, { color: colors.textPrimary }]} > -</Text>
+                  <Text
+                    style={[
+                      textStyles.bodyMedium,
+                      { color: colors.textPrimary },
+                    ]}
+                  >
+                    {" "}
+                    -
+                  </Text>
                 )}
               </View>
               <View style={styles.attributeText}>
-                <Text style={[textStyles.body, { color: colors.textSecondary }]} > Water Frequency:</Text>
+                <Text
+                  style={[textStyles.body, { color: colors.textSecondary }]}
+                >
+                  {" "}
+                  Water Frequency:
+                </Text>
                 {plant.waterFrequency ? (
-                  <Text style={[textStyles.bodyMedium, { color: colors.textPrimary }]} >{plant.waterFrequency.charAt(0) + plant.waterFrequency.slice(1).toLowerCase()}</Text>
+                  <Text
+                    style={[
+                      textStyles.bodyMedium,
+                      { color: colors.textPrimary },
+                    ]}
+                  >
+                    {plant.waterFrequency.charAt(0) +
+                      plant.waterFrequency.slice(1).toLowerCase()}
+                  </Text>
                 ) : (
-                  <Text style={[textStyles.bodyMedium, { color: colors.textPrimary }]} > -</Text>
+                  <Text
+                    style={[
+                      textStyles.bodyMedium,
+                      { color: colors.textPrimary },
+                    ]}
+                  >
+                    {" "}
+                    -
+                  </Text>
                 )}
               </View>
               <View style={styles.attributeText}>
-                <Text style={[textStyles.body, { color: colors.textSecondary }]} > Moisture level:</Text>
+                <Text
+                  style={[textStyles.body, { color: colors.textSecondary }]}
+                >
+                  {" "}
+                  Moisture level:
+                </Text>
                 {plant.neededMoisture ? (
-                  <Text style={[textStyles.bodyMedium, { color: colors.textPrimary }]} > {plant.neededMoisture}</Text>
+                  <Text
+                    style={[
+                      textStyles.bodyMedium,
+                      { color: colors.textPrimary },
+                    ]}
+                  >
+                    {" "}
+                    {plant.neededMoisture}
+                  </Text>
                 ) : (
-                  <Text style={[textStyles.bodyMedium, { color: colors.textPrimary }]} > -</Text>
+                  <Text
+                    style={[
+                      textStyles.bodyMedium,
+                      { color: colors.textPrimary },
+                    ]}
+                  >
+                    {" "}
+                    -
+                  </Text>
                 )}
               </View>
               <View style={styles.attributeText}>
-                <Text style={[textStyles.body, { color: colors.textSecondary }]} > Blooming:</Text>
+                <Text
+                  style={[textStyles.body, { color: colors.textSecondary }]}
+                >
+                  {" "}
+                  Blooming:
+                </Text>
                 {plant.blooming ? (
-                  <Text style={[textStyles.bodyMedium, { color: colors.textPrimary }]} > {plant.blooming.start} till {plant.blooming.end}</Text>
+                  <Text
+                    style={[
+                      textStyles.bodyMedium,
+                      { color: colors.textPrimary },
+                    ]}
+                  >
+                    {" "}
+                    {plant.blooming.start} till {plant.blooming.end}
+                  </Text>
                 ) : (
-                  <Text style={[textStyles.bodyMedium, { color: colors.textPrimary }]} > -</Text>
+                  <Text
+                    style={[
+                      textStyles.bodyMedium,
+                      { color: colors.textPrimary },
+                    ]}
+                  >
+                    {" "}
+                    -
+                  </Text>
                 )}
               </View>
               <View style={styles.attributeText}>
-                <Text style={[textStyles.body, { color: colors.textSecondary }]} > Flower Color:</Text>
+                <Text
+                  style={[textStyles.body, { color: colors.textSecondary }]}
+                >
+                  {" "}
+                  Flower Color:
+                </Text>
                 {plant.blooming ? (
-                  <Text style={[textStyles.bodyMedium, { color: colors.textPrimary }]} > {plant.blooming.flowerColor}</Text>
+                  <Text
+                    style={[
+                      textStyles.bodyMedium,
+                      { color: colors.textPrimary },
+                    ]}
+                  >
+                    {" "}
+                    {plant.blooming.flowerColor}
+                  </Text>
                 ) : (
-                  <Text style={[textStyles.bodyMedium, { color: colors.textPrimary }]} > -</Text>
+                  <Text
+                    style={[
+                      textStyles.bodyMedium,
+                      { color: colors.textPrimary },
+                    ]}
+                  >
+                    {" "}
+                    -
+                  </Text>
                 )}
               </View>
               <View style={styles.attributeText}>
-                <Text style={[textStyles.body, { color: colors.textSecondary }]} > Harvest:</Text>
+                <Text
+                  style={[textStyles.body, { color: colors.textSecondary }]}
+                >
+                  {" "}
+                  Harvest:
+                </Text>
                 {plant.harvest ? (
-                  <Text style={[textStyles.bodyMedium, { color: colors.textPrimary }]} > {plant.harvest.start} till {plant.harvest.end}</Text>
+                  <Text
+                    style={[
+                      textStyles.bodyMedium,
+                      { color: colors.textPrimary },
+                    ]}
+                  >
+                    {" "}
+                    {plant.harvest.start} till {plant.harvest.end}
+                  </Text>
                 ) : (
-                  <Text style={[textStyles.bodyMedium, { color: colors.textPrimary }]} > -</Text>
+                  <Text
+                    style={[
+                      textStyles.bodyMedium,
+                      { color: colors.textPrimary },
+                    ]}
+                  >
+                    {" "}
+                    -
+                  </Text>
                 )}
               </View>
               <View style={styles.attributeText}>
-                <Text style={[textStyles.body, { color: colors.textSecondary }]} > Temperatur Range:</Text>
+                <Text
+                  style={[textStyles.body, { color: colors.textSecondary }]}
+                >
+                  {" "}
+                  Temperatur Range:
+                </Text>
                 {plant.temperature ? (
-                  <Text style={[textStyles.bodyMedium, { color: colors.textPrimary }]} > {plant.temperature.min} °C to {plant.temperature.max} °C</Text>
+                  <Text
+                    style={[
+                      textStyles.bodyMedium,
+                      { color: colors.textPrimary },
+                    ]}
+                  >
+                    {" "}
+                    {plant.temperature.min} °C to {plant.temperature.max} °C
+                  </Text>
                 ) : (
-                  <Text style={[textStyles.bodyMedium, { color: colors.textPrimary }]} > -</Text>
+                  <Text
+                    style={[
+                      textStyles.bodyMedium,
+                      { color: colors.textPrimary },
+                    ]}
+                  >
+                    {" "}
+                    -
+                  </Text>
                 )}
               </View>
             </View>
           </View>
         </View>
-
       ) : (
         <Text style={textStyles.h2}>Plant not found</Text>
       )}
@@ -155,6 +308,7 @@ const styles = StyleSheet.create({
     gap: 8,
     flexDirection: "column",
     justifyContent: "flex-start",
+    paddingBottom: 104,
   },
   attributeText: {
     flexDirection: "row",
