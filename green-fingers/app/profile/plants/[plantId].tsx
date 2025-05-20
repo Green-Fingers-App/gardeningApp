@@ -137,7 +137,7 @@ const PlantDetailPage = () => {
                     dateStyle: "full",
                   })}
                 </Text>
-                {thirsty && <UpdateWateredDate />}
+                {thirsty && <UpdateWateredDate plantId={plant.id} />}
               </View>
               <Text>Last fed: {plant.feededDate}</Text>
             </AccordionItem>

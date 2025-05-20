@@ -12,6 +12,7 @@ import {
   plantsToBeWateredToday,
   WateringAppointment,
 } from "@/utils/calendar";
+import UpdateWateredDate from "../UpdateWateredDate";
 
 interface SelectedDayProps {
   day: WeekDay;
@@ -87,14 +88,25 @@ const SelectedDay: React.FC<SelectedDayProps> = ({ day }) => {
       <Text style={styles.title}>{`${day.day} - ${day.date}`}</Text>
       {listOfPlantsToBeWatered.length > 0 ? (
         listOfPlantsToBeWatered.map(({ overdue, plant }, index) => (
-          <View style={{ marginHorizontal: 5, marginVertical: 2 }} key={index}>
+          <View
+            style={{
+              marginHorizontal: 5,
+              marginVertical: 2,
+              flexDirection: "row",
+              alignItems: "center",
+            }}
+            key={index}
+          >
             <Text
               style={overdue ? { color: colors.textWarning } : null}
               key={index}
-            >{`${plant.nickName} - Last Watered: ${
-              plant.wateredDate &&
-              new Date(plant.wateredDate).toLocaleDateString()
-            }`}</Text>
+            >
+              {`${plant.nickName} - Last Watered: ${
+                plant.wateredDate &&
+                new Date(plant.wateredDate).toLocaleDateString()
+              }`}
+            </Text>
+            {overdue && <UpdateWateredDate plantId={plant.id} />}
           </View>
         ))
       ) : (
