@@ -176,6 +176,7 @@ export const apiBatchUpdateWateredDate = async (
     const data = await response.json();
   } catch (error) {
     console.error("Error updating watered date:", error);
+    throw error;
   }
 };
 
@@ -185,19 +186,18 @@ export const apiEditWateredDate = async (
 ): Promise<void> => {
   const token = await SecureStore.getItemAsync("accessToken");
   try {
-    const response = await fetch(
-      `${base_api_ip}/plants/plants/water/${plantId}`,
-      {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify({
+    const response = await fetch(`${base_api_ip}/plants/plants/${plantId}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({
+        updateData: {
           date_watered: dateWatered,
-        }),
-      }
-    );
+        },
+      }),
+    });
 
     if (!response.ok) {
       const responseError = await response.json();
@@ -205,5 +205,6 @@ export const apiEditWateredDate = async (
     }
   } catch (error) {
     console.error("Error watering single plant:", error);
+    throw error;
   }
 };

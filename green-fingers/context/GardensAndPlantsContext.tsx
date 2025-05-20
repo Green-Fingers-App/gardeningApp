@@ -46,7 +46,7 @@ interface PlantContextProps {
   singleUpdateWateredDate: (
     plantId: number,
     wateredDate: string
-  ) => Promise<void>;
+  ) => Promise<undefined | { error: string }>;
   fetchCatalogPlants: () => void;
   searchPlantsByCommonName: (input: string) => Promise<CatalogPlant[]>;
   createUserPlant: (plantData: AddUserPlant) => Promise<void>;
@@ -124,7 +124,7 @@ export const PlantsProvider: React.FC<{ children: ReactNode }> = ({
   const singleUpdateWateredDate = async (
     plantId: number,
     wateredDate: string
-  ) => {
+  ): Promise<undefined | { error: string }> => {
     try {
       await apiEditWateredDate(plantId, wateredDate);
       const updatedPlants = plants.map((plant) => {
@@ -135,7 +135,7 @@ export const PlantsProvider: React.FC<{ children: ReactNode }> = ({
       });
       setPlants(updatedPlants);
     } catch (error) {
-      console.error("Error watering plant: ", error);
+      return { error: "Updating watering plant failed" };
     }
   };
 

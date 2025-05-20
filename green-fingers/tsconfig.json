@@ -12,6 +12,8 @@
     "**/*.ts",
     "**/*.tsx",
     "api/firebaseConfig.ts",
-    "assets/fonts/*.ttf"
+    "assets/fonts/*.ttf",
+    ".expo/types/**/*.ts",
+    "expo-env.d.ts"
   ]
 }

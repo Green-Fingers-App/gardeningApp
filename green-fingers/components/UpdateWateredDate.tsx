@@ -1,33 +1,68 @@
-import { View, TouchableOpacity, StyleSheet } from "react-native";
-import React, { ChangeEvent, useState } from "react";
+import {
+  View,
+  TouchableOpacity,
+  StyleSheet,
+  Text,
+  TextInput,
+} from "react-native";
+import React, { useRef, useState } from "react";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-import { TextInput } from "react-native-gesture-handler";
+import { useGardensAndPlants } from "@/context/GardensAndPlantsContext";
+import { useToast } from "@/context/ToastContext";
 
-const UpdateWateredDate = () => {
+interface UpdateWateredDateProps {
+  plantId: number;
+}
+
+const UpdateWateredDate: React.FC<UpdateWateredDateProps> = ({ plantId }) => {
+  const monthRef = useRef<TextInput>(null);
   const [open, setOpen] = useState(false);
-  const [date, setDate] = useState("");
+  const [date, setDate] = useState({
+    day: new Date().getDate(),
+    month: new Date().getMonth() + 1,
+    year: new Date().getFullYear(),
+  });
 
-  const handleChange = (text: string) => {
-    // Remove non-digit characters
-    let cleaned = text.replace(/[^\d]/g, "");
+  const { showToast } = useToast();
 
-    // Limit to 6 digits (DDMMYY)
-    if (cleaned.length > 6) cleaned = cleaned.slice(0, 6);
+  const { singleUpdateWateredDate } = useGardensAndPlants();
 
-    setDate((prev) => {
-      const isAdding = cleaned.length > prev.replace(/[^\d]/g, "").length;
+  const handleChange = (key: keyof typeof date, text: string) => {
+    let filtered = text.replace(/\D/g, "");
 
-      let formatted = "";
-      for (let i = 0; i < cleaned.length; i++) {
-        formatted += cleaned[i];
-        // Only insert '/' if typing forward
-        if (isAdding && (i === 1 || i === 3) && i !== cleaned.length - 1) {
-          formatted += "/";
-        }
-      }
+    if (key === "day" && filtered.length === 2) {
+      monthRef.current?.focus();
+    }
 
-      return formatted;
-    });
+    if (key === "month" && filtered.length > 2) {
+      filtered = filtered.substring(0, 2);
+    }
+
+    if (key === "month" && Number(filtered) > 12) {
+      filtered = "12";
+    }
+
+    if (key === "year" && filtered.length > 4) {
+      filtered = filtered.substring(0, 4);
+    }
+
+    const updatedDate = { ...date, [key]: Number(filtered) };
+    setDate(updatedDate);
+  };
+
+  const handleFocus = (key: keyof typeof date) => {
+    setDate({ ...date, [key]: "" });
+  };
+
+  const handleSave = async () => {
+    const dateString = `${date.year}-${date.month}-${date.day}`;
+    const error = await singleUpdateWateredDate(plantId, dateString);
+    if (!error) {
+      showToast("success", "Watering date updated.");
+      setOpen(false);
+      return;
+    }
+    showToast("error", `${error.error}`);
   };
 
   return (
@@ -42,11 +77,47 @@ const UpdateWateredDate = () => {
       {open && (
         <View style={styles.menuContent}>
           <TextInput
-            placeholder="DD/MM/YYYY"
-            value={date}
-            style={styles.input}
-            onChangeText={handleChange}
+            placeholder="dd"
+            value={date.day.toString()}
+            style={[styles.input, { width: 25 }]}
+            onChangeText={(text) => {
+              handleChange("day", text);
+            }}
+            keyboardType="numeric"
+            onFocus={() => {
+              handleFocus("day");
+            }}
           />
+          <Text>/</Text>
+          <TextInput
+            ref={monthRef}
+            placeholder="mm"
+            keyboardType="numeric"
+            style={[styles.input, { width: 25 }]}
+            value={date.month.toString()}
+            onChangeText={(text) => {
+              handleChange("month", text);
+            }}
+            onFocus={() => {
+              handleFocus("month");
+            }}
+          />
+          <Text>/</Text>
+          <TextInput
+            placeholder="yyyy"
+            keyboardType="numeric"
+            style={[styles.input, { width: 50 }]}
+            value={date.year.toString()}
+            onChangeText={(text) => {
+              handleChange("year", text);
+            }}
+            onFocus={() => {
+              handleFocus("year");
+            }}
+          />
+          <TouchableOpacity onPress={handleSave}>
+            <MaterialCommunityIcons name={"check"} size={15} />
+          </TouchableOpacity>
         </View>
       )}
     </View>
@@ -74,14 +145,20 @@ const styles = StyleSheet.create({
     shadowRadius: 4,
     elevation: 5, // Android shadow
     width: 150,
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    gap: 2,
   },
   input: {
+    height: 30,
     borderWidth: 1,
     borderColor: "#ccc",
     borderRadius: 6,
-    paddingVertical: 8,
-    paddingHorizontal: 12,
+    paddingVertical: 4,
     fontSize: 14,
     backgroundColor: "#f9f9f9",
+    alignItems: "center",
+    justifyContent: "center",
   },
 });
