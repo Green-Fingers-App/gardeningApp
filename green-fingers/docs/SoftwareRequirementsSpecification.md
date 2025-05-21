@@ -193,6 +193,24 @@ The user can update the name and location of his gardens.
 
 The user can delete a garden from their app. This will remove the plant from the user's garden and all associated data in the database.
 
+### CRUD-Sensor
+
+#### [3.1.12 Use Case: Add sensor](https://github.com/DHBW-Malte/gardeningApp/blob/main/docs/usecases/CRUD-Sensor/addSensor.md)
+
+The user can create a new sensor, with a name and an associated plant.
+
+#### [3.1.9 Use Case: Show sensor](https://github.com/DHBW-Malte/gardeningApp/blob/main/docs/usecases/CRUD-Garden/showSensor.md)
+
+The user can view a list of all sensors data.
+
+#### [3.1.10 Use Case: Edit sensor](https://github.com/DHBW-Malte/gardeningApp/blob/main/docs/usecases/CRUD-Garden/updateSensor.md)
+
+The user can update the name and the plant it assigned to it.
+
+#### [3.1.11 Use Case: Delete sensor](https://github.com/DHBW-Malte/gardeningApp/blob/main/docs/usecases/CRUD-Garden/deleteSensor.md)
+
+The user can delete a sensor.
+
 ### 3.2 Usability
 
 We plan to design the user interface as intuitive and self-explanatory as possible, so users will feel comfortable organizing their plants as they wish.
