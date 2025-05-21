@@ -10,6 +10,8 @@ import DayCard from "@/components/calendar/DayCard";
 import Button from "@/components/Button";
 import SelectedDay from "@/components/calendar/SelectedDay";
 import { days } from "@/constants/days";
+import colors from "@/constants/colors";
+import textStyles from "@/constants/textStyles";
 
 export type WeekDay = {
   date: number;
@@ -64,12 +66,10 @@ const Index: React.FC = () => {
   return (
     <ImageBackground
       source={require("../../../assets/images/background.png")}
-      style={{ flex: 1 }}
+      style={styles.backgroundImage}
     >
       <View style={styles.container}>
-        <View style={styles.monthContainer}>
-          <Text style={styles.monthText}>{`${month} ${year}`}</Text>
-        </View>
+        <Text style={textStyles.h3}>{`${month} ${year}`}</Text>
         <View style={styles.daysHeaderContainer}>
           {currentWeek.map((day, index) => (
             <DayCard
@@ -88,18 +88,20 @@ const Index: React.FC = () => {
               setNav(nav - 1);
             }}
             text="Previous"
-            style={{ width: "30%" }}
+            type="secondary"
+            style={{ width: "49%" }}
           />
           <Button
             onPress={() => {
               setNav(nav + 1);
             }}
-            text="next"
-            style={{ width: "30%" }}
+            text="Next"
+            type="secondary"
+            style={{ width: "49%" }}
           />
         </View>
-        <View>{selectedDay && <SelectedDay day={selectedDay} />}</View>
       </View>
+      {selectedDay && <SelectedDay day={selectedDay} />}
     </ImageBackground>
   );
 };
@@ -107,40 +109,26 @@ const Index: React.FC = () => {
 export default Index;
 
 const styles = StyleSheet.create({
+  backgroundImage: {
+    flex: 1,
+  },
   container: {
+    flexDirection: "column",
+    gap: 8,
     alignItems: "center",
-    padding: 10,
-    width: Dimensions.get("window").width,
-  },
-  monthContainer: {
-    alignItems: "center",
-    marginBottom: 10,
-  },
-  monthText: {
-    fontSize: 20,
-    fontWeight: "bold",
+    padding: 8,
+    backgroundColor: colors.backDropLight,
   },
   daysHeaderContainer: {
     flexDirection: "row",
     justifyContent: "space-evenly",
-    width: "100%",
-  },
-  dateText: {
-    fontSize: 14,
+    gap: 4,
   },
   buttonContainer: {
     flexDirection: "row",
-    marginTop: 20,
-    gap: 4,
-  },
-  button: {
-    padding: 10,
-    backgroundColor: "#007bff",
-    marginHorizontal: 10,
-    borderRadius: 5,
-  },
-  buttonText: {
-    color: "white",
-    fontWeight: "bold",
+    justifyContent: "space-between",
+    marginTop: 8,
+    gap: 8,
+    width: "100%",
   },
 });

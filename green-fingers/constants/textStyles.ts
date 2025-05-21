@@ -1,7 +1,7 @@
 import colors from './colors';
 import { TextStyle } from 'react-native';
 
-const textStyles: { [key:string]: TextStyle } = {
+const textStyles: { [key: string]: TextStyle } = {
     h1: {
         fontSize: 32,
         lineHeight: 40,
@@ -32,6 +32,12 @@ const textStyles: { [key:string]: TextStyle } = {
         color: colors.textPrimary,
         fontFamily: "Montserrat-Regular",
     },
+    bodyMedium: {
+        fontSize: 14,
+        lineHeight: 20,
+        color: colors.textPrimary,
+        fontFamily: "Montserrat-Medium",
+    },
     label: {
         fontSize: 12,
         lineHeight: 16,
@@ -43,6 +49,11 @@ const textStyles: { [key:string]: TextStyle } = {
         lineHeight: 14,
         color: colors.textSecondary,
         fontFamily: "Montserrat-Regular",
+    },
+    tabLabel: {
+        fontSize: 12,
+        lineHeight: 14,
+        fontFamily: "Montserrat-Medium",
     },
     button: {
         fontSize: 16,

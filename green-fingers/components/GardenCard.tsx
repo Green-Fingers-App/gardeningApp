@@ -19,13 +19,19 @@ const GardenCard: React.FC<GardenCardProps> = ({ garden }) => {
         router.push(`/profile/gardens/${garden.id}`);
       }}
     >
-      <View style={{ flexDirection: "row", alignItems: "center", gap: 8 }}>
+      <View style={styles.row}>
         <MaterialCommunityIcons
           name="nature"
           size={24}
-          color={colors.secondaryDefault}
+          color={colors.primaryDefault}
         />
-        <Text style={textStyles.h3}>{garden.name}</Text>
+        <View style={styles.textContainer}>
+          <Text style={[textStyles.h4, { color: colors.primaryDefault }]}>{garden.name}</Text>
+          <Text style={[textStyles.label, { color: colors.textMuted, marginTop: -2 }]}>
+            {`${garden.location}`}
+          </Text>
+        </View>
+        <View style={styles.spacer} />
       </View>
     </TouchableOpacity>
   );
@@ -35,13 +41,22 @@ export default GardenCard;
 
 const styles = StyleSheet.create({
   cardContainer: {
-    backgroundColor: colors.bgCard,
-    position: "relative",
-    height: 96,
+    backgroundColor: colors.bgLight,
+    borderColor: colors.primaryDefault,
+    borderWidth: 2,
     width: "100%",
-    paddingLeft: 8,
     borderRadius: 8,
-    justifyContent: "center",
-    paddingHorizontal: 8,
+    padding: 12,
+  },
+  row: {
+    flexDirection: "row",
+    justifyContent: "flex-start",
+    alignItems: "center",
+  },
+  textContainer: {
+    marginLeft: 12,
+  },
+  spacer: {
+    flex: 1,
   },
 });

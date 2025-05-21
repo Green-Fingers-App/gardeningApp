@@ -4,7 +4,6 @@ import {
   Image,
   ActivityIndicator,
   View,
-  StyleSheet,
   TouchableOpacity,
 } from "react-native";
 import { Stack, useLocalSearchParams, useRouter } from "expo-router";
@@ -12,6 +11,7 @@ import React, { useEffect, useState } from "react";
 import { useGardensAndPlants } from "@/context/GardensAndPlantsContext";
 import { UserPlant } from "@/types/models";
 import colors from "@/constants/colors";
+import textStyles from "@/constants/textStyles";
 import Accordion from "@/components/Accordion";
 import AccordionItem from "@/components/AccordionItem";
 import OptionsMenu from "@/components/OptionMenu";
@@ -23,7 +23,8 @@ import UpdateWateredDate from "@/components/UpdateWateredDate";
 
 const PlantDetailPage = () => {
   const { plantId } = useLocalSearchParams();
-  const { fetchPlantDetail, gardens, updateUserPlant } = useGardensAndPlants();
+  const { fetchPlantDetail, gardens, updateUserPlant, plants } =
+    useGardensAndPlants();
   const [plant, setPlant] = useState<UserPlant | null>(null);
   const { deleting, handleDeleteEntity } = useDeleteEntity("Plant");
   const [editing, setEditing] = useState(false);
@@ -56,7 +57,7 @@ const PlantDetailPage = () => {
     label: garden.name,
   }));
 
-  const handleChange = (key: string, value: string) => {
+  const handleChange = (key: string, value: string | number) => {
     setEditValues((prev) => ({ ...prev, [key]: value }));
   };
 
@@ -83,7 +84,7 @@ const PlantDetailPage = () => {
     if (newPlant) {
       setPlant(newPlant);
     }
-  }, [plantId]);
+  }, [plantId, plants]);
 
   const [thirsty, setThirsty] = useState(false);
 
@@ -97,7 +98,13 @@ const PlantDetailPage = () => {
     <>
       <Stack.Screen
         options={{
-          title: plant?.nickName || "Plant Details",
+          title: plant?.nickName ?? "Plant Details",
+          headerTitleStyle: {
+            fontSize: 20,
+            fontFamily: textStyles.h3.fontFamily,
+            fontWeight: textStyles.h3.fontWeight,
+            color: colors.primaryDefault,
+          },
           headerStyle: {
             backgroundColor: colors.primaryDefault,
           },
@@ -137,7 +144,7 @@ const PlantDetailPage = () => {
                     dateStyle: "full",
                   })}
                 </Text>
-                {thirsty && <UpdateWateredDate plantId={plant.id} />}
+                <UpdateWateredDate plantId={plant.id} />
               </View>
               <Text>Last fed: {plant.feededDate}</Text>
             </AccordionItem>

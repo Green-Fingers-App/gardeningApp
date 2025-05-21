@@ -69,6 +69,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
           "refreshToken",
           authResponse.refreshToken
         );
+        router.replace("/profile/home");
       }
     } catch (error) {
       if (error instanceof Error) {

@@ -8,8 +8,6 @@ import LoadingScreen from "@/components/LoadingScreen";
 import { CalendarProvider } from "@/context/CalendarContext";
 import { ToastProvider } from "@/context/ToastContext";
 import { MoistureSensorProvider } from "@/context/MoistureSensorContext";
-import { SocketProvider } from "@/context/SocketProvider";
-
 
 const loadFonts = () =>
   Font.loadAsync({
@@ -41,13 +39,10 @@ const RootLayout = () => {
           <PlantsProvider>
             <CalendarProvider>
               <MoistureSensorProvider>
-                <SocketProvider>
-                  <Stack screenOptions={{ headerShown: false }} />
-                </ SocketProvider>
+                <Stack screenOptions={{ headerShown: false }} />
               </MoistureSensorProvider>
             </CalendarProvider>
           </PlantsProvider>
-
         </AuthProvider>
       </ToastProvider>
     </GestureHandlerRootView>

@@ -53,8 +53,9 @@ export const apiGetUserPlants = async (): Promise<UserPlant[]> => {
       Authorization: `Bearer ${token}`,
     },
   });
+  
   const responseData = (await response.json()) as GetUserPlantsResponse;
-
+  
   if (!response.ok) {
     throw new Error(
       responseData.error ?? "Unknown error during plant fetching"

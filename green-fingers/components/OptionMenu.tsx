@@ -8,13 +8,14 @@ import {
   Pressable,
 } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import textStyles from "@/constants/textStyles";
 import colors from "@/constants/colors";
 
-interface OptionsMenuProps {
+interface OptionMenuProps {
   options: { label: string; onPress: () => void }[];
 }
 
-const OptionsMenu: React.FC<OptionsMenuProps> = ({ options }) => {
+const OptionMenu: React.FC<OptionMenuProps> = ({ options }) => {
   const [visible, setVisible] = useState(false);
 
   return (
@@ -28,7 +29,7 @@ const OptionsMenu: React.FC<OptionsMenuProps> = ({ options }) => {
         <MaterialCommunityIcons
           name="dots-vertical"
           size={24}
-          color={colors.textPrimary}
+          color={colors.primaryDefault}
         />
       </TouchableOpacity>
       <Modal
@@ -55,7 +56,7 @@ const OptionsMenu: React.FC<OptionsMenuProps> = ({ options }) => {
                   setVisible(false);
                 }}
               >
-                <Text style={styles.menuText}>{option.label}</Text>
+                <Text style={[textStyles.h4, { color: colors.primaryDefault, textDecorationStyle: "solid", textDecorationLine: "underline" }]}>{option.label}</Text>
               </TouchableOpacity>
             ))}
           </View>
@@ -65,7 +66,7 @@ const OptionsMenu: React.FC<OptionsMenuProps> = ({ options }) => {
   );
 };
 
-export default OptionsMenu;
+export default OptionMenu;
 
 const styles = StyleSheet.create({
   container: {
@@ -78,13 +79,19 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "flex-start",
     alignItems: "flex-end",
+    backgroundColor: colors.backDrop,
   },
   menu: {
     position: "absolute",
+    flexDirection: "column",
+    justifyContent: "flex-start",
+    alignContent: "flex-start",
     top: 110,
     right: 24,
-    backgroundColor: colors.bgCard,
+    backgroundColor: colors.white,
     borderRadius: 8,
+    borderWidth: 1,
+    borderColor: colors.primaryDefault,
     paddingVertical: 4,
     paddingHorizontal: 8,
     shadowColor: "#000",
@@ -95,9 +102,8 @@ const styles = StyleSheet.create({
   },
   menuItem: {
     paddingVertical: 8,
-  },
-  menuText: {
-    color: colors.textPrimary,
-    fontSize: 14,
+    paddingHorizontal: 12,
+    borderBottomColor: colors.greyLight,
+    borderBottomWidth: 1,
   },
 });
