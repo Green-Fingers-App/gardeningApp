@@ -9,36 +9,31 @@ import { useToast } from "@/context/ToastContext";
 import { useAuth } from "@/context/AuthContext";
 import colors from "@/constants/colors";
 
+
 interface AddSensorOptionProps {
   sensorChosen: boolean;
   toggleSensorMenu: () => void;
   setSensorChosen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const AddSensorOption: React.FC<AddSensorOptionProps> = ({
-  setSensorChosen,
-}) => {
+const AddSensorOption: React.FC<AddSensorOptionProps> = ({ setSensorChosen }) => {
   const [permission, requestPermission] = useCameraPermissions();
   const [scanned, setScanned] = useState(false);
   const [foundSensor, setFoundSensor] = useState<{ ssid: string; password: string; ip: string } | null>(null);
   const [connecting, setConnecting] = useState(false);
-
   const [connectedToSensor, setConnectedToSensor] = useState(false);
   const [sensorIP, setSensorIP] = useState<string | null>(null);
-
   const [wifiConfigured, setWifiConfigured] = useState(false);
   const [assigning, setAssigning] = useState(false);
 
   const { showToast } = useToast();
   const { user } = useAuth();
 
-
   useEffect(() => {
     if (permission?.status !== "granted") {
       requestPermission();
     }
   }, [permission]);
-
 
   const handleBarcodeScanned = ({ data }: { data: string }) => {
     setScanned(true);
@@ -76,8 +71,9 @@ const AddSensorOption: React.FC<AddSensorOptionProps> = ({
         }
       }
 
+
+
       await WifiManager.connectToProtectedSSID(ssid, password, true, false);
-      // await new Promise(resolve => setTimeout(resolve, 2000)); // wait 2 seconds for handshake
       setSensorIP(ip);
       setConnectedToSensor(true);
     } catch (error) {
@@ -85,8 +81,10 @@ const AddSensorOption: React.FC<AddSensorOptionProps> = ({
       setScanned(false);
     } finally {
       setConnecting(false);
+
     }
   };
+
 
   if (foundSensor && !connectedToSensor) {
     return (
@@ -123,14 +121,7 @@ const AddSensorOption: React.FC<AddSensorOptionProps> = ({
   }
 
   if (connectedToSensor && sensorIP && !wifiConfigured) {
-    return (
-      <SendWifiCredentialsForm
-        sensorIP={sensorIP}
-        onFinish={() => {
-          setWifiConfigured(true);
-        }}
-      />
-    );
+    return <SendWifiCredentialsForm sensorIP={sensorIP} onFinish={() => setWifiConfigured(true)} />;
   }
 
   if (connectedToSensor && sensorIP && wifiConfigured) {
@@ -144,11 +135,7 @@ const AddSensorOption: React.FC<AddSensorOptionProps> = ({
             const res = await fetch(`http://${sensorIP}/assign`, {
               method: "POST",
               headers: { "Content-Type": "application/json" },
-              body: JSON.stringify({
-                userId: user.id,
-                name: sensorName,
-                plantId: plantId,
-              }),
+              body: JSON.stringify({ userId: user.id, name: sensorName, plantId }),
             });
 
             if (res.ok) {
@@ -166,9 +153,7 @@ const AddSensorOption: React.FC<AddSensorOptionProps> = ({
             setAssigning(false);
           }
         }}
-        onCancel={() => {
-          setWifiConfigured(false);
-        }}
+        onCancel={() => setWifiConfigured(false)}
       />
     );
   }
@@ -185,7 +170,7 @@ const AddSensorOption: React.FC<AddSensorOptionProps> = ({
       </View>
       {scanned && (
         <View style={{ marginTop: 12 }}>
-          <Button text="Scan Again" type="secondary" onPress={() => { setScanned(false) }} />
+          <Button text="Scan Again" type="secondary" onPress={() => setScanned(false)} />
         </View>
       )}
     </View>

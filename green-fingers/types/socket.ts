@@ -6,4 +6,5 @@ export interface MoistureUpdateMessage {
   moisture_level: number;
   interpreted_level: SoilMoisture;
   percentage: string;
+  sensorName: string;
 }

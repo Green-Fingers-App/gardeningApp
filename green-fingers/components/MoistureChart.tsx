@@ -18,10 +18,8 @@ const yLabels: SoilMoisture[] = [
   "Very Dry",
 ];
 
-const MoistureChart: React.FC<MoistureChartProps> = ({
-  data,
-  expectedMoisture,
-}) => {
+
+const MoistureChart: React.FC<MoistureChartProps> = ({ data, expectedMoisture }) => {
   const [layout, setLayout] = useState({ width: 0, height: 0 });
 
   const onLayout = (event: LayoutChangeEvent) => {
@@ -36,7 +34,8 @@ const MoistureChart: React.FC<MoistureChartProps> = ({
       !isNaN(entry.moisture_level)
   );
 
-  // Padding
+  const hasValidData = sanitizedData.length >= 2;
+
   const leftPadding = 48;
   const rightPadding = 16;
   const topPadding = 16;
@@ -49,100 +48,91 @@ const MoistureChart: React.FC<MoistureChartProps> = ({
   const minMoisture = 0;
 
   const points = sanitizedData.map((entry, index) => {
-    const x =
-      (index / (sanitizedData.length - 1)) * chartWidth + leftPadding;
-    const y =
-      ((entry.moisture_level - minMoisture) /
-        (maxMoisture - minMoisture)) *
-      chartHeight +
-      topPadding;
+    const x = (index / (sanitizedData.length - 1)) * chartWidth + leftPadding;
+    const y = ((entry.moisture_level - minMoisture) / (maxMoisture - minMoisture)) * chartHeight + topPadding;
     return `${x},${y}`;
   });
 
   return (
     <View style={styles.wrapper} onLayout={onLayout}>
-      {layout.width > 0 && layout.height > 0 && (
-        <Svg width={layout.width} height={layout.height}>
-          {expectedMoisture && (() => {
-            const levelIndex = yLabels.indexOf(expectedMoisture);
-            if (levelIndex === -1) return null;
+      {layout.width > 0 && layout.height > 0 ? (
+        hasValidData ? (
+          <Svg width={layout.width} height={layout.height}>
+            {expectedMoisture && (() => {
+              const levelIndex = yLabels.indexOf(expectedMoisture);
+              if (levelIndex === -1) return null;
 
-            return (
-              <>
+              return (
+                <>
+                  <Defs>
+                    <LinearGradient id="moistureGradient" x1="0" y1="0" x2="0" y2="1">
+                      {yLabels.map((level, i) => {
+                        const offset = (i / (yLabels.length - 1)) * 100;
+                        const expectedIndex = yLabels.indexOf(expectedMoisture ?? "");
+                        const isExpectedZone = Math.abs(expectedIndex - i) <= 1;
 
-                <Defs>
-                  <LinearGradient id="moistureGradient" x1="0" y1="0" x2="0" y2="1">
-                    {yLabels.map((level, i) => {
-                      const offset = (i / (yLabels.length - 1)) * 100;
+                        return (
+                          <Stop
+                            key={level}
+                            offset={`${offset}%`}
+                            stopColor={isExpectedZone ? colors.bgSuccess : colors.bgWarning}
+                          />
+                        );
+                      })}
+                    </LinearGradient>
+                  </Defs>
+                  <Rect
+                    x={leftPadding}
+                    y={topPadding}
+                    width={chartWidth}
+                    height={chartHeight}
+                    fill="url(#moistureGradient)"
+                  />
+                </>
+              );
+            })()}
 
-                      const expectedIndex = yLabels.indexOf(expectedMoisture ?? "");
-                      const isExpectedZone = Math.abs(expectedIndex - i) <= 1;
+            {yLabels.map((label, i) => {
+              const bandHeight = chartHeight / yLabels.length;
+              const y = topPadding + bandHeight * i + bandHeight / 2;
 
-                      return (
-                        <Stop
-                          key={level}
-                          offset={`${offset}%`}
-                          stopColor={
-                            isExpectedZone ? colors.bgSuccess : colors.bgWarning
-                          }
-                        />
-                      );
-                    })}
-                  </LinearGradient>
-                </Defs>
+              return (
+                <React.Fragment key={label}>
+                  <Line
+                    x1={leftPadding}
+                    x2={layout.width - rightPadding}
+                    y1={y}
+                    y2={y}
+                    stroke="#ccc"
+                    strokeWidth="1"
+                  />
+                  <SvgText
+                    x={leftPadding - 6}
+                    y={y + 4}
+                    fontSize="10"
+                    fill={colors.textSecondary}
+                    textAnchor="end"
+                  >
+                    {label}
+                  </SvgText>
+                </React.Fragment>
+              );
+            })}
 
-
-                <Rect
-                  x={leftPadding}
-                  y={topPadding}
-                  width={chartWidth}
-                  height={chartHeight}
-                  fill="url(#moistureGradient)"
-                />
-              </>
-            );
-          })()}
-
-          {/* Gridlines + Y-axis labels */}
-          {yLabels.map((label, i) => {
-            const bandHeight = chartHeight / yLabels.length;
-            const y = topPadding + bandHeight * i + bandHeight / 2;
-
-            return (
-              <React.Fragment key={label}>
-                <Line
-                  x1={leftPadding}
-                  x2={layout.width - rightPadding}
-                  y1={y}
-                  y2={y}
-                  stroke="#ccc"
-                  strokeWidth="1"
-                />
-                <SvgText
-                  x={leftPadding - 6}
-                  y={y + 4}
-                  fontSize="10"
-                  fill={colors.textSecondary}
-                  textAnchor="end"
-                >
-                  {label}
-                </SvgText>
-              </React.Fragment>
-            );
-          })}
-
-          {/* Moisture line */}
-          <Polyline
-            points={points.join(" ")}
-            fill="none"
-            stroke={colors.primaryDefault}
-            strokeWidth="2"
-          />
-        </Svg>
-      )}
-      <Text style={[textStyles.label, styles.title]}>
-        Moisture level of the last 28 days
-      </Text>
+            <Polyline
+              points={points.join(" ")}
+              fill="none"
+              stroke={colors.primaryDefault}
+              strokeWidth="2"
+            />
+          </Svg>
+        ) : (
+          <View style={styles.placeholderContainer}>
+            <Text style={textStyles.body}>No moisture data available yet.</Text>
+          </View>
+        )
+      ) : null}
+      <Text style={[textStyles.label, styles.title]}>Moisture level of the last 28 days</Text>
     </View>
   );
 };
@@ -157,6 +147,12 @@ const styles = StyleSheet.create({
   title: {
     textAlign: "center",
     margin: 0,
+  },
+  placeholderContainer: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    padding: 16,
   },
 });
 

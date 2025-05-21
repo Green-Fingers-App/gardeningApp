@@ -142,12 +142,7 @@ const SensorDetailPage = () => {
       {sensor && !deleting ? (
         <View style={styles.pageContainer}>
           <View style={styles.chartContainer}>
-
-            <MoistureChart
-              data={history}
-              expectedMoisture={plant?.neededMoisture}
-            />
-
+            <MoistureChart data={history} expectedMoisture={plant?.neededMoisture} />
           </View>
           <View style={[styles.currentMoistureLevel, { backgroundColor: iconProps.bg }]}>
             <MaterialIcons name={iconProps.name} color={iconProps.color} size={24} />
