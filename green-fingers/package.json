@@ -9,7 +9,7 @@
     "ios": "expo run:ios",
     "web": "expo start --web",
     "build": "cd android && ./gradlew assembleRelease && echo '\nAPK built at: android/app/build/outputs/apk/release/app-release.apk\n'",
-    "test": "jest --coverage",
+    "test": "npx jest --coverage",
     "lint": "expo lint"
   },
   "dependencies": {
@@ -66,7 +66,7 @@
     "jest": "^29.7.0",
     "jest-expo": "~52.0.1",
     "react-test-renderer": "^18.2.0",
-    "ts-jest": "^29.3.2",
+    "ts-jest": "^29.3.4",
     "typescript": "~5.3.3",
     "whatwg-fetch": "^3.6.20"
   },
