@@ -130,7 +130,7 @@ const styles = StyleSheet.create({
   menuContainer: {
     position: "relative",
     marginLeft: 10,
-    zIndex: 10, // Ensure it's on top of other elements
+    zIndex: 800, // Ensure it's on top of other elements
   },
   menuContent: {
     position: "absolute",

@@ -1,4 +1,5 @@
 import colors from "@/constants/colors";
+import textStyles from "@/constants/textStyles";
 import React, { useEffect, useRef, useState } from "react";
 import {
   View,
@@ -44,7 +45,7 @@ const AccordionItem: React.FC<AccordionItemProps> = ({
     <View style={styles.container}>
       <TouchableOpacity onPress={onToggle}>
         <View style={styles.header}>
-          <Text style={styles.title}>{title}</Text>
+          <Text style={[textStyles.h4, styles.title]}>{title}</Text>
         </View>
       </TouchableOpacity>
 
@@ -58,19 +59,29 @@ const AccordionItem: React.FC<AccordionItemProps> = ({
 };
 
 const styles = StyleSheet.create({
-  container: {},
-  header: {
-    padding: 10,
-    backgroundColor: colors.primaryDefault,
-    color: colors.textSecondary,
+  container: {
+    backgroundColor: colors.bgLight,
   },
-  title: { fontSize: 16 },
-  contentContainer: { overflow: "hidden" },
+  header: {
+    padding: 8,
+    backgroundColor: colors.secondaryDefault,
+    borderBottomWidth: 1,
+    borderColor: colors.primaryDefault,
+  },
+  title: {
+    color: colors.primaryDefault,
+  },
+  contentContainer: {
+    overflow: "visible",
+    position: "relative",
+    zIndex: 1,
+  },
   content: {
-    padding: 10,
+    padding: 8,
     backgroundColor: colors.bgLight,
     height: "100%",
-    justifyContent: "space-evenly",
+    flexDirection: "column",
+    gap: 8,
   },
 });
 
