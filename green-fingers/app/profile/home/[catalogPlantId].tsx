@@ -35,7 +35,7 @@ const CatalogPlantDetail = () => {
           },
           headerTintColor: colors.primaryDefault,
           headerLeft: () => (
-            <TouchableOpacity onPress={() => router.push("/profile/gardens")}>
+            <TouchableOpacity onPress={() => router.push("/profile/home/plantexplorer")}>
               <MaterialIcons
                 name="arrow-back"
                 size={24}

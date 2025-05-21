@@ -1,4 +1,5 @@
 import { LoginData, SignUpData } from "@/types/authtypes";
+import { getApiUrl } from "./api";
 
 export type UserData = {
   username: string;
@@ -10,25 +11,21 @@ export interface AuthResponse {
   accessToken: string;
   refreshToken: string;
   user: UserData;
-}
-
-const base_api_ip = "https://greenfingers.truenas.work/api";
+};
 
 export const apiSignUp = async (
   userData: SignUpData
 ): Promise<AuthResponse> => {
   const { username, password, email } = userData;
 
-  const response = await fetch(`${base_api_ip}/auth/signup`, {
+  const url = await getApiUrl("/auth/signup");
+
+  const response = await fetch(url, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({
-      username: username,
-      password: password,
-      email: email,
-    }),
+    body: JSON.stringify({ username, password, email }),
   });
 
   const responseData = await response.json();
@@ -43,15 +40,14 @@ export const apiSignUp = async (
 export const apiLogin = async (loginData: LoginData): Promise<AuthResponse> => {
   const { email, password } = loginData;
 
-  const response = await fetch(`${base_api_ip}/auth/login`, {
+  const url = await getApiUrl("/auth/login");
+
+  const response = await fetch(url, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({
-      email: email,
-      password: password,
-    }),
+    body: JSON.stringify({ email, password }),
   });
 
   const responseData = await response.json();

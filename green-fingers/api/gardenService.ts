@@ -6,14 +6,14 @@ import {
   UpdateGardenResponse,
 } from "@/types/api";
 import * as SecureStore from "expo-secure-store";
-
-const base_api_ip = "https://greenfingers.truenas.work/api";
+import { getApiUrl } from "./api";
 
 export const apiAddGarden = async (gardenData: AddGarden): Promise<Garden> => {
   const { name, userId } = gardenData;
   const token = await SecureStore.getItemAsync("accessToken");
+  const url = await getApiUrl("/gardens");
 
-  const response = await fetch(`${base_api_ip}/gardens`, {
+  const response = await fetch(url, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -28,9 +28,7 @@ export const apiAddGarden = async (gardenData: AddGarden): Promise<Garden> => {
   const responseData = (await response.json()) as CreateGardenResponse;
 
   if (!response.ok) {
-    throw new Error(
-      responseData.error ?? "Unknonw error during garden creation"
-    );
+    throw new Error(responseData.error ?? "Unknown error during garden creation");
   }
 
   return responseData;
@@ -41,8 +39,9 @@ export const apiUpdateGarden = async (
   updatedData: Partial<AddGarden>
 ): Promise<void> => {
   const token = await SecureStore.getItemAsync("accessToken");
+  const url = await getApiUrl(`/gardens/${gardenId}`);
 
-  const response = await fetch(`${base_api_ip}/gardens/${gardenId}`, {
+  const response = await fetch(url, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
@@ -60,42 +59,40 @@ export const apiUpdateGarden = async (
   }
 };
 
-// Delete a garden
 export const apiDeleteGarden = async (gardenId: number): Promise<void> => {
   const token = await SecureStore.getItemAsync("accessToken");
+  const url = await getApiUrl(`/gardens/${gardenId}`);
 
-  const response = await fetch(`${base_api_ip}/gardens/${gardenId}`, {
+  const response = await fetch(url, {
     method: "DELETE",
     headers: {
-      Authorization: `Bearer: ${token}`,
+      Authorization: `Bearer ${token}`,
     },
   });
 
   const responseData = (await response.json()) as DeleteGardenResponse;
 
   if (!response.ok) {
-    throw new Error(
-      responseData.error ?? "Unknown error during garden deletion"
-    );
+    throw new Error(responseData.error ?? "Unknown error during garden deletion");
   }
 };
 
 export const apiGetUserGardens = async (): Promise<Garden[]> => {
   const token = await SecureStore.getItemAsync("accessToken");
+  const url = await getApiUrl("/users/gardens");
 
-  const response = await fetch(`${base_api_ip}/users/gardens`, {
+  const response = await fetch(url, {
     method: "GET",
     headers: {
-      Authorization: `Bearer: ${token}`,
+      Authorization: `Bearer ${token}`,
     },
   });
 
   const responseData = (await response.json()) as GetGardenResponse;
 
   if (!response.ok) {
-    throw new Error(
-      responseData.error ?? "Unknown error during garden fetching"
-    );
+    throw new Error(responseData.error ?? "Unknown error during garden fetching");
   }
+
   return responseData;
 };

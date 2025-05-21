@@ -43,7 +43,7 @@ describe("auth API", () => {
 
       jest.spyOn(global, "fetch").mockImplementation(mockFetchResponse(200, fakeResponse));
 
-      const result = await apiSignUp({ username: "testUser", email: "test@example.com", password: "secret" });
+      const result = await apiSignUp({ username: "testUser", password: "secret", confirmPassword: "secret", email: "test@example.com" });
 
       expect(result).toEqual(fakeResponse);
     });
@@ -59,6 +59,7 @@ describe("auth API", () => {
           username: "TestUser",
           email: "existing@example.com",
           password: "somepassword",
+          confirmPassword: "secret",
         })
       ).rejects.toThrow("Email already in use");
     });
@@ -73,6 +74,7 @@ describe("auth API", () => {
           username: "",
           email: "existing@example.com",
           password: "somepassword",
+          confirmPassword: "secret",
         })
       ).rejects.toThrow("Missing required fields");
     });

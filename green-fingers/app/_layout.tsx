@@ -9,7 +9,8 @@ import { CalendarProvider } from "@/context/CalendarContext";
 import { ToastProvider } from "@/context/ToastContext";
 import { MoistureSensorProvider } from "@/context/MoistureSensorContext";
 import { SocketProvider } from "@/context/SocketProvider";
-
+import { BaseUrlProvider, useBaseUrl } from "@/context/BaseUrlContext";
+import BaseUrlScreen from "@/components/BaseUrlScreen";
 
 const loadFonts = () =>
   Font.loadAsync({
@@ -19,14 +20,22 @@ const loadFonts = () =>
     "Montserrat-Italic-Medium": require("../assets/fonts/Montserrat-MediumItalic.ttf"),
   });
 
+const RootStack = () => {
+  const { baseUrl } = useBaseUrl();
+
+  if (baseUrl === null) {
+    return <BaseUrlScreen />;
+  }
+
+  return <Stack screenOptions={{ headerShown: false }} />;
+};
+
 const RootLayout = () => {
   const [fontsLoaded, setFontsLoaded] = useState(false);
 
   useEffect(() => {
     loadFonts()
-      .then(() => {
-        setFontsLoaded(true);
-      })
+      .then(() => setFontsLoaded(true))
       .catch(console.warn);
   }, []);
 
@@ -37,18 +46,19 @@ const RootLayout = () => {
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
       <ToastProvider>
-        <AuthProvider>
-          <PlantsProvider>
-            <CalendarProvider>
-              <MoistureSensorProvider>
-                <SocketProvider>
-                  <Stack screenOptions={{ headerShown: false }} />
-                </ SocketProvider>
-              </MoistureSensorProvider>
-            </CalendarProvider>
-          </PlantsProvider>
-
-        </AuthProvider>
+        <BaseUrlProvider>
+          <AuthProvider>
+            <PlantsProvider>
+              <CalendarProvider>
+                <MoistureSensorProvider>
+                  <SocketProvider>
+                    <RootStack />
+                  </SocketProvider>
+                </MoistureSensorProvider>
+              </CalendarProvider>
+            </PlantsProvider>
+          </AuthProvider>
+        </BaseUrlProvider>
       </ToastProvider>
     </GestureHandlerRootView>
   );

@@ -9,8 +9,7 @@ import {
 } from "@/types/api";
 import { AddUserPlant } from "../types/models";
 import * as SecureStore from "expo-secure-store";
-
-const base_api_ip = "https://greenfingers.truenas.work/api";
+import { getApiUrl } from "./api";
 
 // Add a new user plant
 export const apiCreateUserPlant = async (
@@ -18,8 +17,9 @@ export const apiCreateUserPlant = async (
 ): Promise<number> => {
   const { nickName, catalogPlant_id, userId, garden_id } = plantData;
   const token = await SecureStore.getItemAsync("accessToken");
+  const url = await getApiUrl("/plants/plants");
 
-  const response = await fetch(`${base_api_ip}/plants/plants`, {
+  const response = await fetch(url, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -46,8 +46,9 @@ export const apiCreateUserPlant = async (
 
 export const apiGetUserPlants = async (): Promise<UserPlant[]> => {
   const token = await SecureStore.getItemAsync("accessToken");
+  const url = await getApiUrl("/users/plants");
 
-  const response = await fetch(`${base_api_ip}/users/plants`, {
+  const response = await fetch(url, {
     method: "GET",
     headers: {
       Authorization: `Bearer ${token}`,
@@ -67,14 +68,17 @@ export const apiGetUserPlants = async (): Promise<UserPlant[]> => {
 
 export const apiDeleteUserPlant = async (plantId: number): Promise<void> => {
   const token = await SecureStore.getItemAsync("accessToken");
+  const url = await getApiUrl(`/plants/plants/${plantId}`);
 
-  const response = await fetch(`${base_api_ip}/plants/plants/${plantId}`, {
+  const response = await fetch(url, {
     method: "DELETE",
     headers: {
       Authorization: `Bearer ${token}`,
     },
   });
+
   const responseData = (await response.json()) as DeleteUserPlantResponse;
+
   if (!response.ok) {
     throw new Error(
       responseData.error ?? "Unknown error during plant deletion"
@@ -82,14 +86,14 @@ export const apiDeleteUserPlant = async (plantId: number): Promise<void> => {
   }
 };
 
-// Update User Plant
 export const apiUpdateUserPlant = async (
   plantId: number,
   updatedData: Partial<AddUserPlant>
 ): Promise<void> => {
   const token = await SecureStore.getItemAsync("accessToken");
+  const url = await getApiUrl(`/plants/plants/${plantId}`);
 
-  const response = await fetch(`${base_api_ip}/plants/plants/${plantId}`, {
+  const response = await fetch(url, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
@@ -99,6 +103,7 @@ export const apiUpdateUserPlant = async (
       updateData: updatedData,
     }),
   });
+
   const responseData = (await response.json()) as UpdateUserPlantResponse;
 
   if (!response.ok) {
@@ -108,13 +113,15 @@ export const apiUpdateUserPlant = async (
 
 export const apiGetCatalogPlants = async (): Promise<CatalogPlant[]> => {
   const token = await SecureStore.getItemAsync("accessToken");
+  const url = await getApiUrl("/plants/plants");
 
-  const response = await fetch(`${base_api_ip}/plants/plants`, {
+  const response = await fetch(url, {
     method: "GET",
     headers: {
-      Authorization: `Bearer: ${token}`,
+      Authorization: `Bearer ${token}`,
     },
   });
+
   const responseData = (await response.json()) as GetCatalogPlantsResponse;
 
   if (!response.ok) {
@@ -130,17 +137,17 @@ export const apiSearchCatalogPlantsByCommonName = async (
   searchTerm: string
 ): Promise<CatalogPlant[]> => {
   const token = await SecureStore.getItemAsync("accessToken");
-  const response = await fetch(
-    `${base_api_ip}/plants/plants/search?query=${encodeURIComponent(
-      searchTerm
-    )}`,
-    {
-      method: "GET",
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    }
+  const url = await getApiUrl(
+    `/plants/plants/search?query=${encodeURIComponent(searchTerm)}`
   );
+
+  const response = await fetch(url, {
+    method: "GET",
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+
   const responseData =
     (await response.json()) as SearchCatalogPlantsByCommonNameResponse;
 
@@ -157,27 +164,22 @@ export const apiBatchUpdateWateredDate = async (
   plantIds: number[]
 ): Promise<void> => {
   const token = await SecureStore.getItemAsync("accessToken");
-  try {
-    const response = await fetch(`${base_api_ip}/plants/plants/batch`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      },
-      body: JSON.stringify({
-        plantIds,
-      }),
-    });
+  const url = await getApiUrl("/plants/plants/batch");
 
-    if (!response.ok) {
-      const errorData = await response.json();
-      throw new Error(`Failed to update watered date: ${errorData}`);
-    }
+  const response = await fetch(url, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify({
+      plantIds,
+    }),
+  });
 
-    const data = await response.json();
-  } catch (error) {
-    console.error("Error updating watered date:", error);
-    throw error;
+  if (!response.ok) {
+    const errorData = await response.json();
+    throw new Error(`Failed to update watered date: ${errorData}`);
   }
 };
 
@@ -186,26 +188,23 @@ export const apiEditWateredDate = async (
   dateWatered: string
 ): Promise<void> => {
   const token = await SecureStore.getItemAsync("accessToken");
-  try {
-    const response = await fetch(`${base_api_ip}/plants/plants/${plantId}`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      },
-      body: JSON.stringify({
-        updateData: {
-          date_watered: dateWatered,
-        },
-      }),
-    });
+  const url = await getApiUrl(`/plants/plants/${plantId}`);
 
-    if (!response.ok) {
-      const responseError = await response.json();
-      throw new Error(`Error updating watered date: ${responseError.error}`);
-    }
-  } catch (error) {
-    console.error("Error watering single plant:", error);
-    throw error;
+  const response = await fetch(url, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify({
+      updateData: {
+        date_watered: dateWatered,
+      },
+    }),
+  });
+
+  if (!response.ok) {
+    const responseError = await response.json();
+    throw new Error(`Error updating watered date: ${responseError.error}`);
   }
 };
