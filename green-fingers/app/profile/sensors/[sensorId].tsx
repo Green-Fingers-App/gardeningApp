@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Stack, useLocalSearchParams, useRouter } from "expo-router";
-import { Text, View, StyleSheet, ActivityIndicator, ImageBackground } from "react-native";
+import { Text, View, StyleSheet, ActivityIndicator, ImageBackground, TouchableOpacity } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
 import { useMoistureSensors } from "@/context/MoistureSensorContext";
 import { useGardensAndPlants } from "@/context/GardensAndPlantsContext";
@@ -137,6 +137,15 @@ const SensorDetailPage = () => {
           },
           headerTintColor: colors.primaryDefault,
           headerRight: () => <OptionMenu options={options} />,
+          headerLeft: () => (
+            <TouchableOpacity onPress={() => router.push("/profile/sensors")}>
+              <MaterialIcons
+                name="arrow-back"
+                size={24}
+                color={colors.primaryDefault}
+              />
+            </TouchableOpacity>
+          ),
         }}
       />
       {sensor && !deleting ? (

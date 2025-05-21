@@ -77,6 +77,7 @@ export interface AddUserPlant extends Plant {
   moistureLevel: Level;
   sunlightLevel: Level;
   harvested: boolean;
+  sensorId: string;
 }
 
 //User's own plant interface
