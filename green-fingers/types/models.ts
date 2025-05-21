@@ -105,7 +105,7 @@ export interface MoistureSensor extends AddMoistureSensor {
 
 export interface AddMoistureSensor {
   name: string;
-  current_moisture_level: SoilMoisture;
+  current_moisture_level: number;
   sensorType: string;
   plant_id: number;
   nickname: string;

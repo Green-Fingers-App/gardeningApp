@@ -6,6 +6,7 @@ import DropDown from "@/components/DropDown";
 import { useGardensAndPlants } from "@/context/GardensAndPlantsContext";
 import { UserPlant } from "@/types/models";
 
+
 interface AssignSensorProps {
   onSubmit: (sensorName: string, plantId: number) => void;
   onCancel: () => void;

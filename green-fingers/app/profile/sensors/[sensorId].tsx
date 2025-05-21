@@ -16,10 +16,14 @@ import MoistureChart from "@/components/MoistureChart";
 
 const SensorDetailPage = () => {
   const { sensorId } = useLocalSearchParams();
-  const { fetchSensor, fetchSensorWithHistory, getMoistureLevel, updateMoistureSensor } = useMoistureSensors();
+  const { getSensorWithHistory, getMoistureLevel, updateMoistureSensor, fetchSensorWithHistory } = useMoistureSensors();
   const { fetchPlantDetail } = useGardensAndPlants();
 
-  const [sensor, setSensor] = useState<MoistureSensor | undefined>(undefined);
+  const id = parseInt(sensorId.toString(), 10);
+  const sensorWithHistory = getSensorWithHistory(id);
+  const sensor = sensorWithHistory?.sensor;
+  const history = sensorWithHistory?.history ?? [];
+
   const [plant, setPlant] = useState<UserPlant | undefined>(undefined);
 
   const [iconProps, setIconProps] = useState<{
@@ -28,7 +32,7 @@ const SensorDetailPage = () => {
     bg: string;
   }>({ name: "error", color: colors.textError, bg: colors.bgError });
   const [status, setStatus] = useState<string>("No value available");
-  const [history, setHistory] = useState<MoistureDataPoint[]>([]);
+
 
   const { deleting, handleDeleteEntity } = useDeleteEntity("Sensor");
   const [editing, setEditing] = useState(false);
@@ -85,15 +89,13 @@ const SensorDetailPage = () => {
     });
   };
 
+
   const handleSave = async () => {
-    const updatedSensor = await updateMoistureSensor(
-      parseInt(sensorId.toString(), 10),
-      {
-        name: editValues.name as string,
-        plant_id: editValues.plant_id as number,
-      }
-    );
-    setSensor(updatedSensor);
+    const updatedSensor = await updateMoistureSensor(id, {
+      name: editValues.name as string,
+      plant_id: editValues.plant_id as number,
+    });
+
     const newPlant = fetchPlantDetail(editValues.plant_id.toString());
     setPlant(newPlant);
     setEditValues({});
@@ -102,26 +104,20 @@ const SensorDetailPage = () => {
   };
 
   useEffect(() => {
-    const loadSensorData = async () => {
-      const currentSensor = fetchSensor(sensorId.toString());
-      const sensorWithHistory = await fetchSensorWithHistory(sensorId.toString());
-      if (currentSensor && sensorWithHistory) {
-        const status = getMoistureLevel(
-          currentSensor.plant_id,
-          currentSensor.interpretedMoisture
-        );
-        const currentIconProps = getIconProps(status);
-        const connectedPlant = fetchPlantDetail(currentSensor.plant_id.toString());
-        setStatus(status);
-        setSensor(currentSensor);
-        setHistory(sensorWithHistory.history);
-        setPlant(connectedPlant);
-        setIconProps(currentIconProps);
-      }
-    };
+    fetchSensorWithHistory(id.toString());
+  }, [id]);
 
-    loadSensorData();
-  }, [sensorId]);
+  useEffect(() => {
+    if (!sensor) return;
+
+    const status = getMoistureLevel(sensor.plant_id, sensor.interpretedMoisture);
+    const iconProps = getIconProps(status);
+    const connectedPlant = fetchPlantDetail(sensor.plant_id.toString());
+
+    setStatus(status);
+    setIconProps(iconProps);
+    setPlant(connectedPlant);
+  }, [sensor]);
 
 
   return (
@@ -146,12 +142,7 @@ const SensorDetailPage = () => {
       {sensor && !deleting ? (
         <View style={styles.pageContainer}>
           <View style={styles.chartContainer}>
-
-            <MoistureChart
-              data={history}
-              expectedMoisture={plant?.neededMoisture}
-            />
-
+            <MoistureChart data={history} expectedMoisture={plant?.neededMoisture} />
           </View>
           <View style={[styles.currentMoistureLevel, { backgroundColor: iconProps.bg }]}>
             <MaterialIcons name={iconProps.name} color={iconProps.color} size={24} />

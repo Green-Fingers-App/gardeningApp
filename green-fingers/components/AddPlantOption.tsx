@@ -65,6 +65,7 @@ const AddPlantOption: React.FC<AddPlantOptionProps> = ({ setPlantChosen }) => {
       sunlightLevel: "Optimal",
       harvested: false,
       imageUrl: selectedPlant.imageUrl,
+      neededMoisture: selectedPlant.neededMoisture,
     };
 
     // Call the createPlant function to save to the database
