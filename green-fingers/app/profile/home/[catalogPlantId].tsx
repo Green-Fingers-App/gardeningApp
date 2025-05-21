@@ -1,15 +1,18 @@
-import { View, Text, StyleSheet, Image } from "react-native";
+import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
 import React, { useEffect, useState } from "react";
 import { useGardensAndPlants } from "@/context/GardensAndPlantsContext";
 import { CatalogPlant } from "@/types/models";
-import { Stack, useLocalSearchParams } from "expo-router";
+import { Stack, useLocalSearchParams, useRouter } from "expo-router";
 import colors from "@/constants/colors";
+import { MaterialIcons } from "@expo/vector-icons";
 import textStyles from "@/constants/textStyles";
 
 const CatalogPlantDetail = () => {
   const { databasePlants } = useGardensAndPlants();
   const [plant, setPlant] = useState<CatalogPlant | undefined>(undefined);
   const { catalogPlantId } = useLocalSearchParams();
+
+  const router = useRouter();
 
   useEffect(() => {
     const plant = databasePlants?.find(
@@ -31,6 +34,15 @@ const CatalogPlantDetail = () => {
             color: colors.primaryDefault,
           },
           headerTintColor: colors.primaryDefault,
+          headerLeft: () => (
+            <TouchableOpacity onPress={() => router.push("/profile/gardens")}>
+              <MaterialIcons
+                name="arrow-back"
+                size={24}
+                color={colors.primaryDefault}
+              />
+            </TouchableOpacity>
+          ),
         }}
       />
       {plant ? (

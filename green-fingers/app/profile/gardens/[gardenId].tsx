@@ -5,6 +5,7 @@ import {
   StyleSheet,
   ActivityIndicator,
   ImageBackground,
+  TouchableOpacity,
 } from "react-native";
 import React, { useEffect, useState } from "react";
 import { Stack, useLocalSearchParams, useRouter } from "expo-router";
@@ -16,6 +17,7 @@ import textStyles from "@/constants/textStyles";
 import OptionMenu from "@/components/OptionMenu";
 import { useDeleteEntity } from "@/hooks/useDeleteEntity";
 import EntityEditModal from "@/components/EntityEditModal";
+import { MaterialIcons } from "@expo/vector-icons";
 
 const GardenDetailPage = () => {
   const { gardenId } = useLocalSearchParams();
@@ -95,6 +97,15 @@ const GardenDetailPage = () => {
             color: colors.primaryDefault,
           },
           headerRight: () => <OptionMenu options={options} />,
+          headerLeft: () => (
+            <TouchableOpacity onPress={() => router.push("/profile/gardens")}>
+              <MaterialIcons
+                name="arrow-back"
+                size={24}
+                color={colors.primaryDefault}
+              />
+            </TouchableOpacity>
+          ),
         }}
       />
       {garden && !deleting ? (
