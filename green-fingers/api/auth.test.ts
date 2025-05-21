@@ -1,5 +1,12 @@
 import { apiLogin, apiSignUp } from "./auth";
 import { mockFetchResponse } from "@/test-utils/mockFetch";
+import * as SecureStore from "expo-secure-store";
+
+beforeEach(() => {
+  jest.resetAllMocks();
+
+  jest.spyOn(SecureStore, "getItemAsync").mockResolvedValue("http://test-backend.local");
+});
 
 describe("auth API", () => {
   beforeEach(() => {
