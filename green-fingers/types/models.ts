@@ -80,7 +80,7 @@ export interface AddUserPlant extends Plant {
   sensorId: string;
 }
 
-//User's own plant interface
+//User's own plat interface
 export interface UserPlant extends AddUserPlant {
   id: number;
 }
@@ -115,7 +115,6 @@ export interface AddMoistureSensor {
   interpretedMoisture: SoilMoisture;
 }
 
-
 export interface MoistureDataPoint {
   id: number;
   interpreted: SoilMoisture;
@@ -123,7 +122,6 @@ export interface MoistureDataPoint {
   sensor_id: number;
   time_stamp: string;
 }
-
 
 export interface SensorWithHistory {
   sensor: MoistureSensor;

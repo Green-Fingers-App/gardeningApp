@@ -8,16 +8,10 @@ import Button from "@/components/Button";
 import colors from "@/constants/colors";
 
 interface AddPlantOptionProps {
-  gardenChosen: boolean;
-  toggleGardenMenu: () => void;
   setGardenChosen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const AddPlantOption: React.FC<AddPlantOptionProps> = ({
-  gardenChosen,
-  toggleGardenMenu,
-  setGardenChosen,
-}) => {
+const AddPlantOption: React.FC<AddPlantOptionProps> = ({ setGardenChosen }) => {
   const { createGarden } = useGardensAndPlants();
 
   const [name, setName] = useState<string>("");

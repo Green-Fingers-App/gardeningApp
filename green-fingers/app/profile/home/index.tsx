@@ -5,27 +5,27 @@ import { useRouter } from "expo-router";
 import Button from "@/components/Button";
 
 const Home = () => {
-  const { user, logout } = useAuth();
+  const { logout } = useAuth();
   const router = useRouter();
   return (
     <ImageBackground
       source={require("../../../assets/images/background.png")}
       style={styles.backgroundImage}
     >
-    <View style={styles.container}>
-      <Button
-        onPress={() => router.push("/profile/home/plantexplorer")}
-        text="Plant Explorer"
-        type="primary"
-        iconName="magnify"
-      />
-      <Button
-        onPress={logout}
-        text="Logout"
-        type="secondary"
-        iconName="logout"
-      />
-    </View>
+      <View style={styles.container}>
+        <Button
+          onPress={() => router.push("/profile/home/plantexplorer")}
+          text="Plant Explorer"
+          type="primary"
+          iconName="magnify"
+        />
+        <Button
+          onPress={logout}
+          text="Logout"
+          type="secondary"
+          iconName="logout"
+        />
+      </View>
     </ImageBackground>
   );
 };

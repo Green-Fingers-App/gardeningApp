@@ -21,7 +21,11 @@ const AddMenu: React.FC<AddMenuProps> = ({ visible, onClose }) => {
   const renderHeader = () => {
     if (plantChosen) {
       return (
-        <Pressable onPress={() => { setPlantChosen(false); }}>
+        <Pressable
+          onPress={() => {
+            setPlantChosen(false);
+          }}
+        >
           <Text style={[textStyles.h3, { color: colors.bgLight }]}>
             <MaterialCommunityIcons name="arrow-left" size={20} /> Add Plant
           </Text>
@@ -30,7 +34,11 @@ const AddMenu: React.FC<AddMenuProps> = ({ visible, onClose }) => {
     }
     if (gardenChosen) {
       return (
-        <Pressable onPress={() => { setGardenChosen(false); }}>
+        <Pressable
+          onPress={() => {
+            setGardenChosen(false);
+          }}
+        >
           <Text style={[textStyles.h3, { color: colors.bgLight }]}>
             <MaterialCommunityIcons name="arrow-left" size={20} /> Add Garden
           </Text>
@@ -39,7 +47,11 @@ const AddMenu: React.FC<AddMenuProps> = ({ visible, onClose }) => {
     }
     if (sensorChosen) {
       return (
-        <Pressable onPress={() => { setSensorChosen(false); }}>
+        <Pressable
+          onPress={() => {
+            setSensorChosen(false);
+          }}
+        >
           <Text style={[textStyles.h3, { color: colors.bgLight }]}>
             <MaterialCommunityIcons name="arrow-left" size={20} /> Add Sensor
           </Text>
@@ -67,21 +79,30 @@ const AddMenu: React.FC<AddMenuProps> = ({ visible, onClose }) => {
 
         {!plantChosen && !gardenChosen && !sensorChosen && (
           <View style={styles.optionContainer}>
-            <Button text="Plant" iconName="flower" type="tertiary" onPress={() => setPlantChosen(true)} />
-            <Button text="Garden" iconName="nature" type="tertiary" onPress={() => setGardenChosen(true)} />
-            <Button text="Sensor" iconName="qrcode" type="tertiary" onPress={() => setSensorChosen(true)} />
+            <Button
+              text="Plant"
+              iconName="flower"
+              type="tertiary"
+              onPress={() => setPlantChosen(true)}
+            />
+            <Button
+              text="Garden"
+              iconName="nature"
+              type="tertiary"
+              onPress={() => setGardenChosen(true)}
+            />
+            <Button
+              text="Sensor"
+              iconName="qrcode"
+              type="tertiary"
+              onPress={() => setSensorChosen(true)}
+            />
           </View>
         )}
 
-        {plantChosen && (
-          <AddPlantOption plantChosen={plantChosen} togglePlantMenu={() => setPlantChosen(false)} setPlantChosen={setPlantChosen} />
-        )}
-        {gardenChosen && (
-          <AddGardenOption gardenChosen={gardenChosen} toggleGardenMenu={() => setGardenChosen(false)} setGardenChosen={setGardenChosen} />
-        )}
-        {sensorChosen && (
-          <AddSensorOption sensorChosen={sensorChosen} toggleSensorMenu={() => setSensorChosen(false)} setSensorChosen={setSensorChosen} />
-        )}
+        {plantChosen && <AddPlantOption setPlantChosen={setPlantChosen} />}
+        {gardenChosen && <AddGardenOption setGardenChosen={setGardenChosen} />}
+        {sensorChosen && <AddSensorOption setSensorChosen={setSensorChosen} />}
       </View>
     </>
   );

@@ -10,8 +10,6 @@ import Button from "@/components/Button";
 import colors from "@/constants/colors";
 
 interface AddPlantOptionProps {
-  plantChosen: boolean;
-  togglePlantMenu: () => void;
   setPlantChosen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
