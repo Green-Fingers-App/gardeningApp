@@ -37,14 +37,36 @@ const PlantDetailPage = () => {
     garden_id: "",
   });
 
-  const [iconProps, setIconProps] = useState<{ name: keyof typeof MaterialIcons.glyphMap; color: string; message: string, bg: string }>();
+  const [iconProps, setIconProps] = useState<{
+    name: keyof typeof MaterialIcons.glyphMap;
+    color: string;
+    message: string;
+    bg: string;
+  }>();
   const router = useRouter();
 
-  const getIconProps = (thirsty: boolean): { name: keyof typeof MaterialIcons.glyphMap; color: string; message: string, bg: string } => {
+  const getIconProps = (
+    thirsty: boolean
+  ): {
+    name: keyof typeof MaterialIcons.glyphMap;
+    color: string;
+    message: string;
+    bg: string;
+  } => {
     if (thirsty) {
-      return { name: "warning", color: colors.textWarning, message: "I'm thirsty", bg: colors.bgWarning };
+      return {
+        name: "warning",
+        color: colors.textWarning,
+        message: "I'm thirsty",
+        bg: colors.bgWarning,
+      };
     } else {
-      return { name: "check-circle", color: colors.textSuccess, message: "I'm good", bg: colors.bgSuccess };
+      return {
+        name: "check-circle",
+        color: colors.textSuccess,
+        message: "I'm good",
+        bg: colors.bgSuccess,
+      };
     }
   };
 
@@ -88,23 +110,19 @@ const PlantDetailPage = () => {
     router.push(`/profile/plants/${plantId}`);
   };
 
+  let thirsty;
   useEffect(() => {
     const newPlant = fetchPlantDetail(plantId.toString());
-
+    if (!newPlant) return;
+    thirsty = shouldBeWatered(newPlant);
     const iconProps = getIconProps(thirsty);
+    console.log(thirsty);
     setIconProps(iconProps);
     if (newPlant) {
       setPlant(newPlant);
     }
-    console.log(newPlant?.sensorId)
+    console.log(newPlant?.sensorId);
   }, [plantId, plants]);
-
-  const [thirsty, setThirsty] = useState(false);
-
-  useEffect(() => {
-    if (!plant) return;
-    setThirsty(shouldBeWatered(plant));
-  }, [plant]);
 
   return (
     <>
@@ -138,109 +156,242 @@ const PlantDetailPage = () => {
             style={styles.plantImage}
             resizeMode="contain"
           />
-          <View style={[styles.currentMoistureLevel, { backgroundColor: iconProps?.bg }]}>
-            <MaterialIcons name={iconProps?.name} color={iconProps?.color} size={24} />
-            <Text style={[textStyles.h4, { textAlign: "center", }]} >{iconProps?.message} </Text>
+          <View
+            style={[
+              styles.currentMoistureLevel,
+              { backgroundColor: iconProps?.bg },
+            ]}
+          >
+            <MaterialIcons
+              name={iconProps?.name}
+              color={iconProps?.color}
+              size={24}
+            />
+            <Text style={[textStyles.h4, { textAlign: "center" }]}>
+              {iconProps?.message}{" "}
+            </Text>
           </View>
-          <View >
+          <View>
             <Accordion style={styles.accordionContainer}>
               <AccordionItem title="Status">
                 <View style={styles.attributeText}>
-                  <Text style={[textStyles.body, { color: colors.textSecondary }]} >Last watered:</Text>
+                  <Text
+                    style={[textStyles.body, { color: colors.textSecondary }]}
+                  >
+                    Last watered:
+                  </Text>
                   {plant.wateredDate ? (
                     <View style={styles.rowSpaceBetween}>
-                      <Text style={[textStyles.bodyMedium, { color: colors.textPrimary }]} >  {new Date(plant.wateredDate).toLocaleDateString("en-GB")}
+                      <Text
+                        style={[
+                          textStyles.bodyMedium,
+                          { color: colors.textPrimary },
+                        ]}
+                      >
+                        {" "}
+                        {new Date(plant.wateredDate).toLocaleDateString(
+                          "en-GB"
+                        )}
                       </Text>
                       <UpdateWateredDate plantId={plant.id} />
                     </View>
                   ) : (
-                    <Text style={[textStyles.bodyMedium, { color: colors.textPrimary }]} > -</Text>
+                    <Text
+                      style={[
+                        textStyles.bodyMedium,
+                        { color: colors.textPrimary },
+                      ]}
+                    >
+                      {" "}
+                      -
+                    </Text>
                   )}
                 </View>
 
                 <View style={styles.attributeText}>
-                  <Text style={[textStyles.body, { color: colors.textSecondary }]} >Last fed:</Text>
+                  <Text
+                    style={[textStyles.body, { color: colors.textSecondary }]}
+                  >
+                    Last fed:
+                  </Text>
                   {plant.feededDate ? (
-                    <Text style={[textStyles.bodyMedium, { color: colors.textPrimary }]} > {new Date(plant.feededDate).toLocaleDateString("en-GB")}</Text>
+                    <Text
+                      style={[
+                        textStyles.bodyMedium,
+                        { color: colors.textPrimary },
+                      ]}
+                    >
+                      {" "}
+                      {new Date(plant.feededDate).toLocaleDateString("en-GB")}
+                    </Text>
                   ) : (
-                    <Text style={[textStyles.bodyMedium, { color: colors.textPrimary }]} > -</Text>
+                    <Text
+                      style={[
+                        textStyles.bodyMedium,
+                        { color: colors.textPrimary },
+                      ]}
+                    >
+                      {" "}
+                      -
+                    </Text>
                   )}
                 </View>
               </AccordionItem>
               <AccordionItem title="Overview">
-
                 <View style={styles.attributeText}>
-                  <Text style={[textStyles.body, { color: colors.textSecondary }]} >Plant family:</Text>
+                  <Text
+                    style={[textStyles.body, { color: colors.textSecondary }]}
+                  >
+                    Plant family:
+                  </Text>
                   {plant.sensorId ? (
                     <Button
                       style={{ flexShrink: 1 }}
                       type="tertiary"
                       text={plant.name.scientificName}
-                      onPress={() => router.push(`profile/home/${plant.catalogPlant_id}`)}
+                      onPress={() =>
+                        router.push(`profile/home/${plant.catalogPlant_id}`)
+                      }
                     />
                   ) : (
-                    <Text style={[textStyles.body, { color: colors.textPrimary }]} > -</Text>
+                    <Text
+                      style={[textStyles.body, { color: colors.textPrimary }]}
+                    >
+                      {" "}
+                      -
+                    </Text>
                   )}
                 </View>
 
                 <View style={styles.attributeText}>
-                  <Text style={[textStyles.body, { color: colors.textSecondary }]}>Blooming:</Text>
+                  <Text
+                    style={[textStyles.body, { color: colors.textSecondary }]}
+                  >
+                    Blooming:
+                  </Text>
                   {plant.blooming?.start ? (
-                    <Text style={[textStyles.bodyMedium, { color: colors.textPrimary }]}>
+                    <Text
+                      style={[
+                        textStyles.bodyMedium,
+                        { color: colors.textPrimary },
+                      ]}
+                    >
                       {` ${plant.blooming.start} till ${plant.blooming.end}`}
                     </Text>
                   ) : (
-                    <Text style={[textStyles.bodyMedium, { color: colors.textPrimary }]}> -</Text>
+                    <Text
+                      style={[
+                        textStyles.bodyMedium,
+                        { color: colors.textPrimary },
+                      ]}
+                    >
+                      {" "}
+                      -
+                    </Text>
                   )}
                 </View>
 
                 <View style={styles.attributeText}>
-                  <Text style={[textStyles.body, { color: colors.textSecondary }]}>Harvest:</Text>
+                  <Text
+                    style={[textStyles.body, { color: colors.textSecondary }]}
+                  >
+                    Harvest:
+                  </Text>
                   {plant.harvest?.start ? (
-                    <Text style={[textStyles.bodyMedium, { color: colors.textPrimary }]}>
+                    <Text
+                      style={[
+                        textStyles.bodyMedium,
+                        { color: colors.textPrimary },
+                      ]}
+                    >
                       {` ${plant.harvest.start} till ${plant.harvest.end}`}
                     </Text>
                   ) : (
-                    <Text style={[textStyles.bodyMedium, { color: colors.textPrimary }]}> -</Text>
+                    <Text
+                      style={[
+                        textStyles.bodyMedium,
+                        { color: colors.textPrimary },
+                      ]}
+                    >
+                      {" "}
+                      -
+                    </Text>
                   )}
                 </View>
 
                 <View style={styles.attributeText}>
-                  <Text style={[textStyles.body, { color: colors.textSecondary }]}>Fertilizer type:</Text>
-                  <Text style={[textStyles.bodyMedium, { color: colors.textPrimary }]}>
+                  <Text
+                    style={[textStyles.body, { color: colors.textSecondary }]}
+                  >
+                    Fertilizer type:
+                  </Text>
+                  <Text
+                    style={[
+                      textStyles.bodyMedium,
+                      { color: colors.textPrimary },
+                    ]}
+                  >
                     {plant.fertilizerType || " -"}
                   </Text>
                 </View>
 
                 <View style={styles.attributeText}>
-                  <Text style={[textStyles.body, { color: colors.textSecondary }]}>Water Frequency:</Text>
-                  <Text style={[textStyles.bodyMedium, { color: colors.textPrimary }]}>
-                    {
-                      plant.waterFrequency.charAt(0) +
-                      plant.waterFrequency.slice(1).toLowerCase()
-                      || " -"}
+                  <Text
+                    style={[textStyles.body, { color: colors.textSecondary }]}
+                  >
+                    Water Frequency:
+                  </Text>
+                  <Text
+                    style={[
+                      textStyles.bodyMedium,
+                      { color: colors.textPrimary },
+                    ]}
+                  >
+                    {plant.waterFrequency.charAt(0) +
+                      plant.waterFrequency.slice(1).toLowerCase() || " -"}
                   </Text>
                 </View>
 
                 <View style={styles.attributeText}>
-                  <Text style={[textStyles.body, { color: colors.textSecondary }]}>Sunlight requirement:</Text>
-                  <Text style={[textStyles.bodyMedium, { color: colors.textPrimary }]}>
+                  <Text
+                    style={[textStyles.body, { color: colors.textSecondary }]}
+                  >
+                    Sunlight requirement:
+                  </Text>
+                  <Text
+                    style={[
+                      textStyles.bodyMedium,
+                      { color: colors.textPrimary },
+                    ]}
+                  >
                     {plant.sunLight || " -"}
                   </Text>
                 </View>
               </AccordionItem>
               <AccordionItem title="Sensors">
                 <View style={styles.attributeText}>
-                  <Text style={[textStyles.body, { color: colors.textSecondary }]} > Assigned sensor:</Text>
+                  <Text
+                    style={[textStyles.body, { color: colors.textSecondary }]}
+                  >
+                    {" "}
+                    Assigned sensor:
+                  </Text>
                   {plant.sensorId ? (
                     <Button
                       style={{ flexShrink: 1 }}
                       type="tertiary"
                       text="Sensor"
-                      onPress={() => router.push(`profile/sensors/${plant.sensorId}`)}
+                      onPress={() =>
+                        router.push(`profile/sensors/${plant.sensorId}`)
+                      }
                     />
                   ) : (
-                    <Text style={[textStyles.body, { color: colors.textPrimary }]} > -</Text>
+                    <Text
+                      style={[textStyles.body, { color: colors.textPrimary }]}
+                    >
+                      {" "}
+                      -
+                    </Text>
                   )}
                 </View>
               </AccordionItem>
