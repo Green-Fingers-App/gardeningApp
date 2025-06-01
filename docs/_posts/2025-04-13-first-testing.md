@@ -69,8 +69,8 @@ Once finalized, this plan will guide all our future testing efforts – from mic
 
 We’ll also explore using **Maestro** for end-to-end mobile UI tests, so we can simulate real user behavior in our React Native app. Here is our E2E test, which covers the login, garden creation and plant creation.
 
-<video width="600" controls autoplay loop muted>
-  <source src="https://github.com/Green-Fingers-App/gardeningApp/blob/main/docs/assets/screencasts/e2e-test.webm" type="video/web">
+<video width="600" controls>
+  <source src="https://github.com/Green-Fingers-App/gardeningApp/blob/main/docs/assets/screencasts/e2e-test.webm" type="video/webm">
   Your browser does not support the video tag.
 </video>
 
