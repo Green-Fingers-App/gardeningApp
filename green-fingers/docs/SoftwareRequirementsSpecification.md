@@ -159,57 +159,67 @@ Users will be able to check the date of planting and last time watering their pl
 
 ### CRUD-Plant
 
-#### [3.1.4 User Case: Add plant](https://github.com/DHBW-Malte/gardeningApp/blob/main/docs/usecases/CRUD-Plant/addPlant.md)
+#### [3.1.5 User Case: Add plant](https://github.com/DHBW-Malte/gardeningApp/blob/main/docs/usecases/CRUD-Plant/addPlant.md)
 
 Users can add new plants to their personal garden by entering a plant type, nickname and the corresponding garden.
 
-#### [3.1.5 Use Case: View plant](https://github.com/DHBW-Malte/gardeningApp/blob/main/docs/usecases/CRUD-Plant/viewPlant.md)
+#### [3.1.6 Use Case: View plant](https://github.com/DHBW-Malte/gardeningApp/blob/main/docs/usecases/CRUD-Plant/viewPlant.md)
 
 The user can select a specific plant and view the details of it.
 
-#### [3.1.6 Use Case: Update plant](https://github.com/DHBW-Malte/gardeningApp/blob/main/docs/usecases/CRUD-Plant/updatePlant.md)
+#### [3.1.7 Use Case: Update plant](https://github.com/DHBW-Malte/gardeningApp/blob/main/docs/usecases/CRUD-Plant/updatePlant.md)
 
 The user can edit the nickname and garden of a plant.
 
-#### [3.1.7 Use Case: Delete plant](https://github.com/DHBW-Malte/gardeningApp/blob/main/docs/usecases/CRUD-Plant/deletePlant.md)
+#### [3.1.8 Use Case: Delete plant](https://github.com/DHBW-Malte/gardeningApp/blob/main/docs/usecases/CRUD-Plant/deletePlant.md)
 
 The user can delete a plant from their app. This will remove the plant from the user's garden and all associated data in the database.
 
 ### CRUD-Garden
 
-#### [3.1.8 Use Case: Add garden](https://github.com/DHBW-Malte/gardeningApp/blob/main/docs/usecases/CRUD-Garden/addGarden.md)
+#### [3.1.9 Use Case: Add garden](https://github.com/DHBW-Malte/gardeningApp/blob/main/docs/usecases/CRUD-Garden/addGarden.md)
 
 The user can create a new garden, with a name and a location.
 
-#### [3.1.9 Use Case: Show garden](https://github.com/DHBW-Malte/gardeningApp/blob/main/docs/usecases/CRUD-Garden/showGardens.md)
+#### [3.1.10 Use Case: Show garden](https://github.com/DHBW-Malte/gardeningApp/blob/main/docs/usecases/CRUD-Garden/showGardens.md)
 
 The user can view a list of all gardens.
 
-#### [3.1.10 Use Case: Edit garden](https://github.com/DHBW-Malte/gardeningApp/blob/main/docs/usecases/CRUD-Garden/updateGarden.md)
+#### [3.1.11 Use Case: Edit garden](https://github.com/DHBW-Malte/gardeningApp/blob/main/docs/usecases/CRUD-Garden/updateGarden.md)
 
 The user can update the name and location of his gardens.
 
-#### [3.1.11 Use Case: Delete garden](https://github.com/DHBW-Malte/gardeningApp/blob/main/docs/usecases/CRUD-Garden/deleteGarden.md)
+#### [3.1.12 Use Case: Delete garden](https://github.com/DHBW-Malte/gardeningApp/blob/main/docs/usecases/CRUD-Garden/deleteGarden.md)
 
 The user can delete a garden from their app. This will remove the plant from the user's garden and all associated data in the database.
 
 ### CRUD-Sensor
 
-#### [3.1.12 Use Case: Add sensor](https://github.com/DHBW-Malte/gardeningApp/blob/main/docs/usecases/CRUD-Sensor/addSensor.md)
+#### [3.1.13 Use Case: Add sensor](https://github.com/DHBW-Malte/gardeningApp/blob/main/docs/usecases/CRUD-Sensor/addSensor.md)
 
 The user can create a new sensor, with a name and an associated plant.
 
-#### [3.1.9 Use Case: Show sensor](https://github.com/DHBW-Malte/gardeningApp/blob/main/docs/usecases/CRUD-Garden/showSensor.md)
+#### [3.1.14 Use Case: Show sensor](https://github.com/DHBW-Malte/gardeningApp/blob/main/docs/usecases/CRUD-Garden/showSensor.md)
 
 The user can view a list of all sensors data.
 
-#### [3.1.10 Use Case: Edit sensor](https://github.com/DHBW-Malte/gardeningApp/blob/main/docs/usecases/CRUD-Garden/updateSensor.md)
+#### [3.1.15 Use Case: Edit sensor](https://github.com/DHBW-Malte/gardeningApp/blob/main/docs/usecases/CRUD-Garden/updateSensor.md)
 
 The user can update the name and the plant it assigned to it.
 
-#### [3.1.11 Use Case: Delete sensor](https://github.com/DHBW-Malte/gardeningApp/blob/main/docs/usecases/CRUD-Garden/deleteSensor.md)
+#### [3.1.16 Use Case: Delete sensor](https://github.com/DHBW-Malte/gardeningApp/blob/main/docs/usecases/CRUD-Garden/deleteSensor.md)
 
 The user can delete a sensor.
+
+### Calendar Use-Cases
+
+#### [3.1.17 Use Case: View Calendar](https://github.com/DHBW-Malte/gardeningApp/blob/main/docs/usecases/Calendar_Use_Cases/viewCalendar.md)
+
+The user can view their calendar on a tab.
+
+#### [3.1.18 Use Case: Update Calendar](https://github.com/DHBW-Malte/gardeningApp/blob/main/docs/usecases/Calendar_Use_Cases/updateCalendar.md)
+
+The user can update their watering dates of their plants.
 
 ### 3.2 Usability
 
