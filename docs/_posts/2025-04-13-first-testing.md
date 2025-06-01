@@ -22,7 +22,7 @@ We’ve identified several test levels, based on both our tech stack and testing
 | **Frontend** | Jest + React Testing Library | Test UI components and form behavior from a user’s view |
 | **Backend**  | Jest                         | Unit testing business logic and route handlers          |
 | **API**      | Postman                      | Manual and automated testing of REST endpoints          |
-| **E2E**      | Detox (planned)              | Behavior-driven full-app flows for login, signup, etc.  |
+| **E2E**      | Maestro                      | Behavior-driven full-app flows for login, signup, etc.  |
 
 We started implementing **unit tests for our login flow** using Jest and React Testing Library. Here's a sneak peek at our passing test suite for `login.tsx`:
 
@@ -67,7 +67,9 @@ We're currently working on our [**RUP-based Test Plan**](https://github.com/DHBW
 
 Once finalized, this plan will guide all our future testing efforts – from microcontroller integration to database edge-case testing.
 
-We’ll also explore using **Detox** for end-to-end mobile UI tests, so we can simulate real user behavior in our React Native app.
+We’ll also explore using **Maestro** for end-to-end mobile UI tests, so we can simulate real user behavior in our React Native app. Here is our E2E test, which covers the login, garden creation and plant creation.
+
+![E2E video](https://github.com/Green-Fingers-App/gardeningApp/blob/main/docs/assets/screencasts/e2e-test.webm)
 
 ---
 
