@@ -63,6 +63,8 @@ This document describes the technical architecture of the "Green Fingers" applic
 | [UC: Create Sensor](https://github.com/Green-Fingers-App/gardeningApp/blob/main/docs/usecases/CRUD-Sensor/addSensor.md)| 01.06.2025 |GreenFingers  |
 | [UC: Read Sensor](https://github.com/Green-Fingers-App/gardeningApp/blob/main/docs/usecases/CRUD-Sensor/showSensor.md)| 01.06.2025 |GreenFingers  |
 | [UC: Update Sensor](https://github.com/Green-Fingers-App/gardeningApp/blob/main/docs/usecases/CRUD-Sensor/updateSensor.md)| 01.06.2025 |GreenFingers  |
+| [UC: Read Calendar](https://github.com/Green-Fingers-App/gardeningApp/blob/main/docs/usecases/Calendar_Use_Cases/viewCalendar.md)| 01.06.2025 |GreenFingers  |
+| [UC: Update Calendar](https://github.com/Green-Fingers-App/gardeningApp/blob/main/docs/usecases/Calendar_Use_Cases/updateCalendar.md)| 01.06.2025 |GreenFingers  |
 
 ### 1.5 Overview
 This document contains the Architectural Representation, Goals and Constraints as well as the Logical, Deployment, Implementation and Data Views.
